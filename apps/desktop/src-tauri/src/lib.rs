@@ -5,6 +5,7 @@
 //! only the command layer exists so far.
 
 pub mod commands;
+pub mod contract;
 
 pub fn run() {
     tauri::Builder::default()
