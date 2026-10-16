@@ -1,0 +1,27 @@
+.wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.select {
+  appearance: none;
+  height: var(--control-h);
+  min-width: 120px;
+  padding: 0 28px 0 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-control);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.select:disabled {
+  opacity: 0.5;
+}
+
+.caret {
+  position: absolute;
+  right: 10px;
+  color: var(--text-2);
+  pointer-events: none;
+}

@@ -1,0 +1,11 @@
+{
+  "name": "opendoc-reader",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-only document OCR desktop app",
+  "license": "MIT",
+  "packageManager": "pnpm@10.6.1",
+  "engines": {
+    "node": ">=22"
+  }
+}

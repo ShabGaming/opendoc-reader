@@ -1,0 +1,19 @@
+.shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  height: 100%;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--surface);
+}
+
+.content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  padding: var(--space-5);
+}

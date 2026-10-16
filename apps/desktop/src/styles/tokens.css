@@ -1,0 +1,119 @@
+/*
+ * Design tokens. Values come from docs/design.md section 3.
+ * Light is the default. Dark applies with data-theme="dark", or when no
+ * data-theme attribute is set and the system prefers dark.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Colour */
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --sidebar: #f0efec;
+  --hover: rgba(0, 0, 0, 0.04);
+  --selected: #e3ecef;
+  --border: #e2e0db;
+  --border-strong: #cfccc5;
+  --text: #1d1d1b;
+  --text-2: #5f5d58;
+  --text-3: #8e8b84;
+  --accent: #1f6b85;
+  --accent-hover: #195a70;
+  --accent-text: #ffffff;
+  --accent-soft: #e3eef2;
+  --ok: #2f7a4b;
+  --warn: #9a5b00;
+  --err: #b53a26;
+  --ok-soft: rgba(47, 122, 75, 0.1);
+  --warn-soft: rgba(154, 91, 0, 0.1);
+  --err-soft: rgba(181, 58, 38, 0.1);
+  --shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  --scrim: rgba(0, 0, 0, 0.28);
+
+  /* Derived control colours */
+  --secondary-hover: color-mix(in srgb, var(--text) 5%, var(--surface));
+  --secondary-pressed: color-mix(in srgb, var(--text) 9%, var(--surface));
+  --row-hover: color-mix(in srgb, var(--text) 3%, var(--surface));
+
+  /* Typography */
+  --font-ui:
+    -apple-system, BlinkMacSystemFont, "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, monospace;
+
+  /* Radii */
+  --r-control: 5px;
+  --r-panel: 7px;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  /* Fixed sizes */
+  --control-h: 28px;
+  --primary-h: 30px;
+  --row-h: 30px;
+  --sidebar-w: 240px;
+  --sidebar-header-h: 40px;
+  --action-bar-h: 56px;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #1b1b1a;
+  --surface: #222221;
+  --sidebar: #181817;
+  --hover: rgba(255, 255, 255, 0.05);
+  --selected: #23353b;
+  --border: #33322f;
+  --border-strong: #45433f;
+  --text: #eceae5;
+  --text-2: #aaa79f;
+  --text-3: #7d7a73;
+  --accent: #6bb4cc;
+  --accent-hover: #86c4d8;
+  --accent-text: #0f1a1e;
+  --accent-soft: #1f3239;
+  --ok: #6cc08b;
+  --warn: #e0a94f;
+  --err: #e8826f;
+  --ok-soft: rgba(108, 192, 139, 0.12);
+  --warn-soft: rgba(224, 169, 79, 0.12);
+  --err-soft: rgba(232, 130, 111, 0.12);
+  --shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+  --scrim: rgba(0, 0, 0, 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+
+    --bg: #1b1b1a;
+    --surface: #222221;
+    --sidebar: #181817;
+    --hover: rgba(255, 255, 255, 0.05);
+    --selected: #23353b;
+    --border: #33322f;
+    --border-strong: #45433f;
+    --text: #eceae5;
+    --text-2: #aaa79f;
+    --text-3: #7d7a73;
+    --accent: #6bb4cc;
+    --accent-hover: #86c4d8;
+    --accent-text: #0f1a1e;
+    --accent-soft: #1f3239;
+    --ok: #6cc08b;
+    --warn: #e0a94f;
+    --err: #e8826f;
+    --ok-soft: rgba(108, 192, 139, 0.12);
+    --warn-soft: rgba(224, 169, 79, 0.12);
+    --err-soft: rgba(232, 130, 111, 0.12);
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+    --scrim: rgba(0, 0, 0, 0.5);
+  }
+}
