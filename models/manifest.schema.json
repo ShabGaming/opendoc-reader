@@ -1,0 +1,302 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/models/manifest.schema.json",
+  "title": "OpenDoc Reader download manifest",
+  "description": "Describes everything the app may download on first run (llama-server builds and model files, each pinned by SHA-256) and the rules the hardware suggester applies. Every downloaded file is verified against its sha256 before use. See docs/architecture.md and ADRs 0007 and 0008.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "runtimes", "models", "suggester"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional pointer to this schema, for editors."
+    },
+    "schemaVersion": {
+      "const": 1,
+      "description": "Version of this manifest format. Increase it only for changes the app must handle explicitly."
+    },
+    "runtimes": {
+      "type": "object",
+      "description": "Runtime binaries the app downloads and runs.",
+      "additionalProperties": false,
+      "required": ["llamaServer"],
+      "properties": {
+        "llamaServer": { "$ref": "#/$defs/llamaServer" }
+      }
+    },
+    "models": {
+      "type": "object",
+      "description": "Downloadable models, keyed by model id. The id is stable and is what the suggester rules and the app settings refer to.",
+      "minProperties": 1,
+      "propertyNames": { "$ref": "#/$defs/id" },
+      "additionalProperties": { "$ref": "#/$defs/model" }
+    },
+    "suggester": { "$ref": "#/$defs/suggester" }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]*$",
+      "description": "Lowercase identifier made of letters, digits, dots and hyphens."
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Lowercase hex SHA-256 of the file as published."
+    },
+    "httpsUrl": {
+      "type": "string",
+      "pattern": "^https://",
+      "description": "An https URL."
+    },
+    "backend": {
+      "enum": ["cuda", "vulkan", "metal", "cpu"],
+      "description": "The llama-server backend the app would use on this machine."
+    },
+    "llamaServer": {
+      "type": "object",
+      "description": "The pinned llama.cpp release that provides llama-server. Pin the bNNNNN build tag; the GitHub Latest release can have no binaries.",
+      "additionalProperties": false,
+      "required": ["build", "releaseUrl", "license", "builds"],
+      "properties": {
+        "build": {
+          "type": "string",
+          "pattern": "^b[0-9]+$",
+          "description": "The llama.cpp build tag, for example b11669."
+        },
+        "releaseUrl": { "$ref": "#/$defs/httpsUrl" },
+        "license": { "type": "string", "description": "SPDX license identifier of the runtime." },
+        "builds": {
+          "type": "object",
+          "description": "Builds keyed by <os>-<arch>-<backend>, for example windows-x64-cuda. The app picks one from the hardware probe.",
+          "minProperties": 1,
+          "propertyNames": { "pattern": "^(windows|macos)-(x64|arm64)-(cuda|vulkan|metal|cpu)$" },
+          "additionalProperties": { "$ref": "#/$defs/runtimeBuild" }
+        }
+      }
+    },
+    "runtimeBuild": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backend", "files"],
+      "properties": {
+        "backend": { "$ref": "#/$defs/backend" },
+        "description": { "type": "string" },
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Every archive needed for this build. All of them are extracted into the same folder. CUDA builds need the cudart archive in addition to the main one.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "url", "sha256", "sizeBytes"],
+            "properties": {
+              "name": { "type": "string", "description": "File name as published." },
+              "url": { "$ref": "#/$defs/httpsUrl" },
+              "sha256": { "$ref": "#/$defs/sha256" },
+              "sizeBytes": { "type": "integer", "minimum": 1 }
+            }
+          }
+        }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tier",
+        "experimental",
+        "displayName",
+        "engine",
+        "license",
+        "sources",
+        "files",
+        "requirements",
+        "llamaServerArgs",
+        "notes"
+      ],
+      "properties": {
+        "tier": {
+          "enum": ["fast", "accurate", "max"],
+          "description": "The user-facing tier the model belongs to."
+        },
+        "experimental": {
+          "type": "boolean",
+          "description": "True for models offered only as an advanced option and labelled experimental in the UI."
+        },
+        "displayName": { "type": "string" },
+        "engine": {
+          "type": "string",
+          "description": "Id of the engine in the Python engine that drives this model (see engine.capabilities)."
+        },
+        "license": {
+          "type": "string",
+          "description": "SPDX license identifier of the model weights. Shown to the user before download."
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Repositories the files come from, each pinned to an immutable revision. Most models have one; a PaddleOCR pipeline combines several model repositories.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["repo", "revision", "url"],
+            "properties": {
+              "repo": { "type": "string", "description": "Hugging Face repository, owner/name." },
+              "revision": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$",
+                "description": "Full commit SHA of the Hugging Face repository."
+              },
+              "url": { "$ref": "#/$defs/httpsUrl" }
+            }
+          }
+        },
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "role", "urls", "sha256", "sizeBytes"],
+            "properties": {
+              "name": { "type": "string", "description": "File name on disk." },
+              "dir": {
+                "type": "string",
+                "description": "Optional sub-folder of the model folder to store the file in. Used where several files must share a directory, for example one folder per PaddleOCR model."
+              },
+              "role": {
+                "enum": ["model", "mmproj", "paddle-model"],
+                "description": "model is passed to llama-server with -m, mmproj with --mmproj. paddle-model is a file of a PaddleOCR inference model that the Python engine loads from its dir."
+              },
+              "urls": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": { "$ref": "#/$defs/httpsUrl" },
+                "description": "Download URLs in the order to try them: Hugging Face first, ModelScope mirror second when the same repository exists there. All URLs serve the same bytes, so one sha256 covers them."
+              },
+              "sha256": { "$ref": "#/$defs/sha256" },
+              "sizeBytes": { "type": "integer", "minimum": 1 }
+            }
+          }
+        },
+        "requirements": {
+          "type": "object",
+          "description": "Measured or estimated needs, used for fit badges and the Setup screen. See the model notes for how each figure was obtained.",
+          "additionalProperties": false,
+          "required": ["minVramMB", "minRamMB", "backends"],
+          "properties": {
+            "minVramMB": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "VRAM needed for full GPU offload, rounded up from the measured peak. 0 for models that run on the CPU only."
+            },
+            "minRamMB": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "System RAM (unified memory on Apple Silicon) needed to run on the CPU."
+            },
+            "backends": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "$ref": "#/$defs/backend" },
+              "description": "Backends the model is expected to work on."
+            }
+          }
+        },
+        "llamaServerArgs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Arguments appended to llama-server; empty for models that do not use it. The app adds -m, --mmproj, --host 127.0.0.1 and --port itself, and adds -ngl 99 on GPU backends or -ngl 0 on the CPU backend. Always pass --port, because the default changed between builds."
+        },
+        "notes": { "type": "string", "description": "Provenance, caveats and where the figures come from." }
+      }
+    },
+    "range": {
+      "type": "object",
+      "description": "Inclusive numeric range. Give min, max or both.",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "min": { "type": "integer", "minimum": 0 },
+        "max": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "when": {
+      "type": "object",
+      "description": "Conditions on the hardware probe. A rule matches when every condition present holds; an empty object always matches. The probe reports 0 for a quantity that does not apply: vramMB is 0 on the cpu and metal backends, unifiedMemoryMB is 0 except on Apple Silicon (where ramMB equals it).",
+      "additionalProperties": false,
+      "properties": {
+        "backend": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/backend" },
+          "description": "Matches when the selected backend is any of these."
+        },
+        "vramMB": { "$ref": "#/$defs/range" },
+        "ramMB": { "$ref": "#/$defs/range" },
+        "unifiedMemoryMB": { "$ref": "#/$defs/range" }
+      }
+    },
+    "suggester": {
+      "type": "object",
+      "description": "Rules for the hardware suggester (ADR 0008). Rules are evaluated in order. Code only evaluates them, so tuning needs no code change. Keep this language small.",
+      "additionalProperties": false,
+      "required": ["defaultModel", "recommend", "badges"],
+      "properties": {
+        "defaultModel": {
+          "$ref": "#/$defs/id",
+          "description": "Model id recommended when no recommend rule matches."
+        },
+        "recommend": {
+          "type": "array",
+          "description": "Ordered. The first rule whose when matches picks the recommended model.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "when", "model", "reason"],
+            "properties": {
+              "id": { "$ref": "#/$defs/id" },
+              "when": { "$ref": "#/$defs/when" },
+              "model": {
+                "$ref": "#/$defs/id",
+                "description": "Recommended model id; must exist under models."
+              },
+              "reason": {
+                "type": "string",
+                "description": "Plain-language reason shown to the user. May use the placeholders {gpuName}, {vramGB}, {ramGB} and {unifiedGB}, which the app fills from the probe."
+              }
+            }
+          }
+        },
+        "badges": {
+          "type": "array",
+          "description": "Ordered. For each model, the first rule whose models list contains it and whose when matches sets its fit badge. A model with no matching rule gets wontFit.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "models", "when", "badge"],
+            "properties": {
+              "id": { "$ref": "#/$defs/id" },
+              "models": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": { "$ref": "#/$defs/id" },
+                "description": "Model ids the rule applies to; each must exist under models."
+              },
+              "when": { "$ref": "#/$defs/when" },
+              "badge": {
+                "enum": ["runsWell", "slow", "wontFit", "hidden"],
+                "description": "runsWell: Runs well. slow: Slow on this PC. wontFit: Won't fit. hidden: the model is not offered on this machine."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

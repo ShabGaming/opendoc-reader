@@ -1,0 +1,638 @@
+{
+  "$schema": "./manifest.schema.json",
+  "schemaVersion": 1,
+  "runtimes": {
+    "llamaServer": {
+      "build": "b11669",
+      "releaseUrl": "https://github.com/ggml-org/llama.cpp/releases/tag/b11669",
+      "license": "MIT",
+      "builds": {
+        "windows-x64-cuda": {
+          "backend": "cuda",
+          "description": "NVIDIA GPUs. CUDA 13.4 build; needs a recent NVIDIA driver (the spike used 616.56). The cudart archive supplies the CUDA runtime DLLs.",
+          "files": [
+            {
+              "name": "llama-b11669-bin-win-cuda-13.4-x64.zip",
+              "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/llama-b11669-bin-win-cuda-13.4-x64.zip",
+              "sha256": "3b92d5c064f5032e603e531d3ec8961f3bd6613e5dfad047399a92dec8e95dbc",
+              "sizeBytes": 154582227
+            },
+            {
+              "name": "cudart-llama-bin-win-cuda-13.4-x64.zip",
+              "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/cudart-llama-bin-win-cuda-13.4-x64.zip",
+              "sha256": "738f8c251ac22b70c3ae6f83a10cf222725df0395246a2cf58f32bdb85fbe668",
+              "sizeBytes": 423535356
+            }
+          ]
+        },
+        "windows-x64-vulkan": {
+          "backend": "vulkan",
+          "description": "AMD and Intel GPUs, and NVIDIA GPUs as a fallback. Not yet tested on real hardware.",
+          "files": [
+            {
+              "name": "llama-b11669-bin-win-vulkan-x64.zip",
+              "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/llama-b11669-bin-win-vulkan-x64.zip",
+              "sha256": "2c07574e7bde71321cb785282b20cc821e951132149eeceeea32ddebdbf0598e",
+              "sizeBytes": 32182350
+            }
+          ]
+        },
+        "windows-x64-cpu": {
+          "backend": "cpu",
+          "description": "Any x64 CPU. Multi-variant build that picks the best instruction set at run time.",
+          "files": [
+            {
+              "name": "llama-b11669-bin-win-cpu-x64.zip",
+              "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/llama-b11669-bin-win-cpu-x64.zip",
+              "sha256": "37b3efcf962847ca869745fd4ccf7f5e7e8dacfeff9fa3523b4ca8cdc66d632b",
+              "sizeBytes": 19537886
+            }
+          ]
+        },
+        "macos-arm64-metal": {
+          "backend": "metal",
+          "description": "Apple Silicon (M1 and newer). Metal is the default backend of the macOS arm64 build.",
+          "files": [
+            {
+              "name": "llama-b11669-bin-macos-arm64.tar.gz",
+              "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/llama-b11669-bin-macos-arm64.tar.gz",
+              "sha256": "dbed55493d72bc1ba2babc8770d669c2289b5bc4ee9fb2a4dfc158d45b7d13fd",
+              "sizeBytes": 12191582
+            }
+          ]
+        }
+      }
+    }
+  },
+  "models": {
+    "fast-ppocrv6-tiny": {
+      "tier": "fast",
+      "experimental": false,
+      "displayName": "PP-OCRv6 tiny + PP-StructureV3 (text and layout)",
+      "engine": "paddleocr-structure",
+      "license": "Apache-2.0",
+      "sources": [
+        {
+          "repo": "PaddlePaddle/PP-OCRv6_tiny_det",
+          "revision": "d3177d4e5551463292a61e27cfca2b53e7c3fe9d",
+          "url": "https://huggingface.co/PaddlePaddle/PP-OCRv6_tiny_det"
+        },
+        {
+          "repo": "PaddlePaddle/PP-OCRv6_tiny_rec",
+          "revision": "0736086f72f666350ebcdc0c3a504eeac89cdfad",
+          "url": "https://huggingface.co/PaddlePaddle/PP-OCRv6_tiny_rec"
+        },
+        {
+          "repo": "PaddlePaddle/PP-DocLayout_plus-L",
+          "revision": "aa52b8528c84f9b1a34ac3a88fe0e576edb9d11d",
+          "url": "https://huggingface.co/PaddlePaddle/PP-DocLayout_plus-L"
+        }
+      ],
+      "files": [
+        {
+          "name": "inference.json",
+          "dir": "PP-OCRv6_tiny_det",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-OCRv6_tiny_det/resolve/d3177d4e5551463292a61e27cfca2b53e7c3fe9d/inference.json"
+          ],
+          "sha256": "935c18972799dd8f2a2ff424b9f8b2c6adee4b89f3a76f0746210ec33ba9b3d8",
+          "sizeBytes": 229184
+        },
+        {
+          "name": "inference.pdiparams",
+          "dir": "PP-OCRv6_tiny_det",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-OCRv6_tiny_det/resolve/d3177d4e5551463292a61e27cfca2b53e7c3fe9d/inference.pdiparams"
+          ],
+          "sha256": "853f7ed317d4f2f80de646842e5bbc32f9d39c601562cbe466cda42e4bafb1b1",
+          "sizeBytes": 1718055
+        },
+        {
+          "name": "inference.yml",
+          "dir": "PP-OCRv6_tiny_det",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-OCRv6_tiny_det/resolve/d3177d4e5551463292a61e27cfca2b53e7c3fe9d/inference.yml"
+          ],
+          "sha256": "3ac018be6f97499a08faa3bbdeb33640968d9307f6736d152902747a9f259593",
+          "sizeBytes": 883
+        },
+        {
+          "name": "inference.json",
+          "dir": "PP-OCRv6_tiny_rec",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-OCRv6_tiny_rec/resolve/0736086f72f666350ebcdc0c3a504eeac89cdfad/inference.json"
+          ],
+          "sha256": "b5b14770c7dcf092781e92f4278a2ae5f95048f08b4b8a04140e88cb2745f147",
+          "sizeBytes": 108959
+        },
+        {
+          "name": "inference.pdiparams",
+          "dir": "PP-OCRv6_tiny_rec",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-OCRv6_tiny_rec/resolve/0736086f72f666350ebcdc0c3a504eeac89cdfad/inference.pdiparams"
+          ],
+          "sha256": "bb2f8f54d1e25f28c71b6fa4fe23f5940e159cae27fbee96155c99f822156e57",
+          "sizeBytes": 4420410
+        },
+        {
+          "name": "inference.yml",
+          "dir": "PP-OCRv6_tiny_rec",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-OCRv6_tiny_rec/resolve/0736086f72f666350ebcdc0c3a504eeac89cdfad/inference.yml"
+          ],
+          "sha256": "66170210bad538e83fff3c4a3867e547d6bf20b50d64b20347c4b913f3034ea1",
+          "sizeBytes": 55571
+        },
+        {
+          "name": "config.json",
+          "dir": "PP-DocLayout_plus-L",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-DocLayout_plus-L/resolve/aa52b8528c84f9b1a34ac3a88fe0e576edb9d11d/config.json"
+          ],
+          "sha256": "adc92346e7ecc5d54dc9ed224c754c9237f56e5d88b0c9208db08cb315d66c09",
+          "sizeBytes": 6074
+        },
+        {
+          "name": "inference.json",
+          "dir": "PP-DocLayout_plus-L",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-DocLayout_plus-L/resolve/aa52b8528c84f9b1a34ac3a88fe0e576edb9d11d/inference.json"
+          ],
+          "sha256": "99bd09c0a1b9e88d35c65c305b91711d98055fc94b4a6eecd50da02e04729384",
+          "sizeBytes": 1081621
+        },
+        {
+          "name": "inference.pdiparams",
+          "dir": "PP-DocLayout_plus-L",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-DocLayout_plus-L/resolve/aa52b8528c84f9b1a34ac3a88fe0e576edb9d11d/inference.pdiparams"
+          ],
+          "sha256": "24ca3e2e442164505e250deef59f7ee9a54ea12dd32875c9cd6155d959dc97da",
+          "sizeBytes": 129307978
+        },
+        {
+          "name": "inference.yml",
+          "dir": "PP-DocLayout_plus-L",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-DocLayout_plus-L/resolve/aa52b8528c84f9b1a34ac3a88fe0e576edb9d11d/inference.yml"
+          ],
+          "sha256": "d60f782a16f96afb27e8280399899a94c3e9ffc694ffb2f913ea00af1c522f1e",
+          "sizeBytes": 1838
+        }
+      ],
+      "requirements": {
+        "minVramMB": 0,
+        "minRamMB": 2048,
+        "backends": [
+          "cpu"
+        ]
+      },
+      "llamaServerArgs": [],
+      "notes": "CPU-only, no llama-server. Spike section 5, config FINAL-structure-min-v6tiny: PP-StructureV3 with only layout detection and text OCR enabled, text_det_limit_type max, text_det_limit_side_len 960, oneDNN off (it fails on paddlepaddle 3.3.1 CPU). The layout model is the PP-StructureV3 default, PP-DocLayout_plus-L. 4 to 11 s per page and 765 MiB peak RSS on the spike CPU. Tables and formulas are kept as images. Each model is stored in its own folder (see dir). Files were hashed from the spike machine's copy and checked against the Hugging Face tree at the pinned revisions."
+    },
+    "accurate-paddleocr-vl-1.6": {
+      "tier": "accurate",
+      "experimental": false,
+      "displayName": "PaddleOCR-VL 1.6",
+      "engine": "paddleocr-vl",
+      "license": "Apache-2.0",
+      "sources": [
+        {
+          "repo": "PaddlePaddle/PaddleOCR-VL-1.6-GGUF",
+          "revision": "511b09642bb324401f15f97cc23bc67e8f0a291d",
+          "url": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6-GGUF"
+        },
+        {
+          "repo": "PaddlePaddle/PP-DocLayoutV3",
+          "revision": "241f8bdfc77a7c7bee915a5057aaee58c235a8d3",
+          "url": "https://huggingface.co/PaddlePaddle/PP-DocLayoutV3"
+        }
+      ],
+      "files": [
+        {
+          "name": "PaddleOCR-VL-1.6-GGUF.gguf",
+          "role": "model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6-GGUF/resolve/511b09642bb324401f15f97cc23bc67e8f0a291d/PaddleOCR-VL-1.6-GGUF.gguf",
+            "https://modelscope.cn/models/PaddlePaddle/PaddleOCR-VL-1.6-GGUF/resolve/dea493a839bfee633c4014ddad016ab7f0336b6f/PaddleOCR-VL-1.6-GGUF.gguf"
+          ],
+          "sha256": "f3ae46ec885050acf4b3d31944431e1fd90d50664fb09126af4a3c050ba14ee8",
+          "sizeBytes": 935769056
+        },
+        {
+          "name": "PaddleOCR-VL-1.6-GGUF-mmproj.gguf",
+          "role": "mmproj",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6-GGUF/resolve/511b09642bb324401f15f97cc23bc67e8f0a291d/PaddleOCR-VL-1.6-GGUF-mmproj.gguf",
+            "https://modelscope.cn/models/PaddlePaddle/PaddleOCR-VL-1.6-GGUF/resolve/dea493a839bfee633c4014ddad016ab7f0336b6f/PaddleOCR-VL-1.6-GGUF-mmproj.gguf"
+          ],
+          "sha256": "204d757d7610d9b3faab10d506d69e5b244e32bf765e2bab2d0167e65e0a058a",
+          "sizeBytes": 881770560
+        },
+        {
+          "name": "inference.json",
+          "dir": "PP-DocLayoutV3",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-DocLayoutV3/resolve/241f8bdfc77a7c7bee915a5057aaee58c235a8d3/inference.json"
+          ],
+          "sha256": "2b68367c5b312a03de5a6e1642c597c8f95165a7e40cd59c6700cf4a5042f4fd",
+          "sizeBytes": 1196890
+        },
+        {
+          "name": "inference.pdiparams",
+          "dir": "PP-DocLayoutV3",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-DocLayoutV3/resolve/241f8bdfc77a7c7bee915a5057aaee58c235a8d3/inference.pdiparams"
+          ],
+          "sha256": "70bd316b0582769ec968829fd1feb1a6a58b7c941b938327e551b6b12b45c137",
+          "sizeBytes": 130806572
+        },
+        {
+          "name": "inference.yml",
+          "dir": "PP-DocLayoutV3",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-DocLayoutV3/resolve/241f8bdfc77a7c7bee915a5057aaee58c235a8d3/inference.yml"
+          ],
+          "sha256": "506fcfac13b3b546ae40d7886b44126420f392adb694e3f8bb6a6286a1f90fdc",
+          "sizeBytes": 1482
+        }
+      ],
+      "requirements": {
+        "minVramMB": 3072,
+        "minRamMB": 4096,
+        "backends": [
+          "cuda",
+          "vulkan",
+          "metal",
+          "cpu"
+        ]
+      },
+      "llamaServerArgs": [
+        "--temp",
+        "0",
+        "-np",
+        "1",
+        "-c",
+        "16384"
+      ],
+      "notes": "Spike sections 3 and 7: 2509 MiB peak VRAM above baseline and about 3.1 GB RAM on CPU, including the Python process. Always pass -np 1 -c 16384; the defaults use 11.5 GB of VRAM. The layout model PP-DocLayoutV3 (files in its own folder) runs on the CPU in the Python engine; about 2.8 s per page. The ModelScope mirror is pinned to its own commit (dea493a8), which holds the same bytes."
+    },
+    "max-deepseek-ocr-1-q8": {
+      "tier": "max",
+      "experimental": false,
+      "displayName": "DeepSeek-OCR v1 (Q8_0)",
+      "engine": "deepseek-ocr",
+      "license": "MIT",
+      "sources": [
+        {
+          "repo": "ggml-org/DeepSeek-OCR-GGUF",
+          "revision": "7086620c3e417c744eb30dd3090fd053c6bb2e5e",
+          "url": "https://huggingface.co/ggml-org/DeepSeek-OCR-GGUF"
+        }
+      ],
+      "files": [
+        {
+          "name": "DeepSeek-OCR-Q8_0.gguf",
+          "role": "model",
+          "urls": [
+            "https://huggingface.co/ggml-org/DeepSeek-OCR-GGUF/resolve/7086620c3e417c744eb30dd3090fd053c6bb2e5e/DeepSeek-OCR-Q8_0.gguf",
+            "https://modelscope.cn/models/ggml-org/DeepSeek-OCR-GGUF/resolve/f8982f9a8161c41f542dc8d9fd3aeab48116f084/DeepSeek-OCR-Q8_0.gguf"
+          ],
+          "sha256": "81ede3e256230707dccf7fa052570c3a939d57db99de655f43cbb1a830d14d92",
+          "sizeBytes": 3126139712
+        },
+        {
+          "name": "mmproj-DeepSeek-OCR-Q8_0.gguf",
+          "role": "mmproj",
+          "urls": [
+            "https://huggingface.co/ggml-org/DeepSeek-OCR-GGUF/resolve/7086620c3e417c744eb30dd3090fd053c6bb2e5e/mmproj-DeepSeek-OCR-Q8_0.gguf",
+            "https://modelscope.cn/models/ggml-org/DeepSeek-OCR-GGUF/resolve/f8982f9a8161c41f542dc8d9fd3aeab48116f084/mmproj-DeepSeek-OCR-Q8_0.gguf"
+          ],
+          "sha256": "786c9b5159898de3d1d94a102836df559fed0bcf09f41a32f62c3219b0e278e0",
+          "sizeBytes": 447856768
+        }
+      ],
+      "requirements": {
+        "minVramMB": 6144,
+        "minRamMB": 10240,
+        "backends": [
+          "cuda",
+          "vulkan",
+          "metal",
+          "cpu"
+        ]
+      },
+      "llamaServerArgs": [
+        "--special",
+        "--chat-template",
+        "deepseek-ocr",
+        "--no-jinja",
+        "--temp",
+        "0",
+        "--flash-attn",
+        "off",
+        "--no-warmup",
+        "-c",
+        "8192",
+        "-np",
+        "1"
+      ],
+      "notes": "Spike sections 3 and 7: 6012 MiB peak VRAM above baseline at -c 8192, 6201 MiB working set on CPU. --special is required or the grounding tokens are stripped. Leave the default tiling. The ModelScope mirror is pinned to its own commit (f8982f9a), which holds the same bytes. Apple Silicon figures are estimates."
+    },
+    "experimental-deepseek-ocr-2-q8": {
+      "tier": "max",
+      "experimental": true,
+      "displayName": "DeepSeek-OCR 2 (Q8_0, experimental)",
+      "engine": "deepseek-ocr",
+      "license": "Apache-2.0",
+      "sources": [
+        {
+          "repo": "sabafallah/DeepSeek-OCR-2-GGUF",
+          "revision": "d08e5af400c64fa8a9b89b04ba373b600b02e05d",
+          "url": "https://huggingface.co/sabafallah/DeepSeek-OCR-2-GGUF"
+        }
+      ],
+      "files": [
+        {
+          "name": "deepseek-ocr-2-q8_0.gguf",
+          "role": "model",
+          "urls": [
+            "https://huggingface.co/sabafallah/DeepSeek-OCR-2-GGUF/resolve/d08e5af400c64fa8a9b89b04ba373b600b02e05d/deepseek-ocr-2-q8_0.gguf"
+          ],
+          "sha256": "4d82d12b949a6256a66eed9874a8177a9a25d1fe1b0650dfaaf34c9b92d9b911",
+          "sizeBytes": 3126139808
+        },
+        {
+          "name": "mmproj-deepseek-ocr-2-q8_0.gguf",
+          "role": "mmproj",
+          "urls": [
+            "https://huggingface.co/sabafallah/DeepSeek-OCR-2-GGUF/resolve/d08e5af400c64fa8a9b89b04ba373b600b02e05d/mmproj-deepseek-ocr-2-q8_0.gguf"
+          ],
+          "sha256": "46efe1304f581869f3b067eb77b1151dc0daf32bc25ef644fc7d505f4153a545",
+          "sizeBytes": 512537792
+        }
+      ],
+      "requirements": {
+        "minVramMB": 8192,
+        "minRamMB": 12288,
+        "backends": [
+          "cuda",
+          "vulkan",
+          "metal",
+          "cpu"
+        ]
+      },
+      "llamaServerArgs": [
+        "--special",
+        "--chat-template",
+        "deepseek-ocr",
+        "--no-jinja",
+        "--temp",
+        "0",
+        "--flash-attn",
+        "off",
+        "--no-warmup",
+        "-c",
+        "8192",
+        "-np",
+        "1",
+        "--dry-multiplier",
+        "0.8",
+        "--dry-base",
+        "1.75",
+        "--dry-allowed-length",
+        "2",
+        "--dry-penalty-last-n",
+        "8192",
+        "--dry-sequence-breaker",
+        "none"
+      ],
+      "notes": "Community GGUF conversion by an individual account with no license field; the Apache-2.0 license is the upstream weights' license. No official GGUF exists, so this is pinned by revision and SHA-256 and has no ModelScope mirror. Verify or replace it before v0.1. Spike section 3: 7639 MiB peak VRAM above baseline, so it is only offered with 10 GB or more of VRAM (16 GB or more on a Mac). DRY sampling guards against repetition loops (section 7)."
+    }
+  },
+  "suggester": {
+    "defaultModel": "accurate-paddleocr-vl-1.6",
+    "recommend": [
+      {
+        "id": "max-on-apple-silicon",
+        "when": {
+          "backend": [
+            "metal"
+          ],
+          "unifiedMemoryMB": {
+            "min": 16384
+          }
+        },
+        "model": "max-deepseek-ocr-1-q8",
+        "reason": "Your Mac has {unifiedGB} GB of memory, enough to run Max."
+      },
+      {
+        "id": "max-on-gpu",
+        "when": {
+          "backend": [
+            "cuda",
+            "vulkan"
+          ],
+          "vramMB": {
+            "min": 8192
+          }
+        },
+        "model": "max-deepseek-ocr-1-q8",
+        "reason": "Your {gpuName} ({vramGB} GB) runs Max on the GPU."
+      },
+      {
+        "id": "max-on-cpu",
+        "when": {
+          "backend": [
+            "cpu"
+          ],
+          "ramMB": {
+            "min": 16384
+          }
+        },
+        "model": "max-deepseek-ocr-1-q8",
+        "reason": "No supported GPU was found, but with {ramGB} GB of RAM Max measured faster on a CPU than Accurate."
+      },
+      {
+        "id": "fast-on-low-ram-cpu",
+        "when": {
+          "backend": [
+            "cpu"
+          ],
+          "ramMB": {
+            "max": 8191
+          }
+        },
+        "model": "fast-ppocrv6-tiny",
+        "reason": "No supported GPU was found and this PC has {ramGB} GB of RAM, so the lightweight Fast tier is the practical choice. Tables and formulas stay as images."
+      }
+    ],
+    "badges": [
+      {
+        "id": "fast-cpu",
+        "models": [
+          "fast-ppocrv6-tiny"
+        ],
+        "when": {
+          "ramMB": {
+            "min": 2048
+          }
+        },
+        "badge": "runsWell"
+      },
+      {
+        "id": "accurate-gpu",
+        "models": [
+          "accurate-paddleocr-vl-1.6"
+        ],
+        "when": {
+          "backend": [
+            "cuda",
+            "vulkan"
+          ],
+          "vramMB": {
+            "min": 3072
+          }
+        },
+        "badge": "runsWell"
+      },
+      {
+        "id": "accurate-apple-silicon",
+        "models": [
+          "accurate-paddleocr-vl-1.6"
+        ],
+        "when": {
+          "backend": [
+            "metal"
+          ],
+          "unifiedMemoryMB": {
+            "min": 16384
+          }
+        },
+        "badge": "runsWell"
+      },
+      {
+        "id": "accurate-cpu",
+        "models": [
+          "accurate-paddleocr-vl-1.6"
+        ],
+        "when": {
+          "ramMB": {
+            "min": 4096
+          }
+        },
+        "badge": "slow"
+      },
+      {
+        "id": "max-gpu",
+        "models": [
+          "max-deepseek-ocr-1-q8"
+        ],
+        "when": {
+          "backend": [
+            "cuda",
+            "vulkan"
+          ],
+          "vramMB": {
+            "min": 6144
+          }
+        },
+        "badge": "runsWell"
+      },
+      {
+        "id": "max-apple-silicon",
+        "models": [
+          "max-deepseek-ocr-1-q8"
+        ],
+        "when": {
+          "backend": [
+            "metal"
+          ],
+          "unifiedMemoryMB": {
+            "min": 16384
+          }
+        },
+        "badge": "runsWell"
+      },
+      {
+        "id": "max-small-mac",
+        "models": [
+          "max-deepseek-ocr-1-q8"
+        ],
+        "when": {
+          "backend": [
+            "metal"
+          ],
+          "unifiedMemoryMB": {
+            "max": 16383
+          }
+        },
+        "badge": "wontFit"
+      },
+      {
+        "id": "max-cpu",
+        "models": [
+          "max-deepseek-ocr-1-q8"
+        ],
+        "when": {
+          "ramMB": {
+            "min": 10240
+          }
+        },
+        "badge": "slow"
+      },
+      {
+        "id": "experimental-gpu",
+        "models": [
+          "experimental-deepseek-ocr-2-q8"
+        ],
+        "when": {
+          "backend": [
+            "cuda",
+            "vulkan"
+          ],
+          "vramMB": {
+            "min": 10240
+          }
+        },
+        "badge": "runsWell"
+      },
+      {
+        "id": "experimental-apple-silicon",
+        "models": [
+          "experimental-deepseek-ocr-2-q8"
+        ],
+        "when": {
+          "backend": [
+            "metal"
+          ],
+          "unifiedMemoryMB": {
+            "min": 16384
+          }
+        },
+        "badge": "runsWell"
+      },
+      {
+        "id": "experimental-otherwise",
+        "models": [
+          "experimental-deepseek-ocr-2-q8"
+        ],
+        "when": {},
+        "badge": "hidden"
+      }
+    ]
+  }
+}
