@@ -283,7 +283,7 @@ describe("Privacy and logs, About", () => {
     );
     await act(async () => undefined);
     expect(platform.opened).toEqual([
-      "https://github.com/ShabGaming/opendoc-reader/blob/main/LICENSE",
+      "https://github.com/ShabGaming/opendoc-reader/blob/main/THIRD_PARTY_NOTICES.md",
       "https://github.com/ShabGaming/opendoc-reader",
     ]);
   });

@@ -5,7 +5,7 @@ import { useApp } from "../../state/AppContext";
 import styles from "./Settings.module.css";
 
 const SOURCE_URL = "https://github.com/ShabGaming/opendoc-reader";
-const LICENSE_URL = "https://github.com/ShabGaming/opendoc-reader/blob/main/LICENSE";
+const LICENSE_URL = "https://github.com/ShabGaming/opendoc-reader/blob/main/THIRD_PARTY_NOTICES.md";
 
 function ExternalLink({ href, children }: { href: string; children: ReactNode }) {
   const { platform } = useApp();
