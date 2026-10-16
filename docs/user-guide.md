@@ -144,8 +144,9 @@ What to expect in the files:
 ## Where your files go
 
 - **Results** go next to the original file, or in the folder you picked under **Save to**.
-- **Models, the document engine and work files** are in the app's data folder. On Windows this is under `%APPDATA%` in a folder named `io.github.shabgaming.opendocreader`, and on macOS under `~/Library/Application Support/` in a folder with the same name. Models can live elsewhere if you chose another folder during setup.
-- **Logs** are in a separate folder. Use **Open logs folder** in Settings to find it.
+- **Models, the document engine, work files, settings and logs** are in one folder named `OpenDoc Reader`. On Windows it is `%LOCALAPPDATA%\OpenDoc Reader` (usually `C:\Users\<you>\AppData\Local\OpenDoc Reader`), and on macOS it is `~/Library/Application Support/OpenDoc Reader`. Models can live elsewhere if you chose another folder during setup.
+- **Logs** are in the `logs` folder inside it. Use **Open logs folder** in Settings to open it.
+- If you used an earlier build, the app moves its old folder (`io.github.shabgaming.opendocreader` under `%APPDATA%` or `~/Library/Application Support/`) to the new place the first time it starts. Large models can take a few minutes to move to another drive. If the move fails, the app keeps using the old folder and says why in the log.
 
 To free space, remove models you do not use in Settings, under Models.
 

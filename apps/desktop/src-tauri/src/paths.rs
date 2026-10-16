@@ -2,9 +2,12 @@
 
 use std::path::{Path, PathBuf};
 
+/// Folder name under the OS local data directory that holds everything the app stores.
+pub const DATA_FOLDER: &str = "OpenDoc Reader";
+
 #[derive(Debug, Clone)]
 pub struct AppPaths {
-    /// Per-OS app data directory from the Tauri path resolver.
+    /// `<local data>/OpenDoc Reader`, or the `OPENDOC_APP_DATA` override.
     pub data: PathBuf,
     pub logs: PathBuf,
     /// One job directory per queued file (`<work>/<fileId>/`).
@@ -80,6 +83,26 @@ pub fn path_str(path: &Path) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn everything_sits_under_the_data_folder() {
+        let data = PathBuf::from("/local").join(DATA_FOLDER);
+        let paths = AppPaths::new(data.clone(), data.join("logs"));
+        for dir in [
+            &paths.work,
+            &paths.runtime,
+            &paths.engine,
+            &paths.python,
+            &paths.uv_cache,
+            &paths.database,
+            &paths.settings_file,
+            &paths.default_models,
+            &paths.logs,
+        ] {
+            assert!(dir.starts_with(&data), "{}", dir.display());
+        }
+        assert_eq!(DATA_FOLDER, "OpenDoc Reader");
+    }
 
     #[test]
     fn job_layout_follows_the_protocol() {

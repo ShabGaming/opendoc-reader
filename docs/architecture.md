@@ -214,7 +214,7 @@ Download behavior:
 
 - Every file is verified against its SHA-256 before use. A mismatch deletes the file and reports an error.
 - Downloads are resumable and pausable, and they honor the system proxy.
-- Storage is a user-chosen folder, since models are gigabytes. The default is inside the app data directory.
+- Storage is a user-chosen folder, since models are gigabytes. The default is the `models` folder inside the app data folder (see below).
 - Licenses are shown before a download starts.
 - Settings has "Import model from folder" for restricted networks. Imported files are verified against the same manifest checksums.
 - Models can be removed in Settings.
@@ -243,15 +243,17 @@ Settings the engines depend on (details in section 7 of the spike report):
 
 ## Job queue and resume
 
-The queue accepts many files and folders and runs in the background with progress, pause and cancel. Only one GPU job runs at a time. Queue state is persisted so that jobs resume after an app restart, from the last completed page. The Rust core owns the queue. The engine is stateless between `run` calls, which keeps resume logic in one place. Queue state is stored in a SQLite database in the app data directory, which gives atomic updates if the app is killed mid-job.
+The queue accepts many files and folders and runs in the background with progress, pause and cancel. Only one GPU job runs at a time. Queue state is persisted so that jobs resume after an app restart, from the last completed page. The Rust core owns the queue. The engine is stateless between `run` calls, which keeps resume logic in one place. Queue state is stored in a SQLite database in the app data folder, which gives atomic updates if the app is killed mid-job.
 
 ## Where data lives on disk
 
 | What | Where |
 | --- | --- |
-| Settings, logs, runtime (`llama-server` builds, Python environment), queue state | The per-OS Tauri app data directory |
-| Models | A user-chosen folder; default is inside the app data directory |
+| Settings, logs, runtime (`llama-server` builds), engine source and Python environment, uv cache, queue database, job work folders | The app data folder: `%LOCALAPPDATA%\OpenDoc Reader\` on Windows, `~/Library/Application Support/OpenDoc Reader/` on macOS |
+| Models | A user-chosen folder; default is `models/` inside the app data folder |
 | Output files | Next to the original by default (`invoice.pdf` becomes `invoice.docx`; Markdown becomes `invoice.md` and `invoice_assets/`), or in an optional fixed output folder |
+
+The app data folder is under the local data directory, not the roaming one, because it holds gigabytes that must not follow a Windows profile around. Its name is fixed and does not contain the Tauri identifier, which stays `io.github.shabgaming.opendocreader` so that upgrades keep working. The `OPENDOC_APP_DATA` environment variable points a development build at another folder. Builds before this change used the identifier-named folder under the roaming data directory (`%APPDATA%`). On first start the app moves it into place (a rename on the same volume, otherwise a verified copy and then deletion), rewrites the stored paths that pointed into it, and drops the Python environment so that it is rebuilt from the moved cache. If the move fails it keeps using the old folder. A models folder the user chose elsewhere is not touched.
 
 Logs are local only. Settings has a button to copy diagnostics so a user can paste them into a GitHub issue. Nothing is sent anywhere automatically.
 
