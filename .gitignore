@@ -231,3 +231,4 @@ apps/desktop/src-tauri/target/
 apps/desktop/src-tauri/gen/schemas/
 *.tsbuildinfo
 .vite/
+.claude/worktrees/
