@@ -27,7 +27,7 @@ export const MODEL_CATALOG: Omit<ModelInfo, "state" | "installedSizeBytes">[] = 
     engineId: "paddleocr-structure",
     experimental: false,
     license: "Apache-2.0",
-    downloadSizeBytes: 176_035_573,
+    downloadSizeBytes: 136_930_573,
     sourceUrl: "https://github.com/PaddlePaddle/PaddleOCR",
   },
   {
@@ -37,7 +37,7 @@ export const MODEL_CATALOG: Omit<ModelInfo, "state" | "installedSizeBytes">[] = 
     engineId: "paddleocr-vl",
     experimental: false,
     license: "Apache-2.0",
-    downloadSizeBytes: 1_988_649_560,
+    downloadSizeBytes: 1_949_544_560,
     sourceUrl: "https://github.com/PaddlePaddle/PaddleOCR",
   },
   {
@@ -47,7 +47,7 @@ export const MODEL_CATALOG: Omit<ModelInfo, "state" | "installedSizeBytes">[] = 
     engineId: "deepseek-ocr",
     experimental: false,
     license: "MIT",
-    downloadSizeBytes: 3_613_101_480,
+    downloadSizeBytes: 3_573_996_480,
     sourceUrl: "https://github.com/deepseek-ai/DeepSeek-OCR",
   },
   {
@@ -57,7 +57,7 @@ export const MODEL_CATALOG: Omit<ModelInfo, "state" | "installedSizeBytes">[] = 
     engineId: "deepseek-ocr",
     experimental: true,
     license: "Apache-2.0",
-    downloadSizeBytes: 3_677_782_600,
+    downloadSizeBytes: 3_638_677_600,
     sourceUrl: "https://github.com/deepseek-ai/DeepSeek-OCR-2",
   },
 ];
