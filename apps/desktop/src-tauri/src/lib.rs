@@ -1,11 +1,17 @@
 //! OpenDoc Reader desktop core.
 //!
 //! The Rust side owns the job queue, process supervision, downloads, the
-//! hardware probe and settings. Each of those arrives as its own module;
-//! only the command layer exists so far.
+//! hardware probe and settings.
 
 pub mod commands;
 pub mod contract;
+pub mod error;
+pub mod hardware;
+pub mod logging;
+pub mod manifest;
+pub mod paths;
+pub mod settings;
+pub mod suggester;
 
 pub fn run() {
     tauri::Builder::default()
