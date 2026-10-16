@@ -7,47 +7,23 @@
 //! OPENDOC_INTEGRATION=1 cargo test --test integration -- --nocapture
 //! ```
 //!
-//! `OPENDOC_UV` names the uv to use (default: the sidecar in `binaries/`, else `uv` on the PATH).
+//! `OPENDOC_UV` names the uv to use (default: the real sidecar in `binaries/`, else `uv` on the
+//! PATH). `tests/e2e.rs` is the whole-app run.
 //! `OPENDOC_LLAMA_DIR` and `OPENDOC_MODELS_DIR` point at a llama-server build folder and a
 //! models folder laid out as `<modelsDir>/<modelId>/<file>`.
+
+mod common;
 
 use std::path::PathBuf;
 use std::time::Duration;
 
+use common::{enabled, engine_source, uv};
 use opendoc_reader_lib::contract::Backend;
 use opendoc_reader_lib::engine_env::EngineEnv;
 use opendoc_reader_lib::manifest::Manifest;
 use opendoc_reader_lib::paths::AppPaths;
 use opendoc_reader_lib::supervisor::{EngineProcess, EngineSpawn, LlamaLaunch, LlamaServer};
 use serde_json::{json, Value};
-
-fn enabled() -> bool {
-    if std::env::var("OPENDOC_INTEGRATION").as_deref() == Ok("1") {
-        true
-    } else {
-        eprintln!("skipped: set OPENDOC_INTEGRATION=1 to run");
-        false
-    }
-}
-
-fn uv() -> PathBuf {
-    if let Ok(path) = std::env::var("OPENDOC_UV") {
-        return PathBuf::from(path);
-    }
-    let triple_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("binaries");
-    if let Ok(entries) = std::fs::read_dir(&triple_dir) {
-        for entry in entries.flatten() {
-            let name = entry.file_name().to_string_lossy().into_owned();
-            if name.starts_with("uv-")
-                && !name.ends_with(".stamp")
-                && entry.metadata().is_ok_and(|m| m.len() > 0)
-            {
-                return entry.path();
-            }
-        }
-    }
-    PathBuf::from("uv")
-}
 
 #[tokio::test]
 async fn the_engine_environment_is_built_by_uv_and_the_engine_answers() {
@@ -56,8 +32,7 @@ async fn the_engine_environment_is_built_by_uv_and_the_engine_answers() {
     }
     let dir = tempfile::tempdir().unwrap();
     let paths = AppPaths::new(dir.path().join("data"), dir.path().join("logs"));
-    let source = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../engine");
-    let env = EngineEnv::new(&paths, source, uv());
+    let env = EngineEnv::new(&paths, engine_source(), uv());
 
     assert!(!env.is_ready());
     env.ensure(|line| eprintln!("uv: {line}")).await.unwrap();

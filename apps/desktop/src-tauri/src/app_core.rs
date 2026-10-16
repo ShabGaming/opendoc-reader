@@ -8,14 +8,20 @@ use crate::contract::{
     AppError, AppErrorCode, HardwareInfo, ModelInfo, ModelState, Recommendation, Settings,
     SettingsPatch,
 };
+use crate::download::Downloader;
+use crate::engine_env::EngineEnv;
 use crate::error::Result;
 use crate::logging;
+use crate::manifest::Manifest;
 use crate::models;
+use crate::paths::AppPaths;
 use crate::queue::Queue;
 use crate::runtime;
-use crate::services::Services;
+use crate::services::{CalibrationStore, EventSink, HardwareService, Services};
+use crate::settings::SettingsStore;
 use crate::setup::SetupManager;
 use crate::suggester;
+use crate::supervisor::{Dirs, EngineSpawn, SpawnFactory, Supervisor, SupervisorConfig};
 
 pub struct Core {
     pub svc: Arc<Services>,
@@ -24,6 +30,59 @@ pub struct Core {
 }
 
 impl Core {
+    /// Builds the real services for `paths` (the real engine, the embedded manifest) and the
+    /// core on top of them. The app and the end-to-end test both start here; the queue's
+    /// background loops and the log writer are left to the caller.
+    pub fn assemble(
+        paths: AppPaths,
+        engine_source: PathBuf,
+        uv: PathBuf,
+        calibration_page: PathBuf,
+        sink: Arc<dyn EventSink>,
+    ) -> Result<Arc<Self>> {
+        let engine_env = EngineEnv::new(&paths, engine_source, uv);
+        let settings = SettingsStore::load(paths.settings_file.clone(), &paths.default_models);
+        let models_dir = PathBuf::from(settings.get().models_dir);
+
+        let spawn_env = engine_env.clone();
+        let spawn: SpawnFactory = Arc::new(move || {
+            if !spawn_env.is_ready() {
+                return Err(AppError::new(
+                    AppErrorCode::EngineUnavailable,
+                    "The document engine is not installed yet.",
+                )
+                .with_reason("engine_not_installed"));
+            }
+            Ok(EngineSpawn {
+                program: spawn_env.python(),
+                args: vec!["-m".into(), "opendoc_engine".into()],
+                cwd: Some(spawn_env.project_dir()),
+                env: Vec::new(),
+            })
+        });
+        let supervisor = Supervisor::new(
+            spawn,
+            Dirs {
+                work_dir: paths.work.clone(),
+                models_dir,
+            },
+            SupervisorConfig::default(),
+        );
+        let svc = Services {
+            calibration: CalibrationStore::load(paths.calibration_file.clone()),
+            settings,
+            manifest: Arc::new(Manifest::embedded().clone()),
+            hardware: HardwareService::new(),
+            downloader: Downloader::new()?,
+            engine_env,
+            supervisor,
+            calibration_page,
+            sink,
+            paths,
+        };
+        Ok(Arc::new(Core::new(Arc::new(svc))?))
+    }
+
     pub fn new(svc: Arc<Services>) -> Result<Self> {
         let queue = Queue::new(svc.clone())?;
         let setup = SetupManager::new(svc.clone());
