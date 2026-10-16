@@ -2,6 +2,11 @@ import en from "./en.json";
 
 export type MessageKey = keyof typeof en;
 
+/** Keys that have `.one` and `.other` forms, for example `queue.count`. */
+export type PluralKey = {
+  [K in MessageKey]: K extends `${infer Base}.one` ? Base : never;
+}[MessageKey];
+
 const messages: Record<string, string> = en;
 
 /**
@@ -16,4 +21,13 @@ export function t(key: MessageKey, vars?: Record<string, string | number>): stri
   return template.replace(/\{(\w+)\}/g, (match, name: string) =>
     name in vars ? String(vars[name]) : match,
   );
+}
+
+/**
+ * Picks `<key>.one` for a count of 1 and `<key>.other` otherwise, and fills `{count}`. Plural
+ * forms live in the strings, not in the layout.
+ */
+export function tp(key: PluralKey, count: number, vars?: Record<string, string | number>): string {
+  const form = count === 1 ? "one" : "other";
+  return t(`${key}.${form}` as MessageKey, { count, ...vars });
 }
