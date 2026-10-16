@@ -8,7 +8,7 @@ afterEach(() => {
 describe("parseDevParams", () => {
   it("reads the mock switches and ignores values it does not know", () => {
     const dev = parseDevParams(
-      "?mock=1&screen=review&theme=dark&step=3&section=models&page=2&view=result&t=2500&freeze=1&hw=mac&fail=offline&file=Library",
+      "?mock=1&screen=review&theme=dark&step=3&section=models&page=2&view=result&t=2500&freeze=1&hw=mac&fail=offline&file=Library&missing=docx",
     );
     expect(dev).toEqual({
       mock: true,
@@ -23,6 +23,7 @@ describe("parseDevParams", () => {
       hardware: "mac",
       fail: "offline",
       file: "Library",
+      missing: "docx",
     });
     const odd = parseDevParams("?screen=nope&theme=pink&step=x&hw=toaster&view=3d");
     expect(odd).toMatchObject({

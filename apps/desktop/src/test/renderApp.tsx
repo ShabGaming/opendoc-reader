@@ -25,6 +25,7 @@ const noDev: DevParams = {
   hardware: null,
   fail: null,
   file: null,
+  missing: null,
 };
 
 /**
@@ -33,6 +34,7 @@ const noDev: DevParams = {
  */
 export async function renderApp(options: RenderOptions = {}) {
   const backend = new MockBackend({ scenario: "demo", ...options });
+  if (options.dev?.missing) backend.markOutputsGone(options.dev.missing);
   const platform = createMockPlatform({ openWindow: false, ...options.platform });
   const api = createApi(backend);
   const dev = options.dev ? { ...noDev, ...options.dev } : null;

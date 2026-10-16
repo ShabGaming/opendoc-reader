@@ -219,6 +219,13 @@ export interface OutputFile {
   assetsDir: string | null;
 }
 
+/** One saved output of an item and whether the file is still on disk (`check_outputs`). */
+export interface OutputStatus {
+  format: ExportFormat;
+  path: string;
+  exists: boolean;
+}
+
 export interface QueueItem {
   fileId: string;
   path: string;
@@ -326,6 +333,12 @@ export interface Commands {
   get_review: { args: { fileId: string; page: number }; result: ReviewPage };
   export: { args: { fileId: string; format: ExportFormat }; result: OutputFile };
   reveal_in_folder: { args: { path: string }; result: null };
+  export_to: {
+    args: { fileId: string; format: ExportFormat; destPath: string; overwrite: boolean };
+    result: OutputFile;
+  };
+  check_outputs: { args: { fileId: string }; result: OutputStatus[] };
+  open_output: { args: { path: string }; result: null };
 
   settings_get: { args: Record<string, never>; result: Settings };
   settings_set: { args: { patch: SettingsPatch }; result: Settings };

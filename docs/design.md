@@ -233,8 +233,8 @@ Review replaces the main area. The queue sidebar stays, with the reviewed file h
 +----------------------+-----------------------------------------------------+
 | Queue  5 files       | [<- Queue] Library scans.pdf  [Original|Side|Result]|
 |                      |  <  Page 2 of 3  >  [-] 100% [+]  [Blocks]          |
-| [pdf] Library sc.. ok|                  [Show in folder][Export Markdown]  |
-| [pdf] Statistical 64%|                                      [Export Word]  |
+| [pdf] Library sc.. ok|   [Open in Word][Open Markdown][Show in folder][Save a copy v]|
+| [pdf] Statistical 64%|                                                     |
 | ...                  +-----------------------------------------------------+
 |                      | [p1] [p2] [p3]                    thumbnail strip   |
 |                      +--------------------------+--------------------------+
@@ -287,7 +287,15 @@ Headings and titles at 16 px semibold, paragraphs at 14 px, captions and notes a
 
 **Export actions**
 
-"Export Word" and "Export Markdown" write the files and show a toast, for example "Saved Library scans.docx next to the original." Existing files are never overwritten (a numeric suffix is added). "Show in folder" opens the output folder in the OS file manager.
+Conversion already saved the chosen formats next to the original, so the toolbar opens those files instead of exporting again.
+
+- **Open in Word** (primary) opens the saved .docx with the OS default app. If Word was not one of the formats for that file, the primary becomes **Open Markdown**; if neither file exists any more, it becomes **Save a copy as...**.
+- **Open Markdown** (secondary, only while the .md exists).
+- **Show in folder** (tertiary) selects a saved file in the OS file manager, or the original when the saved files are gone.
+- **Save a copy as...** (small menu button with a caret) offers **Word document...** and **Markdown...**. Each opens the native save dialog at the original's folder and name and writes that format to the chosen path, including a format that was not chosen at conversion. The dialog asks before replacing a file. A toast says where the copy went.
+- When a saved file has been moved or deleted, an inline notice under the toolbar names it and points to Save a copy as. The same buttons and notice appear in the Done detail view on the main screen (Open in Word, Open Markdown, Show in folder, Review, Save a copy as).
+
+The menu uses the popover surface: `--surface`, 1px `--border-strong`, `--shadow`, 5 px radius, items 28 px high with `--hover` on hover and focus.
 
 ### 4.4 Setup
 

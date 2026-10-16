@@ -4,10 +4,12 @@
 //! managed state. Names and argument names follow the contract: Rust `snake_case`, JavaScript
 //! `camelCase` (`invoke("queue_cancel", { fileId })`).
 
+mod outputs;
 mod queue;
 mod setup;
 mod system;
 
+pub use outputs::*;
 pub use queue::*;
 pub use setup::*;
 pub use system::*;

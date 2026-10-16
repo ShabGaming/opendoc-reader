@@ -7,6 +7,13 @@
   background: var(--bg);
 }
 
+.notice {
+  flex: none;
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
 .split {
   display: flex;
   flex: 1;

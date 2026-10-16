@@ -1,18 +1,11 @@
-import {
-  CheckCircle,
-  Clock,
-  Columns,
-  FolderOpen,
-  Pause,
-  Play,
-  Prohibit,
-  X,
-} from "@phosphor-icons/react";
+import { CheckCircle, Clock, Columns, Pause, Play, Prohibit, X } from "@phosphor-icons/react";
 import { Button } from "../../components/Button";
+import { OutputActions } from "../../components/OutputActions";
 import { InlineNotice } from "../../components/InlineNotice";
 import { ProgressBar } from "../../components/ProgressBar";
 import { t, tp } from "../../i18n";
 import { useApp } from "../../state/AppContext";
+import { useOutputs } from "../../state/useOutputs";
 import {
   adviceText,
   conversionErrorAdvice,
@@ -147,51 +140,8 @@ function StatusBlock({ item }: { item: QueueItem }) {
         </>
       );
     }
-    case "done": {
-      const first = item.outputs[0];
-      const folder = first ? parentDir(first.path) : null;
-      const nextToOriginal = folder === parentDir(item.path);
-      return (
-        <>
-          <div>
-            <div className={styles.headlineOk}>
-              <CheckCircle size={16} aria-hidden="true" />
-              {item.durationMs !== null
-                ? t("detail.done", { time: formatDurationMs(item.durationMs) })
-                : t("detail.doneNoTime")}
-            </div>
-            {first && (
-              <>
-                <div className={styles.savedLabel}>
-                  {nextToOriginal
-                    ? t("detail.savedNextTo")
-                    : t("detail.savedIn", { folder: folder ?? "" })}
-                </div>
-                <div className={styles.mono}>
-                  {item.outputs.map((o) => fileName(o.path)).join(", ")}
-                </div>
-              </>
-            )}
-          </div>
-          <div className={styles.actions}>
-            <Button
-              icon={<Columns size={16} aria-hidden="true" />}
-              onClick={() => actions.openReview(item.fileId)}
-            >
-              {t("detail.review")}
-            </Button>
-            {first && (
-              <Button
-                icon={<FolderOpen size={16} aria-hidden="true" />}
-                onClick={() => actions.reveal(first.path)}
-              >
-                {t("detail.showInFolder")}
-              </Button>
-            )}
-          </div>
-        </>
-      );
-    }
+    case "done":
+      return <DoneBlock item={item} />;
     case "needsAttention":
       return (
         <>
@@ -249,6 +199,49 @@ function StatusBlock({ item }: { item: QueueItem }) {
       );
     }
   }
+}
+
+function DoneBlock({ item }: { item: QueueItem }) {
+  const { actions } = useApp();
+  const outputs = useOutputs(item);
+  const first = item.outputs[0];
+  const folder = first ? parentDir(first.path) : null;
+  const nextToOriginal = folder === parentDir(item.path);
+  return (
+    <>
+      <div>
+        <div className={styles.headlineOk}>
+          <CheckCircle size={16} aria-hidden="true" />
+          {item.durationMs !== null
+            ? t("detail.done", { time: formatDurationMs(item.durationMs) })
+            : t("detail.doneNoTime")}
+        </div>
+        {first && (
+          <>
+            <div className={styles.savedLabel}>
+              {nextToOriginal
+                ? t("detail.savedNextTo")
+                : t("detail.savedIn", { folder: folder ?? "" })}
+            </div>
+            <div className={styles.mono}>
+              {item.outputs.map((o) => fileName(o.path)).join(", ")}
+            </div>
+          </>
+        )}
+      </div>
+      {outputs.notice && <InlineNotice title={outputs.notice} />}
+      <div className={styles.actions}>
+        <OutputActions outputs={outputs} onReveal={(path) => void actions.reveal(path)}>
+          <Button
+            icon={<Columns size={16} aria-hidden="true" />}
+            onClick={() => actions.openReview(item.fileId)}
+          >
+            {t("detail.review")}
+          </Button>
+        </OutputActions>
+      </div>
+    </>
+  );
 }
 
 function RemoveButton({ item }: { item: QueueItem }) {

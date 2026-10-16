@@ -1,7 +1,7 @@
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { getCurrentWebview } from "@tauri-apps/api/webview";
-import { open as openDialog } from "@tauri-apps/plugin-dialog";
+import { open as openDialog, save as saveDialog } from "@tauri-apps/plugin-dialog";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import type { AppError } from "../types/commands";
 import type { Transport } from "./api";
@@ -57,6 +57,13 @@ export const tauriPlatform: Platform = {
       defaultPath,
     });
     return typeof picked === "string" ? picked : null;
+  },
+  async pickSavePath({ defaultPath, extension, filterName }) {
+    const picked = await saveDialog({
+      defaultPath,
+      filters: [{ name: filterName, extensions: [extension] }],
+    });
+    return picked ?? null;
   },
   onFileDrop(handlers) {
     return getCurrentWebview().onDragDropEvent((event) => {

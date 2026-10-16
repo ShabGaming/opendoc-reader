@@ -8,6 +8,7 @@ import {
   type HardwareInfo,
   type ModelInfo,
   type OutputFile,
+  type OutputStatus,
   type PageStatus,
   type QueueItem,
   type QueueProgress,
@@ -207,6 +208,13 @@ describe("Tauri contract types match docs/protocol-examples.json", () => {
       assetsDir: "C:\\Users\\Ada\\Documents\\invoice_assets",
     };
     expect(output).toEqual(examples["tauri.OutputFile"]);
+
+    const status: OutputStatus = {
+      format: "docx",
+      path: "C:\\Users\\Ada\\Documents\\invoice.docx",
+      exists: true,
+    };
+    expect(status).toEqual(examples["tauri.OutputStatus"]);
   });
 
   it("ReviewPage", () => {
