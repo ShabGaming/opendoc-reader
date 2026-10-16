@@ -328,8 +328,11 @@ def run(tmp_path_factory) -> Run:
                 json.dumps(normalize_page(current.pages[name]), ensure_ascii=False, indent=1)
                 + "\n",
                 encoding="utf-8",
+                newline="\n",
             )
-            (EXPECTED / f"{name}.md").write_text(current.markdown(name), encoding="utf-8")
+            (EXPECTED / f"{name}.md").write_text(
+                current.markdown(name), encoding="utf-8", newline="\n"
+            )
     return current
 
 
