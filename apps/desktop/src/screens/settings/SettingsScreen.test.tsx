@@ -300,6 +300,6 @@ describe("Privacy and logs, About", () => {
     await user.click(within(items[0]!).getByRole("link"));
     await act(async () => undefined);
     expect(platform.opened[0]).toMatch(/^https:\/\/github\.com\//);
-    expect(screen.getByText(/Nothing is fetched while it runs/)).toBeInTheDocument();
+    expect(screen.getByText(/People who have contributed to OpenDoc Reader./)).toBeInTheDocument();
   });
 });

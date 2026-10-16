@@ -365,7 +365,7 @@
   "settings.about.licensesDesc": "The app is released under the MIT License. Models keep their own licenses: Apache-2.0 (PaddleOCR-VL, PP-OCRv6) and MIT (DeepSeek-OCR).",
   "settings.about.viewLicenses": "View licenses",
   "settings.about.contributors": "Contributors",
-  "settings.about.contributorsDesc": "People who have contributed to OpenDoc Reader, most contributions first. The list is bundled with the app. Nothing is fetched while it runs.",
+  "settings.about.contributorsDesc": "People who have contributed to OpenDoc Reader.",
   "settings.about.contributorsList": "Contributors to OpenDoc Reader",
   "settings.about.contributions.one": "1 contribution",
   "settings.about.contributions.other": "{count} contributions",
