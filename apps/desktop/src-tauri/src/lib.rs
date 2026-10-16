@@ -16,7 +16,9 @@ pub mod manifest;
 pub mod models;
 pub mod paths;
 pub mod runtime;
+pub mod services;
 pub mod settings;
+pub mod setup;
 pub mod suggester;
 pub mod supervisor;
 #[cfg(test)]

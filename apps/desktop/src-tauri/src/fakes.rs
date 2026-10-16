@@ -3,6 +3,9 @@
 
 use std::path::PathBuf;
 
+pub mod rig;
+pub use rig::*;
+
 use serde_json::Value;
 
 use crate::contract::{AppError, Backend};
