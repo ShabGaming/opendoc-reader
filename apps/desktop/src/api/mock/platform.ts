@@ -1,10 +1,18 @@
 import type { Platform } from "../platform";
 
+export interface SaveRequest {
+  defaultPath: string;
+  extension: string;
+  filterName: string;
+}
+
 export interface MockPlatformOptions {
   /** What the file picker returns. */
   files?: string[];
   /** What the folder picker returns, null to act as if cancelled. */
   folder?: string | null;
+  /** What the save dialog returns: a path, a function of the request, or null to cancel. Default: the suggested path. */
+  savePath?: string | null | ((request: SaveRequest) => string | null);
   /** Open links in a new browser tab. Tests turn it off. */
   openWindow?: boolean;
 }
@@ -18,18 +26,27 @@ const DEMO_DIR = "C:\\Users\\Demo\\Documents";
 export function createMockPlatform(options: MockPlatformOptions = {}): Platform & {
   opened: string[];
   copied: string[];
+  saveRequests: SaveRequest[];
 } {
   const opened: string[] = [];
   const copied: string[] = [];
+  const saveRequests: SaveRequest[] = [];
   return {
     kind: "mock",
     opened,
     copied,
+    saveRequests,
     assetUrl: (path) => path,
     pickFiles: async () =>
       options.files ?? [`${DEMO_DIR}\\Meeting notes.pdf`, `${DEMO_DIR}\\scan-014.png`],
     pickFolder: async () =>
       options.folder === undefined ? `${DEMO_DIR}\\Converted` : options.folder,
+    pickSavePath: async (request) => {
+      saveRequests.push(request);
+      const chosen = options.savePath;
+      if (chosen === undefined) return request.defaultPath;
+      return typeof chosen === "function" ? chosen(request) : chosen;
+    },
     onFileDrop(handlers) {
       if (typeof window === "undefined") return Promise.resolve(() => {});
       const hasFiles = (e: DragEvent) =>

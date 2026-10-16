@@ -34,9 +34,14 @@ describe("Review layout", () => {
     expect(screen.getByText("Page 1 of 3")).toBeInTheDocument();
     expect(screen.getByText("100%")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Blocks" })).toHaveAttribute("aria-pressed", "true");
-    expect(screen.getByRole("button", { name: "Export Word" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Export Markdown" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Open in Word" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Open Markdown" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Show in folder" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Save a copy as..." })).toHaveAttribute(
+      "aria-haspopup",
+      "menu",
+    );
+    expect(screen.queryByRole("button", { name: /^Export/ })).not.toBeInTheDocument();
     // The pane headers name what is shown and which model produced it.
     expect(screen.getByText("Accurate (PaddleOCR-VL 1.6)")).toBeInTheDocument();
   });
@@ -372,28 +377,106 @@ describe("Linking the scan and the result", () => {
   });
 });
 
-describe("Export and Show in folder", () => {
-  it("exports Word and Markdown and says where the file went, never overwriting", async () => {
+describe("Open, Save a copy and Show in folder", () => {
+  const docs = "C:\\Users\\Demo\\Documents";
+
+  it("opens the saved Word and Markdown files", async () => {
     const { user, backend } = await openReview();
-    await user.click(screen.getByRole("button", { name: "Export Word" }));
-    expect(
-      await screen.findByText("Saved Library scans (2).docx next to the original."),
-    ).toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: "Export Markdown" }));
-    expect(
-      await screen.findByText("Saved Library scans (2).md next to the original."),
-    ).toBeInTheDocument();
-    const exports = backend.calls.filter((c) => c.command === "export").map((c) => c.args);
-    expect(exports).toEqual([
-      { fileId: expect.any(String), format: "docx" },
-      { fileId: expect.any(String), format: "markdown" },
+    await user.click(screen.getByRole("button", { name: "Open in Word" }));
+    await user.click(screen.getByRole("button", { name: "Open Markdown" }));
+    expect(backend.openedOutputs).toEqual([
+      `${docs}\\Library scans.docx`,
+      `${docs}\\Library scans.md`,
     ]);
+  });
+
+  it("saves a copy in any format, at the path from the dialog", async () => {
+    const { user, backend, platform } = await openReview();
+    await user.click(screen.getByRole("button", { name: "Save a copy as..." }));
+    expect(screen.getByRole("menuitem", { name: "Word document..." })).toBeInTheDocument();
+    await user.click(screen.getByRole("menuitem", { name: "Markdown..." }));
+    expect(platform.saveRequests).toEqual([
+      {
+        defaultPath: `${docs}\\Library scans.md`,
+        extension: "md",
+        filterName: "Markdown",
+      },
+    ]);
+    expect(
+      await screen.findByText("Saved Library scans.md next to the original."),
+    ).toBeInTheDocument();
+    expect(backend.savedCopies).toEqual([
+      {
+        fileId: expect.any(String),
+        format: "markdown",
+        path: `${docs}\\Library scans.md`,
+      },
+    ]);
+    // The dialog has already confirmed any replacement, so the call allows it.
+    const call = backend.calls.find((c) => c.command === "export_to");
+    expect(call?.args).toMatchObject({ overwrite: true, format: "markdown" });
+  });
+
+  it("closes the menu with Escape", async () => {
+    const { user } = await openReview();
+    await user.click(screen.getByRole("button", { name: "Save a copy as..." }));
+    expect(screen.getByRole("menu")).toBeInTheDocument();
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+  });
+
+  it("does nothing when the save dialog is cancelled", async () => {
+    const app = await renderApp({ dev: { screen: "review" }, platform: { savePath: null } });
+    await screen.findByRole("region", { name: "Result text" });
+    await app.user.click(screen.getByRole("button", { name: "Save a copy as..." }));
+    await app.user.click(screen.getByRole("menuitem", { name: "Word document..." }));
+    expect(app.backend.calls.some((c) => c.command === "export_to")).toBe(false);
+  });
+
+  it("writes to another folder and appends the extension the user left off", async () => {
+    const app = await renderApp({
+      dev: { screen: "review" },
+      platform: { savePath: "D:\\Archive\\notes" },
+    });
+    await screen.findByRole("region", { name: "Result text" });
+    await app.user.click(screen.getByRole("button", { name: "Save a copy as..." }));
+    await app.user.click(screen.getByRole("menuitem", { name: "Word document..." }));
+    expect(await screen.findByText("Saved notes.docx in D:\\Archive.")).toBeInTheDocument();
+    expect(app.backend.savedCopies[0]?.path).toBe("D:\\Archive\\notes.docx");
+  });
+
+  it("falls back to Open Markdown when the Word file is gone, and says so", async () => {
+    const app = await renderApp({ dev: { screen: "review", missing: "docx" } });
+    await screen.findByRole("region", { name: "Result text" });
+    expect(await screen.findByText(/Moved or deleted: Library scans.docx/)).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Open in Word" })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Open Markdown" })).toBeInTheDocument();
+    // Show in folder selects the file that is still there.
+    await app.user.click(screen.getByRole("button", { name: "Show in folder" }));
+    expect(app.backend.revealed).toEqual([`${docs}\\Library scans.md`]);
+  });
+
+  it("offers only Save a copy as when every output is gone", async () => {
+    await renderApp({ dev: { screen: "review", missing: "all" } });
+    await screen.findByRole("region", { name: "Result text" });
+    expect(await screen.findByText(/Moved or deleted/)).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /^Open / })).not.toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: "Save a copy as..." })).toHaveLength(1);
+  });
+
+  it("notices a file that vanished after the screen opened", async () => {
+    const { user, backend } = await openReview();
+    backend.markOutputsGone("docx");
+    await user.click(screen.getByRole("button", { name: "Open in Word" }));
+    expect(await screen.findByText(/Moved or deleted: Library scans.docx/)).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Open in Word" })).not.toBeInTheDocument();
+    expect(backend.openedOutputs).toEqual([]);
   });
 
   it("shows the output folder in the file manager", async () => {
     const { user, backend } = await openReview();
     await user.click(screen.getByRole("button", { name: "Show in folder" }));
-    expect(backend.revealed).toEqual(["C:\\Users\\Demo\\Documents\\Library scans.docx"]);
+    expect(backend.revealed).toEqual([`${docs}\\Library scans.docx`]);
   });
 });
 

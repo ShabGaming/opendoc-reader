@@ -902,6 +902,9 @@ An `AppError`:
 | `get_pages` | `async fn get_pages(file_id: String) -> Result<Vec<PageStatus>, AppError>` | `PageStatus[]` | One entry per page with its state and rendered image, for the thumbnail strip |
 | `get_review` | `async fn get_review(file_id: String, page: u32) -> Result<ReviewPage, AppError>` | `ReviewPage` | The IR page (read from the job's `ir/` file and passed through unchanged), its image path and the engine that produced it. `page` is 0-based. Rejects with `notFound` for a page that has no result yet |
 | `export` | `async fn export(file_id: String, format: ExportFormat) -> Result<OutputFile, AppError>` | `OutputFile` | Writes one more export of a finished file ("Export Word", "Export Markdown"): assembles the document if needed, picks a free name next to the original (or in the chosen folder) and runs `export.docx` or `export.markdown`. Never overwrites, so a second call writes "name (2).docx" |
+| `export_to` | `async fn export_to(file_id: String, format: ExportFormat, dest_path: String, overwrite: bool) -> Result<OutputFile, AppError>` | `OutputFile` | "Save a copy as": writes one format to the exact path the user chose in the save dialog, assembling the document if needed. `dest_path` must be absolute, in an existing folder, with the extension of the format (`.docx`, or `.md` or `.markdown`), otherwise `invalidArgument` (reasons `bad_path`, `bad_extension`, `is_directory`, `no_folder`). A file already at the path is refused with `io` and reason `already_exists` unless `overwrite` is true; the UI passes true because the save dialog has already asked about replacing. The engine writes into a hidden staging folder next to the destination under the final name, and the result is then moved into place, so a failed export leaves the old file as it was. Markdown figures go to `<name>_assets` beside it; an existing folder is merged, never deleted. The copy is not added to the item's `outputs` |
+| `check_outputs` | `async fn check_outputs(file_id: String) -> Result<Vec<OutputStatus>, AppError>` | `OutputStatus[]` | The item's `outputs` with whether each file is still on disk, so the UI can say that a file was moved or deleted |
+| `open_output` | `async fn open_output(path: String) -> Result<(), AppError>` | nothing | Opens a saved output with the OS default app ("Open in Word", "Open Markdown"). Only a path that is in some item's `outputs` is accepted (`invalidArgument`, reason `not_an_output`); if the file is gone it rejects with `notFound` and reason `file_missing`. `export` stays available but the UI no longer uses it |
 | `reveal_in_folder` | `async fn reveal_in_folder(path: String) -> Result<(), AppError>` | nothing | Shows the file in the OS file manager |
 
 ### Settings
@@ -1114,6 +1117,17 @@ The full definitions are in `commands.ts`. This section shows the shape of the m
 }
 ```
 
+**`OutputStatus`** is one entry of `check_outputs`.
+
+<!-- example: tauri.OutputStatus -->
+```json
+{
+  "format": "docx",
+  "path": "C:\\Users\\Ada\\Documents\\invoice.docx",
+  "exists": true
+}
+```
+
 **`ReviewPage`** carries the IR page (type `Page` from `ir.ts`). The UI draws block overlays from `page.blocks[].bbox`, in the pixel space of `imagePath`, and renders tables, formulas and figures from the same blocks.
 
 <!-- example: tauri.ReviewPage -->
@@ -1255,7 +1269,7 @@ Download failures use `offline`, `downloadFailed`, `checksumMismatch` and `diskF
 
 **Cancel and resume.** `queue_cancel` sends `convert.cancel`, the page in flight is dropped, and the item becomes `cancelled`. `queue_retry` starts it again and skips every page that has an IR file.
 
-**Review.** `get_pages` for the thumbnail strip, `get_review` for the page on screen, `export` for the toolbar buttons, `reveal_in_folder` for "Show in folder".
+**Review.** `get_pages` for the thumbnail strip, `get_review` for the page on screen, `check_outputs` and `open_output` for "Open in Word" and "Open Markdown", `export_to` for "Save a copy as", `reveal_in_folder` for "Show in folder".
 
 ---
 

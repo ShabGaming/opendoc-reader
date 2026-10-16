@@ -25,6 +25,8 @@ export interface DevParams {
   fail: "offline" | "diskFull" | "checksumMismatch" | null;
   /** Show the review mode without a file picked: select the file with this name. */
   file: string | null;
+  /** Pretend the saved files of this format (or all) were moved or deleted. */
+  missing: "docx" | "markdown" | "all" | null;
 }
 
 export interface Runtime {
@@ -59,6 +61,7 @@ export function parseDevParams(search: string): DevParams {
     hardware: pick(p.get("hw"), ["gpu", "cpu", "mac"] as const),
     fail: pick(p.get("fail"), ["offline", "diskFull", "checksumMismatch"] as const),
     file: p.get("file"),
+    missing: pick(p.get("missing"), ["docx", "markdown", "all"] as const),
   };
 }
 
@@ -89,6 +92,7 @@ export function createRuntime(
     latencyMs: 60,
     failDownload: dev.fail ?? undefined,
   });
+  if (dev.missing) mock.markOutputsGone(dev.missing);
   if (dev.advanceMs > 0) mock.advance(dev.advanceMs);
   if (!dev.freeze) mock.start();
   return { api: createApi(mock), platform: createMockPlatform(), mock, dev };

@@ -12,6 +12,16 @@ export interface Platform {
   pickFiles(): Promise<string[]>;
   /** The chosen folder, null when the picker was cancelled. */
   pickFolder(defaultPath?: string): Promise<string | null>;
+  /**
+   * The native save dialog, starting at `defaultPath` (folder and file name). The extension is
+   * the only file type offered. Null when it was cancelled. The dialog itself asks before it
+   * replaces a file.
+   */
+  pickSavePath(options: {
+    defaultPath: string;
+    extension: string;
+    filterName: string;
+  }): Promise<string | null>;
   /** Subscribes to files dragged onto the window. Resolves with an unsubscribe function. */
   onFileDrop(handlers: DropHandlers): Promise<() => void>;
   openUrl(url: string): Promise<void>;

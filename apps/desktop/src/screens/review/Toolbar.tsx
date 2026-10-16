@@ -2,13 +2,14 @@ import {
   ArrowLeft,
   CaretLeft,
   CaretRight,
-  FolderOpen,
   MagnifyingGlassMinus,
   MagnifyingGlassPlus,
   Selection,
 } from "@phosphor-icons/react";
 import { Button } from "../../components/Button";
+import { OutputActions } from "../../components/OutputActions";
 import { t } from "../../i18n";
+import type { OutputsState } from "../../state/useOutputs";
 import { cx } from "../../util/cx";
 import styles from "./Toolbar.module.css";
 
@@ -30,11 +31,9 @@ interface ToolbarProps {
   onZoom(zoom: number): void;
   showBlocks: boolean;
   onBlocks(show: boolean): void;
-  canReveal: boolean;
+  outputs: OutputsState;
   onBack(): void;
-  onReveal(): void;
-  onExportWord(): void;
-  onExportMarkdown(): void;
+  onReveal(path: string): void;
 }
 
 const MODES: Array<{
@@ -132,20 +131,11 @@ export function Toolbar(props: ToolbarProps) {
         {t("review.blocks")}
       </Button>
 
-      <div className={cx(styles.group, styles.exports)}>
-        <Button
-          variant="tertiary"
-          icon={<FolderOpen size={16} aria-hidden="true" />}
-          disabled={!props.canReveal}
-          onClick={props.onReveal}
-        >
-          {t("review.showInFolder")}
-        </Button>
-        <Button onClick={props.onExportMarkdown}>{t("review.exportMarkdown")}</Button>
-        <Button variant="primary" onClick={props.onExportWord}>
-          {t("review.exportWord")}
-        </Button>
-      </div>
+      {props.done && (
+        <div className={cx(styles.group, styles.exports)}>
+          <OutputActions outputs={props.outputs} onReveal={props.onReveal} />
+        </div>
+      )}
     </div>
   );
 }

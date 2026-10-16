@@ -9,6 +9,16 @@ function row(name: string | RegExp) {
   });
 }
 
+describe("done detail", () => {
+  it("falls back when the saved files were moved", async () => {
+    await renderApp({ dev: { missing: "all" } });
+    expect(await screen.findByText(/Moved or deleted/)).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Open in Word" })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Save a copy as..." })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Review" })).toBeInTheDocument();
+  });
+});
+
 describe("queue rows", () => {
   it("shows every state with an icon and a word, and the percentage while converting", async () => {
     await renderApp();
@@ -105,12 +115,18 @@ describe("detail view per state", () => {
     expect(screen.getByText("Press Resume all to continue.")).toBeInTheDocument();
   });
 
-  it("done: how long it took, where it was saved, and Review and Show in folder", async () => {
+  it("done: Open in Word, Open Markdown, Show in folder and Review", async () => {
     const { user, backend } = await renderApp();
     expect(screen.getByText("Finished in 14 s")).toBeInTheDocument();
     expect(screen.getByText("Saved next to the original:")).toBeInTheDocument();
     expect(screen.getByText("Library scans.docx, Library scans.md")).toBeInTheDocument();
 
+    await user.click(screen.getByRole("button", { name: "Open in Word" }));
+    await user.click(screen.getByRole("button", { name: "Open Markdown" }));
+    expect(backend.openedOutputs).toEqual([
+      "C:\\Users\\Demo\\Documents\\Library scans.docx",
+      "C:\\Users\\Demo\\Documents\\Library scans.md",
+    ]);
     await user.click(screen.getByRole("button", { name: "Show in folder" }));
     expect(backend.revealed).toEqual(["C:\\Users\\Demo\\Documents\\Library scans.docx"]);
 

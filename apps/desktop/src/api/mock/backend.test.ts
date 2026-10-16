@@ -345,6 +345,37 @@ describe("review and export", () => {
     );
   });
 
+  it("saves a copy to the exact path and refuses to overwrite unless told to", async () => {
+    const { backend, api } = make({ scenario: "demo" });
+    const done = (await api.queueList()).find((q) => q.status === "done")!;
+    const dest = "D:\\Archive\\copy.docx";
+    expect((await api.exportTo(done.fileId, "docx", dest, false)).path).toBe(dest);
+    expect((await rejection(api.exportTo(done.fileId, "docx", dest, false))).reason).toBe(
+      "already_exists",
+    );
+    await api.exportTo(done.fileId, "docx", dest, true);
+    expect(backend.savedCopies).toHaveLength(2);
+    expect(
+      (await rejection(api.exportTo(done.fileId, "docx", "D:\\Archive\\copy.md", true))).reason,
+    ).toBe("bad_extension");
+    // A copy is not one of the conversion outputs.
+    expect((await api.queueList()).find((q) => q.fileId === done.fileId)!.outputs).toHaveLength(2);
+  });
+
+  it("opens only saved outputs, and reports the ones that are gone", async () => {
+    const { backend, api } = make({ scenario: "demo" });
+    const done = (await api.queueList()).find((q) => q.status === "done")!;
+    const docx = done.outputs[0]!.path;
+    await api.openOutput(docx);
+    expect(backend.openedOutputs).toEqual([docx]);
+    expect((await rejection(api.openOutput("C:\\Windows\\notepad.exe"))).reason).toBe(
+      "not_an_output",
+    );
+    backend.markOutputsGone("docx");
+    expect((await rejection(api.openOutput(docx))).reason).toBe("file_missing");
+    expect((await api.checkOutputs(done.fileId)).map((o) => o.exists)).toEqual([false, true]);
+  });
+
   it("records the folder a reveal was asked for", async () => {
     const { backend, api } = make();
     await api.revealInFolder("C:\\x\\a.docx");

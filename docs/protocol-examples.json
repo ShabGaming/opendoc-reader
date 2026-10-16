@@ -507,6 +507,12 @@
     "assetsDir": "C:\\Users\\Ada\\Documents\\invoice_assets"
   },
 
+  "tauri.OutputStatus": {
+    "format": "docx",
+    "path": "C:\\Users\\Ada\\Documents\\invoice.docx",
+    "exists": true
+  },
+
   "tauri.ReviewPage": {
     "fileId": "f-9c41",
     "pageIndex": 3,

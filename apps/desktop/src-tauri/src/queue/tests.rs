@@ -8,6 +8,8 @@ use crate::contract::SaveLocation;
 use crate::fakes::{read_fake_log, test_services, CollectSink, FakeEnv};
 use crate::models::tests::tiny_model_manifest;
 
+mod export_to_tests;
+
 struct Rig {
     env: FakeEnv,
     svc: Arc<Services>,

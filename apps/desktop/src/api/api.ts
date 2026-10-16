@@ -53,6 +53,10 @@ export function createApi(transport: Transport) {
     getPages: (fileId: string) => call("get_pages", { fileId }),
     getReview: (fileId: string, page: number) => call("get_review", { fileId, page }),
     exportFile: (fileId: string, format: ExportFormat) => call("export", { fileId, format }),
+    exportTo: (fileId: string, format: ExportFormat, destPath: string, overwrite: boolean) =>
+      call("export_to", { fileId, format, destPath, overwrite }),
+    checkOutputs: (fileId: string) => call("check_outputs", { fileId }),
+    openOutput: (path: string) => call("open_output", { path }),
     revealInFolder: (path: string) => call("reveal_in_folder", { path }),
 
     settingsGet: () => call("settings_get", none),

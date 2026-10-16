@@ -102,6 +102,10 @@ export class MockBackend implements Transport {
   readonly hardwareProfile: HardwareProfile;
   /** Every path passed to reveal_in_folder, newest last. */
   readonly revealed: string[] = [];
+  /** Every path passed to open_output, newest last. */
+  readonly openedOutputs: string[] = [];
+  /** Every copy written by export_to, newest last. */
+  readonly savedCopies: Array<{ fileId: string; format: ExportFormat; path: string }> = [];
   /** Every command call in order, for tests. */
   readonly calls: Array<{ command: string; args: unknown }> = [];
 
@@ -127,6 +131,8 @@ export class MockBackend implements Transport {
   private oomOnce = new Set<string>();
   private paused = false;
   private usedNames = new Set<string>();
+  /** Output files the user "moved or deleted" (see markOutputsGone). */
+  private gone = new Set<string>();
   private saveTo = new Map<string, SaveLocation>();
   private idCounter = 0;
 
@@ -687,6 +693,15 @@ export class MockBackend implements Transport {
     this.startNext();
   }
 
+  /** Pretends the user moved or deleted the saved files of this format (or all of them). */
+  markOutputsGone(format: ExportFormat | "all"): void {
+    for (const item of this.queue) {
+      for (const o of item.outputs) {
+        if (format === "all" || o.format === format) this.gone.add(o.path);
+      }
+    }
+  }
+
   private outputDir(item: QueueItem): string {
     const target = this.saveTo.get(item.fileId) ?? this.settings.saveTo;
     return target.kind === "folder" ? target.path : parentDir(item.path);
@@ -848,6 +863,37 @@ export class MockBackend implements Transport {
     },
     reveal_in_folder: ({ path }) => {
       this.revealed.push(path);
+      return null;
+    },
+    export_to: ({ fileId, format, destPath, overwrite }) => {
+      const item = this.find(fileId);
+      if (item.status !== "done") throw appError("invalidArgument", "not_done");
+      const ext = destPath.split(".").pop()?.toLowerCase() ?? "";
+      const okExt = format === "docx" ? ext === "docx" : ext === "md" || ext === "markdown";
+      if (!okExt) throw appError("invalidArgument", "bad_extension");
+      if (this.usedNames.has(destPath) && !this.gone.has(destPath) && !overwrite) {
+        throw appError("io", "already_exists");
+      }
+      this.usedNames.add(destPath);
+      this.gone.delete(destPath);
+      this.savedCopies.push({ fileId, format, path: destPath });
+      return {
+        format,
+        path: destPath,
+        assetsDir: format === "markdown" ? destPath.replace(/.[^.]+$/, "_assets") : null,
+      };
+    },
+    check_outputs: ({ fileId }) =>
+      this.find(fileId).outputs.map((o) => ({
+        format: o.format,
+        path: o.path,
+        exists: !this.gone.has(o.path),
+      })),
+    open_output: ({ path }) => {
+      const known = this.queue.some((i) => i.outputs.some((o) => o.path === path));
+      if (!known) throw appError("invalidArgument", "not_an_output");
+      if (this.gone.has(path)) throw appError("notFound", "file_missing");
+      this.openedOutputs.push(path);
       return null;
     },
 

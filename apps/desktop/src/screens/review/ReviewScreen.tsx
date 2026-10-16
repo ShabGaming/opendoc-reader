@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { InlineNotice } from "../../components/InlineNotice";
 import { t } from "../../i18n";
 import { useApp } from "../../state/AppContext";
 import { isAppError } from "../../state/errorCopy";
+import { useOutputs } from "../../state/useOutputs";
 import { modelShortName } from "../../state/selectors";
 import type { ReviewPage } from "../../types/commands";
 import { cx } from "../../util/cx";
@@ -29,6 +31,7 @@ export function ReviewScreen({ fileId }: { fileId: string }) {
   const { state, dispatch, api, dev, actions } = useApp();
   const item = state.queue.find((q) => q.fileId === fileId) ?? null;
   const pageStatuses = state.pages[fileId];
+  const outputs = useOutputs(item);
 
   const [page, setPage] = useState(() => Math.max(0, (dev?.page ?? 1) - 1));
   const [mode, setMode] = useState<ReviewMode>(dev?.view ?? "split");
@@ -168,12 +171,15 @@ export function ReviewScreen({ fileId }: { fileId: string }) {
         onZoom={changeZoom}
         showBlocks={showBlocks}
         onBlocks={setShowBlocks}
-        canReveal={!!item && item.outputs.length > 0}
+        outputs={outputs}
         onBack={actions.closeReview}
-        onReveal={() => item?.outputs[0] && actions.reveal(item.outputs[0].path)}
-        onExportWord={() => actions.exportFile(fileId, "docx")}
-        onExportMarkdown={() => actions.exportFile(fileId, "markdown")}
+        onReveal={(path) => void actions.reveal(path)}
       />
+      {outputs.notice && (
+        <div className={styles.notice}>
+          <InlineNotice title={outputs.notice} />
+        </div>
+      )}
       <ThumbStrip pageCount={pageCount} pages={pageStatuses} page={current} onPage={goTo} />
       <div className={styles.split} aria-busy={!ready}>
         {mode !== "result" && (

@@ -358,6 +358,15 @@ pub struct OutputFile {
     pub assets_dir: Option<String>,
 }
 
+/// One saved output of a queue item and whether the file is still there (`check_outputs`).
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct OutputStatus {
+    pub format: ExportFormat,
+    pub path: String,
+    pub exists: bool,
+}
+
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct QueueItem {
@@ -491,6 +500,7 @@ mod tests {
         round_trip::<PageStatus>("tauri.PageStatus");
         round_trip::<ReviewPage>("tauri.ReviewPage");
         round_trip::<OutputFile>("tauri.OutputFile");
+        round_trip::<OutputStatus>("tauri.OutputStatus");
         round_trip::<QueueProgress>("tauri.event.queue-progress");
         round_trip::<SetupStatus>("tauri.event.setup-progress");
     }

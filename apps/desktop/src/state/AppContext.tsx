@@ -40,7 +40,10 @@ export interface Actions {
   retry(fileId: string): Promise<void>;
   addAgainWith(fileId: string, modelId: string): Promise<void>;
   setTextMode(fileId: string, mode: TextMode): Promise<void>;
-  exportFile(fileId: string, format: ExportFormat): Promise<void>;
+  /** Opens a saved output with the OS default app. "missing" when the file is gone. */
+  openOutput(path: string): Promise<"opened" | "missing" | "failed">;
+  /** Asks where to save a copy, then writes that format there. False when cancelled or failed. */
+  saveCopy(fileId: string, format: ExportFormat): Promise<boolean>;
   reveal(path: string): Promise<void>;
   /** The folder picker. Null when it was cancelled or could not open. */
   pickFolder(defaultPath?: string): Promise<string | null>;
@@ -252,22 +255,56 @@ export function AppProvider({ api, platform, dev = null, children }: ProviderPro
           await refreshQueue();
           if (mode === "existingText") toast(t("toast.usedText"));
         }),
-      async exportFile(fileId, format) {
-        await guard(
-          async () => {
-            const output = await api.exportFile(fileId, format);
-            const name = fileName(output.path);
-            const folder = parentDir(output.path);
-            const item = stateRef.current.queue.find((q) => q.fileId === fileId);
-            const nextToOriginal = item ? parentDir(item.path) === folder : true;
-            toast(
-              nextToOriginal
-                ? t("review.exported", { name })
-                : t("review.exportedIn", { name, folder }),
-            );
-          },
-          () => t("error.exportFailed"),
-        );
+      async openOutput(path) {
+        try {
+          await api.openOutput(path);
+          return "opened";
+        } catch (error) {
+          if (describe(error)?.reason === "file_missing") return "missing";
+          fail(t("error.openFailed"));
+          return "failed";
+        }
+      },
+      async saveCopy(fileId, format) {
+        const item = stateRef.current.queue.find((q) => q.fileId === fileId);
+        if (!item) return false;
+        const extension = format === "docx" ? "docx" : "md";
+        const sep = item.path.includes("/") ? "/" : "\\";
+        const defaultPath = `${parentDir(item.path)}${sep}${baseName(item.name)}.${extension}`;
+        let chosen: string | null;
+        try {
+          chosen = await platform.pickSavePath({
+            defaultPath,
+            extension,
+            filterName: t(format === "docx" ? "format.word" : "format.markdown"),
+          });
+        } catch {
+          fail(t("error.pickerFailed"));
+          return false;
+        }
+        if (!chosen) return false;
+        const dest = chosen.toLowerCase().endsWith(`.${extension}`)
+          ? chosen
+          : `${chosen}.${extension}`;
+        try {
+          // The save dialog has already asked about replacing an existing file.
+          const output = await api.exportTo(fileId, format, dest, true);
+          const name = fileName(output.path);
+          const folder = parentDir(output.path);
+          toast(
+            folder === parentDir(item.path)
+              ? t("review.exported", { name })
+              : t("review.exportedIn", { name, folder }),
+          );
+          return true;
+        } catch (error) {
+          fail(
+            describe(error)?.code === "diskFull"
+              ? t("error.exportDiskFull")
+              : t("error.exportFailed"),
+          );
+          return false;
+        }
       },
       reveal: (path) => guard(() => api.revealInFolder(path).then(() => {})),
       async pickFolder(defaultPath) {

@@ -287,4 +287,19 @@ describe("Privacy and logs, About", () => {
       "https://github.com/ShabGaming/opendoc-reader",
     ]);
   });
+
+  it("lists the bundled contributors with avatars and opens profiles through the host", async () => {
+    const { user, platform } = await openSettings("about");
+    expect(await screen.findByRole("heading", { name: "Contributors" })).toBeInTheDocument();
+    const list = screen.getByRole("list", { name: "Contributors to OpenDoc Reader" });
+    const items = within(list).getAllByRole("listitem");
+    expect(items.length).toBeGreaterThan(0);
+    const avatar = within(items[0]!).getByRole("img");
+    expect(avatar).toHaveAttribute("alt");
+    expect(avatar.getAttribute("src") ?? "").not.toMatch(/^https?:/);
+    await user.click(within(items[0]!).getByRole("link"));
+    await act(async () => undefined);
+    expect(platform.opened[0]).toMatch(/^https:\/\/github\.com\//);
+    expect(screen.getByText(/Nothing is fetched while it runs/)).toBeInTheDocument();
+  });
 });

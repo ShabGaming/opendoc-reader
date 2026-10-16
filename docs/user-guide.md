@@ -122,13 +122,17 @@ When a file is done, click **Review** to check it page by page. The screen has:
 - **Blocks.** The converter splits each page into blocks: headings, paragraphs, lists, tables, formulas, figures and captions. With Blocks on, each block on the original page has an outline, and each block in the result is labeled by type. Hover over a block on one side and the matching block lights up on the other side, so you can see what the app read from where. Switch Blocks off to hide the outlines and labels.
 - Running heads and page numbers are marked in the result as **Left out of the export**. They are not copied into the Word or Markdown file.
 
-In version 0.1 the review screen is read-only. To fix a word, open the exported file in Word or a text editor.
+In version 0.1 the review screen is read-only. To fix a word, click **Open in Word** (or **Open Markdown**) to open the saved file, and edit it there.
 
 ## Exporting
 
 When a file finishes, it is saved in the formats you checked. A message tells you where, and **Show in folder** opens the folder.
 
-In Review, **Export Word** and **Export Markdown** save another copy at any time, for example if you only chose one format before. Each export uses a new name if the old one exists, so nothing is overwritten.
+The same buttons appear in Review and on the file's page in the queue: **Open in Word** opens the saved Word file, **Open Markdown** opens the Markdown file, and **Show in folder** shows it in your file manager. If you chose only one format, the main button is the one you have.
+
+**Save a copy as...** writes a Word or Markdown file wherever you choose, in either format, including the one you did not pick before. It opens a save dialog that starts in the original's folder; the dialog asks before it replaces a file.
+
+If you move or delete a saved file, the app says so and offers Save a copy as... to write it again.
 
 What to expect in the files:
 
@@ -170,7 +174,7 @@ Open Settings with the gear at the bottom of the queue.
 - Open the logs folder.
 - **Copy diagnostics**, which copies the app version, a short system summary and recent log lines, so you can paste them into a bug report. Nothing is sent anywhere.
 
-**About** shows the version, the link to the source code and the licenses of the app, its dependencies and the models. The full list is in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
+**About** shows the version, the link to the source code and the licenses of the app, its dependencies and the models. The full list is in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md). It also lists the project's contributors with their GitHub avatars, most contributions first; clicking a name opens that person's GitHub page in your browser.
 
 ## Privacy
 
@@ -180,6 +184,8 @@ The app uses the internet only to:
 
 - download models, the recognition runtime and the document engine's packages during setup or when you install a model. Every file is checked against a known checksum. The app uses your system's proxy settings.
 - ask GitHub once a month whether a newer version exists, if you leave **Check for new versions** on. Nothing about you or your files is sent.
+
+The contributor list in About is bundled with the app when it is built. Nothing is fetched to show it, and no avatar is loaded from the internet.
 
 After setup, you can use the app with no connection.
 
