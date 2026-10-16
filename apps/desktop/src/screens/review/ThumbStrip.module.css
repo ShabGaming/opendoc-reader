@@ -1,0 +1,51 @@
+.strip {
+  display: flex;
+  flex: none;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  overflow-x: auto;
+  background: var(--sidebar);
+  border-bottom: 1px solid var(--border);
+}
+
+.thumb {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-2);
+  font-size: 12px;
+}
+
+.image {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 88px;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-3);
+}
+
+.image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.thumb[aria-current="true"] {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.thumb[aria-current="true"] .image {
+  outline: 2px solid var(--accent);
+  border-color: transparent;
+}

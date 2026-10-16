@@ -1,9 +1,9 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ComponentPropsWithRef, ReactNode } from "react";
 import styles from "./Button.module.css";
 
-type Variant = "primary" | "secondary" | "tertiary" | "ghost" | "icon";
+type Variant = "primary" | "secondary" | "tertiary" | "ghost" | "icon" | "danger";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ComponentPropsWithRef<"button"> {
   variant?: Variant;
   small?: boolean;
   /** Optional leading icon, placed before the label. */

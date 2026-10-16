@@ -1,0 +1,150 @@
+.doc {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.block {
+  margin: 0 -10px 4px;
+  padding: 6px 10px;
+  border-radius: var(--r-control);
+}
+
+.active {
+  background: var(--accent-soft);
+}
+
+.paragraph {
+  margin: 0;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.subtitle {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.small {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.centered {
+  text-align: center;
+}
+
+.furniture {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.furnitureLabel {
+  font-weight: 600;
+}
+
+.furnitureLabel::after {
+  content: "\00b7";
+  margin-left: var(--space-2);
+  font-weight: 400;
+}
+
+.list {
+  margin: 0;
+  padding-left: 24px;
+}
+
+.figure {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border);
+}
+
+.figureEmpty {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.formula {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.tex {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: center;
+}
+
+.tex :global(.katex-display) {
+  margin: 0;
+}
+
+.number {
+  color: var(--text-2);
+}
+
+.block :global(.katex) {
+  font-size: 1.05em;
+}
+
+.tableScroll {
+  overflow-x: auto;
+  border: 1px solid var(--border-strong);
+}
+
+.tableScroll::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+.tableScroll::-webkit-scrollbar-track {
+  background: var(--bg);
+  border-radius: 5px;
+}
+
+.tableScroll::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 5px;
+}
+
+.table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.table th,
+.table td {
+  padding: 3px 6px;
+  border: 1px solid var(--border-strong);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.table th {
+  background: var(--bg);
+  font-weight: 600;
+  text-align: center;
+}
+
+.table tbody tr:last-child td {
+  font-weight: 600;
+}
+
+.numeric {
+  text-align: right;
+  white-space: nowrap;
+}
