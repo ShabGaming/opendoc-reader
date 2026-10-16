@@ -2,7 +2,8 @@
 
 `engine.ping`, `engine.version` and `engine.capabilities` live here. The rest is registered by
 one module per area, each exposing `register(...)`: `methods_pages` (input files) and
-`methods_convert` (recognition and calibration).
+`methods_convert` (recognition and calibration); the exports are registered from
+`methods_export`.
 """
 
 from __future__ import annotations
@@ -12,6 +13,7 @@ from typing import Any
 from opendoc_engine import __version__, methods_convert, methods_pages
 from opendoc_engine.engines import EngineRegistry, default_registry, describe
 from opendoc_engine.ir import IR_SCHEMA_VERSION
+from opendoc_engine.methods_export import register_export_methods
 from opendoc_engine.rpc import MethodRegistry, RpcServer
 from opendoc_engine.runtime import Runtime
 
@@ -41,6 +43,7 @@ def build_methods(engines: EngineRegistry, runtime: Runtime | None = None) -> Me
 
     methods_pages.register(methods, runtime)
     methods_convert.register(methods, engines, runtime)
+    register_export_methods(methods)
     return methods
 
 

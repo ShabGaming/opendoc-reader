@@ -66,6 +66,12 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter desktop build
 
+      # The uv sidecar is declared in tauri.conf.json and bundled with the app. The build
+      # script would write an empty placeholder, but fetching the real one keeps this job
+      # honest about the download and the pinned checksum.
+      - name: Fetch the uv sidecar
+        run: node scripts/fetch-uv.mjs
+
       - name: cargo fmt
         working-directory: apps/desktop/src-tauri
         run: cargo fmt --check

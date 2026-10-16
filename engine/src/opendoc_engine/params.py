@@ -17,8 +17,9 @@ _MISSING: Any = object()
 
 @dataclass(frozen=True)
 class Field:
-    """One parameter. `kind` is `str`, `path`, `int`, `bool`, `object`, `id` (a JSON-RPC id:
-    integer or string) or `nullable_str`. `choices` limits a value to a fixed set."""
+    """One parameter. `kind` is `str`, `path`, `int`, `bool`, `object`, `list`, `path_or_object`,
+    `id` (a JSON-RPC id: integer or string), `nullable_str` or `any`. `choices` limits a value
+    to a fixed set."""
 
     kind: str
     required: bool = True
@@ -41,6 +42,8 @@ def _check(name: str, field: Field, value: Any) -> Any:
         "int": _is_int(value),
         "bool": isinstance(value, bool),
         "object": isinstance(value, dict),
+        "list": isinstance(value, list),
+        "path_or_object": (isinstance(value, str) and bool(value)) or isinstance(value, dict),
         "id": _is_int(value) or isinstance(value, str),
         "any": True,
     }[kind]

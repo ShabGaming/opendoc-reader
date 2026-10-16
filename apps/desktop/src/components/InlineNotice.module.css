@@ -1,0 +1,37 @@
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--warn);
+  border-radius: var(--r-control);
+  background: var(--warn-soft);
+}
+
+.err {
+  border-left-color: var(--err);
+  background: var(--err-soft);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--warn);
+}
+
+.err .title {
+  color: var(--err);
+}
+
+.body {
+  color: var(--text-2);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
