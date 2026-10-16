@@ -10,6 +10,10 @@ Coordinates are integers 0..999 normalized to the page image, and the output end
 end-of-sentence token. `parse_grounding` converts that text into IR blocks in page pixels.
 Blocks keep the order the model emitted, which is the reading order.
 
+A `formula_number` segment directly after an `equation` becomes that formula's `number` and
+is not a block of its own. With no equation directly before it (or when the equation already
+has a number) it stays a block of type `other`, so the text is not lost.
+
 Two leniencies, both logged: a segment whose box is missing or malformed gets the full-page
 box rather than being dropped (the text is worth keeping), and text with no tag at all is
 kept as a single full-page paragraph.
@@ -19,6 +23,7 @@ from __future__ import annotations
 
 import logging
 import re
+from dataclasses import dataclass
 
 from opendoc_engine.htmltable import parse_html_table
 from opendoc_engine.ir import BBox, Block, BlockType
@@ -45,8 +50,12 @@ _LABEL_TYPES: dict[str, tuple[BlockType, int | None]] = {
     "image": (BlockType.FIGURE, None),
     "image_caption": (BlockType.CAPTION, None),
     "equation": (BlockType.FORMULA, None),
-    "formula_number": (BlockType.OTHER, None),
 }
+
+# Not a block of its own: the text becomes the `number` of the formula before it.
+_FORMULA_NUMBER_LABEL = "formula_number"
+
+_EQUATION_LABEL = "equation"
 
 _MATH_DELIMITERS = (("\\[", "\\]"), ("\\(", "\\)"), ("$$", "$$"), ("$", "$"))
 
@@ -80,7 +89,16 @@ def _strip_math(text: str) -> str:
     return text
 
 
-def _build_block(block_id: str, label: str, bbox: BBox, order: int, content: str) -> Block:
+@dataclass
+class _Segment:
+    label: str
+    bbox: BBox
+    content: str
+    number: str | None = None  # printed equation number, set on `equation` segments only
+
+
+def _build_block(block_id: str, segment: _Segment, order: int) -> Block:
+    label, bbox, content = segment.label, segment.bbox, segment.content
     block_type, level = _LABEL_TYPES.get(label, (BlockType.OTHER, None))
     block = Block(block_id, block_type, bbox, order, level=level)
 
@@ -93,6 +111,7 @@ def _build_block(block_id: str, label: str, bbox: BBox, order: int, content: str
         block.type = BlockType.PARAGRAPH
     elif block_type is BlockType.FORMULA:
         block.latex = _strip_math(content)
+        block.number = segment.number
         return block
     elif block_type is BlockType.FIGURE:
         return block  # the pipeline crops the page image and fills `figure_crop`
@@ -124,14 +143,13 @@ def parse_grounding(text: str, page_size: tuple[int, int], page_index: int = 0) 
     width, height = page_size
     full_page: BBox = (0.0, 0.0, float(width), float(height))
 
-    # (label, bbox, content) per segment.
-    segments: list[tuple[str, BBox, str]] = []
+    segments: list[_Segment] = []
     matches = list(_SEGMENT_RE.finditer(text))
 
     lead = text[: matches[0].start()] if matches else text
     if lead.strip():
         log.warning("grounding output has untagged text; kept as a full-page paragraph")
-        segments.append(("text", full_page, lead.strip()))
+        segments.append(_Segment("text", full_page, lead.strip()))
 
     for i, match in enumerate(matches):
         end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
@@ -144,11 +162,22 @@ def parse_grounding(text: str, page_size: tuple[int, int], page_index: int = 0) 
                 match.group("label"),
             )
             bbox = full_page
-        segments.append((match.group("label").strip(), bbox, content))
+        label = match.group("label").strip()
+        previous = segments[-1] if segments else None
+        if (
+            label == _FORMULA_NUMBER_LABEL
+            and content
+            and previous is not None
+            and previous.label == _EQUATION_LABEL
+            and previous.number is None
+        ):
+            previous.number = content
+            continue
+        segments.append(_Segment(label, bbox, content))
 
     blocks = [
-        _build_block(f"p{page_index}-b{order}", label, bbox, order, content)
-        for order, (label, bbox, content) in enumerate(segments)
+        _build_block(f"p{page_index}-b{order}", segment, order)
+        for order, segment in enumerate(segments)
     ]
     _link_captions(blocks)
     return blocks

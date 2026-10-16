@@ -1,0 +1,254 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/ir.schema.json",
+  "title": "Document",
+  "description": "OpenDoc Reader document IR, schema version 1. Every engine produces this model and every exporter reads it. JSON keys are camelCase. All coordinates are pixels of the rendered page image (`Page.sourceImage`), origin at the top left, as [x1, y1, x2, y2]. All file paths are absolute paths in the native format of the host OS. The Python reference implementation is engine/src/opendoc_engine/ir.py; docs/protocol.md explains where IR files live and which RPC methods write them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "source", "engine", "pages"],
+  "properties": {
+    "schemaVersion": {
+      "const": "1",
+      "description": "IR schema version. A reader rejects any other value."
+    },
+    "source": { "$ref": "#/$defs/Source" },
+    "engine": { "$ref": "#/$defs/EngineInfo" },
+    "pages": {
+      "type": "array",
+      "description": "Converted pages in page order. A finished document holds one entry per source page.",
+      "items": { "$ref": "#/$defs/Page" }
+    }
+  },
+  "$defs": {
+    "Source": {
+      "title": "Source",
+      "description": "The file the document was read from.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "kind", "pageCount"],
+      "properties": {
+        "path": { "type": "string", "description": "Absolute path of the original file." },
+        "kind": { "enum": ["pdf", "image"] },
+        "pageCount": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of pages in the source file (frames, for a multi-page TIFF)."
+        }
+      }
+    },
+    "EngineInfo": {
+      "title": "EngineInfo",
+      "description": "Which engine and model produced the content. Text taken from a PDF text layer uses id `pdf-text` and model `text-layer`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "model", "version"],
+      "properties": {
+        "id": { "type": "string", "description": "Engine id, as listed by engine.capabilities." },
+        "model": {
+          "type": "string",
+          "description": "Manifest model id, or `none` for engines that use no model."
+        },
+        "version": { "type": "string", "description": "Engine package version." }
+      }
+    },
+    "Page": {
+      "title": "Page",
+      "description": "One converted page. `blocks` are stored in reading order, and for multi-column pages that order is the only column information kept. A table never continues onto the next page in v1; a table split by a page break is two tables.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["index", "width", "height", "sourceImage", "blocks"],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "0-based page index within the source file."
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Width in pixels of the page image."
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Height in pixels of the page image."
+        },
+        "sourceImage": {
+          "type": "string",
+          "description": "Absolute path of the rendered and preprocessed page image (PNG, 200 DPI for PDFs). All bounding boxes refer to this image."
+        },
+        "blocks": {
+          "type": "array",
+          "description": "Blocks in reading order. `order` of each block equals its array index. Block ids are unique within a document.",
+          "items": { "$ref": "#/$defs/Block" }
+        }
+      }
+    },
+    "BlockType": {
+      "title": "BlockType",
+      "enum": [
+        "heading",
+        "paragraph",
+        "list",
+        "table",
+        "formula",
+        "figure",
+        "caption",
+        "header",
+        "footer",
+        "footnote",
+        "page_number",
+        "other"
+      ]
+    },
+    "BBox": {
+      "title": "BBox",
+      "description": "[x1, y1, x2, y2] in page pixels.",
+      "type": "array",
+      "items": { "type": "number" },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "Block": {
+      "title": "Block",
+      "description": "A layout element on a page. Which optional fields are set depends on `type`: headings use `level` and `text`; paragraphs, captions, headers, footers, footnotes, page numbers and `other` use `text`; lists use `items`; tables use `table`; formulas use `latex` (and `number` when the page prints an equation number); figures use `figure` once the crop is written. `text` is inline Markdown (emphasis, links, inline math as $...$).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "bbox", "order"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique within the document. Engines use `p{pageIndex}-b{order}`; blocks inside table cells append `-r{row}c{col}`."
+        },
+        "type": { "$ref": "#/$defs/BlockType" },
+        "bbox": { "$ref": "#/$defs/BBox" },
+        "order": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Reading-order index within the page, contiguous from 0. Blocks inside a table cell number from 0 within the cell."
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 6,
+          "description": "Heading level. Headings only."
+        },
+        "text": { "type": "string" },
+        "lines": {
+          "type": "array",
+          "description": "Optional line-level boxes and text for text blocks. Not used by the Word and Markdown exporters; kept for the searchable PDF export planned for v0.2. Engines that cannot produce line boxes omit the field.",
+          "items": { "$ref": "#/$defs/Line" }
+        },
+        "items": {
+          "type": "array",
+          "description": "List entries, with nesting. List blocks only.",
+          "items": { "$ref": "#/$defs/ListItem" }
+        },
+        "table": { "$ref": "#/$defs/Table" },
+        "latex": {
+          "type": "string",
+          "description": "Formula source without math delimiters. Formula blocks only."
+        },
+        "number": {
+          "type": "string",
+          "description": "The equation number printed next to a formula, as printed, for example \"(1)\". Formula blocks only."
+        },
+        "figure": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["crop"],
+          "properties": {
+            "crop": {
+              "type": "string",
+              "description": "Absolute path of the PNG cropped from the page image."
+            }
+          }
+        },
+        "caption": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["for"],
+          "properties": {
+            "for": {
+              "type": "string",
+              "description": "Id of the figure or table block this caption describes."
+            }
+          }
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "table" } } },
+          "then": { "required": ["table"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "list" } } },
+          "then": { "required": ["items"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "formula" } } },
+          "then": { "required": ["latex"] }
+        }
+      ]
+    },
+    "Line": {
+      "title": "Line",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bbox", "text"],
+      "properties": {
+        "bbox": { "$ref": "#/$defs/BBox" },
+        "text": { "type": "string" }
+      }
+    },
+    "ListItem": {
+      "title": "ListItem",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "ordered"],
+      "properties": {
+        "text": { "type": "string", "description": "Inline Markdown." },
+        "ordered": { "type": "boolean" },
+        "children": {
+          "type": "array",
+          "description": "Nested items.",
+          "items": { "$ref": "#/$defs/ListItem" }
+        }
+      }
+    },
+    "Table": {
+      "title": "Table",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rows", "cols", "cells"],
+      "properties": {
+        "rows": { "type": "integer", "minimum": 1 },
+        "cols": { "type": "integer", "minimum": 1 },
+        "cells": {
+          "type": "array",
+          "description": "One entry per anchored cell. A cell covered by another cell's span has no entry.",
+          "items": { "$ref": "#/$defs/TableCell" }
+        }
+      }
+    },
+    "TableCell": {
+      "title": "TableCell",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["row", "col", "rowSpan", "colSpan", "blocks"],
+      "properties": {
+        "row": { "type": "integer", "minimum": 0 },
+        "col": { "type": "integer", "minimum": 0 },
+        "rowSpan": { "type": "integer", "minimum": 1 },
+        "colSpan": { "type": "integer", "minimum": 1 },
+        "header": { "const": true, "description": "Present and true for header cells." },
+        "blocks": {
+          "type": "array",
+          "description": "Cell content, usually one paragraph. Cell blocks are never tables: nested tables are not supported in v1.",
+          "items": { "$ref": "#/$defs/Block" }
+        }
+      }
+    }
+  }
+}

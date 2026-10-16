@@ -4,6 +4,9 @@ The shapes follow the sketch in docs/architecture.md. JSON keys are camelCase, P
 attributes are snake_case, and optional fields are omitted from JSON when unset. All
 coordinates are in pixels of the rendered page image, as `(x1, y1, x2, y2)`.
 
+The JSON form is specified by engine/schema/ir.schema.json (the source of the UI's TypeScript
+types); tests check that what this module writes validates against it.
+
 `from_dict` is strict about structure (missing required keys and unknown schema versions
 raise `ValueError`) so that a corrupted or newer file fails loudly instead of being half read.
 """
@@ -46,6 +49,25 @@ def _bbox(value: Any, where: str) -> BBox:
         raise ValueError(f"{where}: bbox must be a list of 4 numbers")
     x1, y1, x2, y2 = (float(v) for v in value)
     return (x1, y1, x2, y2)
+
+
+@dataclass
+class Line:
+    """One text line of a text block, with its own box. Optional on blocks; kept so a later
+    searchable-PDF exporter can place invisible text per line."""
+
+    bbox: BBox
+    text: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return {"bbox": list(self.bbox), "text": self.text}
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> Line:
+        return cls(
+            bbox=_bbox(_get(data, "bbox", "line"), "line"),
+            text=_get(data, "text", "line"),
+        )
 
 
 @dataclass
@@ -135,7 +157,8 @@ class Table:
 @dataclass
 class Block:
     """A layout element on a page. `figure_crop` and `caption_for` flatten the nested
-    `figure: {crop}` and `caption: {for}` objects of the JSON form."""
+    `figure: {crop}` and `caption: {for}` objects of the JSON form. `number` is the printed
+    equation number of a formula block."""
 
     id: str
     type: BlockType
@@ -143,9 +166,11 @@ class Block:
     order: int
     level: int | None = None
     text: str | None = None
+    lines: list[Line] | None = None
     items: list[ListItem] | None = None
     table: Table | None = None
     latex: str | None = None
+    number: str | None = None
     figure_crop: str | None = None
     caption_for: str | None = None
     confidence: float | None = None
@@ -161,12 +186,16 @@ class Block:
             data["level"] = self.level
         if self.text is not None:
             data["text"] = self.text
+        if self.lines is not None:
+            data["lines"] = [line.to_dict() for line in self.lines]
         if self.items is not None:
             data["items"] = [i.to_dict() for i in self.items]
         if self.table is not None:
             data["table"] = self.table.to_dict()
         if self.latex is not None:
             data["latex"] = self.latex
+        if self.number is not None:
+            data["number"] = self.number
         if self.figure_crop is not None:
             data["figure"] = {"crop": self.figure_crop}
         if self.caption_for is not None:
@@ -180,6 +209,7 @@ class Block:
         where = f"block {data.get('id', '?')}"
         table = data.get("table")
         items = data.get("items")
+        lines = data.get("lines")
         return cls(
             id=_get(data, "id", where),
             type=BlockType(_get(data, "type", where)),
@@ -187,9 +217,11 @@ class Block:
             order=int(_get(data, "order", where)),
             level=data.get("level"),
             text=data.get("text"),
+            lines=None if lines is None else [Line.from_dict(line) for line in lines],
             items=None if items is None else [ListItem.from_dict(i) for i in items],
             table=None if table is None else Table.from_dict(table),
             latex=data.get("latex"),
+            number=data.get("number"),
             figure_crop=data.get("figure", {}).get("crop"),
             caption_for=data.get("caption", {}).get("for"),
             confidence=data.get("confidence"),

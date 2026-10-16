@@ -41,12 +41,11 @@ def test_block_types_levels_and_order():
         BlockType.TABLE,
         BlockType.CAPTION,
         BlockType.FORMULA,
-        BlockType.OTHER,
         BlockType.FIGURE,
         BlockType.OTHER,
     ]
     assert [b.level for b in blocks[:2]] == [1, 2]
-    assert [b.order for b in blocks] == list(range(9))
+    assert [b.order for b in blocks] == list(range(8))
     assert blocks[0].id == "p0-b0"
     assert parse_grounding(SAMPLE, PAGE, page_index=3)[0].id == "p3-b0"
 
@@ -89,13 +88,64 @@ def test_equation_delimiters_are_stripped():
     assert parse_grounding(SAMPLE, PAGE)[5].latex == "E = mc^2"
 
 
+def test_formula_number_is_attached_to_the_preceding_formula():
+    formula = parse_grounding(SAMPLE, PAGE)[5]
+    assert formula.type is BlockType.FORMULA
+    assert formula.latex == "E = mc^2"
+    assert formula.number == "(1)"
+    assert formula.to_dict()["number"] == "(1)"
+    # The number is not a block of its own, and block ids stay contiguous.
+    ids = [b.id for b in parse_grounding(SAMPLE, PAGE)]
+    assert ids == [f"p0-b{i}" for i in range(8)]
+
+
+def test_formula_without_a_number_has_none():
+    text = "<|ref|>equation<|/ref|><|det|>[[0, 0, 999, 999]]<|/det|>\n$$ a + b $$"
+    (block,) = parse_grounding(text, PAGE)
+    assert block.number is None
+    assert "number" not in block.to_dict()
+
+
+def segment(label: str, box: str, content: str) -> str:
+    return f"<|ref|>{label}<|/ref|><|det|>[[{box}]]<|/det|>\n{content}\n\n"
+
+
+def test_formula_number_without_a_formula_before_it_is_kept_as_other():
+    text = segment("text", "0, 0, 999, 100", "Intro") + segment(
+        "formula_number", "900, 200, 999, 250", "(7)"
+    )
+    blocks = parse_grounding(text, PAGE)
+    assert [b.type for b in blocks] == [BlockType.PARAGRAPH, BlockType.OTHER]
+    assert blocks[1].text == "(7)"
+
+
+def test_second_formula_number_after_one_equation_is_kept_as_other():
+    text = (
+        segment("equation", "0, 0, 800, 100", "x")
+        + segment("formula_number", "900, 0, 999, 100", "(1)")
+        + segment("formula_number", "900, 0, 999, 100", "(2)")
+    )
+    blocks = parse_grounding(text, PAGE)
+    assert [b.type for b in blocks] == [BlockType.FORMULA, BlockType.OTHER]
+    assert blocks[0].number == "(1)"
+    assert blocks[1].text == "(2)"
+
+
+def test_empty_formula_number_is_not_attached():
+    text = segment("equation", "0, 0, 800, 100", "x") + segment(
+        "formula_number", "900, 0, 999, 100", ""
+    )
+    blocks = parse_grounding(text, PAGE)
+    assert blocks[0].number is None
+
+
 def test_caption_links_to_preceding_table():
     blocks = parse_grounding(SAMPLE, PAGE)
     assert blocks[4].caption_for == blocks[3].id
 
 
 def test_figure_has_no_crop_yet():
-    figure = parse_grounding(SAMPLE, PAGE)[7]
+    figure = parse_grounding(SAMPLE, PAGE)[6]
     assert figure.type is BlockType.FIGURE
     assert figure.figure_crop is None
 
