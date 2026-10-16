@@ -6,7 +6,7 @@ Date: 2026-10-15
 
 ## Context
 
-The pieces the app needs are large. Models range from a few hundred megabytes to over 3 GB (DeepSeek-OCR 2 at Q4_K_M is about 2.5 GB including the multimodal projector). The right `llama-server` build depends on the user's GPU, and the Python environment is created for the user's platform. Most users need only some of these.
+The pieces the app needs are large. Models range from a few hundred megabytes to over 3 GB (DeepSeek-OCR v1 at Q8_0 is about 3.6 GB including the multimodal projector). The right `llama-server` build depends on the user's GPU, and the Python environment is created for the user's platform. Most users need only some of these.
 
 Bundling everything would produce an installer of many gigabytes, most of it unused on any given machine, and GitHub release assets have size limits. Users also differ in where they want to store models: a laptop with a small system drive may prefer an external or secondary drive.
 
@@ -14,7 +14,7 @@ Downloaded files are executed (`llama-server`) or loaded as model weights, so in
 
 ## Decision
 
-The installer contains only the app, an estimated 20 to 40 MB. On first run the Setup screen downloads:
+The installer contains the app, the `uv` binary and the engine source, an estimated 20 to 40 MB. On first run the Setup screen downloads:
 
 - the `llama-server` build for the detected backend,
 - the Python engine environment (created by `uv`),

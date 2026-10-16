@@ -28,24 +28,26 @@ The first time you open the app, it looks at your computer and suggests a model 
 
 ## Models
 
-The app shows friendly tier names. A details panel shows the underlying model and its license. Hardware guidance below is an estimate until we have benchmark results.
+The app shows friendly tier names. A details panel shows the underlying model and its license. Hardware guidance below comes from a small benchmark on one desktop PC (see the [model spike report](docs/spike/2026-10-model-spike.md)) and from estimates, so treat it as a rough guide. Laptops will be slower.
 
 | Tier | Underlying model | License | Best for | Hardware guidance (estimate) |
 | --- | --- | --- | --- | --- |
-| Fast | PP-OCRv6 + PP-StructureV3 (PaddleOCR 3.7) | Apache-2.0 | Plain text and simple layouts | Runs on any CPU. A few seconds per page. |
-| Accurate | PaddleOCR-VL 1.6 (0.9B) with PP-DocLayoutV3 | Apache-2.0 | Tables, formulas, complex layouts | Slow on a CPU-only machine. Fast on a GPU or Apple Silicon. |
-| Max | DeepSeek-OCR 2 (3B), or DeepSeek-OCR v1 (3B) as a fallback | Apache-2.0 (OCR 2), MIT (v1) | Difficult scans on stronger hardware | GPU or Apple Silicon with 16 GB or more of memory. |
+| Fast | PP-OCRv6 + PP-StructureV3 (PaddleOCR 3.7) | Apache-2.0 | Plain text and simple layouts. Tables and formulas are kept as images. | Runs on any CPU. 4 to 11 s per page on a fast desktop CPU, slower on a laptop. |
+| Accurate | PaddleOCR-VL 1.6 (0.9B) with PP-DocLayoutV3 | Apache-2.0 | Tables, formulas, complex layouts. The default recommendation for most computers. | Needs about 2.3 GB of GPU memory. Slow on a CPU-only machine. Fast on a GPU or Apple Silicon. |
+| Max | DeepSeek-OCR v1 (3B) | MIT | Difficult scans on stronger hardware | A GPU with at least 8 GB of VRAM, or an Apple Silicon Mac with at least 16 GB of memory. |
 
 "Max" means the largest model. It is not necessarily the most accurate one. In the results each team has published on OmniDocBench, PaddleOCR-VL scores higher than DeepSeek-OCR 2. We will publish our own comparison on the test set.
 
-Which DeepSeek-OCR version ships in the Max tier is still undecided. A technical spike will compare the two before v0.1.
+DeepSeek-OCR 2 (Apache-2.0) is available as an experimental option under the Max tier for advanced users. It comes from a community conversion of the model and is labelled experimental in the app.
+
+On a CPU-only machine with enough RAM, Max can be faster than Accurate, so the app does not assume Accurate is the faster choice there. Apple Silicon speeds have not been measured; our estimates are in the spike report.
 
 ## System requirements
 
 - Windows 10 version 22H2 or later, 64-bit.
 - macOS 13 Ventura or later on Apple Silicon (M1 or newer). Intel Macs are not supported.
 - 8 GB of RAM is the lowest we are designing for. 16 GB or more is recommended for the Max tier. These are estimates.
-- Free disk space for models. As a rough figure, the Max tier model is about 2.5 GB (4-bit quantization) to 3 GB or more (8-bit), plus a few more components that setup downloads. Other sizes have not been measured yet. All of this is an estimate.
+- Free disk space for models. As a rough figure, the Max tier model (DeepSeek-OCR v1, 8-bit) is about 3.6 GB including its vision component, and the Accurate tier model is under 2 GB, plus a few more components that setup downloads. These come from the spike; Fast tier sizes have not been measured yet.
 - A dedicated GPU is optional. The app is meant to be useful on a laptop without one.
 
 Windows on ARM and Linux are on the roadmap but are not supported at launch.
@@ -79,7 +81,7 @@ Plans can change as the project moves forward.
 
 - [ ] **v0.1:** first-run setup, hardware check, model suggestion and downloads; all three tiers; Markdown and Word export; batch queue; read-only side-by-side review.
 - [ ] **v0.2:** searchable PDF, HTML and plain text export; editing text in the review screen; PDF page ranges; monthly update check.
-- [ ] **v0.3:** Excel (tables) and JSON export; more OCR engines (for example GLM-OCR and MinerU).
+- [ ] **v0.3:** Excel (tables) and JSON export; more OCR engines (for example GLM-OCR and MinerU); a faster CPU engine for the Fast tier (ONNX Runtime / OpenVINO).
 - [ ] **1.0:** code signing (Apple notarization, and SignPath Foundation or Azure Trusted Signing on Windows); polish.
 - [ ] **Later:** translations (Simplified Chinese first), Linux builds, Windows on ARM, folder watching, in-app auto-update.
 

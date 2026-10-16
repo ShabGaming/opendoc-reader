@@ -35,8 +35,8 @@ Bad:
 
 - Three processes are more complex to supervise: startup order, crashes, port selection, shutdown, and cleanup of orphans on exit.
 - First run has more to download and set up (a `llama-server` build, a Python environment, models), and more places to fail. The `uv` binary and the engine source ship inside the installer; `uv` then fetches the interpreter and locked dependencies.
-- We depend on upstream llama.cpp for model support. Pinning a release protects us from regressions but delays fixes. For DeepSeek-OCR 2, an upstream multi-tile fix PR was closed unmerged (see ADR 0004).
-- The Fast tier and layout detection still need PaddlePaddle on CPU, which is a sizeable dependency. Whether PP-DocLayoutV3 can run through ONNX Runtime instead is an open question for the spike.
+- We depend on upstream llama.cpp for model support. Pinning a release protects us from regressions but delays fixes. DeepSeek-OCR 2 has no official GGUF, so its experimental option relies on a community conversion (see ADR 0004).
+- The Fast tier and layout detection still need PaddlePaddle on CPU, which is a sizeable dependency. The model spike ran PP-DocLayoutV3 on `paddlepaddle` CPU at about 2.8 s per page; running it through ONNX Runtime instead is untested and deferred past v0.1.
 
 ## Alternatives considered
 

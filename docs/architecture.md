@@ -1,6 +1,6 @@
 # Architecture
 
-> Status: pre-alpha. Planning is done and there is no code yet. This document describes the planned design and will change as the technical spike and v0.1 work settle the open questions listed at the end. Decisions are recorded as ADRs in [docs/adr](adr/README.md).
+> Status: pre-alpha. Planning is done and there is no code yet. This document describes the planned design and will change as v0.1 work settles the open questions listed at the end. The technical spike has already answered most of them. Decisions are recorded as ADRs in [docs/adr](adr/README.md).
 
 ## Overview
 
@@ -43,9 +43,9 @@ Each file in the queue goes through the same steps. Pages are processed one at a
 1. **Input.** Accepted formats are PDF, PNG, JPG, TIFF (multi-page), BMP, WebP and HEIC. If a PDF has a real text layer, the app offers to use that text directly (instant and exact), with a "Run OCR anyway" option.
 2. **Render and preprocess.** PDF pages are rendered at 200 DPI with PDFium (pypdfium2). Every page is auto-rotated and deskewed. Dewarping for curled phone photos is opt-in.
 3. **Engine-specific recognition.** The selected tier decides what happens here:
-   - Fast: PP-OCRv6 and PP-StructureV3 run in the engine process.
+   - Fast: PP-StructureV3 runs in the engine process with only layout detection and text OCR enabled (PP-OCRv6 tiny det/rec, detection limit 960, oneDNN off). Table and formula recognition are off, so tables and formulas are cropped and kept as images.
    - Accurate: PP-DocLayoutV3 detects layout regions in the engine, then PaddleOCR-VL recognizes each element through `llama-server`.
-   - Max: DeepSeek-OCR runs through `llama-server` and returns text with grounding information for blocks.
+   - Max: DeepSeek-OCR v1 (or DeepSeek-OCR 2, if the user picked it as an experimental option) runs through `llama-server` and returns text with grounding information for blocks.
 4. **Normalize to the IR.** The engine converts whatever the model produced into [document IR](#the-document-ir) blocks: types, page-coordinate bounding boxes, reading order, table cells, LaTeX formulas, and cropped figures. Normalization code is per engine. Everything after this step is engine-agnostic.
 5. **Export.** The selected exporters render the IR to files next to the original (or in the chosen output folder). Existing files are never overwritten; a numeric suffix such as " (2)" is added instead. See [Exporters](#exporters).
 
@@ -53,15 +53,15 @@ The Review screen reads the same IR to show the original page next to the result
 
 ## Model tiers
 
-The UI shows friendly tier names. A details panel shows the real model names and licenses. Speeds in the table are placeholders until the spike produces measurements.
+The UI shows friendly tier names. A details panel shows the real model names and licenses. Speeds in the table are measured on one desktop (RTX 4090, Ryzen 7 7800X3D) in the [model spike](spike/2026-10-model-spike.md); laptops will be slower.
 
 | Tier | Models | Runs on | Intended use | Notes |
 | --- | --- | --- | --- | --- |
-| Fast | PP-OCRv6 + PP-StructureV3 (PaddleOCR 3.7, Apache-2.0) | Any CPU | Plain text and simple layouts | Seconds per page (estimate, pending benchmarks). Language dropdown, defaulting to the multilingual model. |
-| Accurate | PaddleOCR-VL 1.6 (0.9B, Apache-2.0, released 2026-05-28) + PP-DocLayoutV3 | CPU (slow) or GPU / Apple Silicon (fast) | Tables, formulas, complex layouts | Scores higher than DeepSeek-OCR 2 on OmniDocBench in each team's published results. Our own comparison is pending. |
-| Max | DeepSeek-OCR 2 (3B, Apache-2.0, released 2026-01-27), or DeepSeek-OCR v1 (3B, MIT) as fallback | GPU or Apple Silicon with 16 GB+ recommended | Hardest pages | GGUF Q4_K_M is about 2.5 GB including mmproj, Q8_0 a little over 3 GB. "Max" means the biggest model, not necessarily the most accurate. |
+| Fast | PP-OCRv6 tiny + PP-StructureV3 (PaddleOCR 3.7, Apache-2.0), layout and text only | Any CPU | Plain text and simple layouts. Tables and formulas are kept as images. | 4 to 11 s/page measured on a Ryzen 7 7800X3D; a laptop will be slower. Language dropdown, defaulting to the multilingual model. |
+| Accurate | PaddleOCR-VL 1.6 (0.9B, Apache-2.0, released 2026-05-28) + PP-DocLayoutV3 | CPU (slow) or GPU / Apple Silicon (fast) | Tables, formulas, complex layouts | The default recommendation for most hardware. About 2.3 GB of VRAM. Scores higher than DeepSeek-OCR 2 on OmniDocBench in each team's published results. |
+| Max | DeepSeek-OCR v1 (3B, MIT), Q8_0 from the official ggml-org GGUF repo | GPU with 8 GB+ VRAM, or Apple Silicon with 16 GB+ memory | Hardest pages | Needs about 5.7 GB of VRAM. "Max" means the biggest model, not necessarily the most accurate. Optional experimental model: DeepSeek-OCR 2 (Apache-2.0), see below. |
 
-Which DeepSeek-OCR version ships in Max is decided by a spike. llama.cpp has supported DeepSeek-OCR 2 since 2026-05-29, but a multi-tile fix for it was closed unmerged, while multi-tile support for v1 is more mature. See [ADR 0004](adr/0004-three-model-tiers-common-engine-interface.md).
+The model spike chose DeepSeek-OCR v1 for Max. DeepSeek-OCR 2 showed no quality advantage over v1, needs DRY sampling on the Q4_K_M quant, uses more VRAM and has no official GGUF. It stays available as an optional, experimental model under Max for advanced users (for example in an "Advanced models" section of Settings), from a community conversion pinned by revision and SHA-256 in the manifest. It ships as the Q8_0 quant (about 7.3 GB of VRAM, so it is only offered on GPUs with 10 GB or more and Macs with 16 GB or more) and runs with DRY sampling as a guard against repetition loops. Verifying that conversion, or publishing our own from the official weights, is a follow-up before v0.1. See [ADR 0004](adr/0004-three-model-tiers-common-engine-interface.md) and the [spike report](spike/2026-10-model-spike.md).
 
 There is no language setting for the VLM tiers, because those models detect the language themselves. Handwriting is best-effort and not advertised.
 
@@ -180,9 +180,9 @@ Illustrative excerpt. Field names, URLs and hashes here are placeholders, not re
     }
   },
   "models": {
-    "deepseek-ocr-2-q4_k_m": {
+    "deepseek-ocr-1-q8_0": {
       "tier": "max",
-      "license": "Apache-2.0",
+      "license": "MIT",
       "files": [
         {
           "name": "<model>.gguf",
@@ -215,7 +215,23 @@ Download behavior:
 
 The Rust core probes: GPU vendor, model and VRAM; Apple unified memory; system RAM; CPU core count; and free disk space. The suggester applies the rules from the manifest to that data and produces one recommended model with a plain-language reason, for example "Your RTX 3060 (12 GB) runs Max at about 4 s per page". Other tiers get a fit badge: "Runs well", "Slow on this PC" or "Won't fit". Because the rules are data, contributors can tune them without touching code. After a model is downloaded, a one-page calibration benchmark refines the time estimates. See [ADR 0008](adr/0008-hardware-based-model-suggester.md).
 
-The speed figure in the example above is illustrative. Real numbers come from the spike.
+The speed figure in the example above is illustrative. Measured numbers are in the [spike report](spike/2026-10-model-spike.md).
+
+Rules the spike settled:
+
+- Accurate (PaddleOCR-VL) is the default recommendation for most hardware.
+- Max is recommended for GPUs with at least 8 GB of VRAM and for Apple Silicon Macs with at least 16 GB of memory.
+- Do not assume Accurate is faster than Max on CPU. On a CPU-only machine with enough RAM, DeepSeek-OCR v1 measured faster than PaddleOCR-VL on CPU (17 to 41 s/page against 20 to 109 s/page on a Ryzen 7 7800X3D). This is one CPU, so recheck on laptop hardware.
+- Apple Silicon speeds are estimates only, not measurements. See the estimates in the spike report.
+
+### llama-server settings
+
+Settings the engines depend on (details in section 7 of the spike report):
+
+- DeepSeek-OCR needs `--special`, otherwise the grounding tokens are stripped from the output.
+- PaddleOCR-VL must run with `-np 1 -c 16384`. The defaults use 11.5 GB of VRAM instead of 2.5 GB.
+- Pin llama.cpp by its `bNNNNN` build tag in the manifest. The "latest" GitHub release has no binaries.
+- Always pass `--port`. The default port changed between builds.
 
 ## Job queue and resume
 
@@ -242,10 +258,13 @@ Builds are unsigned before 1.0, with free ad-hoc signing on macOS. See [ADR 0009
 
 ## Open questions
 
-These are to be settled by the technical spike (step 2 of the work order, after these docs).
+The technical spike (step 2 of the work order) answered most of these. See the [spike report](spike/2026-10-model-spike.md).
 
-1. **DeepSeek-OCR 2 or v1 for Max.** Depends on llama.cpp multi-tile maturity and measured quality. ([ADR 0004](adr/0004-three-model-tiers-common-engine-interface.md))
-2. **Real speeds and memory.** Per-page time and memory per quantization on GPU and on CPU. These feed the suggester rules. ([ADR 0008](adr/0008-hardware-based-model-suggester.md))
-3. **PP-DocLayoutV3 runtime.** Whether it can run through ONNX Runtime, which would shrink the engine environment, or needs `paddlepaddle` CPU. ([ADR 0003](adr/0003-hybrid-llama-server-and-python-engine.md))
-4. **Vulkan coverage.** Whether the Vulkan backend supports the operations DeepSeek-OCR needs on AMD and Intel GPUs.
-5. **DeepSeek-OCR grounding syntax.** Believed to be `<|ref|>label<|/ref|><|det|>[[x1,y1,x2,y2]]<|/det|>` with coordinates normalized to 0-999. To be confirmed against real output.
+1. **DeepSeek-OCR 2 or v1 for Max.** Answered: v1 ships in Max, and OCR 2 is an experimental advanced option (spike sections 6 and 8). ([ADR 0004](adr/0004-three-model-tiers-common-engine-interface.md))
+2. **Real speeds and memory.** Answered for one desktop (RTX 4090 and Ryzen 7 7800X3D); no laptop CPU or 8 GB GPU was measured (spike section 3). ([ADR 0008](adr/0008-hardware-based-model-suggester.md))
+3. **PP-DocLayoutV3 runtime.** Partly answered: it runs under `paddlepaddle` CPU at about 2.8 s per page. ONNX Runtime is untested (spike section 6). ([ADR 0003](adr/0003-hybrid-llama-server-and-python-engine.md))
+4. **Vulkan coverage.** Still open. Whether the Vulkan backend supports the operations DeepSeek-OCR needs on AMD and Intel GPUs. No such hardware was available for the spike.
+5. **DeepSeek-OCR grounding syntax.** Answered: confirmed, with integer coordinates 0 to 999 and `--special` required (spike section 6).
+6. **Apple Silicon: estimated only.** No Apple Silicon machine was benchmarked. The estimates in the spike report are derived from memory bandwidth and will be replaced by measurements.
+7. **ONNX Runtime / OpenVINO for Fast: deferred past v0.1.** The Fast tier runs on `paddlepaddle` CPU for now.
+8. **Fast tier languages.** The spike used PP-OCRv6 tiny on English pages only. Which languages the tiny models cover, and whether the language dropdown needs larger models for some scripts, is still to be checked.
