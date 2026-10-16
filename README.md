@@ -2,7 +2,7 @@
 
 OpenDoc Reader is a free, open source desktop app that turns scanned documents and photos of documents into editable Markdown and Word files.
 
-> **Status: pre-alpha.** Planning is complete and the code has not been written yet. There is nothing to download. The first release will be v0.1.
+> **Status: pre-alpha.** Planning is complete and work on v0.1 has started. There is nothing to download yet. The first release will be v0.1.
 
 ## What it does
 

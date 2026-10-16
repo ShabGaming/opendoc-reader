@@ -6,7 +6,7 @@ Thanks for your interest in OpenDoc Reader. This guide explains how to take part
 
 ## Project status
 
-The project is pre-alpha. The plan is written, but there is no application code yet. The repository currently holds the license and documentation.
+The project is pre-alpha. The plan is written and the repository has a skeleton (app shell, engine package, CI), but OCR is not wired up yet.
 
 The most useful contributions right now are:
 
@@ -24,23 +24,66 @@ The most useful contributions right now are:
 
 ## Development setup
 
-The code does not exist yet, so there is nothing to build. Exact commands will be added here when the repository skeleton lands.
+The repository has a working skeleton: the app shell, the engine package and CI. OCR itself is not wired up yet.
 
-The planned toolchain is:
+You need:
 
-- Rust (stable) and the [Tauri 2 prerequisites](https://tauri.app/start/prerequisites/) for your OS. On Windows this includes the Microsoft C++ Build Tools and WebView2. On macOS it includes the Xcode command line tools.
-- Node.js (LTS) and [pnpm](https://pnpm.io/) for the user interface.
-- Python, managed through [uv](https://docs.astral.sh/uv/), for the engine.
+- Rust (stable, 1.90 or newer) and the [Tauri 2 prerequisites](https://tauri.app/start/prerequisites/) for your OS. On Windows this includes the Microsoft C++ Build Tools and WebView2. On macOS it includes the Xcode command line tools.
+- Node.js 22 or newer and [pnpm](https://pnpm.io/) 10 (the exact version is pinned in `package.json`; `corepack enable` picks it up).
+- [uv](https://docs.astral.sh/uv/) for the engine. It installs Python 3.12 for you.
 
-The planned repository layout is:
+Layout:
 
 ```
 apps/desktop/        Tauri app (src-tauri/ Rust, src/ React UI)
-engine/              Python sidecar (uv project, pytest)
-models/manifest.json models, runtime builds, checksums, suggester rules
-docs/                user guide, architecture, ADRs, contributing a new engine
-.github/             CI, release builds, issue/PR templates
+engine/              Python engine (uv project, pytest)
+models/              manifest.json (downloads, checksums, suggester rules) and its schema
+docs/                architecture, ADRs, design reference, spike report
+.github/             CI, release builds, issue and PR templates
 ```
+
+Desktop app, from the repository root:
+
+```bash
+pnpm install
+pnpm --filter desktop tauri dev
+```
+
+`pnpm --filter desktop dev` runs only the web UI in a browser at http://localhost:1420, which is quicker for layout work.
+
+Checks that CI runs for the desktop app (from the repository root):
+
+```bash
+pnpm --filter desktop lint
+pnpm --filter desktop typecheck
+pnpm --filter desktop test
+pnpm --filter desktop build
+```
+
+and in `apps/desktop/src-tauri` (build the frontend first, since the Rust crate embeds it):
+
+```bash
+cargo fmt --check
+cargo clippy --all-targets -- -D warnings
+cargo test
+```
+
+Engine, in `engine/`:
+
+```bash
+uv sync
+uv run ruff check .
+uv run ruff format --check .
+uv run pytest
+```
+
+The engine speaks JSON-RPC over stdin and stdout. A quick check that it starts:
+
+```bash
+echo '{"jsonrpc":"2.0","id":1,"method":"engine.ping"}' | uv run python -m opendoc_engine
+```
+
+The engine tests also validate `models/manifest.json` against `models/manifest.schema.json`, so run them after editing the manifest.
 
 ## Workflow
 
@@ -55,7 +98,7 @@ There is no CLA and no DCO sign-off. You keep the copyright on your contribution
 
 ## Code style
 
-These will be enforced in CI once the skeleton lands:
+CI enforces these:
 
 - Rust: `rustfmt` and `clippy`.
 - TypeScript and React: ESLint and Prettier.
@@ -93,8 +136,8 @@ The set aims to cover a book page, a table-heavy invoice, a formula page, a two-
 
 ## Reporting security issues
 
-Do not report security problems in a public issue. A `SECURITY.md` file will be added with the repository templates. Until then, use GitHub's private vulnerability reporting on the Security tab of the repository.
+Do not report security problems in a public issue. See [SECURITY.md](SECURITY.md) for how to report them privately.
 
 ## Code of conduct
 
-We will follow the [Contributor Covenant](https://www.contributor-covenant.org/). A `CODE_OF_CONDUCT.md` file will be added with the repository templates. Until then, be considerate and keep discussion about the work.
+This project follows the Contributor Covenant. See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
