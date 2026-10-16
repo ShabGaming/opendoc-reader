@@ -93,6 +93,88 @@ async fn the_engine_environment_is_built_by_uv_and_the_engine_answers() {
         capabilities.as_array().unwrap().len()
     );
 
+    // The export path the queue uses, with the parameter shapes it sends: pages in, one
+    // Document out, then Word and Markdown into free names.
+    let work = dir.path().join("work");
+    std::fs::create_dir_all(&work).unwrap();
+    let image = work.join("page-0000.png");
+    std::fs::write(&image, b"not really a png").unwrap();
+    let ir = work.join("page-0000.json");
+    std::fs::write(
+        &ir,
+        json!({
+            "index": 0, "width": 100, "height": 100,
+            "sourceImage": image.to_string_lossy(),
+            "blocks": [
+                {"id": "p0-b0", "type": "heading", "level": 1, "bbox": [1, 1, 90, 20], "order": 0, "text": "Title"},
+                {"id": "p0-b1", "type": "paragraph", "bbox": [1, 30, 90, 50], "order": 1, "text": "Hello world"}
+            ]
+        })
+        .to_string(),
+    )
+    .unwrap();
+    let document = work.join("document.json");
+    engine
+        .request(
+            "document.assemble",
+            json!({
+                "source": {"path": dir.path().join("scan.pdf").to_string_lossy(), "kind": "pdf", "pageCount": 1},
+                "engine": {"id": "paddleocr-vl", "model": "accurate-paddleocr-vl-1.6", "version": "0.1.0"},
+                "pages": [ir.to_string_lossy()],
+                "outPath": document.to_string_lossy(),
+            }),
+            None,
+            true,
+        )
+        .await
+        .unwrap();
+    assert!(document.is_file());
+    let docx = dir.path().join("scan.docx");
+    engine
+        .request(
+            "export.docx",
+            json!({"document": document.to_string_lossy(), "outputPath": docx.to_string_lossy()}),
+            None,
+            true,
+        )
+        .await
+        .unwrap();
+    assert!(docx.is_file());
+    let markdown = dir.path().join("scan.md");
+    engine
+        .request(
+            "export.markdown",
+            json!({
+                "document": document.to_string_lossy(),
+                "outputPath": markdown.to_string_lossy(),
+                "assetsDir": dir.path().join("scan_assets").to_string_lossy(),
+            }),
+            None,
+            true,
+        )
+        .await
+        .unwrap();
+    let text = std::fs::read_to_string(&markdown).unwrap();
+    assert!(
+        text.contains("# Title") && text.contains("Hello world"),
+        "{text}"
+    );
+    // The engine refuses to overwrite, which is why Rust picks free names.
+    let again = engine
+        .request(
+            "export.docx",
+            json!({"document": document.to_string_lossy(), "outputPath": docx.to_string_lossy()}),
+            None,
+            true,
+        )
+        .await
+        .unwrap_err();
+    assert_eq!(
+        again.to_app_error().code,
+        opendoc_reader_lib::contract::AppErrorCode::Io
+    );
+    assert_eq!(again.reason().as_deref(), Some("already_exists"));
+
     // An unknown method comes back as a JSON-RPC error, not a crash.
     let unknown = engine
         .request("no.such.method", Value::Null, None, false)
