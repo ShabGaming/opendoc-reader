@@ -179,7 +179,11 @@ mod tests {
         for _ in 0..50 {
             tokio::time::sleep(std::time::Duration::from_millis(100)).await;
             let system = sysinfo::System::new_all();
-            if system.process(sysinfo::Pid::from_u32(pid)).is_none() {
+            // A killed child that nobody has reaped yet shows up as a zombie on Unix.
+            let alive = system
+                .process(sysinfo::Pid::from_u32(pid))
+                .is_some_and(|p| p.status() != sysinfo::ProcessStatus::Zombie);
+            if !alive {
                 gone = true;
                 break;
             }

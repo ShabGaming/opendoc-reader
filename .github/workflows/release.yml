@@ -47,6 +47,11 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # uv ships inside the installer as a sidecar (tauri.conf.json, bundle.externalBin).
+      # The pinned archive is checked against its SHA-256 before it is used.
+      - name: Fetch the uv sidecar
+        run: node scripts/fetch-uv.mjs --target ${{ matrix.target }}
+
       - uses: tauri-apps/tauri-action@1deb371b0cd8bd54025b384f1cd735e725c4060f # action-v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

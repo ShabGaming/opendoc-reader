@@ -87,6 +87,11 @@ fn build_core(app: &tauri::App) -> Result<Arc<Core>, Box<dyn std::error::Error>>
 
     let settings = SettingsStore::load(paths.settings_file.clone(), &paths.default_models);
     let models_dir = PathBuf::from(settings.get().models_dir);
+    // A models folder outside app data is not covered by the static scope in tauri.conf.json.
+    if !models_dir.starts_with(&paths.data) {
+        app.asset_protocol_scope()
+            .allow_directory(&models_dir, true)?;
+    }
 
     let spawn_env = engine_env.clone();
     let spawn: SpawnFactory = Arc::new(move || {
@@ -145,6 +150,7 @@ fn build_core(app: &tauri::App) -> Result<Arc<Core>, Box<dyn std::error::Error>>
 pub fn run() {
     let app = tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_opener::init())
         .setup(|app| {
             let core = build_core(app)?;
             app.manage(core);

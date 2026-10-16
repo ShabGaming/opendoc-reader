@@ -2,6 +2,8 @@
 
 use std::path::Path;
 
+use tauri::Manager;
+
 use super::CoreState;
 use crate::app_core::existing_path;
 use crate::contract::{AppError, AppErrorCode, Settings, SettingsPatch};
@@ -12,8 +14,20 @@ pub async fn settings_get(core: CoreState<'_>) -> Result<Settings, AppError> {
 }
 
 #[tauri::command]
-pub async fn settings_set(core: CoreState<'_>, patch: SettingsPatch) -> Result<Settings, AppError> {
-    core.settings_set(patch)
+pub async fn settings_set(
+    app: tauri::AppHandle,
+    core: CoreState<'_>,
+    patch: SettingsPatch,
+) -> Result<Settings, AppError> {
+    let before = core.svc.settings.get().models_dir;
+    let next = core.settings_set(patch)?;
+    if next.models_dir != before {
+        // Keep the asset protocol able to serve files from the new models folder.
+        let _ = app
+            .asset_protocol_scope()
+            .allow_directory(&next.models_dir, true);
+    }
+    Ok(next)
 }
 
 #[tauri::command]

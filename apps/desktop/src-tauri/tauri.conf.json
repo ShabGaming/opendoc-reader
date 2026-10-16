@@ -43,7 +43,7 @@
       },
       "assetProtocol": {
         "enable": true,
-        "scope": ["$APPDATA/work/**"]
+        "scope": ["$APPDATA/**"]
       }
     }
   },
