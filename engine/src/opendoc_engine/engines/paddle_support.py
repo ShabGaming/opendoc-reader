@@ -9,6 +9,7 @@ there, the page still converts, just with coarser progress and cancellation.
 
 from __future__ import annotations
 
+import asyncio
 import gc
 import inspect
 import logging
@@ -93,6 +94,29 @@ def wrap_stream(
 
     setattr(owner, attribute, hooked)
     return True
+
+
+def abort_genai_requests() -> None:
+    """Cancel the HTTP requests that a PaddleOCR-VL pipeline has in flight.
+
+    The pipeline sends them from PaddleX's background event loop. Cancelling the tasks closes
+    their connections, and the waiting caller gets `CancelledError`. The client stays usable
+    for the next page. Does nothing when no loop is running.
+    """
+    try:
+        from paddlex.inference.models.common.genai import get_async_manager
+
+        loop = get_async_manager().loop
+    except Exception:
+        return
+    if loop is None or loop.is_closed():
+        return
+
+    def cancel_all() -> None:
+        for task in asyncio.all_tasks(loop):
+            task.cancel()
+
+    loop.call_soon_threadsafe(cancel_all)
 
 
 def close_pipeline(pipeline: Any) -> None:

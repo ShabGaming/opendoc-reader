@@ -281,7 +281,7 @@ def test_calibrate_times_a_warmup_and_the_requested_runs(server, tmp_path, page_
     result = call(server, "calibrate.run", params)["result"]
     assert len(result["runSeconds"]) == 3
     assert result["warmupSeconds"] >= 0
-    assert result["secondsPerPage"] == sorted(result["runSeconds"])[1]
+    assert result["secondsPerPage"] == pytest.approx(sorted(result["runSeconds"])[1], abs=0.011)
     assert not (tmp_path / "work" / "_engine" / "calibration").exists()
 
 

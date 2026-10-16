@@ -107,7 +107,8 @@ def register(methods: MethodRegistry, engines: EngineRegistry, runtime: Runtime)
         runs = [one_run() for _ in range(p["runs"])]
         _clean(folder)
         return {
-            "secondsPerPage": round(statistics.median(runs), 2),
+            # The schema wants a positive number; a run is never faster than a hundredth.
+            "secondsPerPage": max(round(statistics.median(runs), 2), 0.01),
             "warmupSeconds": round(warmup, 2),
             "runSeconds": [round(seconds, 2) for seconds in runs],
         }

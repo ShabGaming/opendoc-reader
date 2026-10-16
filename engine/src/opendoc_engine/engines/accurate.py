@@ -12,17 +12,25 @@ anything; the VL weights are llama-server's business and are not touched here.
 from __future__ import annotations
 
 import logging
+from concurrent.futures import CancelledError
 from pathlib import Path
 from typing import Any
 
 from opendoc_engine.engines.base import Capabilities, EngineSetup
 from opendoc_engine.engines.paddle_support import (
+    abort_genai_requests,
     close_pipeline,
     inner_pipeline,
     wrap,
     wrap_stream,
 )
-from opendoc_engine.errors import map_exception, model_not_ready, not_configured
+from opendoc_engine.errors import (
+    cancelled,
+    map_exception,
+    model_not_ready,
+    not_configured,
+    recognition_failed,
+)
 from opendoc_engine.ir import Block
 from opendoc_engine.llama import LlamaClient
 from opendoc_engine.paddle_blocks import blocks_from_layout, layout_items
@@ -111,6 +119,15 @@ class AccurateEngine:
         recognizer = getattr(inner, "vl_rec_model", None)
         if recognizer is not None:
             wrap_stream(recognizer, "predict", each=self._region_done)
+            # No request may start after a cancel: `abort_genai_requests` only reaches the
+            # requests that already exist when it runs.
+            client = getattr(recognizer, "genai_client", None)
+            if client is not None:
+                wrap(client, "create_chat_completion", before=self._check_cancelled)
+
+    def _check_cancelled(self) -> None:
+        if self._call is not None:
+            self._call.check_cancelled()
 
     def _layout_done(self, results: Any) -> None:
         try:
@@ -142,11 +159,16 @@ class AccurateEngine:
             if call:
                 call.stage("layout")
             try:
-                results = self._pipeline.predict(str(page_image_path), use_queues=False)
-                result = next(iter(results))
+                with (call or CallContext()).on_cancel(abort_genai_requests):
+                    results = self._pipeline.predict(str(page_image_path), use_queues=False)
+                    result = next(iter(results))
             except RpcError:
                 raise
-            except Exception as exc:
+            except (Exception, CancelledError) as exc:
+                if call is not None and call.cancelled.is_set():
+                    raise cancelled() from exc
+                if isinstance(exc, CancelledError):
+                    raise recognition_failed("output_unusable", "request cancelled") from exc
                 raise map_exception(exc) from exc
             if call:
                 call.stage("normalize")

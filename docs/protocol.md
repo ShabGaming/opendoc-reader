@@ -474,7 +474,9 @@ Produces the page image that every later call refers to. PDF pages are rendered 
 | `width`, `height` | Pixels of the written image |
 | `dpi` | Resolution used for a PDF page, null for an image |
 | `rotation` | Clockwise rotation applied: 0, 90, 180 or 270 |
-| `skewAngle` | Degrees of deskew applied, 0 when none |
+| `skewAngle` | Degrees of deskew applied, counterclockwise positive, 0 when none |
+
+Orientation detection (`rotate: "auto"`) and dewarping use optional Paddle helper models, `PP-LCNet_x1_0_doc_ori` and `UVDoc`, which the engine looks for in any folder under `modelsDir` (`<modelsDir>/<any>/PP-LCNet_x1_0_doc_ori/`). Without the orientation model, `"auto"` leaves the page as it is and reports rotation 0. Without the dewarp model, `dewarp: true` fails with `MODEL_NOT_READY` (`files_missing`). Deskew is classical and needs no model; it leaves pages without clear text lines alone.
 
 Errors: `BAD_INPUT` (`file_not_found`, `unreadable`, `corrupt`, `password_protected`, `unsupported_format`, `page_out_of_range`), `IO_ERROR`, `OUT_OF_MEMORY`.
 

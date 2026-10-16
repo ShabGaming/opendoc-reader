@@ -154,7 +154,8 @@ def dewarp(image: Image.Image, models_dir: Path, scratch_dir: Path) -> Image.Ima
         raise model_not_ready("files_missing", f"{UNWARP_MODEL} (no installed model folder)")
     model = _paddle_model(UNWARP_MODEL, directory, scratch_dir)
     result = next(iter(model.predict(_bgr(image), batch_size=1)))
-    return Image.fromarray(np.asarray(result["doctr_img"])[:, :, ::-1])
+    # UVDoc hands back the corrected page as RGB although it was given BGR.
+    return Image.fromarray(np.asarray(result["doctr_img"]))
 
 
 def release_models() -> None:
