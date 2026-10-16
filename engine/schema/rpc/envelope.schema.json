@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/envelope.schema.json",
+  "title": "JSON-RPC 2.0 envelopes",
+  "description": "One message per line on stdin (requests and notifications from Rust) and stdout (responses and notifications from the engine). The engine also accepts batches, but Rust never sends them.",
+  "$defs": {
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "jsonrpc": {
+          "const": "2.0"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "method": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "jsonrpc",
+        "id",
+        "method"
+      ]
+    },
+    "notification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "jsonrpc": {
+          "const": "2.0"
+        },
+        "method": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "jsonrpc",
+        "method"
+      ],
+      "description": "A message with no id. The receiver never answers it."
+    },
+    "successResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "jsonrpc": {
+          "const": "2.0"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "result": {}
+      },
+      "required": [
+        "jsonrpc",
+        "id",
+        "result"
+      ]
+    },
+    "errorResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "jsonrpc": {
+          "const": "2.0"
+        },
+        "id": {
+          "type": [
+            "string",
+            "integer",
+            "null"
+          ]
+        },
+        "error": {
+          "$ref": "error.schema.json#/$defs/error"
+        }
+      },
+      "required": [
+        "jsonrpc",
+        "id",
+        "error"
+      ]
+    }
+  }
+}

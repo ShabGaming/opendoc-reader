@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/text.extract.schema.json",
+  "title": "text.extract",
+  "description": "Builds an IR Page from the text layer of a PDF page (the \"Use existing text\" path). `imagePath` must be the image page.render wrote for the same page with rotate 0 and deskew false, so boxes map onto it by a plain scale; the engine fails with BAD_INPUT (reason `image_mismatch`) when the aspect ratio does not match the PDF page. Blocks are headings, paragraphs and lists inferred from font size, position and spacing; there are no tables, formulas or figures. The result engine is `pdf-text` with model `text-layer`. Emits no progress.",
+  "$defs": {
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath",
+          "description": "The PDF."
+        },
+        "pageIndex": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "imagePath": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath"
+        },
+        "irPath": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath"
+        }
+      },
+      "required": [
+        "source",
+        "pageIndex",
+        "imagePath",
+        "irPath"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "irPath": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath"
+        },
+        "blockCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "engine": {
+          "$ref": "common.schema.json#/$defs/Engine"
+        },
+        "elapsedMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "warnings": {
+          "$ref": "common.schema.json#/$defs/Warnings"
+        }
+      },
+      "required": [
+        "irPath",
+        "blockCount",
+        "engine",
+        "elapsedMs",
+        "warnings"
+      ]
+    }
+  }
+}

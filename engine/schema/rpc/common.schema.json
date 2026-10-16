@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/common.schema.json",
+  "title": "Shared definitions for the engine RPC schemas",
+  "$defs": {
+    "AbsolutePath": {
+      "description": "An absolute filesystem path in the native format of the host OS. On Windows the engine accepts either path separator.",
+      "type": "string",
+      "pattern": "^(/|[A-Za-z]:[\\\\/]|\\\\\\\\)"
+    },
+    "RequestId": {
+      "description": "The JSON-RPC id of a request.",
+      "type": [
+        "string",
+        "integer"
+      ]
+    },
+    "Stage": {
+      "description": "Stage names reported by convert.progress, in the order a page passes through them. An engine reports only the stages it has.",
+      "enum": [
+        "prepare",
+        "layout",
+        "recognize",
+        "normalize",
+        "crops"
+      ]
+    },
+    "Rotation": {
+      "description": "Clockwise degrees.",
+      "enum": [
+        0,
+        90,
+        180,
+        270
+      ]
+    },
+    "Warnings": {
+      "description": "Human-readable notes for the log about things that were degraded but not fatal. Not shown to the user.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Engine": {
+      "$ref": "../ir.schema.json#/$defs/EngineInfo"
+    }
+  }
+}

@@ -25,6 +25,18 @@ METHOD_NOT_FOUND = -32601
 INVALID_PARAMS = -32602
 INTERNAL_ERROR = -32603
 
+# Application errors, in the JSON-RPC range reserved for implementations. The table, with the
+# `data.reason` slugs for each code, is in docs/protocol.md.
+MODEL_NOT_READY = -32001
+LLAMA_SERVER_UNREACHABLE = -32002
+OUT_OF_MEMORY = -32003
+BAD_INPUT = -32004
+CANCELLED = -32005
+NOT_CONFIGURED = -32006
+BUSY = -32007
+RECOGNITION_FAILED = -32008
+IO_ERROR = -32009
+
 # A handler receives the request's `params` (None, a list or a dict) and returns a
 # JSON-serializable result. It signals a protocol-level failure by raising `RpcError`.
 Handler = Callable[[Any], Any]

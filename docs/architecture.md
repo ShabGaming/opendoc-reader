@@ -32,7 +32,7 @@ Three processes cooperate at runtime.
 
 **llama-server.** An unmodified, pinned upstream llama.cpp release build, one per backend: CUDA for NVIDIA GPUs, Vulkan for AMD and Intel GPUs on Windows, Metal on Apple Silicon, and a CPU build. It loads one vision-language model at a time and listens on 127.0.0.1 on a random port. It is never reachable from other machines. See [ADR 0003](adr/0003-hybrid-llama-server-and-python-engine.md).
 
-**Python engine.** A sidecar with a CPU-only environment created by `uv` on first run, using python-build-standalone. It renders PDFs, preprocesses pages, runs the PaddleOCR pipeline pieces (PP-DocLayoutV3 layout detection, PP-OCRv6, PP-StructureV3), normalizes results into the document IR, and runs all exporters. The Tauri core talks to it through JSON-RPC over stdio, so it opens no port of its own. For the Accurate tier, the engine uses PaddleOCR's llama-server VLM backend and sends element crops to `llama-server` over local HTTP. There is no CUDA PyTorch anywhere in the project.
+**Python engine.** A sidecar with a CPU-only environment created by `uv` on first run, using python-build-standalone. It renders PDFs, preprocesses pages, runs the PaddleOCR pipeline pieces (PP-DocLayoutV3 layout detection, PP-OCRv6, PP-StructureV3), normalizes results into the document IR, and runs all exporters. The Tauri core talks to it through JSON-RPC over stdio, so it opens no port of its own. The methods are specified in [protocol.md](protocol.md). For the Accurate tier, the engine uses PaddleOCR's llama-server VLM backend and sends element crops to `llama-server` over local HTTP. There is no CUDA PyTorch anywhere in the project.
 
 The engine is the only client of `llama-server`, for both Accurate and Max. The Rust core starts and stops `llama-server` and passes its port to the engine, but never sends it requests. Keeping all model calls and output parsing in the engine means every engine presents the same interface to the Rust core.
 
@@ -67,10 +67,10 @@ There is no language setting for the VLM tiers, because those models detect the 
 
 ## The document IR
 
-Every engine's output is normalized into one document model. This is a draft sketch. The schema will be finalized in v0.1 and then versioned. See [ADR 0005](adr/0005-single-document-model-no-pandoc.md).
+Every engine's output is normalized into one document model. Schema version 1 is frozen in [`engine/schema/ir.schema.json`](../engine/schema/ir.schema.json), which is the authoritative definition and the source of the UI's generated TypeScript types. The sketch below summarizes it. [protocol.md](protocol.md) says where IR files live and which RPC methods write them. See [ADR 0005](adr/0005-single-document-model-no-pandoc.md).
 
 ```ts
-// Draft. Field names and shapes may change before v0.1.
+// Summary of IR schema v1. The JSON Schema is authoritative.
 
 interface Document {
   schemaVersion: string;
@@ -99,9 +99,11 @@ interface Block {
   order: number;                 // reading-order index within the page
   level?: number;                // heading level
   text?: string;                 // inline markdown (emphasis, links, inline math)
+  lines?: { bbox: BBox; text: string }[]; // optional line boxes on text blocks (searchable PDF, v0.2)
   items?: ListItem[];            // list blocks, with nesting and ordered/unordered flag
   table?: Table;
   latex?: string;                // formula blocks
+  number?: string;               // printed equation number of a formula, e.g. "(1)"
   figure?: { crop: string };     // path to image cropped from the page
   caption?: { for: string };     // block id of the figure or table this caption describes
   confidence?: number;
@@ -121,7 +123,13 @@ interface Table {
 }
 ```
 
-Open details to settle in v0.1: how multi-column pages and cross-page tables are represented, whether table cells hold text only or nested blocks, and how line-level boxes (needed for the searchable PDF) are stored. If line boxes need to be stored, they would be an optional `lines` field on text blocks.
+Details settled for v0.1 (M0-2):
+
+- **Multi-column pages** have no column structure. `blocks` are stored in reading order and `order` equals the array index.
+- **Tables** do not continue across pages in v0.1. A table split by a page break is two tables.
+- **Table cells** hold nested blocks, usually one paragraph. A cell never holds another table.
+- **Line boxes** are an optional `lines` array on text blocks. The Word and Markdown exporters ignore it, and an engine that cannot produce line boxes omits it.
+- **Equation numbers** are the `number` field of the formula block they belong to, not blocks of their own.
 
 ## Exporters
 
@@ -140,7 +148,7 @@ All exporters read the IR and nothing else. Pandoc is deliberately not used: it 
 
 ## Engine interface
 
-Engines implement one common interface so that more can be added later (GLM-OCR and MinerU are candidates for v0.3). The interface is described here conceptually. The real signatures will be written when the engine package exists, along with a "contributing a new engine" guide in `docs/`. See [ADR 0004](adr/0004-three-model-tiers-common-engine-interface.md).
+Engines implement one common interface so that more can be added later (GLM-OCR and MinerU are candidates for v0.3). The interface is described here conceptually. The real signatures are in `engine/src/opendoc_engine/engines/base.py`, and the JSON-RPC methods through which the Rust core drives an engine (`convert.page`, `engine.capabilities` and the rest) are specified in [protocol.md](protocol.md). A "contributing a new engine" guide will follow in `docs/`. See [ADR 0004](adr/0004-three-model-tiers-common-engine-interface.md).
 
 A new engine provides:
 

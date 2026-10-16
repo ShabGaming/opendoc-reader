@@ -68,6 +68,8 @@ cargo clippy --all-targets -- -D warnings
 cargo test
 ```
 
+`lint` also fails when `apps/desktop/src/types/ir.ts` is out of date with `engine/schema/ir.schema.json`. After changing the schema, run `pnpm --filter desktop gen:types` and commit the result. The engine, Rust and UI contracts are described in [docs/protocol.md](docs/protocol.md).
+
 Engine, in `engine/`:
 
 ```bash

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/image.inspect.schema.json",
+  "title": "image.inspect",
+  "description": "Page count and pixel sizes of an image file (PNG, JPG, TIFF including multi-page, BMP, WebP, HEIC). A multi-page TIFF has one page per frame.",
+  "$defs": {
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath"
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pageCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "index": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "width": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "height": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "index",
+              "width",
+              "height"
+            ]
+          }
+        }
+      },
+      "required": [
+        "pageCount",
+        "pages"
+      ]
+    }
+  }
+}

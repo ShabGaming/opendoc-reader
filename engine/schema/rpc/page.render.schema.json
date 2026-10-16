@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/page.render.schema.json",
+  "title": "page.render",
+  "description": "Turns one page of a PDF or image file into a PNG page image. PDF pages are rendered with PDFium at `dpi`. Image pages are decoded (EXIF orientation applied) and re-encoded as PNG at their native pixel size. Then the rotation and deskew steps run, in that order. The result is the image every later call and every IR bounding box refers to. Writes `outPath` atomically.",
+  "$defs": {
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath",
+          "description": "A PDF or image file."
+        },
+        "pageIndex": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "outPath": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath",
+          "description": "Where to write the PNG. Parent directories are created."
+        },
+        "dpi": {
+          "type": "integer",
+          "minimum": 72,
+          "maximum": 600,
+          "default": 200,
+          "description": "Render resolution for PDFs. Ignored for images."
+        },
+        "rotate": {
+          "description": "`auto` detects the page orientation; a number rotates clockwise by that many degrees before deskew.",
+          "oneOf": [
+            {
+              "const": "auto"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/Rotation"
+            }
+          ],
+          "default": "auto"
+        },
+        "deskew": {
+          "type": "boolean",
+          "default": true,
+          "description": "Straighten small skew (up to about 15 degrees)."
+        },
+        "dewarp": {
+          "type": "boolean",
+          "default": false,
+          "description": "Flatten curled phone photos. Off by default."
+        }
+      },
+      "required": [
+        "source",
+        "pageIndex",
+        "outPath"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "dpi": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Resolution used for a PDF page, null for an image."
+        },
+        "rotation": {
+          "$ref": "common.schema.json#/$defs/Rotation",
+          "description": "Clockwise rotation that was applied."
+        },
+        "skewAngle": {
+          "type": "number",
+          "description": "Degrees of deskew rotation that were applied. 0 when deskew is off or nothing was corrected."
+        }
+      },
+      "required": [
+        "path",
+        "width",
+        "height",
+        "dpi",
+        "rotation",
+        "skewAngle"
+      ]
+    }
+  }
+}

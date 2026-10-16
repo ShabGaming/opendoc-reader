@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/export.docx.schema.json",
+  "title": "export.docx",
+  "description": "Writes a Word file. Page furniture is omitted, footnotes stay at the end of their page's section, and a page break separates source pages. Never overwrites: fails with IO_ERROR (reason `already_exists`) when `outputPath` exists, because Rust has already picked a free name.",
+  "$defs": {
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "document": {
+          "description": "The Document IR: an absolute path to a Document JSON file (normal use), or the Document object itself (tests and tiny documents).",
+          "oneOf": [
+            {
+              "$ref": "common.schema.json#/$defs/AbsolutePath"
+            },
+            {
+              "$ref": "../ir.schema.json"
+            }
+          ]
+        },
+        "outputPath": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath",
+          "description": "The .docx file to write."
+        }
+      },
+      "required": [
+        "document",
+        "outputPath"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/AbsolutePath"
+          },
+          "description": "Every file written."
+        },
+        "warnings": {
+          "$ref": "common.schema.json#/$defs/Warnings"
+        }
+      },
+      "required": [
+        "files",
+        "warnings"
+      ]
+    }
+  }
+}

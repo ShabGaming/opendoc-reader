@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/engine.capabilities.schema.json",
+  "title": "engine.capabilities",
+  "$defs": {
+    "params": {
+      "description": "No parameters. The `params` member is omitted.",
+      "type": "null"
+    },
+    "result": {
+      "type": "array",
+      "description": "Every engine this build can run.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Engine id. Equals the `engine` field of the manifest models that use it. Passed back as `engineId` to convert.page."
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "tables": {
+                "type": "boolean"
+              },
+              "formulas": {
+                "type": "boolean"
+              },
+              "figures": {
+                "type": "boolean"
+              },
+              "readingOrder": {
+                "type": "boolean"
+              },
+              "boundingBoxes": {
+                "type": "boolean"
+              },
+              "languageHandling": {
+                "enum": [
+                  "auto",
+                  "selectable",
+                  "none"
+                ]
+              }
+            },
+            "required": [
+              "tables",
+              "formulas",
+              "figures",
+              "readingOrder",
+              "boundingBoxes",
+              "languageHandling"
+            ]
+          },
+          "manifestModels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Manifest model ids this engine needs downloaded."
+          }
+        },
+        "required": [
+          "id",
+          "displayName",
+          "capabilities",
+          "manifestModels"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/calibrate.run.schema.json",
+  "title": "calibrate.run",
+  "description": "Times convert.page on a sample page so Rust can store seconds per page for a model. The first run is a warm-up (model load, first llama-server request) and is reported separately. Writes only under the workDir from engine.configure. Emits convert.progress notifications like convert.page, with pageIndex 0 and this request's id. Honors convert.cancel.",
+  "$defs": {
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "engineId": {
+          "type": "string"
+        },
+        "modelId": {
+          "type": "string"
+        },
+        "samplePath": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath",
+          "description": "The bundled sample page image (PNG)."
+        },
+        "runs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5,
+          "default": 2,
+          "description": "Timed runs after the warm-up."
+        }
+      },
+      "required": [
+        "engineId",
+        "modelId",
+        "samplePath"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "secondsPerPage": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Median of the timed runs."
+        },
+        "warmupSeconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "runSeconds": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      },
+      "required": [
+        "secondsPerPage",
+        "warmupSeconds",
+        "runSeconds"
+      ]
+    }
+  }
+}

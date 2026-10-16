@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/engine.configure.schema.json",
+  "title": "engine.configure",
+  "description": "Sets runtime facts the engine cannot know. Rust calls it after the engine starts and again whenever llama-server is restarted on another port. It may be called at any time when no long-running call is in flight; the engine drops anything it cached about the old settings.",
+  "$defs": {
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "llamaServerUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri",
+          "description": "Base URL of the running llama-server, for example http://127.0.0.1:52871. null when none is running (Fast tier)."
+        },
+        "workDir": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath",
+          "description": "Scratch directory the engine may use for temporary files. Rust owns the layout of per-file job directories beneath it."
+        },
+        "modelsDir": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath",
+          "description": "Root of the installed models. Files of manifest model <id> live at <modelsDir>/<id>/[<dir>/]<name>, where dir and name come from the manifest file entry."
+        },
+        "cpuThreads": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "CPU threads for the Paddle pipelines. Omit to let the engine decide."
+        }
+      },
+      "required": [
+        "llamaServerUrl",
+        "workDir",
+        "modelsDir"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cpuThreads": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Thread count in effect."
+        }
+      },
+      "required": [
+        "cpuThreads"
+      ]
+    }
+  }
+}

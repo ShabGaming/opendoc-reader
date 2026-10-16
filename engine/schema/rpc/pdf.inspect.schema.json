@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/pdf.inspect.schema.json",
+  "title": "pdf.inspect",
+  "description": "Reads page count, page sizes and text-layer presence without rendering. Fails with BAD_INPUT (reason `password_protected`, `corrupt`, `file_not_found` or `unreadable`) for a PDF it cannot open.",
+  "$defs": {
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath"
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pageCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "index": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "width": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "description": "Page width in PDF points (1/72 inch), after the page's own rotation."
+              },
+              "height": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "hasTextLayer": {
+                "type": "boolean",
+                "description": "True when the page has a usable text layer: at least 20 non-whitespace characters, mostly printable text rather than replacement or private-use characters."
+              },
+              "charCount": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Non-whitespace characters found in the text layer."
+              }
+            },
+            "required": [
+              "index",
+              "width",
+              "height",
+              "hasTextLayer",
+              "charCount"
+            ]
+          }
+        }
+      },
+      "required": [
+        "pageCount",
+        "pages"
+      ]
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/convert.page.schema.json",
+  "title": "convert.page",
+  "description": "Recognizes one page image and writes the result as an IR Page JSON file (the `Page` definition of ir.schema.json) to `irPath`. Figure crops are written as PNG files into `cropsDir` and referenced from the IR by absolute path. The engine is stateless between calls: it may keep loaded models, but nothing about earlier pages. Emits convert.progress notifications while it works. Fails with CANCELLED when convert.cancel arrives first; in that case no IR file is written (crops may remain and are cleaned up by Rust).",
+  "$defs": {
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "engineId": {
+          "type": "string",
+          "description": "An id from engine.capabilities."
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Manifest model id to use, for example `accurate-paddleocr-vl-1.6`. Recorded in the IR as engine.model."
+        },
+        "imagePath": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath",
+          "description": "A page image written by page.render."
+        },
+        "pageIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Becomes Page.index and the block id prefix (`p{pageIndex}-b{n}`)."
+        },
+        "irPath": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath",
+          "description": "Where to write the IR Page JSON. Parent directories are created."
+        },
+        "cropsDir": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath",
+          "description": "Directory for figure crops, named `p{pageIndex}-b{n}.png`."
+        },
+        "options": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "language": {
+              "type": "string",
+              "description": "Fast tier only: recognition language code. Other engines ignore it. Not used by the UI in v0.1."
+            }
+          }
+        }
+      },
+      "required": [
+        "engineId",
+        "modelId",
+        "imagePath",
+        "pageIndex",
+        "irPath",
+        "cropsDir"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "irPath": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath"
+        },
+        "blockCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "engine": {
+          "$ref": "common.schema.json#/$defs/Engine"
+        },
+        "elapsedMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "warnings": {
+          "$ref": "common.schema.json#/$defs/Warnings"
+        }
+      },
+      "required": [
+        "irPath",
+        "blockCount",
+        "engine",
+        "elapsedMs",
+        "warnings"
+      ]
+    }
+  }
+}

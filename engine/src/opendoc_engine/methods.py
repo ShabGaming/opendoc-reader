@@ -9,6 +9,9 @@ from opendoc_engine.engines import EngineRegistry, default_registry, describe
 from opendoc_engine.ir import IR_SCHEMA_VERSION
 from opendoc_engine.rpc import MethodRegistry, RpcServer
 
+# Version of the RPC protocol in docs/protocol.md. Rust refuses an engine with another value.
+PROTOCOL_VERSION = "1"
+
 
 def build_methods(engines: EngineRegistry) -> MethodRegistry:
     methods = MethodRegistry()
@@ -19,7 +22,11 @@ def build_methods(engines: EngineRegistry) -> MethodRegistry:
 
     @methods.method("engine.version")
     def version(_params: Any) -> dict[str, str]:
-        return {"engine": __version__, "irSchema": IR_SCHEMA_VERSION}
+        return {
+            "engine": __version__,
+            "irSchema": IR_SCHEMA_VERSION,
+            "protocol": PROTOCOL_VERSION,
+        }
 
     @methods.method("engine.capabilities")
     def capabilities(_params: Any) -> list[dict[str, Any]]:

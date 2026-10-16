@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/convert.progress.schema.json",
+  "title": "convert.progress",
+  "description": "Notification (no id) sent by the engine while convert.page or calibrate.run is running. Informational: Rust uses it for the stage text and for liveness. Never sent after the response to the same request.",
+  "$defs": {
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requestId": {
+          "$ref": "common.schema.json#/$defs/RequestId",
+          "description": "Id of the convert.page or calibrate.run request this belongs to."
+        },
+        "pageIndex": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stage": {
+          "$ref": "common.schema.json#/$defs/Stage"
+        },
+        "current": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Items done in this stage (for example layout regions recognized so far)."
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Items in this stage, when known."
+        }
+      },
+      "required": [
+        "requestId",
+        "pageIndex",
+        "stage"
+      ]
+    }
+  }
+}

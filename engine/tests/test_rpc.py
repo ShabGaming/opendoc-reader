@@ -30,7 +30,7 @@ def test_ping(server):
 def test_version(server):
     response = call(server, {"jsonrpc": "2.0", "id": "a", "method": "engine.version"})
     assert response["id"] == "a"
-    assert response["result"] == {"engine": __version__, "irSchema": "1"}
+    assert response["result"] == {"engine": __version__, "irSchema": "1", "protocol": "1"}
 
 
 def test_capabilities_lists_demo_engine(server):

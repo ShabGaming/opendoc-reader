@@ -1,0 +1,598 @@
+{
+  "engine.ping.request": { "jsonrpc": "2.0", "id": 1, "method": "engine.ping" },
+  "engine.ping.response": { "jsonrpc": "2.0", "id": 1, "result": "pong" },
+
+  "engine.version.request": { "jsonrpc": "2.0", "id": 2, "method": "engine.version" },
+  "engine.version.response": {
+    "jsonrpc": "2.0",
+    "id": 2,
+    "result": { "engine": "0.1.0", "irSchema": "1", "protocol": "1" }
+  },
+
+  "engine.capabilities.request": { "jsonrpc": "2.0", "id": 3, "method": "engine.capabilities" },
+  "engine.capabilities.response": {
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": [
+      {
+        "id": "paddleocr-structure",
+        "displayName": "PP-StructureV3 (text and layout)",
+        "capabilities": {
+          "tables": false,
+          "formulas": false,
+          "figures": true,
+          "readingOrder": true,
+          "boundingBoxes": true,
+          "languageHandling": "selectable"
+        },
+        "manifestModels": ["fast-ppocrv6-tiny"]
+      },
+      {
+        "id": "paddleocr-vl",
+        "displayName": "PaddleOCR-VL",
+        "capabilities": {
+          "tables": true,
+          "formulas": true,
+          "figures": true,
+          "readingOrder": true,
+          "boundingBoxes": true,
+          "languageHandling": "auto"
+        },
+        "manifestModels": ["accurate-paddleocr-vl-1.6"]
+      },
+      {
+        "id": "deepseek-ocr",
+        "displayName": "DeepSeek-OCR",
+        "capabilities": {
+          "tables": true,
+          "formulas": true,
+          "figures": true,
+          "readingOrder": true,
+          "boundingBoxes": true,
+          "languageHandling": "auto"
+        },
+        "manifestModels": ["max-deepseek-ocr-1-q8", "experimental-deepseek-ocr-2-q8"]
+      }
+    ]
+  },
+
+  "engine.configure.request": {
+    "jsonrpc": "2.0",
+    "id": 4,
+    "method": "engine.configure",
+    "params": {
+      "llamaServerUrl": "http://127.0.0.1:52871",
+      "workDir": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work",
+      "modelsDir": "G:\\OpenDoc Reader\\models",
+      "cpuThreads": 8
+    }
+  },
+  "engine.configure.response": { "jsonrpc": "2.0", "id": 4, "result": { "cpuThreads": 8 } },
+
+  "pdf.inspect.request": {
+    "jsonrpc": "2.0",
+    "id": 5,
+    "method": "pdf.inspect",
+    "params": { "path": "C:\\Users\\Ada\\Documents\\invoice.pdf" }
+  },
+  "pdf.inspect.response": {
+    "jsonrpc": "2.0",
+    "id": 5,
+    "result": {
+      "pageCount": 2,
+      "pages": [
+        { "index": 0, "width": 595.0, "height": 842.0, "hasTextLayer": true, "charCount": 2310 },
+        { "index": 1, "width": 595.0, "height": 842.0, "hasTextLayer": false, "charCount": 0 }
+      ]
+    }
+  },
+
+  "image.inspect.request": {
+    "jsonrpc": "2.0",
+    "id": 6,
+    "method": "image.inspect",
+    "params": { "path": "C:\\Users\\Ada\\Pictures\\receipt.tiff" }
+  },
+  "image.inspect.response": {
+    "jsonrpc": "2.0",
+    "id": 6,
+    "result": {
+      "pageCount": 2,
+      "pages": [
+        { "index": 0, "width": 1700, "height": 2200 },
+        { "index": 1, "width": 1700, "height": 2200 }
+      ]
+    }
+  },
+
+  "page.render.request": {
+    "jsonrpc": "2.0",
+    "id": 7,
+    "method": "page.render",
+    "params": {
+      "source": "C:\\Users\\Ada\\Documents\\invoice.pdf",
+      "pageIndex": 3,
+      "outPath": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\pages\\page-0003.png",
+      "dpi": 200,
+      "rotate": "auto",
+      "deskew": true,
+      "dewarp": false
+    }
+  },
+  "page.render.response": {
+    "jsonrpc": "2.0",
+    "id": 7,
+    "result": {
+      "path": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\pages\\page-0003.png",
+      "width": 1654,
+      "height": 2339,
+      "dpi": 200,
+      "rotation": 0,
+      "skewAngle": -0.4
+    }
+  },
+
+  "convert.page.request": {
+    "jsonrpc": "2.0",
+    "id": 8,
+    "method": "convert.page",
+    "params": {
+      "engineId": "paddleocr-vl",
+      "modelId": "accurate-paddleocr-vl-1.6",
+      "imagePath": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\pages\\page-0003.png",
+      "pageIndex": 3,
+      "irPath": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\ir\\page-0003.json",
+      "cropsDir": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\crops",
+      "options": {}
+    }
+  },
+  "convert.page.notification.1": {
+    "jsonrpc": "2.0",
+    "method": "convert.progress",
+    "params": { "requestId": 8, "pageIndex": 3, "stage": "layout" }
+  },
+  "convert.page.notification.2": {
+    "jsonrpc": "2.0",
+    "method": "convert.progress",
+    "params": { "requestId": 8, "pageIndex": 3, "stage": "recognize", "current": 4, "total": 11 }
+  },
+  "convert.page.response": {
+    "jsonrpc": "2.0",
+    "id": 8,
+    "result": {
+      "irPath": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\ir\\page-0003.json",
+      "blockCount": 11,
+      "engine": { "id": "paddleocr-vl", "model": "accurate-paddleocr-vl-1.6", "version": "0.1.0" },
+      "elapsedMs": 4800,
+      "warnings": []
+    }
+  },
+
+  "convert.cancel.request": {
+    "jsonrpc": "2.0",
+    "id": 9,
+    "method": "convert.cancel",
+    "params": { "requestId": 8 }
+  },
+  "convert.cancel.response": { "jsonrpc": "2.0", "id": 9, "result": { "cancelled": true } },
+
+  "text.extract.request": {
+    "jsonrpc": "2.0",
+    "id": 10,
+    "method": "text.extract",
+    "params": {
+      "source": "C:\\Users\\Ada\\Documents\\invoice.pdf",
+      "pageIndex": 0,
+      "imagePath": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\pages\\page-0000.png",
+      "irPath": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\ir\\page-0000.json"
+    }
+  },
+  "text.extract.response": {
+    "jsonrpc": "2.0",
+    "id": 10,
+    "result": {
+      "irPath": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\ir\\page-0000.json",
+      "blockCount": 14,
+      "engine": { "id": "pdf-text", "model": "text-layer", "version": "0.1.0" },
+      "elapsedMs": 90,
+      "warnings": []
+    }
+  },
+
+  "document.assemble.request": {
+    "jsonrpc": "2.0",
+    "id": 11,
+    "method": "document.assemble",
+    "params": {
+      "source": { "path": "C:\\Users\\Ada\\Documents\\invoice.pdf", "kind": "pdf", "pageCount": 2 },
+      "engine": { "id": "paddleocr-vl", "model": "accurate-paddleocr-vl-1.6", "version": "0.1.0" },
+      "pages": [
+        "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\ir\\page-0000.json",
+        "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\ir\\page-0001.json"
+      ],
+      "outPath": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\document.json"
+    }
+  },
+  "document.assemble.response": {
+    "jsonrpc": "2.0",
+    "id": 11,
+    "result": {
+      "path": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\document.json",
+      "pageCount": 2
+    }
+  },
+
+  "export.docx.request": {
+    "jsonrpc": "2.0",
+    "id": 12,
+    "method": "export.docx",
+    "params": {
+      "document": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\document.json",
+      "outputPath": "C:\\Users\\Ada\\Documents\\invoice.docx"
+    }
+  },
+  "export.docx.response": {
+    "jsonrpc": "2.0",
+    "id": 12,
+    "result": {
+      "files": ["C:\\Users\\Ada\\Documents\\invoice.docx"],
+      "warnings": ["formula p1-b4 kept as LaTeX text (unsupported construct)"]
+    }
+  },
+
+  "export.markdown.request": {
+    "jsonrpc": "2.0",
+    "id": 13,
+    "method": "export.markdown",
+    "params": {
+      "document": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\document.json",
+      "outputPath": "C:\\Users\\Ada\\Documents\\invoice.md",
+      "assetsDir": "C:\\Users\\Ada\\Documents\\invoice_assets"
+    }
+  },
+  "export.markdown.response": {
+    "jsonrpc": "2.0",
+    "id": 13,
+    "result": {
+      "files": [
+        "C:\\Users\\Ada\\Documents\\invoice.md",
+        "C:\\Users\\Ada\\Documents\\invoice_assets\\p1-b2.png"
+      ],
+      "warnings": []
+    }
+  },
+
+  "calibrate.run.request": {
+    "jsonrpc": "2.0",
+    "id": 14,
+    "method": "calibrate.run",
+    "params": {
+      "engineId": "paddleocr-vl",
+      "modelId": "accurate-paddleocr-vl-1.6",
+      "samplePath": "C:\\Program Files\\OpenDoc Reader\\resources\\calibration-page.png",
+      "runs": 2
+    }
+  },
+  "calibrate.run.response": {
+    "jsonrpc": "2.0",
+    "id": 14,
+    "result": { "secondsPerPage": 4.8, "warmupSeconds": 9.6, "runSeconds": [4.9, 4.7] }
+  },
+
+  "error.invalid_params": {
+    "jsonrpc": "2.0",
+    "id": 15,
+    "error": {
+      "code": -32602,
+      "message": "Invalid params",
+      "data": { "reason": "missing_param", "field": "pageIndex" }
+    }
+  },
+  "error.model_not_ready": {
+    "jsonrpc": "2.0",
+    "id": 16,
+    "error": {
+      "code": -32001,
+      "message": "Model not ready",
+      "data": { "reason": "files_missing", "detail": "G:\\OpenDoc Reader\\models\\accurate-paddleocr-vl-1.6\\PP-DocLayoutV3\\inference.json" }
+    }
+  },
+  "error.llama_server_unreachable": {
+    "jsonrpc": "2.0",
+    "id": 17,
+    "error": {
+      "code": -32002,
+      "message": "llama-server unreachable",
+      "data": { "reason": "connection_refused", "detail": "http://127.0.0.1:52871" }
+    }
+  },
+  "error.out_of_memory": {
+    "jsonrpc": "2.0",
+    "id": 18,
+    "error": { "code": -32003, "message": "Out of memory", "data": { "reason": "gpu" } }
+  },
+  "error.bad_input": {
+    "jsonrpc": "2.0",
+    "id": 19,
+    "error": {
+      "code": -32004,
+      "message": "Bad input",
+      "data": { "reason": "password_protected" }
+    }
+  },
+  "error.cancelled": {
+    "jsonrpc": "2.0",
+    "id": 8,
+    "error": { "code": -32005, "message": "Cancelled", "data": { "reason": "cancelled" } }
+  },
+  "error.not_configured": {
+    "jsonrpc": "2.0",
+    "id": 20,
+    "error": {
+      "code": -32006,
+      "message": "Engine not configured",
+      "data": { "reason": "llama_server_url" }
+    }
+  },
+  "error.busy": {
+    "jsonrpc": "2.0",
+    "id": 21,
+    "error": { "code": -32007, "message": "Engine busy", "data": { "reason": "call_in_flight" } }
+  },
+  "error.recognition_failed": {
+    "jsonrpc": "2.0",
+    "id": 22,
+    "error": {
+      "code": -32008,
+      "message": "Recognition failed",
+      "data": { "reason": "max_tokens" }
+    }
+  },
+  "error.io_error": {
+    "jsonrpc": "2.0",
+    "id": 23,
+    "error": { "code": -32009, "message": "I/O error", "data": { "reason": "already_exists" } }
+  },
+
+  "tauri.AppError": {
+    "code": "badInput",
+    "message": "The file cannot be converted.",
+    "reason": "password_protected",
+    "detail": null
+  },
+
+  "tauri.HardwareInfo": {
+    "os": "windows",
+    "gpus": [{ "vendor": "nvidia", "name": "NVIDIA GeForce RTX 3060", "vramMB": 12288 }],
+    "backend": "cuda",
+    "ramMB": 32768,
+    "unifiedMemoryMB": null,
+    "cpuName": "AMD Ryzen 7 5800X 8-Core Processor",
+    "cpuCores": 16,
+    "modelsDir": "G:\\OpenDoc Reader\\models",
+    "freeDiskMB": 412000,
+    "cudaDriverVersion": "576.80"
+  },
+
+  "tauri.Recommendation": {
+    "modelId": "max-deepseek-ocr-1-q8",
+    "reason": "Your NVIDIA GeForce RTX 3060 (12 GB) runs Max on the GPU.",
+    "fits": [
+      {
+        "modelId": "fast-ppocrv6-tiny",
+        "badge": "runsWell",
+        "speed": { "secondsPerPage": 8.4, "basis": "estimated" }
+      },
+      {
+        "modelId": "accurate-paddleocr-vl-1.6",
+        "badge": "runsWell",
+        "speed": { "secondsPerPage": 4.8, "basis": "measured" }
+      },
+      {
+        "modelId": "max-deepseek-ocr-1-q8",
+        "badge": "runsWell",
+        "speed": { "secondsPerPage": 5.2, "basis": "measured" }
+      },
+      { "modelId": "experimental-deepseek-ocr-2-q8", "badge": "hidden", "speed": null }
+    ],
+    "runtimeDownloadBytes": 1500000000
+  },
+
+  "tauri.ModelInfo": {
+    "id": "accurate-paddleocr-vl-1.6",
+    "tier": "accurate",
+    "displayName": "PaddleOCR-VL 1.6",
+    "engineId": "paddleocr-vl",
+    "experimental": false,
+    "license": "Apache-2.0",
+    "downloadSizeBytes": 1949544560,
+    "installedSizeBytes": null,
+    "state": "notInstalled",
+    "sourceUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6-GGUF"
+  },
+
+  "tauri.SetupStatus": {
+    "phase": "downloading",
+    "modelsDir": "G:\\OpenDoc Reader\\models",
+    "components": [
+      {
+        "id": "llama-server",
+        "kind": "runtime",
+        "name": "llama-server (CUDA)",
+        "state": "done",
+        "bytesDone": 578117583,
+        "bytesTotal": 578117583,
+        "bytesPerSecond": null,
+        "secondsLeft": null
+      },
+      {
+        "id": "engine",
+        "kind": "engine",
+        "name": "Document engine",
+        "state": "downloading",
+        "bytesDone": 0,
+        "bytesTotal": 0,
+        "bytesPerSecond": null,
+        "secondsLeft": null
+      },
+      {
+        "id": "accurate-paddleocr-vl-1.6",
+        "kind": "model",
+        "name": "PaddleOCR-VL 1.6",
+        "state": "downloading",
+        "bytesDone": 912000000,
+        "bytesTotal": 1949544560,
+        "bytesPerSecond": 18500000.5,
+        "secondsLeft": 56.4
+      }
+    ],
+    "calibration": null,
+    "error": null
+  },
+
+  "tauri.Settings": {
+    "defaultFormats": ["docx", "markdown"],
+    "defaultModelId": null,
+    "saveTo": { "kind": "original" },
+    "theme": "system",
+    "checkForUpdates": true,
+    "modelsDir": "G:\\OpenDoc Reader\\models",
+    "experimentalVulkan": false
+  },
+
+  "tauri.SettingsPatch": {
+    "theme": "dark",
+    "saveTo": { "kind": "folder", "path": "D:\\Converted" }
+  },
+
+  "tauri.ConvertOptions": {
+    "formats": ["docx", "markdown"],
+    "modelId": "accurate-paddleocr-vl-1.6",
+    "saveTo": { "kind": "original" }
+  },
+
+  "tauri.QueueItem": {
+    "fileId": "f-9c41",
+    "path": "C:\\Users\\Ada\\Documents\\invoice.pdf",
+    "name": "invoice.pdf",
+    "kind": "pdf",
+    "sizeBytes": 1843200,
+    "pageCount": 12,
+    "hasTextLayer": false,
+    "previewPath": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\pages\\page-0000.png",
+    "status": "converting",
+    "attention": null,
+    "textMode": "ocr",
+    "modelId": "accurate-paddleocr-vl-1.6",
+    "formats": ["docx", "markdown"],
+    "pagesDone": 3,
+    "currentPage": 3,
+    "stage": "recognize",
+    "secondsLeft": 43.5,
+    "durationMs": null,
+    "outputs": [],
+    "error": null
+  },
+
+  "tauri.PageStatus": {
+    "index": 3,
+    "state": "converting",
+    "imagePath": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\pages\\page-0003.png",
+    "error": null
+  },
+
+  "tauri.OutputFile": {
+    "format": "markdown",
+    "path": "C:\\Users\\Ada\\Documents\\invoice.md",
+    "assetsDir": "C:\\Users\\Ada\\Documents\\invoice_assets"
+  },
+
+  "tauri.ReviewPage": {
+    "fileId": "f-9c41",
+    "pageIndex": 3,
+    "pageCount": 12,
+    "imagePath": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\pages\\page-0003.png",
+    "page": {
+      "index": 3,
+      "width": 1654,
+      "height": 2339,
+      "sourceImage": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\pages\\page-0003.png",
+      "blocks": [
+        {
+          "id": "p3-b0",
+          "type": "heading",
+          "bbox": [165.4, 140.2, 1488.6, 233.9],
+          "order": 0,
+          "level": 1,
+          "text": "3. Results"
+        },
+        {
+          "id": "p3-b1",
+          "type": "paragraph",
+          "bbox": [165.4, 280.0, 1488.6, 520.0],
+          "order": 1,
+          "text": "The energy of a body at rest is given by"
+        },
+        {
+          "id": "p3-b2",
+          "type": "formula",
+          "bbox": [496.2, 560.0, 1157.8, 640.0],
+          "order": 2,
+          "latex": "E = mc^2",
+          "number": "(1)"
+        }
+      ]
+    },
+    "engine": { "id": "paddleocr-vl", "model": "accurate-paddleocr-vl-1.6", "version": "0.1.0" }
+  },
+
+  "tauri.event.queue-progress": {
+    "item": {
+      "fileId": "f-9c41",
+      "path": "C:\\Users\\Ada\\Documents\\invoice.pdf",
+      "name": "invoice.pdf",
+      "kind": "pdf",
+      "sizeBytes": 1843200,
+      "pageCount": 12,
+      "hasTextLayer": false,
+      "previewPath": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\pages\\page-0000.png",
+      "status": "converting",
+      "attention": null,
+      "textMode": "ocr",
+      "modelId": "accurate-paddleocr-vl-1.6",
+      "formats": ["docx", "markdown"],
+      "pagesDone": 4,
+      "currentPage": 4,
+      "stage": "render",
+      "secondsLeft": 38.7,
+      "durationMs": null,
+      "outputs": [],
+      "error": null
+    },
+    "page": {
+      "index": 3,
+      "state": "done",
+      "imagePath": "C:\\Users\\Ada\\AppData\\Roaming\\OpenDoc Reader\\work\\f-9c41\\pages\\page-0003.png",
+      "error": null
+    }
+  },
+
+  "tauri.event.setup-progress": {
+    "phase": "calibrating",
+    "modelsDir": "G:\\OpenDoc Reader\\models",
+    "components": [
+      {
+        "id": "accurate-paddleocr-vl-1.6",
+        "kind": "model",
+        "name": "PaddleOCR-VL 1.6",
+        "state": "done",
+        "bytesDone": 1949544560,
+        "bytesTotal": 1949544560,
+        "bytesPerSecond": null,
+        "secondsLeft": null
+      }
+    ],
+    "calibration": null,
+    "error": null
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/error.schema.json",
+  "title": "JSON-RPC error object used by this protocol",
+  "$defs": {
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            -32700,
+            -32600,
+            -32601,
+            -32602,
+            -32603,
+            -32001,
+            -32002,
+            -32003,
+            -32004,
+            -32005,
+            -32006,
+            -32007,
+            -32008,
+            -32009
+          ],
+          "description": "See the error table in docs/protocol.md."
+        },
+        "message": {
+          "type": "string",
+          "description": "Short English text for the log. Fixed per code, never a raw exception message."
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "reason": {
+              "type": "string",
+              "description": "Machine-readable slug that narrows the code, for example `password_protected`."
+            },
+            "detail": {
+              "type": "string",
+              "description": "Extra text for the log (an exception message, a path). Never shown to the user."
+            },
+            "field": {
+              "type": "string",
+              "description": "INVALID_PARAMS only: the offending parameter."
+            }
+          },
+          "required": [
+            "reason"
+          ]
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  }
+}

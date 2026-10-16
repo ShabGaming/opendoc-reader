@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/convert.cancel.schema.json",
+  "title": "convert.cancel",
+  "description": "Asks the engine to stop the in-flight call with the given id. It is handled while that call is still running, so the engine reads stdin on a separate thread. Cancellation takes effect between stages and between llama-server requests; the cancelled call then answers with CANCELLED. This method itself answers at once.",
+  "$defs": {
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requestId": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        }
+      },
+      "required": [
+        "requestId"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cancelled": {
+          "type": "boolean",
+          "description": "False when no call with that id was in flight (it may have just finished). Not an error."
+        }
+      },
+      "required": [
+        "cancelled"
+      ]
+    }
+  }
+}

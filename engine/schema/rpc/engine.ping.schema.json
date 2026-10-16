@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/engine.ping.schema.json",
+  "title": "engine.ping",
+  "$defs": {
+    "params": {
+      "description": "No parameters. The `params` member is omitted.",
+      "type": "null"
+    },
+    "result": {
+      "const": "pong"
+    }
+  }
+}

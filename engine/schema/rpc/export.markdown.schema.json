@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/export.markdown.schema.json",
+  "title": "export.markdown",
+  "description": "Writes a Markdown file and copies figure crops into `assetsDir`. Image links in the Markdown are relative: `<basename of assetsDir>/<file>`. `assetsDir` is created only when the document has figures. Never overwrites: fails with IO_ERROR (reason `already_exists`) when `outputPath` or a target asset file exists.",
+  "$defs": {
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "document": {
+          "description": "The Document IR: an absolute path to a Document JSON file (normal use), or the Document object itself (tests and tiny documents).",
+          "oneOf": [
+            {
+              "$ref": "common.schema.json#/$defs/AbsolutePath"
+            },
+            {
+              "$ref": "../ir.schema.json"
+            }
+          ]
+        },
+        "outputPath": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath",
+          "description": "The .md file to write."
+        },
+        "assetsDir": {
+          "$ref": "common.schema.json#/$defs/AbsolutePath",
+          "description": "Folder for the figure files, for example `invoice_assets` next to `invoice.md`."
+        }
+      },
+      "required": [
+        "document",
+        "outputPath",
+        "assetsDir"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/AbsolutePath"
+          },
+          "description": "Every file written."
+        },
+        "warnings": {
+          "$ref": "common.schema.json#/$defs/Warnings"
+        }
+      },
+      "required": [
+        "files",
+        "warnings"
+      ]
+    }
+  }
+}

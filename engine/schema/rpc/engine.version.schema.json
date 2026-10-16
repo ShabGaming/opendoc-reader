@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ShabGaming/opendoc-reader/blob/main/engine/schema/rpc/engine.version.schema.json",
+  "title": "engine.version",
+  "$defs": {
+    "params": {
+      "description": "No parameters. The `params` member is omitted.",
+      "type": "null"
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "engine": {
+          "type": "string",
+          "description": "Engine package version."
+        },
+        "irSchema": {
+          "const": "1",
+          "description": "IR schema version the engine writes and reads."
+        },
+        "protocol": {
+          "const": "1",
+          "description": "Version of this RPC protocol. Rust refuses to use an engine that reports another value."
+        }
+      },
+      "required": [
+        "engine",
+        "irSchema",
+        "protocol"
+      ]
+    }
+  }
+}
