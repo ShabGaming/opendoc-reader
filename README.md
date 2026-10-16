@@ -2,7 +2,7 @@
 
 OpenDoc Reader is a free, open source desktop app that turns scanned documents and photos of documents into editable Markdown and Word files.
 
-> **Status: pre-alpha.** Planning is complete and work on v0.1 has started. There is nothing to download yet. The first release will be v0.1.
+> **Status: v0.1 in testing.** Every feature planned for v0.1 is built and the app is being tested. There is nothing to download yet; the first release will be v0.1.0. It has been tried on one Windows PC so far. macOS has not been tested.
 
 ## What it does
 
@@ -10,7 +10,7 @@ You give OpenDoc Reader a PDF or an image of a page. It reads the text, finds th
 
 Everything runs on your computer. There is no account and no cloud service, and your documents are never uploaded. After the one-time setup, the app works offline.
 
-Version 0.1 will include:
+Version 0.1 includes:
 
 - First-run setup that checks your computer and recommends a model.
 - Three model tiers (Fast, Accurate, Max) that you can install and remove.
@@ -21,6 +21,18 @@ Version 0.1 will include:
 - A side-by-side review screen (original page on the left, result on the right). In v0.1 it is read-only.
 
 The goal is to preserve the document's structure: headings, paragraphs, reading order, lists, tables (including merged cells), formulas, figures and page breaks. Fonts and exact positions are approximated so that the output stays easy to edit. A searchable PDF export, planned for v0.2, covers cases where you need the exact look of the original.
+
+## What works now
+
+- First-run setup: hardware check, model suggestion, and resumable, checksum-verified downloads.
+- Conversion with all three tiers, for PDFs and images, with a batch queue that pauses, cancels and resumes after a restart.
+- A choice between using the text already in a PDF and running OCR.
+- Review of each page next to the original, with block outlines.
+- Export to Markdown (with a folder for pictures) and to Word (with tables, merged cells and equations).
+- Settings for models, save location, privacy and logs.
+- Automated tests for the Rust core, the interface and the engine. The Fast tier is also checked against a set of public-domain pages in CI ([golden tests](engine/tests/golden/SOURCES.md)).
+
+Not done yet: the end-to-end smoke test, a pass on macOS, and the release dry run. The [v0.1 plan](docs/plans/v0.1.md) tracks them.
 
 ## How it works
 
@@ -56,6 +68,8 @@ Windows on ARM and Linux are on the roadmap but are not supported at launch.
 
 Downloads will appear on the [Releases page](https://github.com/ShabGaming/opendoc-reader/releases). The installer will contain only the app itself (roughly 20 to 40 MB). Models and runtime components are downloaded during setup.
 
+The [user guide](docs/user-guide.md) walks through setup, converting, review and troubleshooting.
+
 ### Opening an unsigned build
 
 Early releases will not be code signed, so your operating system will warn you the first time you open the app. Signed builds are planned before 1.0.
@@ -74,6 +88,10 @@ Network access is limited to:
 - From v0.2, a check of GitHub Releases once a month to see whether a newer version exists. It is on by default and can be turned off in Settings. The request carries no personal data. If a newer version exists, the app opens the release page. It does not update itself.
 
 On networks where downloads are blocked, Settings will let you import a model from a folder. The files are checked against known checksums.
+
+## Build from source
+
+You need Rust, Node.js with pnpm, and uv. [CONTRIBUTING.md](CONTRIBUTING.md) lists the exact versions, the commands to run the app and its tests, and how to run the checks that CI runs.
 
 ## Roadmap
 
@@ -102,4 +120,4 @@ Model weights are not part of this repository. They are downloaded separately an
 
 ## License
 
-The OpenDoc Reader source code is released under the MIT License. See [LICENSE](LICENSE).
+The OpenDoc Reader source code is released under the MIT License. See [LICENSE](LICENSE). The licenses of the libraries and models it uses are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
