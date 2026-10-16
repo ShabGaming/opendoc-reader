@@ -41,9 +41,23 @@
   background: var(--secondary-pressed);
 }
 
+.danger {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--err);
+}
+
+.danger:hover:not(:disabled) {
+  background: var(--secondary-hover);
+}
+
 .tertiary {
   padding: 0 8px;
   color: var(--accent);
+}
+
+.ghost {
+  padding: 0 8px;
 }
 
 .tertiary:hover:not(:disabled),
@@ -60,5 +74,16 @@
 
 .small {
   height: 24px;
+  padding: 0 8px;
   font-size: 12px;
+}
+
+.button[aria-pressed="true"] {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.button[aria-pressed="true"]:hover:not(:disabled) {
+  background: var(--accent-soft);
 }

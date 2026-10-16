@@ -1,0 +1,25 @@
+.glyph {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.ok {
+  color: var(--ok);
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.warn {
+  color: var(--warn);
+}
+
+.err {
+  color: var(--err);
+}
+
+.muted {
+  color: var(--text-2);
+}

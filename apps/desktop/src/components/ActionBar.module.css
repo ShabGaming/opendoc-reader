@@ -12,12 +12,27 @@
 .group {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: 6px;
 }
 
 .label {
   font-size: 12px;
   color: var(--text-2);
+  white-space: nowrap;
+}
+
+/* At the narrowest window the bar must still fit on one row. */
+.bar .compact {
+  min-width: 0;
+}
+
+.bar > button:not(:last-child) {
+  padding: 0 9px;
+  gap: 5px;
+}
+
+.bar > button:last-child {
+  padding: 0 14px;
 }
 
 .check {

@@ -1,0 +1,23 @@
+.bar {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.bar > i {
+  display: block;
+  height: 100%;
+  width: var(--p, 0%);
+  background: var(--accent);
+}
+
+.complete > i {
+  background: var(--ok);
+}
+
+/* A total that is not known yet: a short fixed segment, no animation. */
+.unknown > i {
+  width: 30%;
+  opacity: 0.6;
+}

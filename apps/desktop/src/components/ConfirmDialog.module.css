@@ -1,0 +1,37 @@
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: var(--scrim);
+}
+
+.dialog {
+  position: fixed;
+  z-index: 50;
+  top: 30%;
+  left: 50%;
+  width: 400px;
+  max-width: calc(100vw - 32px);
+  padding: 20px;
+  transform: translateX(-50%);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-panel);
+  box-shadow: var(--shadow);
+}
+
+.title {
+  font-weight: 600;
+}
+
+.body {
+  margin: var(--space-2) 0 0;
+  color: var(--text-2);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: 20px;
+}

@@ -1,19 +1,17 @@
-.shell {
-  display: grid;
-  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+.app {
   height: 100%;
+  background: var(--bg);
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  background: var(--surface);
+.message {
+  margin: 0;
+  padding: var(--space-6);
+  color: var(--text-2);
 }
 
-.content {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  padding: var(--space-5);
+.failedTitle {
+  margin-bottom: var(--space-2);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
 }

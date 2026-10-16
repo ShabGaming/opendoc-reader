@@ -1,0 +1,42 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  height: 18px;
+  padding: 0 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  color: var(--text-2);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.neutral {
+  background: transparent;
+}
+
+.accent {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--accent);
+}
+
+.ok {
+  background: var(--ok-soft);
+  border-color: transparent;
+  color: var(--ok);
+}
+
+.warn {
+  background: var(--warn-soft);
+  border-color: transparent;
+  color: var(--warn);
+}
+
+.err {
+  background: var(--err-soft);
+  border-color: transparent;
+  color: var(--err);
+}
