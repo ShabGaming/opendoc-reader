@@ -8,6 +8,7 @@ CommonMark parser. Anything it does not recognise stays literal text.
 from __future__ import annotations
 
 import re
+import string
 from dataclasses import dataclass
 from typing import Literal
 
@@ -15,7 +16,7 @@ SegmentKind = Literal["text", "math", "code", "link"]
 
 _LINK = re.compile(r"\[([^\]\n]+)\]\(([^)\s]+)\)")
 _LATEX_HINT = re.compile(r"[\\^_{}]")
-_ESCAPABLE = set("*_$`[]\\")
+_ESCAPABLE = set(string.punctuation)  # CommonMark: a backslash makes any of these literal
 
 
 @dataclass

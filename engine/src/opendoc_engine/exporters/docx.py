@@ -40,6 +40,7 @@ from docx.table import Table as DocxTable
 from docx.table import _Cell
 from docx.text.paragraph import Paragraph
 
+from opendoc_engine.blocktext import export_text
 from opendoc_engine.exporters.inline import Segment, parse_inline, plain_text
 from opendoc_engine.exporters.omml import (
     UnsupportedMath,
@@ -153,7 +154,7 @@ class _Builder:
         for page in self.ir.pages:
             for block in page_blocks(page):
                 if block.type is BlockType.HEADING and block.text:
-                    title = plain_text(block.text)
+                    title = plain_text(export_text(block.text, heading=True))
                     break
             if title:
                 break
@@ -214,8 +215,11 @@ class _Builder:
             return
         if sink.is_cell and style == "Normal":
             style = "Table Text"
+        text = export_text(block.text, heading=block.type is BlockType.HEADING)
+        if not text:
+            return
         para = sink.paragraph(style)
-        self.inline(para, block.text, block.id)
+        self.inline(para, text, block.id)
 
     # --- inline content -----------------------------------------------------------------
 
@@ -277,7 +281,9 @@ class _Builder:
             num.get_or_add_numId().val = decimal_num if item.ordered else self._bullet_num
             if sink.is_cell:
                 para.paragraph_format.space_after = Pt(2)
-            self.inline(para, item.text, block.id)
+            self.inline(
+                para, export_text(item.text, item="ordered" if item.ordered else "bullet"), block.id
+            )
             self._list_items(sink, block, item.children, depth + 1, decimal_num)
 
     def _new_decimal_num(self) -> int:
