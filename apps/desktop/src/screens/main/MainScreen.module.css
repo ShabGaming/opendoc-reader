@@ -1,0 +1,56 @@
+.shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  height: 100%;
+}
+
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: var(--surface);
+}
+
+.content {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.hint {
+  margin: var(--space-5) var(--space-6);
+  color: var(--text-2);
+}
+
+.overlay {
+  position: absolute;
+  inset: var(--space-5);
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--accent);
+  border-radius: var(--r-panel);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: none;
+  padding: 4px var(--space-2) 4px var(--space-4);
+  border-bottom: 1px solid var(--border);
+  border-left: 3px solid var(--err);
+  background: var(--err-soft);
+  color: var(--err);
+  font-weight: 500;
+}
+
+.bannerText {
+  flex: 1;
+}

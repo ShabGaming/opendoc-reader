@@ -1,4 +1,5 @@
 from opendoc_engine.exporters import to_markdown
+from opendoc_engine.exporters.markdown import figure_files
 from opendoc_engine.ir import (
     Block,
     BlockType,
@@ -128,3 +129,47 @@ def test_blocks_render_in_order_field_order():
 
 def test_empty_document_is_empty_string():
     assert to_markdown(document()) == ""
+
+
+def test_assets_folder_name_and_links_are_relative_and_encoded():
+    doc = document([Block("f", BlockType.FIGURE, BOX, 0, figure_crop="C:\\w\\crops\\p0-b1.png")])
+    assert to_markdown(doc, assets_dir="my doc (2)_assets") == (
+        "![](my%20doc%20%282%29_assets/p0-b1.png)\n"
+    )
+
+
+def test_figures_sharing_a_file_name_get_distinct_names():
+    doc = document(
+        ordered(
+            [
+                Block("a", BlockType.FIGURE, BOX, 0, figure_crop="C:\\one\\fig.png"),
+                Block("b", BlockType.FIGURE, BOX, 0, figure_crop="C:\\two\\fig.png"),
+            ]
+        )
+    )
+    assert figure_files(doc) == {
+        "a": ("fig.png", "C:\\one\\fig.png"),
+        "b": ("fig-2.png", "C:\\two\\fig.png"),
+    }
+    assert to_markdown(doc) == "![](assets/fig.png)\n\n![](assets/fig-2.png)\n"
+
+
+def test_footnotes_stay_at_the_end_of_their_page():
+    note = Block("fn", BlockType.FOOTNOTE, BOX, 0, text="1 note")
+    page1 = ordered([para("a", "first"), note, para("b", "second")])
+    page2 = ordered([para("c", "third")])
+    assert to_markdown(document(page1, page2)) == (
+        "first\n\nsecond\n\n1 note\n\n<!-- page 2 -->\n\nthird\n"
+    )
+
+
+def test_formula_number_becomes_a_tag_unless_the_latex_has_one():
+    numbered = Block("f", BlockType.FORMULA, BOX, 0, latex="a=b", number="(3)")
+    assert to_markdown(document([numbered])) == "$$\na=b \\tag{3}\n$$\n"
+    tagged = Block("g", BlockType.FORMULA, BOX, 0, latex="a=b \\tag{9}", number="3")
+    assert to_markdown(document([tagged])) == "$$\na=b \\tag{9}\n$$\n"
+
+
+def test_inline_math_padding_is_removed():
+    doc = document([para("p", "at $ P_1 $ and $5 and $6")])
+    assert to_markdown(doc) == "at $P_1$ and $5 and $6\n"
