@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "node ../../scripts/fetch-contributors.mjs --ci-only && tsc --noEmit && vite build",
     "lint": "eslint . && prettier --check . && pnpm run check:types",
     "gen:types": "node scripts/gen-types.mjs",
     "check:types": "node scripts/gen-types.mjs --check",

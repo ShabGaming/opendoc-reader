@@ -174,7 +174,7 @@ Open Settings with the gear at the bottom of the queue.
 - Open the logs folder.
 - **Copy diagnostics**, which copies the app version, a short system summary and recent log lines, so you can paste them into a bug report. Nothing is sent anywhere.
 
-**About** shows the version, the link to the source code and the licenses of the app, its dependencies and the models. The full list is in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
+**About** shows the version, the link to the source code and the licenses of the app, its dependencies and the models. The full list is in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md). It also lists the project's contributors with their GitHub avatars, most contributions first; clicking a name opens that person's GitHub page in your browser.
 
 ## Privacy
 
@@ -184,6 +184,8 @@ The app uses the internet only to:
 
 - download models, the recognition runtime and the document engine's packages during setup or when you install a model. Every file is checked against a known checksum. The app uses your system's proxy settings.
 - ask GitHub once a month whether a newer version exists, if you leave **Check for new versions** on. Nothing about you or your files is sent.
+
+The contributor list in About is bundled with the app when it is built. Nothing is fetched to show it, and no avatar is loaded from the internet.
 
 After setup, you can use the app with no connection.
 

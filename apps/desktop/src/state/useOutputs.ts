@@ -29,18 +29,24 @@ export function useOutputs(item: QueueItem | null): OutputsState {
   const outputs = item?.outputs;
   const [status, setStatus] = useState<OutputStatus[] | null>(null);
 
-  const refresh = useCallback(async () => {
-    if (!fileId) return;
-    try {
-      setStatus(await api.checkOutputs(fileId));
-    } catch {
-      setStatus(null);
-    }
-  }, [api, fileId]);
+  const [checks, setChecks] = useState(0);
+  const refresh = useCallback(async () => setChecks((n) => n + 1), []);
 
   useEffect(() => {
-    void refresh();
-  }, [refresh, outputs]);
+    if (!fileId) return;
+    let cancelled = false;
+    api
+      .checkOutputs(fileId)
+      .then((found) => {
+        if (!cancelled) setStatus(found);
+      })
+      .catch(() => {
+        if (!cancelled) setStatus(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [api, fileId, outputs, checks]);
 
   return useMemo(() => {
     const list = outputs ?? [];

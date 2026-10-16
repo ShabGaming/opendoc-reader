@@ -2,6 +2,9 @@ import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
 import { Panel, PanelRow } from "../../components/Panel";
 import { t } from "../../i18n";
 import { useApp } from "../../state/AppContext";
+import contributorStyles from "./Contributors.module.css";
+import { ContributorList } from "./ContributorList";
+import { bundledContributors } from "./contributors";
 import styles from "./Settings.module.css";
 
 const SOURCE_URL = "https://github.com/ShabGaming/opendoc-reader";
@@ -57,6 +60,17 @@ export function AboutSection() {
           <ExternalLink href={LICENSE_URL}>{t("settings.about.viewLicenses")}</ExternalLink>
         </PanelRow>
       </Panel>
+      {bundledContributors.length > 0 && (
+        <>
+          <h2 className={styles.heading}>{t("settings.about.contributors")}</h2>
+          <Panel>
+            <PanelRow description={t("settings.about.contributorsDesc")} />
+            <div className={contributorStyles.wrap}>
+              <ContributorList contributors={bundledContributors} />
+            </div>
+          </Panel>
+        </>
+      )}
     </>
   );
 }
