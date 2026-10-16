@@ -1,0 +1,115 @@
+<|ref|>title<|/ref|><|det|>[[277, 46, 700, 84]]<|/det|>
+# Request for Taxpayer Identification Number and Certification  
+
+<|ref|>text<|/ref|><|det|>[[277, 87, 720, 101]]<|/det|>
+Go to www.irs.gov/FormW9 for instructions and the latest information.  
+
+<|ref|>text<|/ref|><|det|>[[806, 53, 933, 96]]<|/det|>
+Give form to the requester. Do not send to the IRS.  
+
+<|ref|>text<|/ref|><|det|>[[58, 104, 632, 118]]<|/det|>
+Before you begin. For guidance related to the purpose of Form W- 9, see Purpose of Form, below.  
+
+<|ref|>text<|/ref|><|det|>[[84, 120, 937, 146]]<|/det|>
+1 Name of entity/individual. An entry is required. (For a sole proprietor or disregarded entity, enter the owner's name on line 1, and enter the business/disregarded entity's name on line 2. )  
+
+<|ref|>text<|/ref|><|det|>[[86, 166, 446, 179]]<|/det|>
+2 Business name/disregarded entity name, if different from above.  
+
+<|ref|>text<|/ref|><|det|>[[86, 196, 725, 220]]<|/det|>
+3a Check the appropriate box for federal tax classification of the entity/individual whose name is entered on line 1. Check only one of the following seven boxes.  
+
+<|ref|>text<|/ref|><|det|>[[115, 224, 725, 238]]<|/det|>
+Individual/sole proprietor C corporation S corporation Partnership Trust/estate  
+
+<|ref|>text<|/ref|><|det|>[[115, 242, 725, 255]]<|/det|>
+LLC. Enter the tax classification ( \(C = C\) corporation, \(S = S\) corporation, \(P =\) Partnership)  
+
+<|ref|>text<|/ref|><|det|>[[115, 255, 725, 287]]<|/det|>
+Note: Check the "LLC" box above and, in the entry space, enter the appropriate code (C, S, or P) for the tax classification of the LLC, unless it is a disregarded entity. A disregarded entity should instead check the appropriate box for the tax classification of its owner.  
+
+<|ref|>text<|/ref|><|det|>[[115, 289, 250, 301]]<|/det|>
+Other (see instructions)  
+
+<|ref|>text<|/ref|><|det|>[[86, 308, 725, 342]]<|/det|>
+3b If on line 3a you checked "Partnership" or "Trust/estate," or checked "LLC" and entered "P" as its tax classification, and you are providing this form to a partnership, trust, or estate in which you have an ownership interest, check this box if you have any foreign partners, owners, or beneficiaries. See instructions  
+
+<|ref|>text<|/ref|><|det|>[[86, 348, 440, 360]]<|/det|>
+5 Address (number, street, and apt. or suite no.). See instructions.  
+
+<|ref|>text<|/ref|><|det|>[[86, 379, 248, 391]]<|/det|>
+6 City, state, and ZIP code  
+
+<|ref|>text<|/ref|><|det|>[[86, 409, 312, 421]]<|/det|>
+7 List account number(s) here (optional)  
+
+<|ref|>text<|/ref|><|det|>[[736, 198, 933, 231]]<|/det|>
+4 Exemptions (codes apply only to certain entities, not individuals; see instructions on page 3):  
+
+<|ref|>text<|/ref|><|det|>[[736, 241, 933, 253]]<|/det|>
+Exempt payee code (if any)  
+
+<|ref|>text<|/ref|><|det|>[[736, 263, 937, 298]]<|/det|>
+Exemption from Foreign Account Tax Compliance Act (FATCA) reporting code (if any)  
+
+<|ref|>text<|/ref|><|det|>[[750, 315, 920, 338]]<|/det|>
+(Applies to accounts maintained outside the United States.)  
+
+<|ref|>sub_title<|/ref|><|det|>[[62, 437, 428, 454]]<|/det|>
+## Part I Taxpayer Identification Number (TIN)  
+
+<|ref|>text<|/ref|><|det|>[[58, 457, 657, 518]]<|/det|>
+Enter your TIN in the appropriate box. The TIN provided must match the name given on line 1 to avoid backup withholding. For individuals, this is generally your social security number (SSN). However, for a resident alien, sole proprietor, or disregarded entity, see the instructions for Part I, later. For other entities, it is your employer identification number (EIN). If you do not have a number, see How to get a TIN, later.  
+
+<|ref|>text<|/ref|><|det|>[[58, 525, 657, 551]]<|/det|>
+Note: If the account is in more than one name, see the instructions for line 1. See also What Name and Number To Give the Requester for guidelines on whose number to enter.  
+
+<|ref|>sub_title<|/ref|><|det|>[[62, 558, 237, 573]]<|/det|>
+## Part II Certification  
+
+<|ref|>text<|/ref|><|det|>[[58, 576, 287, 589]]<|/det|>
+Under penalties of perjury, I certify that:  
+
+<|ref|>text<|/ref|><|det|>[[56, 590, 937, 642]]<|/det|>
+1. The number shown on this form is my correct taxpayer identification number (or I am waiting for a number to be issued to me); and 
+2. I am not subject to backup withholding because (a) I am exempt from backup withholding, or (b) I have not been notified by the Internal Revenue Service (IRS) that I am subject to backup withholding as a result of a failure to report all interest or dividends, or (c) the IRS has notified me that I am no longer subject to backup withholding; and  
+
+<|ref|>text<|/ref|><|det|>[[58, 644, 424, 657]]<|/det|>
+3. I am a U.S. citizen or other U.S. person (defined below); and  
+
+<|ref|>text<|/ref|><|det|>[[58, 659, 711, 673]]<|/det|>
+4. The FATCA code(s) entered on this form (if any) indicating that I am exempt from FATCA reporting is correct.  
+
+<|ref|>text<|/ref|><|det|>[[56, 675, 940, 727]]<|/det|>
+Certification instructions. You must cross out item 2 above if you have been notified by the IRS that you are currently subject to backup withholding because you have failed to report all interest and dividends on your tax return. For real estate transactions, item 2 does not apply. For mortgage interest paid, acquisition or abandonment of secured property, cancellation of debt, contributions to an individual retirement arrangement (IRA), and, generally, payments other than interest and dividends, you are not required to sign the certification, but you must provide your correct TIN. See the instructions for Part II, later.  
+
+<|ref|>table<|/ref|><|det|>[[56, 727, 195, 754]]<|/det|>
+
+<table><tr><td>Sign Here</td><td>Signature of U.S. person</td></tr></table>  
+
+<|ref|>sub_title<|/ref|><|det|>[[58, 765, 280, 784]]<|/det|>
+## General Instructions  
+
+<|ref|>text<|/ref|><|det|>[[58, 788, 466, 812]]<|/det|>
+Section references are to the Internal Revenue Code unless otherwise noted.  
+
+<|ref|>text<|/ref|><|det|>[[58, 815, 466, 850]]<|/det|>
+Future developments. For the latest information about developments related to Form W- 9 and its instructions, such as legislation enacted after they were published, go to www.irs.gov/FormW9.  
+
+<|ref|>sub_title<|/ref|><|det|>[[58, 856, 170, 872]]<|/det|>
+## What's New  
+
+<|ref|>text<|/ref|><|det|>[[58, 876, 478, 923]]<|/det|>
+Line 3a has been modified to clarify how a disregarded entity completes this line. An LLC that is a disregarded entity should check the appropriate box for the tax classification of its owner. Otherwise, it should check the "LLC" box and enter its appropriate tax classification.  
+
+<|ref|>sub_title<|/ref|><|det|>[[629, 740, 655, 750]]<|/det|>
+## Date  
+
+<|ref|>text<|/ref|><|det|>[[512, 764, 939, 882]]<|/det|>
+New line 3b has been added to this form. A flow- through entity is required to complete this line to indicate that it has direct or indirect foreign partners, owners, or beneficiaries when it provides the Form W- 9 to another flow- through entity in which it has an ownership interest. This change is intended to provide a flow- through entity with information regarding the status of its indirect foreign partners, owners, or beneficiaries, so that it can satisfy any applicable reporting requirements. For example, a partnership that has any indirect foreign partners may be required to complete Schedules K- 2 and K- 3. See the Partnership Instructions for Schedules K- 2 and K- 3 (Form 1065).  
+
+<|ref|>sub_title<|/ref|><|det|>[[512, 887, 666, 903]]<|/det|>
+## Purpose of Form  
+
+<|ref|>text<|/ref|><|det|>[[512, 907, 919, 931]]<|/det|>
+An individual or entity (Form W- 9 requester) who is required to file an information return with the IRS is giving you this form because they<｜end▁of▁sentence｜>

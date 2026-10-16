@@ -22,6 +22,7 @@ from dataclasses import dataclass, field
 import pypdfium2 as pdfium
 import pypdfium2.raw as pdfium_raw
 
+from opendoc_engine.blocktext import escape_inline
 from opendoc_engine.errors import bad_input
 from opendoc_engine.ir import BBox, Block, BlockType, Line, ListItem
 
@@ -336,12 +337,12 @@ def _make_block(group: _Group, body: float, mapper: _Mapper, order: int) -> Bloc
     box = mapper.bbox(*_union(group.lines))
     if group.kind == "list":
         items = [
-            ListItem(text=_join(item, strip_marker=True), ordered=group.ordered)
+            ListItem(text=escape_inline(_join(item, strip_marker=True)), ordered=group.ordered)
             for item in group.items
         ]
         return Block(block_id, BlockType.LIST, box, order, items=items)
 
-    text = _join(group.lines)
+    text = escape_inline(_join(group.lines))  # PDF text is literal, IR text is Markdown
     if not text:
         return None
     lines = [Line(mapper.bbox(*_union([line])), line.text) for line in group.lines]
