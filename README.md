@@ -1,123 +1,106 @@
-# OpenDoc Reader
+<h1 align="center">
+  <img src="apps/desktop/src-tauri/icons/128x128.png" width="48" height="48" align="top" alt="OpenDoc Reader icon">
+  &nbsp;OpenDoc Reader
+</h1>
 
-OpenDoc Reader is a free, open source desktop app that turns scanned documents and photos of documents into editable Markdown and Word files.
+<p align="center">
+  Turn scanned documents and photos of pages into editable Word and Markdown files, using state-of-the-art OCR models that run entirely on your own computer.
+</p>
 
-> **Status: v0.1 in testing.** Every feature planned for v0.1 is built and the app is being tested. There is nothing to download yet; the first release will be v0.1.0. It has been tried on one Windows PC so far. macOS has not been tested.
+<p align="center">
+  <a href="https://github.com/ShabGaming/opendoc-reader/releases"><img src="https://img.shields.io/badge/version-0.1.0-1f6b85?style=flat-square" alt="Version 0.1.0"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT license"></a>
+  <a href="#download"><img src="https://img.shields.io/badge/platform-Windows_x64_%7C_macOS_Apple_Silicon-555?style=flat-square" alt="Windows x64 and macOS on Apple Silicon"></a>
+  <a href="https://tauri.app"><img src="https://img.shields.io/badge/built_with-Tauri_%2B_Rust-dea584?style=flat-square&amp;logo=tauri&amp;logoColor=white" alt="Built with Tauri and Rust"></a>
+  <a href="#models"><img src="https://img.shields.io/badge/OCR-DeepSeek--OCR_%7C_PaddleOCR-6bb4cc?style=flat-square" alt="DeepSeek-OCR and PaddleOCR"></a>
+  <a href="#privacy"><img src="https://img.shields.io/badge/runs-100%25_offline-2f7a4b?style=flat-square" alt="Runs offline"></a>
+</p>
 
-## What it does
+<p align="center">
+  <a href="https://github.com/ShabGaming/opendoc-reader/releases">Download</a> ·
+  <a href="#features">Features</a> ·
+  <a href="docs/user-guide.md">User guide</a> ·
+  <a href="#build-from-source">Build from source</a> ·
+  <a href="https://github.com/ShabGaming/opendoc-reader/issues">Report an issue</a>
+</p>
 
-You give OpenDoc Reader a PDF or an image of a page. It reads the text, finds the headings, lists, tables, formulas and pictures, and saves the result as a file you can edit.
+![OpenDoc Reader reviewing a scanned IRS W-9 form: the original page with detected blocks on the left, the recognized text on the right](assets/screenshot.jpg)
 
-Everything runs on your computer. There is no account and no cloud service, and your documents are never uploaded. After the one-time setup, the app works offline.
+> **Status: v0.1, first release.** Tested on Windows with an NVIDIA GPU and on CPU. macOS builds are new; please [report anything that breaks](https://github.com/ShabGaming/opendoc-reader/issues).
 
-Version 0.1 includes:
+## Features
 
-- First-run setup that checks your computer and recommends a model.
-- Three model tiers (Fast, Accurate, Max) that you can install and remove.
-- Input from PDF, PNG, JPG, TIFF (multi-page), BMP, WebP and HEIC files.
-- Automatic page rotation and deskewing.
-- A batch queue that handles many files or folders in the background, with progress, pause, cancel, and resume after a restart.
-- Export to Markdown and Word (.docx).
-- A side-by-side review screen (original page on the left, result on the right). In v0.1 it is read-only.
-
-The goal is to preserve the document's structure: headings, paragraphs, reading order, lists, tables (including merged cells), formulas, figures and page breaks. Fonts and exact positions are approximated so that the output stays easy to edit. A searchable PDF export, planned for v0.2, covers cases where you need the exact look of the original.
-
-## What works now
-
-- First-run setup: hardware check, model suggestion, and resumable, checksum-verified downloads.
-- Conversion with all three tiers, for PDFs and images, with a batch queue that pauses, cancels and resumes after a restart.
-- A choice between using the text already in a PDF and running OCR.
-- Review of each page next to the original, with block outlines.
-- Export to Markdown (with a folder for pictures) and to Word (with tables, merged cells and equations).
-- Settings for models, save location, privacy and logs.
-- Automated tests for the Rust core, the interface and the engine. The Fast tier is also checked against a set of public-domain pages in CI ([golden tests](engine/tests/golden/SOURCES.md)).
-
-Not done yet: the end-to-end smoke test, a pass on macOS, and the release dry run. The [v0.1 plan](docs/plans/v0.1.md) tracks them.
-
-## How it works
-
-The first time you open the app, it looks at your computer and suggests a model that fits. You confirm the choice and the app downloads that model once. After that, you drop files into the window, pick an output format, and press Convert. When a file is done you can check it page by page next to the original, then export it. The result is saved next to the original file by default, for example `invoice.pdf` becomes `invoice.docx`. Existing files are never overwritten.
+- **Everything stays on your computer.** No account, no cloud, no uploads. After the one-time model download the app works offline.
+- **Picks the right model for your hardware.** Setup checks your graphics card, memory and disk, recommends a model, and downloads it with resume and checksum verification.
+- **Keeps the structure, not just the text.** Headings, paragraphs, reading order, lists, tables with merged cells, formulas as real Word equations, figures and page breaks.
+- **PDFs and images.** PDF, PNG, JPG, multi-page TIFF, BMP, WebP and HEIC. Pages are rotated upright and straightened automatically. PDFs that already contain text can use it directly, instantly.
+- **Batch queue.** Drop many files or whole folders. Pause, cancel, and pick up where you left off after a restart.
+- **Side-by-side review.** Check every page next to the original, with each detected block outlined and linked to its result.
+- **Saved where you expect.** `invoice.pdf` becomes `invoice.docx` and `invoice.md` next to the original. Existing files are never overwritten.
 
 ## Models
 
-The app shows friendly tier names. A details panel shows the underlying model and its license. Hardware guidance below comes from a small benchmark on one desktop PC (see the [model spike report](docs/spike/2026-10-model-spike.md)) and from estimates, so treat it as a rough guide. Laptops will be slower.
+The app shows three tiers. A details panel shows the underlying model and its license before you download it.
 
-| Tier | Underlying model | License | Best for | Hardware guidance (estimate) |
-| --- | --- | --- | --- | --- |
-| Fast | PP-OCRv6 + PP-StructureV3 (PaddleOCR 3.7) | Apache-2.0 | Plain text and simple layouts. Tables and formulas are kept as images. | Runs on any CPU. 4 to 11 s per page on a fast desktop CPU, slower on a laptop. |
-| Accurate | PaddleOCR-VL 1.6 (0.9B) with PP-DocLayoutV3 | Apache-2.0 | Tables, formulas, complex layouts. The default recommendation for most computers. | Needs about 2.3 GB of GPU memory. Slow on a CPU-only machine. Fast on a GPU or Apple Silicon. |
-| Max | DeepSeek-OCR v1 (3B) | MIT | Difficult scans on stronger hardware | A GPU with at least 8 GB of VRAM, or an Apple Silicon Mac with at least 16 GB of memory. |
+| Tier | Model | Best for | Speed on an RTX 4090 |
+| --- | --- | --- | --- |
+| **Fast** | PP-OCRv6 + PP-StructureV3 | Plain text and simple layouts, any CPU. Tables and formulas are kept as images. | 4 to 11 s per page (CPU) |
+| **Accurate** | PaddleOCR-VL 1.6 (0.9B) | Tables, formulas and complex layouts. Needs about 2.3 GB of GPU memory, also runs on CPU. | 4 to 11 s per page |
+| **Max** | DeepSeek-OCR (3B) | Difficult scans on a GPU with 8 GB or more, or an Apple Silicon Mac with 16 GB or more. | 2 to 4 s per page |
 
-"Max" means the largest model. It is not necessarily the most accurate one. In the results each team has published on OmniDocBench, PaddleOCR-VL scores higher than DeepSeek-OCR 2. We will publish our own comparison on the test set.
+DeepSeek-OCR 2 is available as an experimental option for advanced users. Speeds come from the [model benchmark](docs/spike/2026-10-model-spike.md) on one desktop PC; laptops are slower, and Apple Silicon figures are estimates.
 
-DeepSeek-OCR 2 (Apache-2.0) is available as an experimental option under the Max tier for advanced users. It comes from a community conversion of the model and is labelled experimental in the app.
+## Download
 
-On a CPU-only machine with enough RAM, Max can be faster than Accurate, so the app does not assume Accurate is the faster choice there. Apple Silicon speeds have not been measured; our estimates are in the spike report.
+Get the latest installer from the [Releases page](https://github.com/ShabGaming/opendoc-reader/releases).
 
-## System requirements
+| Platform | File | Requirements |
+| --- | --- | --- |
+| Windows | `OpenDoc Reader_x.y.z_x64-setup.exe` (or `.msi`) | Windows 10 22H2 or later, 64-bit, 8 GB RAM |
+| macOS | `OpenDoc Reader_x.y.z_aarch64.dmg` | macOS 13 or later on Apple Silicon (M1 or newer) |
 
-- Windows 10 version 22H2 or later, 64-bit.
-- macOS 13 Ventura or later on Apple Silicon (M1 or newer). Intel Macs are not supported.
-- 8 GB of RAM is the lowest we are designing for. 16 GB or more is recommended for the Max tier. These are estimates.
-- Free disk space for models. As a rough figure, the Max tier model (DeepSeek-OCR v1, 8-bit) is about 3.6 GB including its vision component, and the Accurate tier model is under 2 GB, plus a few more components that setup downloads. These come from the spike; Fast tier sizes have not been measured yet.
-- A dedicated GPU is optional. The app is meant to be useful on a laptop without one.
+The installer is about 20 MB. Setup then downloads the model you choose (0.2 to 3.6 GB) and the components it needs. The [user guide](docs/user-guide.md) walks through setup, converting, review and troubleshooting.
 
-Windows on ARM and Linux are on the roadmap but are not supported at launch.
+Releases are not code signed yet, so your system will warn you the first time:
 
-## Install
-
-Downloads will appear on the [Releases page](https://github.com/ShabGaming/opendoc-reader/releases). The installer will contain only the app itself (roughly 20 to 40 MB). Models and runtime components are downloaded during setup.
-
-The [user guide](docs/user-guide.md) walks through setup, converting, review and troubleshooting.
-
-### Opening an unsigned build
-
-Early releases will not be code signed, so your operating system will warn you the first time you open the app. Signed builds are planned before 1.0.
-
-**Windows.** If SmartScreen says "Windows protected your PC", click "More info", then "Run anyway".
-
-**macOS.** Try to open the app once. When macOS blocks it, open System Settings, go to Privacy & Security, scroll down, and click "Open Anyway" next to the OpenDoc Reader message.
+- **Windows:** on "Windows protected your PC", click **More info**, then **Run anyway**.
+- **macOS:** open the app once, then go to **System Settings > Privacy & Security** and click **Open Anyway**.
 
 ## Privacy
 
-OpenDoc Reader has no telemetry. It does not collect usage data, and your documents and results stay on your computer. If something goes wrong, the app keeps a local log that you can copy into a GitHub issue yourself.
+OpenDoc Reader has no telemetry and never sends your documents anywhere. It only goes online to download models and runtime components (from Hugging Face, ModelScope, GitHub and the Python package index, each file checked against a known checksum) and, from v0.2, to check once a month whether a new version exists, which you can turn off. On networks that block downloads, you can import model files from a folder instead.
 
-Network access is limited to:
-
-- Downloads during setup and when you install a model. Model files come from Hugging Face, with ModelScope as a fallback. The inference runtime comes from the llama.cpp releases on GitHub, and the engine's Python environment from the Python package index. Every file is checked against a known checksum. The app uses your system proxy settings.
-- From v0.2, a check of GitHub Releases once a month to see whether a newer version exists. It is on by default and can be turned off in Settings. The request carries no personal data. If a newer version exists, the app opens the release page. It does not update itself.
-
-On networks where downloads are blocked, Settings will let you import a model from a folder. The files are checked against known checksums.
+Your data lives in one folder: `%LOCALAPPDATA%\OpenDoc Reader` on Windows, `~/Library/Application Support/OpenDoc Reader` on macOS.
 
 ## Build from source
 
-You need Rust, Node.js with pnpm, and uv. [CONTRIBUTING.md](CONTRIBUTING.md) lists the exact versions, the commands to run the app and its tests, and how to run the checks that CI runs.
+You need Rust, Node.js 22+ with pnpm, and [uv](https://docs.astral.sh/uv/).
+
+```bash
+git clone https://github.com/ShabGaming/opendoc-reader.git
+cd opendoc-reader
+pnpm install
+pnpm --filter desktop tauri dev
+```
+
+[CONTRIBUTING.md](CONTRIBUTING.md) covers the full setup, the test suites and the checks CI runs. The design is described in [docs/architecture.md](docs/architecture.md), with decisions recorded in [docs/adr/](docs/adr/).
 
 ## Roadmap
 
-Plans can change as the project moves forward.
-
-- [ ] **v0.1:** first-run setup, hardware check, model suggestion and downloads; all three tiers; Markdown and Word export; batch queue; read-only side-by-side review.
-- [ ] **v0.2:** searchable PDF, HTML and plain text export; editing text in the review screen; PDF page ranges; monthly update check.
-- [ ] **v0.3:** Excel (tables) and JSON export; more OCR engines (for example GLM-OCR and MinerU); a faster CPU engine for the Fast tier (ONNX Runtime / OpenVINO).
-- [ ] **1.0:** code signing (Apple notarization, and SignPath Foundation or Azure Trusted Signing on Windows); polish.
-- [ ] **Later:** translations (Simplified Chinese first), Linux builds, Windows on ARM, folder watching, in-app auto-update.
+- [x] **v0.1:** setup with hardware check and model suggestion, three tiers, Word and Markdown export, batch queue, side-by-side review.
+- [ ] **v0.2:** searchable PDF, HTML and plain text export; editing text in review; PDF page ranges; monthly update check.
+- [ ] **v0.3:** Excel and JSON export; more OCR engines (GLM-OCR, MinerU); a faster CPU engine for the Fast tier.
+- [ ] **1.0:** code signing and polish.
+- [ ] **Later:** translations, Linux and Windows on ARM builds, folder watching.
 
 ## Contributing
 
-Contributions are welcome, including feedback on the plan. See [CONTRIBUTING.md](CONTRIBUTING.md) for how to get involved, and [docs/architecture.md](docs/architecture.md) for how the app is designed. Design decisions are recorded in [docs/adr/](docs/adr/).
+Bug reports, ideas, public-domain sample scans and code are all welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), and please follow the [code of conduct](CODE_OF_CONDUCT.md). Security issues go through [SECURITY.md](SECURITY.md).
 
 ## Acknowledgements
 
-OpenDoc Reader builds on the work of others:
-
-- [DeepSeek-OCR](https://github.com/deepseek-ai/DeepSeek-OCR) by deepseek-ai.
-- [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) by PaddlePaddle.
-- [llama.cpp](https://github.com/ggml-org/llama.cpp) by ggml-org.
-- [Tauri](https://tauri.app).
-
-Model weights are not part of this repository. They are downloaded separately and keep their own licenses, which the app shows before you download them.
+OpenDoc Reader builds on [DeepSeek-OCR](https://github.com/deepseek-ai/DeepSeek-OCR), [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR), [llama.cpp](https://github.com/ggml-org/llama.cpp) and [Tauri](https://tauri.app). Model weights are downloaded separately and keep their own licenses.
 
 ## License
 
-The OpenDoc Reader source code is released under the MIT License. See [LICENSE](LICENSE). The licenses of the libraries and models it uses are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+MIT. See [LICENSE](LICENSE). Third-party licenses are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

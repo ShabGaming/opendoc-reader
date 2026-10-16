@@ -18,6 +18,7 @@ from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 from typing import Any, Literal
 
+from opendoc_engine.blocktext import escape_inline, normalize_blocks, strip_heading_markers
 from opendoc_engine.htmltable import parse_html_table
 from opendoc_engine.ir import BBox, Block, BlockType, Line
 from opendoc_engine.mathtext import strip_math
@@ -141,7 +142,10 @@ def blocks_from_layout(
 
     for item in items:
         label, box = item.label, item.bbox
-        text = _clean(item.content)
+        # Fast text is literal OCR output, so markup characters are escaped. VL text is Markdown
+        # written by the model: it keeps its line structure until `normalize_blocks` has
+        # turned markers into IR structure.
+        text = escape_inline(_clean(item.content)) if mode == "fast" else item.content.strip()
         block_id = f"b{len(blocks)}"
         order = len(blocks)
         block: Block | None = None
@@ -154,11 +158,12 @@ def blocks_from_layout(
             block = _formula_block(block_id, item, mode)
         elif label == _FORMULA_NUMBER:
             if text:
-                numbers.append((order, box, text))
+                numbers.append((order, box, _clean(item.content)))
         elif not text:
             pass  # an empty text block carries nothing
         elif label in _HEADINGS:
-            block = Block(block_id, BlockType.HEADING, box, order, heading_level(label, text), text)
+            level = heading_level(label, strip_heading_markers(text))
+            block = Block(block_id, BlockType.HEADING, box, order, level, text)
         elif label == _CAPTION:
             block = Block(block_id, BlockType.CAPTION, box, order, text=text)
         elif label in _FURNITURE:
@@ -173,7 +178,7 @@ def blocks_from_layout(
             continue
         if lines_for is not None and block.type in _LINE_TYPES:
             block.lines = lines_for(box) or None
-        blocks.append(block)
+        blocks.extend(normalize_blocks([block]) if mode == "vl" else [block])
 
     unmatched = _attach_numbers(blocks, [(box, text) for _, box, text in numbers])
     inserted = 0

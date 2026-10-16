@@ -14,13 +14,13 @@ from __future__ import annotations
 
 import io
 import logging
-import re
 from pathlib import Path
 
 from PIL import Image
 
+from opendoc_engine.blocktext import normalize_blocks
 from opendoc_engine.engines.base import Capabilities, EngineSetup
-from opendoc_engine.equations import dollar_math, tidy_equations
+from opendoc_engine.equations import tidy_equations
 from opendoc_engine.errors import not_configured, recognition_failed
 from opendoc_engine.grounding import parse_grounding
 from opendoc_engine.ir import Block
@@ -39,7 +39,6 @@ _DRY_PARAMS = {
     "dry_allowed_length": 2,
     "dry_penalty_last_n": 8192,
 }
-_CENTER_TAGS = re.compile(r"</?center>", re.IGNORECASE)
 
 
 def uses_dry_sampling(model_id: str) -> bool:
@@ -55,15 +54,11 @@ def _png_bytes(path: Path | str) -> bytes:
     return buffer.getvalue()
 
 
-def tidy_blocks(blocks: list[Block]) -> None:
-    """Drop the `<center>` wrappers the model puts around captions and sort out equations."""
+def tidy_blocks(blocks: list[Block]) -> list[Block]:
+    """Turn the model's Markdown into IR: heading markers, lists and `<center>` wrappers go
+    (see `blocktext`), and equations are sorted out."""
     tidy_equations(blocks)
-    for block in blocks:
-        if not block.text:
-            continue
-        if "<" in block.text:
-            block.text = " ".join(_CENTER_TAGS.sub(" ", block.text).split())
-        block.text = dollar_math(block.text)
+    return normalize_blocks(blocks)
 
 
 class DeepseekEngine:
@@ -116,8 +111,7 @@ class DeepseekEngine:
         blocks = parse_grounding(completion.text, page_size)
         if not blocks:
             raise recognition_failed("output_unusable", "no blocks in the answer")
-        tidy_blocks(blocks)
-        return blocks
+        return tidy_blocks(blocks)
 
     def release(self) -> None:
         self._setup = None

@@ -19,6 +19,7 @@ import html
 from pathlib import PureWindowsPath
 from urllib.parse import quote
 
+from opendoc_engine.blocktext import export_text, literal_lead, strip_html
 from opendoc_engine.exporters.inline import tidy_math
 from opendoc_engine.exporters.pages import page_blocks
 from opendoc_engine.ir import Block, BlockType, Document, ListItem, Table
@@ -63,7 +64,8 @@ def _render_block(block: Block, assets_dir: str, names: dict[str, str]) -> str:
     kind = block.type
     if kind is BlockType.HEADING:
         level = min(max(block.level or 1, 1), 6)
-        return f"{'#' * level} {tidy_math(block.text)}" if block.text else ""
+        text = export_text(block.text or "", heading=True)
+        return f"{'#' * level} {tidy_math(text)}" if text else ""
     if kind is BlockType.LIST:
         return "\n".join(_list_lines(block.items or []))
     if kind is BlockType.TABLE:
@@ -80,8 +82,10 @@ def _render_block(block: Block, assets_dir: str, names: dict[str, str]) -> str:
         name = names.get(block.id, _figure_name(block))
         return f"![]({quote(assets_dir)}/{quote(name)})"
     if kind is BlockType.CAPTION:
-        return f"*{tidy_math(block.text)}*" if block.text else ""
-    return tidy_math(block.text or "")  # paragraph, footnote, other
+        text = export_text(block.text or "")
+        return f"*{tidy_math(text)}*" if text else ""
+    # Paragraph, footnote, other: text that starts like a Markdown block stays literal.
+    return literal_lead(tidy_math(export_text(block.text or "")))
 
 
 def _figure_name(block: Block) -> str:
@@ -95,13 +99,14 @@ def _list_lines(items: list[ListItem], depth: int = 0) -> list[str]:
     lines: list[str] = []
     for number, item in enumerate(items, start=1):
         marker = f"{number}." if item.ordered else "-"
-        lines.append(f"{'   ' * depth}{marker} {tidy_math(item.text)}")
+        text = export_text(item.text, item="ordered" if item.ordered else "bullet")
+        lines.append(f"{'   ' * depth}{marker} {tidy_math(text)}")
         lines.extend(_list_lines(item.children, depth + 1))
     return lines
 
 
 def _cell_texts(blocks: list[Block]) -> list[str]:
-    return [tidy_math(b.text) for b in blocks if b.text]
+    return [tidy_math(strip_html(b.text)) for b in blocks if b.text]
 
 
 def _render_table(table: Table) -> str:
