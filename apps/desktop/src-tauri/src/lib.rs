@@ -15,6 +15,7 @@ pub mod logging;
 pub mod manifest;
 pub mod models;
 pub mod paths;
+pub mod queue;
 pub mod runtime;
 pub mod services;
 pub mod settings;

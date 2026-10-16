@@ -15,6 +15,7 @@ steered by environment variables so tests can provoke failures:
   FAKE_STATE_DIR            where the crash marker is kept (survives restarts)
   FAKE_HANG_ON              never answer this method (and send no progress)
   FAKE_LLAMA_UNREACHABLE    convert.page answers LLAMA_SERVER_UNREACHABLE once
+  FAKE_INSPECT_FAIL         pdf.inspect and image.inspect fail with BAD_INPUT and this reason
   FAKE_FIGURE               "1" to have export.markdown write an asset file
 """
 
@@ -211,6 +212,8 @@ def handle(request_id, method, params):
         state["configured"] = params
         return {"cpuThreads": params.get("cpuThreads") or 4}
     if method in ("pdf.inspect", "image.inspect"):
+        if os.environ.get("FAKE_INSPECT_FAIL"):
+            raise Rpc(-32004, "Bad input", {"reason": os.environ["FAKE_INSPECT_FAIL"]})
         count = page_count_for(params["path"]) if method == "pdf.inspect" else 1
         has_text = os.environ.get("FAKE_TEXT_LAYER") == "1"
         pages = []
