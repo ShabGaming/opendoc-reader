@@ -20,6 +20,8 @@ Settings, all optional:
 
 - OPENDOC_MODELS_DIR: models in the manifest layout (default G:/opendoc-dev/models, built by
   scripts/link_dev_models.py). In CI, scripts/fetch-models.py fills it with the Fast tier.
+- OPENDOC_GOLDEN_THREADS: CPU threads for the engine (default: the engine's own choice). Handy
+  for checking that the tolerances absorb the small differences another thread count causes.
 - OPENDOC_GOLDEN_UPDATE=1: write the expected files from this run instead of comparing. Read the
   new files before committing them and do not edit them by hand.
 
@@ -51,6 +53,7 @@ SCHEMA = json.loads((REPO / "engine" / "schema" / "ir.schema.json").read_text("u
 ENABLED = os.environ.get("OPENDOC_GOLDEN") == "1"
 UPDATE = os.environ.get("OPENDOC_GOLDEN_UPDATE") == "1"
 MODELS = Path(os.environ.get("OPENDOC_MODELS_DIR", "G:/opendoc-dev/models"))
+THREADS = int(os.environ.get("OPENDOC_GOLDEN_THREADS", "0"))
 ENGINE_ID = "paddleocr-structure"
 MODEL_ID = "fast-ppocrv6-tiny"
 
@@ -284,6 +287,7 @@ class Run:
                 "llamaServerUrl": None,
                 "workDir": str(self.root / "work"),
                 "modelsDir": str(MODELS),
+                **({"cpuThreads": THREADS} if THREADS else {}),
             },
         )
         for name in PAGES:
