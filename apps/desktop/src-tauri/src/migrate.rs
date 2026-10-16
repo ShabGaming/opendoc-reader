@@ -50,7 +50,10 @@ pub fn locate(
 fn is_empty_dir(path: &Path) -> bool {
     match fs::read_dir(path) {
         Ok(mut entries) => entries.next().is_none(),
-        Err(error) => error.kind() == io::ErrorKind::NotFound,
+        // A missing folder is empty. Any other error (for example a file where the
+        // folder should be, which is NotADirectory on Unix) is treated the same way,
+        // so the move is attempted and its failure keeps the old location.
+        Err(_) => true,
     }
 }
 

@@ -34,7 +34,7 @@ import json
 import os
 import re
 from difflib import SequenceMatcher
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from typing import Any
 
 import pytest
@@ -70,10 +70,10 @@ IMAGE_COUNT_SLACK = 1
 def normalize_page(page: dict[str, Any]) -> dict[str, Any]:
     """The page IR without machine-specific paths: image and crop paths keep only their name."""
     data = json.loads(json.dumps(page))
-    data["sourceImage"] = Path(data["sourceImage"]).name
+    data["sourceImage"] = PureWindowsPath(data["sourceImage"]).name
     for block in data["blocks"]:
         if "figure" in block and "crop" in block["figure"]:
-            block["figure"]["crop"] = Path(block["figure"]["crop"]).name
+            block["figure"]["crop"] = PureWindowsPath(block["figure"]["crop"]).name
     return data
 
 

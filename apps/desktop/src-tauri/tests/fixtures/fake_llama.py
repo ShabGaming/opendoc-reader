@@ -7,6 +7,7 @@
 import os
 import sys
 import time
+import socketserver
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 args = sys.argv[1:]
@@ -35,4 +36,13 @@ class Handler(BaseHTTPRequestHandler):
 
 sys.stderr.write("fake llama-server listening\n")
 sys.stderr.flush()
-HTTPServer(("127.0.0.1", port), Handler).serve_forever()
+class Server(HTTPServer):
+    # HTTPServer.server_bind looks up the host's fully qualified name, which can
+    # stall for tens of seconds on macOS CI runners. The name is never used here.
+    def server_bind(self):
+        socketserver.TCPServer.server_bind(self)
+        self.server_name = "127.0.0.1"
+        self.server_port = self.server_address[1]
+
+
+Server(("127.0.0.1", port), Handler).serve_forever()
