@@ -74,3 +74,14 @@ button {
       transform 120ms ease-out;
   }
 }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
