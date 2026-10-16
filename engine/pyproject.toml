@@ -4,7 +4,15 @@ version = "0.1.0"
 description = "Local document-conversion engine for OpenDoc Reader (JSON-RPC sidecar)."
 requires-python = ">=3.12,<3.13"
 license = "MIT"
-dependencies = []
+dependencies = [
+    "httpx>=0.28.1",
+    "numpy>=2.3.5",
+    "paddleocr[doc-parser]>=3.7,<3.8",
+    "paddlepaddle>=3.3,<3.4",
+    "pi-heif>=1.4.0",
+    "pillow>=12.3.0",
+    "pypdfium2>=5.14.0",
+]
 
 [dependency-groups]
 dev = [
