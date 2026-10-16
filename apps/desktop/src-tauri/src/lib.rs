@@ -5,13 +5,18 @@
 
 pub mod commands;
 pub mod contract;
+pub mod download;
 pub mod error;
 pub mod hardware;
 pub mod logging;
 pub mod manifest;
+pub mod models;
 pub mod paths;
+pub mod runtime;
 pub mod settings;
 pub mod suggester;
+#[cfg(test)]
+pub mod testutil;
 
 pub fn run() {
     tauri::Builder::default()
