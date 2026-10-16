@@ -6,7 +6,10 @@
 pub mod commands;
 pub mod contract;
 pub mod download;
+pub mod engine_env;
 pub mod error;
+#[cfg(test)]
+pub mod fakes;
 pub mod hardware;
 pub mod logging;
 pub mod manifest;
@@ -15,6 +18,7 @@ pub mod paths;
 pub mod runtime;
 pub mod settings;
 pub mod suggester;
+pub mod supervisor;
 #[cfg(test)]
 pub mod testutil;
 
