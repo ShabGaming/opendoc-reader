@@ -4,57 +4,84 @@ Output rules:
 
 - Headings use `#` repeated `level` times (1 to 6).
 - Tables are GFM when no cell is merged and HTML when any cell spans more than one slot.
-- Display formulas are `$$` fenced blocks.
-- Figures are `![](assets/<file>)`. The file name is the basename of the block's crop, or
-  `<block id>.png` when it has none; the pipeline copies crops into the assets folder under
-  those names.
+- Display formulas are `$$` fenced blocks; a printed equation number becomes `\tag{n}`.
+- Figures are `![](<assets folder>/<file>)`, a path relative to the `.md` file. The file name is
+  the basename of the block's crop (made unique when two crops share a basename), or
+  `<block id>.png` when it has none; `figure_files` lists what has to be copied there.
 - Pages are separated by a blank line and a `<!-- page N -->` comment (N is 1-based).
-- Page furniture (header, footer, page number) is omitted.
+- Page furniture (header, footer, page number) is omitted, and footnotes stay at the end of
+  their page.
 """
 
 from __future__ import annotations
 
 import html
 from pathlib import PureWindowsPath
+from urllib.parse import quote
 
+from opendoc_engine.exporters.inline import tidy_math
+from opendoc_engine.exporters.pages import page_blocks
 from opendoc_engine.ir import Block, BlockType, Document, ListItem, Table
 
 ASSETS_DIR = "assets"
 
-_OMITTED = {BlockType.HEADER, BlockType.FOOTER, BlockType.PAGE_NUMBER}
+
+def figure_files(document: Document) -> dict[str, tuple[str, str | None]]:
+    """For each figure block id: the file name it gets in the assets folder and the crop path
+    to copy there (None when the block has no crop)."""
+    used: set[str] = set()
+    files: dict[str, tuple[str, str | None]] = {}
+    for page in document.pages:
+        for block in page_blocks(page):
+            if block.type is not BlockType.FIGURE:
+                continue
+            name = _figure_name(block)
+            stem, dot, ext = name.rpartition(".")
+            candidate, n = name, 1
+            while candidate.lower() in used:
+                n += 1
+                candidate = f"{stem}-{n}{dot}{ext}" if dot else f"{name}-{n}"
+            used.add(candidate.lower())
+            files[block.id] = (candidate, block.figure_crop)
+    return files
 
 
-def to_markdown(document: Document) -> str:
+def to_markdown(document: Document, assets_dir: str = ASSETS_DIR) -> str:
+    names = {block_id: name for block_id, (name, _) in figure_files(document).items()}
     parts: list[str] = []
     for i, page in enumerate(document.pages):
         if i > 0:
             parts.append(f"<!-- page {page.index + 1} -->")
-        for block in sorted(page.blocks, key=lambda b: b.order):
-            rendered = _render_block(block)
+        for block in page_blocks(page):
+            rendered = _render_block(block, assets_dir, names)
             if rendered:
                 parts.append(rendered)
     return "\n\n".join(parts) + "\n" if parts else ""
 
 
-def _render_block(block: Block) -> str:
+def _render_block(block: Block, assets_dir: str, names: dict[str, str]) -> str:
     kind = block.type
-    if kind in _OMITTED:
-        return ""
     if kind is BlockType.HEADING:
         level = min(max(block.level or 1, 1), 6)
-        return f"{'#' * level} {block.text}" if block.text else ""
+        return f"{'#' * level} {tidy_math(block.text)}" if block.text else ""
     if kind is BlockType.LIST:
         return "\n".join(_list_lines(block.items or []))
     if kind is BlockType.TABLE:
         return _render_table(block.table) if block.table else ""
     if kind is BlockType.FORMULA:
         body = block.latex if block.latex is not None else block.text
-        return f"$$\n{body}\n$$" if body else ""
+        if not body:
+            return ""
+        number = (block.number or "").strip().removeprefix("(").removesuffix(")").strip()
+        if number and "\\tag" not in body:
+            body = f"{body.rstrip()} \\tag{{{number}}}"
+        return f"$$\n{body}\n$$"
     if kind is BlockType.FIGURE:
-        return f"![]({ASSETS_DIR}/{_figure_name(block)})"
+        name = names.get(block.id, _figure_name(block))
+        return f"![]({quote(assets_dir)}/{quote(name)})"
     if kind is BlockType.CAPTION:
-        return f"*{block.text}*" if block.text else ""
-    return block.text or ""  # paragraph, footnote, other
+        return f"*{tidy_math(block.text)}*" if block.text else ""
+    return tidy_math(block.text or "")  # paragraph, footnote, other
 
 
 def _figure_name(block: Block) -> str:
@@ -68,13 +95,13 @@ def _list_lines(items: list[ListItem], depth: int = 0) -> list[str]:
     lines: list[str] = []
     for number, item in enumerate(items, start=1):
         marker = f"{number}." if item.ordered else "-"
-        lines.append(f"{'   ' * depth}{marker} {item.text}")
+        lines.append(f"{'   ' * depth}{marker} {tidy_math(item.text)}")
         lines.extend(_list_lines(item.children, depth + 1))
     return lines
 
 
 def _cell_texts(blocks: list[Block]) -> list[str]:
-    return [b.text for b in blocks if b.text]
+    return [tidy_math(b.text) for b in blocks if b.text]
 
 
 def _render_table(table: Table) -> str:
