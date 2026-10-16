@@ -14,10 +14,10 @@ None of these are part of the installer or this repository. The app downloads th
 
 | Model | Tier | License | Source |
 | --- | --- | --- | --- |
-| PP-OCRv6 tiny + PP-StructureV3 (text and layout) | fast | Apache-2.0 | [PaddlePaddle/PP-OCRv6_tiny_det](https://huggingface.co/PaddlePaddle/PP-OCRv6_tiny_det), [PaddlePaddle/PP-OCRv6_tiny_rec](https://huggingface.co/PaddlePaddle/PP-OCRv6_tiny_rec), [PaddlePaddle/PP-DocLayout_plus-L](https://huggingface.co/PaddlePaddle/PP-DocLayout_plus-L) |
-| PaddleOCR-VL 1.6 | accurate | Apache-2.0 | [PaddlePaddle/PaddleOCR-VL-1.6-GGUF](https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6-GGUF), [PaddlePaddle/PP-DocLayoutV3](https://huggingface.co/PaddlePaddle/PP-DocLayoutV3) |
-| DeepSeek-OCR v1 (Q8_0) | max | MIT | [ggml-org/DeepSeek-OCR-GGUF](https://huggingface.co/ggml-org/DeepSeek-OCR-GGUF) |
-| DeepSeek-OCR 2 (Q8_0, experimental) | max | Apache-2.0 | [sabafallah/DeepSeek-OCR-2-GGUF](https://huggingface.co/sabafallah/DeepSeek-OCR-2-GGUF) |
+| PP-OCRv6 tiny + PP-StructureV3 (text and layout) | fast | Apache-2.0 | [PaddlePaddle/PP-OCRv6_tiny_det](https://huggingface.co/PaddlePaddle/PP-OCRv6_tiny_det), [PaddlePaddle/PP-OCRv6_tiny_rec](https://huggingface.co/PaddlePaddle/PP-OCRv6_tiny_rec), [PaddlePaddle/PP-DocLayout_plus-L](https://huggingface.co/PaddlePaddle/PP-DocLayout_plus-L), [PaddlePaddle/PP-LCNet_x1_0_doc_ori](https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori), [PaddlePaddle/UVDoc](https://huggingface.co/PaddlePaddle/UVDoc) |
+| PaddleOCR-VL 1.6 | accurate | Apache-2.0 | [PaddlePaddle/PaddleOCR-VL-1.6-GGUF](https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6-GGUF), [PaddlePaddle/PP-DocLayoutV3](https://huggingface.co/PaddlePaddle/PP-DocLayoutV3), [PaddlePaddle/PP-LCNet_x1_0_doc_ori](https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori), [PaddlePaddle/UVDoc](https://huggingface.co/PaddlePaddle/UVDoc) |
+| DeepSeek-OCR v1 (Q8_0) | max | MIT | [ggml-org/DeepSeek-OCR-GGUF](https://huggingface.co/ggml-org/DeepSeek-OCR-GGUF), [PaddlePaddle/PP-LCNet_x1_0_doc_ori](https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori), [PaddlePaddle/UVDoc](https://huggingface.co/PaddlePaddle/UVDoc) |
+| DeepSeek-OCR 2 (Q8_0, experimental) | max | Apache-2.0 | [sabafallah/DeepSeek-OCR-2-GGUF](https://huggingface.co/sabafallah/DeepSeek-OCR-2-GGUF), [PaddlePaddle/PP-LCNet_x1_0_doc_ori](https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori), [PaddlePaddle/UVDoc](https://huggingface.co/PaddlePaddle/UVDoc) |
 
 The engine's Python environment is created at first run with [uv](https://github.com/astral-sh/uv) 0.12.16 (MIT OR Apache-2.0), which ships with the app, and installs the Python packages listed below from the Python package index. uv also downloads a Python 3.12 interpreter ([PSF-2.0](https://docs.python.org/3/license.html)).
 

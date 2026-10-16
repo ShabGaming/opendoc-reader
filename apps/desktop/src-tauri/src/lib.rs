@@ -35,14 +35,8 @@ use serde_json::Value;
 use tauri::{Emitter, Manager, RunEvent};
 
 use crate::app_core::Core;
-use crate::contract::{AppError, AppErrorCode};
-use crate::download::Downloader;
-use crate::engine_env::EngineEnv;
-use crate::manifest::Manifest;
 use crate::paths::AppPaths;
-use crate::services::{CalibrationStore, EventSink, HardwareService, Services};
-use crate::settings::SettingsStore;
-use crate::supervisor::{Dirs, EngineSpawn, SpawnFactory, Supervisor, SupervisorConfig};
+use crate::services::EventSink;
 
 /// Sends events to the main window.
 struct TauriSink(tauri::AppHandle);
@@ -69,8 +63,11 @@ fn calibration_page(resource_dir: Option<&std::path::Path>) -> PathBuf {
 }
 
 fn build_core(app: &tauri::App) -> Result<Arc<Core>, Box<dyn std::error::Error>> {
-    let data = app.path().app_data_dir()?;
-    let logs = app.path().app_log_dir()?;
+    // OPENDOC_APP_DATA points a development build at another data folder (with its own logs).
+    let (data, logs) = match std::env::var_os("OPENDOC_APP_DATA") {
+        Some(dir) => (PathBuf::from(&dir), PathBuf::from(dir).join("logs")),
+        None => (app.path().app_data_dir()?, app.path().app_log_dir()?),
+    };
     let paths = AppPaths::new(data, logs);
     paths.ensure()?;
     app.manage(LogGuard(logging::init(&paths.logs)));
@@ -83,54 +80,21 @@ fn build_core(app: &tauri::App) -> Result<Arc<Core>, Box<dyn std::error::Error>>
     let resource_dir = app.path().resource_dir().ok();
     let source = engine_env::resolve_source(resource_dir.as_deref())
         .unwrap_or_else(|| paths.engine.join("missing-source"));
-    let engine_env = EngineEnv::new(&paths, source, engine_env::resolve_uv());
+    let core = Core::assemble(
+        paths,
+        source,
+        engine_env::resolve_uv(),
+        calibration_page(resource_dir.as_deref()),
+        Arc::new(TauriSink(app.handle().clone())),
+    )?;
+    let engine_env = core.svc.engine_env.clone();
 
-    let settings = SettingsStore::load(paths.settings_file.clone(), &paths.default_models);
-    let models_dir = PathBuf::from(settings.get().models_dir);
     // A models folder outside app data is not covered by the static scope in tauri.conf.json.
-    if !models_dir.starts_with(&paths.data) {
+    let models_dir = core.svc.models_dir();
+    if !models_dir.starts_with(&core.svc.paths.data) {
         app.asset_protocol_scope()
             .allow_directory(&models_dir, true)?;
     }
-
-    let spawn_env = engine_env.clone();
-    let spawn: SpawnFactory = Arc::new(move || {
-        if !spawn_env.is_ready() {
-            return Err(AppError::new(
-                AppErrorCode::EngineUnavailable,
-                "The document engine is not installed yet.",
-            )
-            .with_reason("engine_not_installed"));
-        }
-        Ok(EngineSpawn {
-            program: spawn_env.python(),
-            args: vec!["-m".into(), "opendoc_engine".into()],
-            cwd: Some(spawn_env.project_dir()),
-            env: Vec::new(),
-        })
-    });
-    let supervisor = Supervisor::new(
-        spawn,
-        Dirs {
-            work_dir: paths.work.clone(),
-            models_dir,
-        },
-        SupervisorConfig::default(),
-    );
-
-    let svc = Services {
-        calibration: CalibrationStore::load(paths.calibration_file.clone()),
-        settings,
-        manifest: Arc::new(Manifest::embedded().clone()),
-        hardware: HardwareService::new(),
-        downloader: Downloader::new()?,
-        engine_env: engine_env.clone(),
-        supervisor,
-        calibration_page: calibration_page(resource_dir.as_deref()),
-        sink: Arc::new(TauriSink(app.handle().clone())),
-        paths,
-    };
-    let core = Arc::new(Core::new(Arc::new(svc))?);
 
     // Keep the engine source in step with this version of the app.
     if engine_env.is_ready() {
