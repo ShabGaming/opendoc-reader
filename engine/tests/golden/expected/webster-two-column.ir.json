@@ -1,0 +1,2160 @@
+{
+ "index": 0,
+ "width": 1163,
+ "height": 1800,
+ "sourceImage": "webster-two-column.jpg",
+ "blocks": [
+  {
+   "id": "p0-b0",
+   "type": "header",
+   "bbox": [
+    234.0,
+    125.0,
+    344.0,
+    143.0
+   ],
+   "order": 0,
+   "text": "CUDDLE",
+   "lines": [
+    {
+     "bbox": [
+      237.0,
+      126.0,
+      346.0,
+      146.0
+     ],
+     "text": "CUDDLE"
+    }
+   ]
+  },
+  {
+   "id": "p0-b1",
+   "type": "header",
+   "bbox": [
+    771.0,
+    125.0,
+    843.0,
+    143.0
+   ],
+   "order": 1,
+   "text": "CURE",
+   "lines": [
+    {
+     "bbox": [
+      771.0,
+      122.0,
+      847.0,
+      148.0
+     ],
+     "text": "CURE"
+    }
+   ]
+  },
+  {
+   "id": "p0-b2",
+   "type": "paragraph",
+   "bbox": [
+    49.0,
+    170.0,
+    540.0,
+    1617.0
+   ],
+   "order": 2,
+   "text": "ruminating. animals frona their lst stomach, and chewed a 2d time; a piece of chewing tobacco; quid.Cuddle, kud'dl, v. i. [cUDDLED (-dld), -DLING.]To lie close or snug ; to squat, crouch, snuggle.—Cud'dy, -dY, n. (Naut.) À small cabin in a boat. A very small apartment. Cudgel, kuj’el, n.A short, thick stick; club.—v. t.[cuDGELED (-eld), -ELING.]. To beat.Cue, ku, n. A tail ; esp. a tail-like twist of hair at the back of the head; last words of an aetor's speech,regarded as a hint for the succeeding player to speak; hint or iatimation; the part one is to perform;a straight rod used in playing billiards.Cuff, kuf, n. A blow with the open hand ;a stroke ;box; buffet.—v. t.[CUFFED (kuft), CUFFING.] To strike with the flat of the hand, as a man ; or with talons or wings, as a fowl.—n. The fold at the end of a sleeve. Cuirass, kwe-ras', n. A piece of armor, covering the body from neck to girdle. —Cuirassier, -sēr', n. A soldier armed with, ete. [F.J Cuish, kwis,n.Defensive armor for the thighs.Cuisine, kwe-zēn', n. The kitchen : style of cooking ;eookery.—Cu'linary, -na-rI, a. Pert. to the kitchen or cookery. Cul-de-gac, koold'sak',n, A street elosed at one end;a trap. (Mil.) A position in which an army has no exit but to the front. (Nat. Hist.) A bag-shaped eavity, or organ, open only at one end.Cull, kul, v. t.°[eULLED (kuld), cULLING.To separate, select, or pick out. Cullender. See CoLANDER. Culminate, kul'mi-nāt, v. i.To reach the highest point of altitude, or of rank, size, numbers, ete.a. Growing upward, as disting. fr. lateral growth.—Culmina'tion, n.Attainment of, ete. ; passage across the meridian; transit. Éulpable, kul/pa-bl, a. Deserving censure; worthy of blame; faulty; censurable.—Culpableness, -bil'ity, -tí, n.—CuÍ'pably, alv.— Cul'prit, n. One accused or convieted of erime ; a eriminal.Cultus, kul'tus, Cult, n. Homage; worship: a system of religious, belief, worship, or rites. —Cul'tivate,0.t.To till, fertilize ; to direct special attention to, foster, cherish ; to improve by labor, care, or study : to civilize, refine.—Cul'tivable, a.— Cultiva'tion, n. Art or practice of,ete. ; tillage ; fostering eare ; civilization: state of being eultivated ;advancement in physical, intellectual, or moral con dition: refinement ; culture. —Cul'tivator, -tēr, n. One w ho, ete. ; an innplement used in the tillage of growing erops, to loosen the surface of the earth.— Culture,kul'chur, n. Act of, ete. eultivation ; refinement of Cultivator.mind or manners. —v. t. [cULTURED (-churd), -TURING.To eultivate. Culter,, kul'tér, n. A colter.See CoLTER.—Cul'.trate, -trated, a. (Bot. & Ornith.) Sharp-edged and pointed, like a pruning knife. Culvert, kul'vērt, n. An arehed drain for water under a road, canal, ete. Cumber, kum’bēr, v. t.. [-BERED (-bērd), -BERING.]To hang or rest on as a troublesome weight; to be burdensome.or oppressive to; to clog, obstruct, embarrass, impede.Cumbersome, -sum, a. Burdensome or hindering ; not easily managed: oppressive;vexatious.—Cum'bersomely, adu.Cum'brance,-brans,n.Eneumbrance.— Cum'brous, -brus, a.Rendering action difficult; giving trouble.—Cum.brously,adv. —Cum'brousness,n.—Cu'mulate,-lat,v.t.To heap together; amass.-Cumula'tion,n. Act of, ete.; a heap.—Cu'mulative, -tiv, a. Forming a mass; aggregated; augmenting: gaining or giving force by successive additions. (Law.) Given by the same testator to the same legatee, — said of a primary forms of elouds,—being massed, and often bringing rain. [L.] — Cu'mulo-stra'tus, n.of cloud between eumulus and stratus, which is in layers. Cumin, kum’in, n., An umbelliferous plant, resembling fennel, and having afomatic seeds.",
+   "lines": [
+    {
+     "bbox": [
+      63.0,
+      167.0,
+      541.0,
+      191.0
+     ],
+     "text": "ruminating. animals frona their lst stomach, and"
+    },
+    {
+     "bbox": [
+      63.0,
+      184.0,
+      538.0,
+      208.0
+     ],
+     "text": "chewed a 2d time; a piece of chewing tobacco; quid."
+    },
+    {
+     "bbox": [
+      50.0,
+      201.0,
+      507.0,
+      225.0
+     ],
+     "text": "Cuddle, kud'dl, v. i. [cUDDLED (-dld), -DLING.]"
+    },
+    {
+     "bbox": [
+      513.0,
+      206.0,
+      539.0,
+      219.0
+     ],
+     "text": "To"
+    },
+    {
+     "bbox": [
+      59.0,
+      216.0,
+      541.0,
+      242.0
+     ],
+     "text": "lie close or snug ; to squat, crouch, snuggle.—Cud'-"
+    },
+    {
+     "bbox": [
+      65.0,
+      236.0,
+      543.0,
+      261.0
+     ],
+     "text": "dy, -dY, n. (Naut.) À small cabin in a boat. A"
+    },
+    {
+     "bbox": [
+      63.0,
+      253.0,
+      270.0,
+      276.0
+     ],
+     "text": "very small apartment."
+    },
+    {
+     "bbox": [
+      50.0,
+      270.0,
+      226.0,
+      294.0
+     ],
+     "text": "Cudgel, kuj’el, n."
+    },
+    {
+     "bbox": [
+      228.0,
+      272.0,
+      539.0,
+      291.0
+     ],
+     "text": "A short, thick stick; club.—v. t."
+    },
+    {
+     "bbox": [
+      63.0,
+      287.0,
+      406.0,
+      306.0
+     ],
+     "text": "[cuDGELED (-eld), -ELING.]. To beat."
+    },
+    {
+     "bbox": [
+      48.0,
+      300.0,
+      541.0,
+      328.0
+     ],
+     "text": "Cue, ku, n. A tail ; esp. a tail-like twist of hair at the"
+    },
+    {
+     "bbox": [
+      63.0,
+      322.0,
+      539.0,
+      341.0
+     ],
+     "text": "back of the head; last words of an aetor's speech,"
+    },
+    {
+     "bbox": [
+      61.0,
+      337.0,
+      541.0,
+      362.0
+     ],
+     "text": "regarded as a hint for the succeeding player to"
+    },
+    {
+     "bbox": [
+      63.0,
+      354.0,
+      543.0,
+      379.0
+     ],
+     "text": "speak; hint or iatimation; the part one is to perform;"
+    },
+    {
+     "bbox": [
+      63.0,
+      371.0,
+      430.0,
+      394.0
+     ],
+     "text": "a straight rod used in playing billiards."
+    },
+    {
+     "bbox": [
+      52.0,
+      392.0,
+      538.0,
+      411.0
+     ],
+     "text": "Cuff, kuf, n. A blow with the open hand ;a stroke ;"
+    },
+    {
+     "bbox": [
+      247.0,
+      405.0,
+      543.0,
+      429.0
+     ],
+     "text": "[CUFFED (kuft), CUFFING.] To"
+    },
+    {
+     "bbox": [
+      63.0,
+      409.0,
+      239.0,
+      428.0
+     ],
+     "text": "box; buffet.—v. t."
+    },
+    {
+     "bbox": [
+      65.0,
+      422.0,
+      541.0,
+      446.0
+     ],
+     "text": "strike with the flat of the hand, as a man ; or with"
+    },
+    {
+     "bbox": [
+      65.0,
+      439.0,
+      541.0,
+      463.0
+     ],
+     "text": "talons or wings, as a fowl.—n. The fold at the end"
+    },
+    {
+     "bbox": [
+      63.0,
+      459.0,
+      170.0,
+      478.0
+     ],
+     "text": "of a sleeve."
+    },
+    {
+     "bbox": [
+      52.0,
+      474.0,
+      538.0,
+      493.0
+     ],
+     "text": "Cuirass, kwe-ras', n. A piece of armor, covering the"
+    },
+    {
+     "bbox": [
+      59.0,
+      489.0,
+      539.0,
+      514.0
+     ],
+     "text": "body from neck to girdle. —Cuirassier, -sēr', n. A"
+    },
+    {
+     "bbox": [
+      63.0,
+      510.0,
+      337.0,
+      529.0
+     ],
+     "text": "soldier armed with, ete. [F.J"
+    },
+    {
+     "bbox": [
+      195.0,
+      525.0,
+      484.0,
+      544.0
+     ],
+     "text": "Defensive armor for the thighs."
+    },
+    {
+     "bbox": [
+      52.0,
+      531.0,
+      201.0,
+      544.0
+     ],
+     "text": "Cuish, kwis,n."
+    },
+    {
+     "bbox": [
+      52.0,
+      544.0,
+      538.0,
+      562.0
+     ],
+     "text": "Cuisine, kwe-zēn', n. The kitchen : style of cooking ;"
+    },
+    {
+     "bbox": [
+      63.0,
+      562.0,
+      172.0,
+      581.0
+     ],
+     "text": "eookery.—"
+    },
+    {
+     "bbox": [
+      163.0,
+      559.0,
+      541.0,
+      583.0
+     ],
+     "text": "Cu'linary, -na-rI, a. Pert. to the kitchen"
+    },
+    {
+     "bbox": [
+      63.0,
+      579.0,
+      168.0,
+      598.0
+     ],
+     "text": "or cookery."
+    },
+    {
+     "bbox": [
+      50.0,
+      592.0,
+      538.0,
+      617.0
+     ],
+     "text": "Cul-de-gac, koold'sak',n, A street elosed at one end;"
+    },
+    {
+     "bbox": [
+      61.0,
+      613.0,
+      539.0,
+      632.0
+     ],
+     "text": "a trap. (Mil.) A position in which an army has no"
+    },
+    {
+     "bbox": [
+      63.0,
+      626.0,
+      539.0,
+      651.0
+     ],
+     "text": "exit but to the front. (Nat. Hist.) A bag-shaped"
+    },
+    {
+     "bbox": [
+      63.0,
+      647.0,
+      423.0,
+      666.0
+     ],
+     "text": "eavity, or organ, open only at one end."
+    },
+    {
+     "bbox": [
+      50.0,
+      662.0,
+      436.0,
+      681.0
+     ],
+     "text": "Cull, kul, v. t.°[eULLED (kuld), cULLING."
+    },
+    {
+     "bbox": [
+      451.0,
+      660.0,
+      536.0,
+      683.0
+     ],
+     "text": "To sepa-"
+    },
+    {
+     "bbox": [
+      63.0,
+      681.0,
+      283.0,
+      699.0
+     ],
+     "text": "rate, select, or pick out."
+    },
+    {
+     "bbox": [
+      52.0,
+      698.0,
+      300.0,
+      716.0
+     ],
+     "text": "Cullender. See CoLANDER."
+    },
+    {
+     "bbox": [
+      52.0,
+      714.0,
+      323.0,
+      733.0
+     ],
+     "text": "Culminate, kul'mi-nāt, v. i."
+    },
+    {
+     "bbox": [
+      314.0,
+      711.0,
+      539.0,
+      735.0
+     ],
+     "text": "To reach the highest"
+    },
+    {
+     "bbox": [
+      57.0,
+      727.0,
+      526.0,
+      754.0
+     ],
+     "text": "point of altitude, or of rank, size, numbers, ete."
+    },
+    {
+     "bbox": [
+      63.0,
+      746.0,
+      539.0,
+      771.0
+     ],
+     "text": "a. Growing upward, as disting. fr. lateral growth."
+    },
+    {
+     "bbox": [
+      65.0,
+      763.0,
+      253.0,
+      786.0
+     ],
+     "text": "—Culmina'tion, n."
+    },
+    {
+     "bbox": [
+      260.0,
+      767.0,
+      538.0,
+      786.0
+     ],
+     "text": "Attainment of, ete. ; passage"
+    },
+    {
+     "bbox": [
+      63.0,
+      784.0,
+      329.0,
+      802.0
+     ],
+     "text": "across the meridian; transit."
+    },
+    {
+     "bbox": [
+      52.0,
+      799.0,
+      532.0,
+      818.0
+     ],
+     "text": "Éulpable, kul/pa-bl, a. Deserving censure; worthy"
+    },
+    {
+     "bbox": [
+      61.0,
+      814.0,
+      536.0,
+      838.0
+     ],
+     "text": "of blame; faulty; censurable.—Culpableness, -bil'"
+    },
+    {
+     "bbox": [
+      65.0,
+      834.0,
+      539.0,
+      853.0
+     ],
+     "text": "ity, -tí, n.—CuÍ'pably, alv.— Cul'prit, n. One ac-"
+    },
+    {
+     "bbox": [
+      63.0,
+      851.0,
+      434.0,
+      870.0
+     ],
+     "text": "cused or convieted of erime ; a eriminal."
+    },
+    {
+     "bbox": [
+      50.0,
+      866.0,
+      539.0,
+      891.0
+     ],
+     "text": "Cultus, kul'tus, Cult, n. Homage; worship: a system"
+    },
+    {
+     "bbox": [
+      61.0,
+      883.0,
+      538.0,
+      908.0
+     ],
+     "text": "of religious, belief, worship, or rites. —Cul'tivate,"
+    },
+    {
+     "bbox": [
+      61.0,
+      899.0,
+      117.0,
+      923.0
+     ],
+     "text": "0.t."
+    },
+    {
+     "bbox": [
+      111.0,
+      898.0,
+      539.0,
+      924.0
+     ],
+     "text": "To till, fertilize ; to direct special attention"
+    },
+    {
+     "bbox": [
+      61.0,
+      915.0,
+      539.0,
+      941.0
+     ],
+     "text": "to, foster, cherish ; to improve by labor, care, or"
+    },
+    {
+     "bbox": [
+      65.0,
+      934.0,
+      539.0,
+      958.0
+     ],
+     "text": "study : to civilize, refine.—Cul'tivable, a.— Cul-"
+    },
+    {
+     "bbox": [
+      63.0,
+      949.0,
+      538.0,
+      975.0
+     ],
+     "text": "tiva'tion, n. Art or practice of,ete. ; tillage ; fos-"
+    },
+    {
+     "bbox": [
+      67.0,
+      971.0,
+      536.0,
+      990.0
+     ],
+     "text": "tering eare ; civilization: state of being eultivated ;"
+    },
+    {
+     "bbox": [
+      65.0,
+      986.0,
+      534.0,
+      1005.0
+     ],
+     "text": "advancement in physical, intellectual, or moral con"
+    },
+    {
+     "bbox": [
+      65.0,
+      1001.0,
+      329.0,
+      1024.0
+     ],
+     "text": "dition: refinement ; culture."
+    },
+    {
+     "bbox": [
+      69.0,
+      1020.0,
+      327.0,
+      1039.0
+     ],
+     "text": "—Cul'tivator, -tēr, n. One"
+    },
+    {
+     "bbox": [
+      67.0,
+      1039.0,
+      331.0,
+      1058.0
+     ],
+     "text": "w ho, ete. ; an innplement"
+    },
+    {
+     "bbox": [
+      65.0,
+      1052.0,
+      331.0,
+      1076.0
+     ],
+     "text": "used in the tillage of grow-"
+    },
+    {
+     "bbox": [
+      67.0,
+      1072.0,
+      327.0,
+      1091.0
+     ],
+     "text": "ing erops, to loosen the sur-"
+    },
+    {
+     "bbox": [
+      67.0,
+      1089.0,
+      325.0,
+      1108.0
+     ],
+     "text": "face of the earth.— Culture,"
+    },
+    {
+     "bbox": [
+      65.0,
+      1104.0,
+      329.0,
+      1129.0
+     ],
+     "text": "kul'chur, n. Act of, ete."
+    },
+    {
+     "bbox": [
+      65.0,
+      1123.0,
+      331.0,
+      1142.0
+     ],
+     "text": "eultivation ; refinement of"
+    },
+    {
+     "bbox": [
+      381.0,
+      1118.0,
+      484.0,
+      1138.0
+     ],
+     "text": "Cultivator."
+    },
+    {
+     "bbox": [
+      63.0,
+      1138.0,
+      539.0,
+      1162.0
+     ],
+     "text": "mind or manners. —v. t. [cULTURED (-churd), -TUR-"
+    },
+    {
+     "bbox": [
+      65.0,
+      1161.0,
+      115.0,
+      1174.0
+     ],
+     "text": "ING."
+    },
+    {
+     "bbox": [
+      119.0,
+      1161.0,
+      251.0,
+      1174.0
+     ],
+     "text": "To eultivate."
+    },
+    {
+     "bbox": [
+      52.0,
+      1174.0,
+      117.0,
+      1192.0
+     ],
+     "text": "Culter,"
+    },
+    {
+     "bbox": [
+      107.0,
+      1172.0,
+      249.0,
+      1195.0
+     ],
+     "text": ", kul'tér, n."
+    },
+    {
+     "bbox": [
+      241.0,
+      1174.0,
+      329.0,
+      1192.0
+     ],
+     "text": "A colter."
+    },
+    {
+     "bbox": [
+      342.0,
+      1170.0,
+      538.0,
+      1193.0
+     ],
+     "text": "See CoLTER.—Cul'."
+    },
+    {
+     "bbox": [
+      57.0,
+      1189.0,
+      541.0,
+      1213.0
+     ],
+     "text": "trate, -trated, a. (Bot. & Ornith.) Sharp-edged and"
+    },
+    {
+     "bbox": [
+      67.0,
+      1209.0,
+      342.0,
+      1228.0
+     ],
+     "text": "pointed, like a pruning knife."
+    },
+    {
+     "bbox": [
+      50.0,
+      1221.0,
+      538.0,
+      1247.0
+     ],
+     "text": "Culvert, kul'vērt, n. An arehed drain for water un-"
+    },
+    {
+     "bbox": [
+      57.0,
+      1243.0,
+      270.0,
+      1262.0
+     ],
+     "text": "der a road, canal, ete."
+    },
+    {
+     "bbox": [
+      50.0,
+      1256.0,
+      277.0,
+      1279.0
+     ],
+     "text": "Cumber, kum’bēr, v. t."
+    },
+    {
+     "bbox": [
+      268.0,
+      1256.0,
+      541.0,
+      1281.0
+     ],
+     "text": ". [-BERED (-bērd), -BERING.]"
+    },
+    {
+     "bbox": [
+      67.0,
+      1277.0,
+      541.0,
+      1296.0
+     ],
+     "text": "To hang or rest on as a troublesome weight; to be"
+    },
+    {
+     "bbox": [
+      67.0,
+      1294.0,
+      541.0,
+      1312.0
+     ],
+     "text": "burdensome.or oppressive to; to clog, obstruct, em-"
+    },
+    {
+     "bbox": [
+      67.0,
+      1311.0,
+      224.0,
+      1329.0
+     ],
+     "text": "barrass, impede."
+    },
+    {
+     "bbox": [
+      235.0,
+      1311.0,
+      539.0,
+      1329.0
+     ],
+     "text": "Cumbersome, -sum, a. Burden-"
+    },
+    {
+     "bbox": [
+      67.0,
+      1328.0,
+      539.0,
+      1346.0
+     ],
+     "text": "some or hindering ; not easily managed: oppressive;"
+    },
+    {
+     "bbox": [
+      69.0,
+      1344.0,
+      392.0,
+      1363.0
+     ],
+     "text": "vexatious.—Cum'bersomely, adu."
+    },
+    {
+     "bbox": [
+      417.0,
+      1344.0,
+      538.0,
+      1363.0
+     ],
+     "text": "Cum'brance,"
+    },
+    {
+     "bbox": [
+      67.0,
+      1363.0,
+      168.0,
+      1382.0
+     ],
+     "text": "-brans,n."
+    },
+    {
+     "bbox": [
+      180.0,
+      1361.0,
+      539.0,
+      1380.0
+     ],
+     "text": "Eneumbrance.— Cum'brous, -brus, a."
+    },
+    {
+     "bbox": [
+      65.0,
+      1376.0,
+      457.0,
+      1399.0
+     ],
+     "text": "Rendering action difficult; giving trouble."
+    },
+    {
+     "bbox": [
+      461.0,
+      1378.0,
+      539.0,
+      1397.0
+     ],
+     "text": "—Cum."
+    },
+    {
+     "bbox": [
+      65.0,
+      1393.0,
+      541.0,
+      1418.0
+     ],
+     "text": "brously,adv. —Cum'brousness,n.—Cu'mulate,"
+    },
+    {
+     "bbox": [
+      67.0,
+      1412.0,
+      149.0,
+      1431.0
+     ],
+     "text": "-lat,v.t."
+    },
+    {
+     "bbox": [
+      151.0,
+      1412.0,
+      396.0,
+      1431.0
+     ],
+     "text": "To heap together; amass."
+    },
+    {
+     "bbox": [
+      411.0,
+      1412.0,
+      541.0,
+      1431.0
+     ],
+     "text": "-Cumula'tion,"
+    },
+    {
+     "bbox": [
+      63.0,
+      1425.0,
+      543.0,
+      1451.0
+     ],
+     "text": "n. Act of, ete.; a heap.—Cu'mulative, -tiv, a. Form-"
+    },
+    {
+     "bbox": [
+      65.0,
+      1442.0,
+      543.0,
+      1468.0
+     ],
+     "text": "ing a mass; aggregated; augmenting: gaining or giv-"
+    },
+    {
+     "bbox": [
+      67.0,
+      1459.0,
+      541.0,
+      1485.0
+     ],
+     "text": "ing force by successive additions. (Law.) Given by"
+    },
+    {
+     "bbox": [
+      67.0,
+      1476.0,
+      543.0,
+      1502.0
+     ],
+     "text": "the same testator to the same legatee, — said of a"
+    },
+    {
+     "bbox": [
+      71.0,
+      1515.0,
+      302.0,
+      1534.0
+     ],
+     "text": "primary forms of elouds,"
+    },
+    {
+     "bbox": [
+      302.0,
+      1515.0,
+      543.0,
+      1534.0
+     ],
+     "text": "—being massed, and often"
+    },
+    {
+     "bbox": [
+      71.0,
+      1532.0,
+      461.0,
+      1551.0
+     ],
+     "text": "bringing rain. [L.] — Cu'mulo-stra'tus, n."
+    },
+    {
+     "bbox": [
+      69.0,
+      1549.0,
+      543.0,
+      1568.0
+     ],
+     "text": "of cloud between eumulus and stratus, which is in"
+    },
+    {
+     "bbox": [
+      73.0,
+      1568.0,
+      130.0,
+      1581.0
+     ],
+     "text": "layers."
+    },
+    {
+     "bbox": [
+      54.0,
+      1579.0,
+      543.0,
+      1603.0
+     ],
+     "text": "Cumin, kum’in, n., An umbelliferous plant, resem-"
+    },
+    {
+     "bbox": [
+      69.0,
+      1598.0,
+      442.0,
+      1622.0
+     ],
+     "text": "bling fennel, and having afomatic seeds."
+    }
+   ]
+  },
+  {
+   "id": "p0-b3",
+   "type": "paragraph",
+   "bbox": [
+    552.0,
+    168.0,
+    1044.0,
+    1620.0
+   ],
+   "order": 3,
+   "text": "Cunctative, kunk'ta-tiv, a. Causing or prone to delay; tardy. Cuneal. ku'ne-al. -neate, -neated, -neat/ic, -niform,-ne’iform, a. Having the form of a wedge; pert. to the wedge-shaped characters in ancient Persian and Assyrian inseriptions. Cunning, kun'ning, a.Well-instructed ; skillful ;experienced ; given to underhand maneuvering ;artfully deceitful; sly; crafty ; exhibiting skill or craft; ingenious; curious.—n.Faculty or act of using stratagem ; deceit ; art. Cup, kup, n. A small drinking vessel; contents of a eup; cupful; a drink compösed of wine iced and flavored ; that which must be endured ; portion ; pl. Repeated potations ;revelry; drunkenness.[CUPPED (kupt), CUPPING.]To supply with eups.(Surg.)To bleed by searification and a eupping-glass.Cup’ping, n.(Surg.) Operation of drawing blood with a cupping-glass.Cup'ping-glass, n. A glass eup to be applied te the skin, to draw blood by ex hausting the air.. —Cup'bear er, n. One who fills and hands the eups at an entertainment. —Cup²board, kub'ěrd, n. À closet with shelves, for cups,plates, etc.—Cu'pel, n. small vessel used in refining precious m etal s: a shallow erueible. separate by means of a cupel;refine.Cu'pola, -là, n.; pl. -LAS, -láz.(Åreh.) Á spherical vault on the top of.an iurnace; the furnace itself. Cupidity, ku-pid'Y-tí, n. Eager desire for possession,, esp. of Cupola.wealth; covetousness; lust. Cupreous,ku'pre-us, a.\"Of or resembling copper ;coppery.— Cuprif’erous,, -ēr-us, a. Containing or affording copper. Cur, kēr, n.,.A worthless or degenerate dog; a worthless, \"snarling fellow - Cur'rish, a.Like a cur ;quarrelsome ; churlish.— Cur'rishly. adv.Curable, Curate, Curator, ete. See under CURE.Curacoa,k00-ra-so,n.A cordial, flavored with orange-peel, einnamon, and maee, first made in the island of Curaçoa. Curare, -ri, ku-ra're, n. A South American vegetable poison used by Indians upon arrows, ete., —destroying control by the nerves,of the voluntary muscles. [Written urari, woorali, wourari, etc.]Curb, kěrb, n. A check or hindrance; esp. a chain or strap upon a horse's bit, which may be drawn tightly against the lower jaw; a wall to hold back a mass of earth in its place; a wall set within or round the mouth of a well: a_eurb-stone. —v. t.[CURBED (kērbd). cuRBING.1To bend to one's will, restrain,confine: to furnish with a curb, as a well; to restrain by a eurb, as a bank of earth.—Curb'roof, n.A roof having a double slope: gambrel roof; mansard roof. —-stone, n. A stone placed edgewise against earth or stonework to prevent its giving way.Curd, kérd, n. The coagulated or thickened' part of milk, eaten as food, also of any liquid. —v. t. To curdle; congeal. —v. i.To become coagulated or thickened; to separate into eurds and whey.— Cur/.dle, -dl, v. i. and t.. [cuRDLED (-dld), -DLING.],To change into curd, coagulate or conerete; to thicken. congeal. Cure, kūr, n.. Spiritual charge; care of souls; office of a curate; curacy; medical care; remedial treatment of disease ;_ successful remedial treatment ;restoration to health ; remedy ; restorative.[CURED (kūrd), CURING.]] To heal, restore to health,soundness, or sanity; to remedy, remove ; to prepare for preservation by drying, salting, ete.— v. i.To effect a eure, be healed.-Cur'able, a. That may be,etc.—-Cur'ableness, -abil'ity. n.—Cure'less,a.Ineurable.—Cur'ative, -tiv,a. Pert. to the cure of diseases; tending to eure.—Cura'tor, -tēr,n. A superintendent,as of a museum, ete. ; trustee;guardian.L.-Cu'rate, -rāt, n.One who has the cure of soüls; orig., any clergyman; now, an",
+   "lines": [
+    {
+     "bbox": [
+      547.0,
+      165.0,
+      1041.0,
+      189.0
+     ],
+     "text": "Cunctative, kunk'ta-tiv, a. Causing or prone to de-"
+    },
+    {
+     "bbox": [
+      566.0,
+      188.0,
+      669.0,
+      206.0
+     ],
+     "text": "lay; tardy."
+    },
+    {
+     "bbox": [
+      551.0,
+      201.0,
+      1041.0,
+      225.0
+     ],
+     "text": "Cuneal. ku'ne-al. -neate, -neated, -neat/ic, -niform,"
+    },
+    {
+     "bbox": [
+      568.0,
+      221.0,
+      1044.0,
+      240.0
+     ],
+     "text": "-ne’iform, a. Having the form of a wedge; pert. to"
+    },
+    {
+     "bbox": [
+      570.0,
+      238.0,
+      1042.0,
+      257.0
+     ],
+     "text": "the wedge-shaped characters in ancient Persian and"
+    },
+    {
+     "bbox": [
+      568.0,
+      255.0,
+      773.0,
+      274.0
+     ],
+     "text": "Assyrian inseriptions."
+    },
+    {
+     "bbox": [
+      551.0,
+      270.0,
+      775.0,
+      293.0
+     ],
+     "text": "Cunning, kun'ning, a."
+    },
+    {
+     "bbox": [
+      792.0,
+      268.0,
+      1046.0,
+      292.0
+     ],
+     "text": "Well-instructed ; skillful ;"
+    },
+    {
+     "bbox": [
+      566.0,
+      285.0,
+      1044.0,
+      311.0
+     ],
+     "text": "experienced ; given to underhand maneuvering ;"
+    },
+    {
+     "bbox": [
+      566.0,
+      302.0,
+      1042.0,
+      326.0
+     ],
+     "text": "artfully deceitful; sly; crafty ; exhibiting skill or"
+    },
+    {
+     "bbox": [
+      570.0,
+      322.0,
+      868.0,
+      341.0
+     ],
+     "text": "craft; ingenious; curious.—n."
+    },
+    {
+     "bbox": [
+      868.0,
+      321.0,
+      1044.0,
+      345.0
+     ],
+     "text": "Faculty or act of"
+    },
+    {
+     "bbox": [
+      566.0,
+      339.0,
+      845.0,
+      358.0
+     ],
+     "text": "using stratagem ; deceit ; art."
+    },
+    {
+     "bbox": [
+      551.0,
+      352.0,
+      1046.0,
+      379.0
+     ],
+     "text": "Cup, kup, n. A small drinking vessel; contents of a"
+    },
+    {
+     "bbox": [
+      566.0,
+      375.0,
+      1044.0,
+      394.0
+     ],
+     "text": "eup; cupful; a drink compösed of wine iced and"
+    },
+    {
+     "bbox": [
+      568.0,
+      392.0,
+      1042.0,
+      411.0
+     ],
+     "text": "flavored ; that which must be endured ; portion ;"
+    },
+    {
+     "bbox": [
+      855.0,
+      409.0,
+      1042.0,
+      428.0
+     ],
+     "text": "pl. Repeated pota-"
+    },
+    {
+     "bbox": [
+      570.0,
+      426.0,
+      633.0,
+      444.0
+     ],
+     "text": "tions ;"
+    },
+    {
+     "bbox": [
+      629.0,
+      426.0,
+      863.0,
+      444.0
+     ],
+     "text": "revelry; drunkenness."
+    },
+    {
+     "bbox": [
+      958.0,
+      426.0,
+      1042.0,
+      444.0
+     ],
+     "text": "[CUPPED"
+    },
+    {
+     "bbox": [
+      572.0,
+      442.0,
+      740.0,
+      461.0
+     ],
+     "text": "(kupt), CUPPING.]"
+    },
+    {
+     "bbox": [
+      736.0,
+      442.0,
+      966.0,
+      461.0
+     ],
+     "text": "To supply with eups."
+    },
+    {
+     "bbox": [
+      958.0,
+      442.0,
+      1042.0,
+      463.0
+     ],
+     "text": "(Surg.)"
+    },
+    {
+     "bbox": [
+      570.0,
+      459.0,
+      1021.0,
+      478.0
+     ],
+     "text": "To bleed by searification and a eupping-glass."
+    },
+    {
+     "bbox": [
+      568.0,
+      474.0,
+      698.0,
+      493.0
+     ],
+     "text": "Cup’ping, n."
+    },
+    {
+     "bbox": [
+      690.0,
+      471.0,
+      1044.0,
+      499.0
+     ],
+     "text": "(Surg.) Operation of drawing blood"
+    },
+    {
+     "bbox": [
+      570.0,
+      493.0,
+      767.0,
+      512.0
+     ],
+     "text": "with a cupping-glass."
+    },
+    {
+     "bbox": [
+      779.0,
+      491.0,
+      1046.0,
+      516.0
+     ],
+     "text": "Cup'ping-glass, n. A glass"
+    },
+    {
+     "bbox": [
+      568.0,
+      508.0,
+      1042.0,
+      532.0
+     ],
+     "text": "eup to be applied te the skin, to draw blood by ex"
+    },
+    {
+     "bbox": [
+      727.0,
+      525.0,
+      847.0,
+      544.0
+     ],
+     "text": ". —Cup'bear"
+    },
+    {
+     "bbox": [
+      570.0,
+      527.0,
+      736.0,
+      546.0
+     ],
+     "text": "hausting the air."
+    },
+    {
+     "bbox": [
+      568.0,
+      540.0,
+      849.0,
+      566.0
+     ],
+     "text": "er, n. One who fills and hands"
+    },
+    {
+     "bbox": [
+      572.0,
+      561.0,
+      847.0,
+      579.0
+     ],
+     "text": "the eups at an entertainment."
+    },
+    {
+     "bbox": [
+      578.0,
+      578.0,
+      847.0,
+      596.0
+     ],
+     "text": "—Cup²board, kub'ěrd, n. À"
+    },
+    {
+     "bbox": [
+      568.0,
+      592.0,
+      849.0,
+      615.0
+     ],
+     "text": "closet with shelves, for cups,"
+    },
+    {
+     "bbox": [
+      568.0,
+      613.0,
+      679.0,
+      632.0
+     ],
+     "text": "plates, etc."
+    },
+    {
+     "bbox": [
+      679.0,
+      609.0,
+      811.0,
+      632.0
+     ],
+     "text": "—Cu'pel, n."
+    },
+    {
+     "bbox": [
+      568.0,
+      626.0,
+      851.0,
+      651.0
+     ],
+     "text": "small vessel used in refining"
+    },
+    {
+     "bbox": [
+      570.0,
+      647.0,
+      847.0,
+      666.0
+     ],
+     "text": "precious m etal s: a shallow"
+    },
+    {
+     "bbox": [
+      568.0,
+      664.0,
+      656.0,
+      682.0
+     ],
+     "text": "erueible."
+    },
+    {
+     "bbox": [
+      564.0,
+      675.0,
+      851.0,
+      701.0
+     ],
+     "text": "separate by means of a cupel;"
+    },
+    {
+     "bbox": [
+      658.0,
+      694.0,
+      851.0,
+      718.0
+     ],
+     "text": "Cu'pola, -là, n.; pl."
+    },
+    {
+     "bbox": [
+      570.0,
+      698.0,
+      635.0,
+      716.0
+     ],
+     "text": "refine."
+    },
+    {
+     "bbox": [
+      566.0,
+      712.0,
+      666.0,
+      735.0
+     ],
+     "text": "-LAS, -láz."
+    },
+    {
+     "bbox": [
+      668.0,
+      714.0,
+      849.0,
+      733.0
+     ],
+     "text": "(Åreh.) Á spher-"
+    },
+    {
+     "bbox": [
+      568.0,
+      731.0,
+      853.0,
+      750.0
+     ],
+     "text": "ical vault on the top of.an"
+    },
+    {
+     "bbox": [
+      566.0,
+      763.0,
+      832.0,
+      786.0
+     ],
+     "text": "iurnace; the furnace itself."
+    },
+    {
+     "bbox": [
+      551.0,
+      780.0,
+      853.0,
+      804.0
+     ],
+     "text": "Cupidity, ku-pid'Y-tí, n. Eager"
+    },
+    {
+     "bbox": [
+      566.0,
+      797.0,
+      851.0,
+      821.0
+     ],
+     "text": "desire for possession,, esp. of"
+    },
+    {
+     "bbox": [
+      909.0,
+      799.0,
+      983.0,
+      819.0
+     ],
+     "text": "Cupola."
+    },
+    {
+     "bbox": [
+      566.0,
+      812.0,
+      813.0,
+      838.0
+     ],
+     "text": "wealth; covetousness; lust."
+    },
+    {
+     "bbox": [
+      555.0,
+      834.0,
+      650.0,
+      853.0
+     ],
+     "text": "Cupreous,"
+    },
+    {
+     "bbox": [
+      645.0,
+      834.0,
+      794.0,
+      853.0
+     ],
+     "text": "ku'pre-us, a."
+    },
+    {
+     "bbox": [
+      784.0,
+      829.0,
+      1044.0,
+      855.0
+     ],
+     "text": "\"Of or resembling copper ;"
+    },
+    {
+     "bbox": [
+      562.0,
+      851.0,
+      648.0,
+      870.0
+     ],
+     "text": "coppery."
+    },
+    {
+     "bbox": [
+      662.0,
+      851.0,
+      805.0,
+      870.0
+     ],
+     "text": "— Cuprif’erous,"
+    },
+    {
+     "bbox": [
+      796.0,
+      849.0,
+      1046.0,
+      874.0
+     ],
+     "text": ", -ēr-us, a. Containing or"
+    },
+    {
+     "bbox": [
+      568.0,
+      868.0,
+      729.0,
+      887.0
+     ],
+     "text": "affording copper."
+    },
+    {
+     "bbox": [
+      551.0,
+      883.0,
+      1046.0,
+      908.0
+     ],
+     "text": "Cur, kēr, n.,.A worthless or degenerate dog; a worth-"
+    },
+    {
+     "bbox": [
+      566.0,
+      900.0,
+      763.0,
+      923.0
+     ],
+     "text": "less, \"snarling fellow"
+    },
+    {
+     "bbox": [
+      786.0,
+      900.0,
+      913.0,
+      923.0
+     ],
+     "text": "- Cur'rish, a."
+    },
+    {
+     "bbox": [
+      912.0,
+      904.0,
+      1046.0,
+      922.0
+     ],
+     "text": "Like a cur ;"
+    },
+    {
+     "bbox": [
+      568.0,
+      919.0,
+      786.0,
+      938.0
+     ],
+     "text": "quarrelsome ; churlish."
+    },
+    {
+     "bbox": [
+      790.0,
+      919.0,
+      962.0,
+      938.0
+     ],
+     "text": "— Cur'rishly. adv."
+    },
+    {
+     "bbox": [
+      549.0,
+      934.0,
+      993.0,
+      958.0
+     ],
+     "text": "Curable, Curate, Curator, ete. See under CURE."
+    },
+    {
+     "bbox": [
+      552.0,
+      950.0,
+      637.0,
+      975.0
+     ],
+     "text": "Curacoa,"
+    },
+    {
+     "bbox": [
+      637.0,
+      954.0,
+      784.0,
+      973.0
+     ],
+     "text": "k00-ra-so,n."
+    },
+    {
+     "bbox": [
+      796.0,
+      954.0,
+      1044.0,
+      973.0
+     ],
+     "text": "A cordial, flavored with"
+    },
+    {
+     "bbox": [
+      566.0,
+      971.0,
+      1044.0,
+      990.0
+     ],
+     "text": "orange-peel, einnamon, and maee, first made in"
+    },
+    {
+     "bbox": [
+      568.0,
+      988.0,
+      777.0,
+      1007.0
+     ],
+     "text": "the island of Curaçoa."
+    },
+    {
+     "bbox": [
+      549.0,
+      999.0,
+      1046.0,
+      1026.0
+     ],
+     "text": "Curare, -ri, ku-ra're, n. A South American vegetable"
+    },
+    {
+     "bbox": [
+      566.0,
+      1020.0,
+      1048.0,
+      1044.0
+     ],
+     "text": "poison used by Indians upon arrows, ete., —de-"
+    },
+    {
+     "bbox": [
+      564.0,
+      1035.0,
+      1046.0,
+      1061.0
+     ],
+     "text": "stroying control by the nerves,of the voluntary"
+    },
+    {
+     "bbox": [
+      566.0,
+      1054.0,
+      1018.0,
+      1078.0
+     ],
+     "text": "muscles. [Written urari, woorali, wourari, etc.]"
+    },
+    {
+     "bbox": [
+      553.0,
+      1069.0,
+      1048.0,
+      1095.0
+     ],
+     "text": "Curb, kěrb, n. A check or hindrance; esp. a chain or"
+    },
+    {
+     "bbox": [
+      568.0,
+      1089.0,
+      1046.0,
+      1108.0
+     ],
+     "text": "strap upon a horse's bit, which may be drawn tight-"
+    },
+    {
+     "bbox": [
+      568.0,
+      1102.0,
+      1046.0,
+      1129.0
+     ],
+     "text": "ly against the lower jaw; a wall to hold back a mass"
+    },
+    {
+     "bbox": [
+      566.0,
+      1119.0,
+      1046.0,
+      1146.0
+     ],
+     "text": "of earth in its place; a wall set within or round the"
+    },
+    {
+     "bbox": [
+      568.0,
+      1136.0,
+      953.0,
+      1164.0
+     ],
+     "text": "mouth of a well: a_eurb-stone. —v. t."
+    },
+    {
+     "bbox": [
+      947.0,
+      1142.0,
+      1046.0,
+      1161.0
+     ],
+     "text": "[CURBED"
+    },
+    {
+     "bbox": [
+      570.0,
+      1155.0,
+      746.0,
+      1174.0
+     ],
+     "text": "(kērbd). cuRBING.1"
+    },
+    {
+     "bbox": [
+      754.0,
+      1155.0,
+      1044.0,
+      1178.0
+     ],
+     "text": "To bend to one's will, restrain,"
+    },
+    {
+     "bbox": [
+      572.0,
+      1177.0,
+      757.0,
+      1191.0
+     ],
+     "text": "confine: to furnish"
+    },
+    {
+     "bbox": [
+      754.0,
+      1176.0,
+      1044.0,
+      1194.0
+     ],
+     "text": "with a curb, as a well; to re-"
+    },
+    {
+     "bbox": [
+      568.0,
+      1187.0,
+      1046.0,
+      1213.0
+     ],
+     "text": "strain by a eurb, as a bank of earth.—Curb'roof, n."
+    },
+    {
+     "bbox": [
+      570.0,
+      1208.0,
+      1042.0,
+      1226.0
+     ],
+     "text": "A roof having a double slope: gambrel roof; mansard"
+    },
+    {
+     "bbox": [
+      568.0,
+      1224.0,
+      1044.0,
+      1243.0
+     ],
+     "text": "roof. —-stone, n. A stone placed edgewise against"
+    },
+    {
+     "bbox": [
+      568.0,
+      1243.0,
+      985.0,
+      1262.0
+     ],
+     "text": "earth or stonework to prevent its giving way."
+    },
+    {
+     "bbox": [
+      553.0,
+      1254.0,
+      1048.0,
+      1279.0
+     ],
+     "text": "Curd, kérd, n. The coagulated or thickened' part of"
+    },
+    {
+     "bbox": [
+      568.0,
+      1275.0,
+      1046.0,
+      1294.0
+     ],
+     "text": "milk, eaten as food, also of any liquid. —v. t. To"
+    },
+    {
+     "bbox": [
+      572.0,
+      1294.0,
+      792.0,
+      1312.0
+     ],
+     "text": "curdle; congeal. —v. i."
+    },
+    {
+     "bbox": [
+      784.0,
+      1294.0,
+      1046.0,
+      1312.0
+     ],
+     "text": "To become coagulated or"
+    },
+    {
+     "bbox": [
+      570.0,
+      1307.0,
+      1046.0,
+      1331.0
+     ],
+     "text": "thickened; to separate into eurds and whey.— Cur/."
+    },
+    {
+     "bbox": [
+      570.0,
+      1326.0,
+      1048.0,
+      1350.0
+     ],
+     "text": "dle, -dl, v. i. and t.. [cuRDLED (-dld), -DLING.],To"
+    },
+    {
+     "bbox": [
+      568.0,
+      1342.0,
+      1046.0,
+      1365.0
+     ],
+     "text": "change into curd, coagulate or conerete; to thicken."
+    },
+    {
+     "bbox": [
+      572.0,
+      1365.0,
+      647.0,
+      1378.0
+     ],
+     "text": "congeal."
+    },
+    {
+     "bbox": [
+      555.0,
+      1376.0,
+      683.0,
+      1399.0
+     ],
+     "text": "Cure, kūr, n."
+    },
+    {
+     "bbox": [
+      673.0,
+      1376.0,
+      1048.0,
+      1401.0
+     ],
+     "text": ". Spiritual charge; care of souls; office"
+    },
+    {
+     "bbox": [
+      566.0,
+      1393.0,
+      1050.0,
+      1417.0
+     ],
+     "text": "of a curate; curacy; medical care; remedial treat-"
+    },
+    {
+     "bbox": [
+      568.0,
+      1408.0,
+      853.0,
+      1434.0
+     ],
+     "text": "ment of disease ;_ successful"
+    },
+    {
+     "bbox": [
+      845.0,
+      1416.0,
+      1046.0,
+      1429.0
+     ],
+     "text": "remedial treatment ;"
+    },
+    {
+     "bbox": [
+      572.0,
+      1429.0,
+      991.0,
+      1448.0
+     ],
+     "text": "restoration to health ; remedy ; restorative.-"
+    },
+    {
+     "bbox": [
+      788.0,
+      1442.0,
+      1046.0,
+      1468.0
+     ],
+     "text": "] To heal, restore to health,"
+    },
+    {
+     "bbox": [
+      574.0,
+      1448.0,
+      798.0,
+      1466.0
+     ],
+     "text": "[CURED (kūrd), CURING.]"
+    },
+    {
+     "bbox": [
+      572.0,
+      1464.0,
+      1044.0,
+      1483.0
+     ],
+     "text": "soundness, or sanity; to remedy, remove ; to pre-"
+    },
+    {
+     "bbox": [
+      576.0,
+      1481.0,
+      1046.0,
+      1500.0
+     ],
+     "text": "pare for preservation by drying, salting, ete.— v. i."
+    },
+    {
+     "bbox": [
+      832.0,
+      1494.0,
+      1048.0,
+      1519.0
+     ],
+     "text": "Cur'able, a. That may"
+    },
+    {
+     "bbox": [
+      576.0,
+      1498.0,
+      830.0,
+      1517.0
+     ],
+     "text": "To effect a eure, be healed.-"
+    },
+    {
+     "bbox": [
+      652.0,
+      1509.0,
+      1048.0,
+      1538.0
+     ],
+     "text": "-Cur'ableness, -abil'ity. n.—Cure'less,a."
+    },
+    {
+     "bbox": [
+      574.0,
+      1515.0,
+      662.0,
+      1534.0
+     ],
+     "text": "be,etc.—"
+    },
+    {
+     "bbox": [
+      574.0,
+      1532.0,
+      673.0,
+      1551.0
+     ],
+     "text": "Ineurable."
+    },
+    {
+     "bbox": [
+      666.0,
+      1528.0,
+      1048.0,
+      1552.0
+     ],
+     "text": "—Cur'ative, -tiv,a. Pert. to the cure of"
+    },
+    {
+     "bbox": [
+      843.0,
+      1545.0,
+      1046.0,
+      1568.0
+     ],
+     "text": "Cura'tor, -tēr,n. A"
+    },
+    {
+     "bbox": [
+      572.0,
+      1549.0,
+      853.0,
+      1568.0
+     ],
+     "text": "diseases; tending to eure.—"
+    },
+    {
+     "bbox": [
+      723.0,
+      1560.0,
+      1048.0,
+      1586.0
+     ],
+     "text": "as of a museum, ete. ; trustee;"
+    },
+    {
+     "bbox": [
+      572.0,
+      1566.0,
+      725.0,
+      1584.0
+     ],
+     "text": "superintendent,"
+    },
+    {
+     "bbox": [
+      572.0,
+      1582.0,
+      668.0,
+      1601.0
+     ],
+     "text": "guardian."
+    },
+    {
+     "bbox": [
+      683.0,
+      1584.0,
+      717.0,
+      1599.0
+     ],
+     "text": "L."
+    },
+    {
+     "bbox": [
+      733.0,
+      1582.0,
+      905.0,
+      1601.0
+     ],
+     "text": "-Cu'rate, -rāt, n."
+    },
+    {
+     "bbox": [
+      897.0,
+      1582.0,
+      1048.0,
+      1601.0
+     ],
+     "text": "One who has"
+    },
+    {
+     "bbox": [
+      572.0,
+      1598.0,
+      1046.0,
+      1622.0
+     ],
+     "text": "the cure of soüls; orig., any clergyman; now, an"
+    }
+   ]
+  },
+  {
+   "id": "p0-b4",
+   "type": "footer",
+   "bbox": [
+    173.0,
+    1631.0,
+    917.0,
+    1651.0
+   ],
+   "order": 4,
+   "text": "Bùn, cūbe, fyll;mõon,fõót; cow, oil ; liņger or igk, then, bonbon, chair, get.",
+   "lines": [
+    {
+     "bbox": [
+      176.0,
+      1631.0,
+      918.0,
+      1656.0
+     ],
+     "text": "Bùn, cūbe, fyll;mõon,fõót; cow, oil ; liņger or igk, then, bonbon, chair, get."
+    }
+   ]
+  },
+  {
+   "id": "p0-b5",
+   "type": "page_number",
+   "bbox": [
+    528.0,
+    121.0,
+    560.0,
+    144.0
+   ],
+   "order": 5,
+   "text": "91"
+  }
+ ]
+}

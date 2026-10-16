@@ -1,0 +1,645 @@
+{
+ "index": 0,
+ "width": 1111,
+ "height": 1800,
+ "sourceImage": "cookbook-lists.jpg",
+ "blocks": [
+  {
+   "id": "p0-b0",
+   "type": "header",
+   "bbox": [
+    301.0,
+    78.0,
+    773.0,
+    102.0
+   ],
+   "order": 0,
+   "text": "BREAD AND BREAD MAKING",
+   "lines": [
+    {
+     "bbox": [
+      301.0,
+      75.0,
+      779.0,
+      107.0
+     ],
+     "text": "BREAD AND BREAD MAKING"
+    }
+   ]
+  },
+  {
+   "id": "p0-b1",
+   "type": "heading",
+   "bbox": [
+    495.0,
+    169.0,
+    576.0,
+    197.0
+   ],
+   "order": 1,
+   "level": 2,
+   "text": "Buns",
+   "lines": [
+    {
+     "bbox": [
+      494.0,
+      167.0,
+      581.0,
+      201.0
+     ],
+     "text": "Buns"
+    }
+   ]
+  },
+  {
+   "id": "p0-b2",
+   "type": "paragraph",
+   "bbox": [
+    138.0,
+    213.0,
+    478.0,
+    385.0
+   ],
+   "order": 2,
+   "text": "1 ceup scalded milk ½ cup butter ½ cup sugar 1 yeast cake dissolved in 4 eup lukewarm water",
+   "lines": [
+    {
+     "bbox": [
+      141.0,
+      212.0,
+      397.0,
+      251.0
+     ],
+     "text": "1 ceup scalded milk"
+    },
+    {
+     "bbox": [
+      141.0,
+      246.0,
+      332.0,
+      291.0
+     ],
+     "text": "½ cup butter"
+    },
+    {
+     "bbox": [
+      139.0,
+      283.0,
+      322.0,
+      322.0
+     ],
+     "text": "½ cup sugar"
+    },
+    {
+     "bbox": [
+      137.0,
+      315.0,
+      480.0,
+      354.0
+     ],
+     "text": "1 yeast cake dissolved in"
+    },
+    {
+     "bbox": [
+      137.0,
+      349.0,
+      467.0,
+      392.0
+     ],
+     "text": "4 eup lukewarm water"
+    }
+   ]
+  },
+  {
+   "id": "p0-b3",
+   "type": "paragraph",
+   "bbox": [
+    597.0,
+    214.0,
+    944.0,
+    382.0
+   ],
+   "order": 3,
+   "text": "teaspoon salt eup raisins stoned and cut in quarters 1 teaspoon extract lemon Flour",
+   "lines": [
+    {
+     "bbox": [
+      596.0,
+      212.0,
+      822.0,
+      251.0
+     ],
+     "text": "teaspoon salt"
+    },
+    {
+     "bbox": [
+      594.0,
+      242.0,
+      951.0,
+      289.0
+     ],
+     "text": "eup raisins stoned and"
+    },
+    {
+     "bbox": [
+      656.0,
+      281.0,
+      876.0,
+      319.0
+     ],
+     "text": "cut in quarters"
+    },
+    {
+     "bbox": [
+      596.0,
+      317.0,
+      943.0,
+      354.0
+     ],
+     "text": "1 teaspoon extract lemon"
+    },
+    {
+     "bbox": [
+      598.0,
+      352.0,
+      683.0,
+      388.0
+     ],
+     "text": "Flour"
+    }
+   ]
+  },
+  {
+   "id": "p0-b4",
+   "type": "paragraph",
+   "bbox": [
+    76.0,
+    407.0,
+    991.0,
+    638.0
+   ],
+   "order": 4,
+   "text": "Add one-half sugar and salt to milk; when lukewarm, add dissolved yeast cake and one and one-half cups four ; cover,and let rise until light; add butter, remaining sugar, raisins,lemon, and flour to make a dough; let rise, shape like biscuits, let rise again, and bake. If wanted glazed, brush over with beaten egg before baking.",
+   "lines": [
+    {
+     "bbox": [
+      118.0,
+      405.0,
+      993.0,
+      442.0
+     ],
+     "text": "Add one-half sugar and salt to milk; when lukewarm, add"
+    },
+    {
+     "bbox": [
+      79.0,
+      442.0,
+      995.0,
+      484.0
+     ],
+     "text": "dissolved yeast cake and one and one-half cups four ; cover,"
+    },
+    {
+     "bbox": [
+      79.0,
+      482.0,
+      995.0,
+      525.0
+     ],
+     "text": "and let rise until light; add butter, remaining sugar, raisins,"
+    },
+    {
+     "bbox": [
+      81.0,
+      523.0,
+      993.0,
+      561.0
+     ],
+     "text": "lemon, and flour to make a dough; let rise, shape like bis-"
+    },
+    {
+     "bbox": [
+      83.0,
+      562.0,
+      995.0,
+      600.0
+     ],
+     "text": "cuits, let rise again, and bake. If wanted glazed, brush over"
+    },
+    {
+     "bbox": [
+      83.0,
+      604.0,
+      548.0,
+      643.0
+     ],
+     "text": "with beaten egg before baking."
+    }
+   ]
+  },
+  {
+   "id": "p0-b5",
+   "type": "heading",
+   "bbox": [
+    408.0,
+    679.0,
+    665.0,
+    704.0
+   ],
+   "order": 5,
+   "level": 2,
+   "text": "Hot Cross Buns",
+   "lines": [
+    {
+     "bbox": [
+      407.0,
+      671.0,
+      670.0,
+      713.0
+     ],
+     "text": "Hot Cross Buns"
+    }
+   ]
+  },
+  {
+   "id": "p0-b6",
+   "type": "paragraph",
+   "bbox": [
+    137.0,
+    721.0,
+    945.0,
+    930.0
+   ],
+   "order": 6,
+   "text": "1 cup scalded milk 4 teaspoon cinnamon 4 cup sugar 3 cups flour 2 tablespoons butter 1 egg teaspoon salt 4 cup raisins stoned and á yeast cake dissolved in quartered, or Á eup lukewarm water 4 eup currants",
+   "lines": [
+    {
+     "bbox": [
+      139.0,
+      722.0,
+      401.0,
+      759.0
+     ],
+     "text": "1 cup scalded milk"
+    },
+    {
+     "bbox": [
+      598.0,
+      722.0,
+      907.0,
+      759.0
+     ],
+     "text": "4 teaspoon cinnamon"
+    },
+    {
+     "bbox": [
+      141.0,
+      759.0,
+      322.0,
+      793.0
+     ],
+     "text": "4 cup sugar"
+    },
+    {
+     "bbox": [
+      596.0,
+      758.0,
+      762.0,
+      791.0
+     ],
+     "text": "3 cups flour"
+    },
+    {
+     "bbox": [
+      137.0,
+      791.0,
+      422.0,
+      829.0
+     ],
+     "text": "2 tablespoons butter"
+    },
+    {
+     "bbox": [
+      593.0,
+      787.0,
+      682.0,
+      833.0
+     ],
+     "text": "1 egg"
+    },
+    {
+     "bbox": [
+      596.0,
+      819.0,
+      951.0,
+      865.0
+     ],
+     "text": "4 cup raisins stoned and"
+    },
+    {
+     "bbox": [
+      141.0,
+      827.0,
+      366.0,
+      866.0
+     ],
+     "text": "teaspoon salt"
+    },
+    {
+     "bbox": [
+      141.0,
+      857.0,
+      496.0,
+      900.0
+     ],
+     "text": "á yeast cake dissolved in"
+    },
+    {
+     "bbox": [
+      660.0,
+      862.0,
+      845.0,
+      896.0
+     ],
+     "text": "quartered, or"
+    },
+    {
+     "bbox": [
+      139.0,
+      892.0,
+      469.0,
+      936.0
+     ],
+     "text": "Á eup lukewarm water"
+    },
+    {
+     "bbox": [
+      596.0,
+      896.0,
+      816.0,
+      936.0
+     ],
+     "text": "4 eup currants"
+    }
+   ]
+  },
+  {
+   "id": "p0-b7",
+   "type": "paragraph",
+   "bbox": [
+    77.0,
+    951.0,
+    992.0,
+    1220.0
+   ],
+   "order": 7,
+   "text": "Add butter, sugar, and salt to milk ; when lukewarm, add dissolved yeast cake, four, cinnamon, and egg well beaten ;when thoroughly mixed, add raisins, cover, and let rise over night. In morning, shape in forms of large biseuits, place in pan one inch apart, let rise, brush over with beaten egg,and bake twenty minutes; cool, and with ornamental frosting make a cross on top of each bun.",
+   "lines": [
+    {
+     "bbox": [
+      116.0,
+      947.0,
+      999.0,
+      990.0
+     ],
+     "text": "Add butter, sugar, and salt to milk ; when lukewarm, add"
+    },
+    {
+     "bbox": [
+      83.0,
+      990.0,
+      997.0,
+      1028.0
+     ],
+     "text": "dissolved yeast cake, four, cinnamon, and egg well beaten ;"
+    },
+    {
+     "bbox": [
+      81.0,
+      1029.0,
+      997.0,
+      1067.0
+     ],
+     "text": "when thoroughly mixed, add raisins, cover, and let rise over"
+    },
+    {
+     "bbox": [
+      81.0,
+      1069.0,
+      997.0,
+      1106.0
+     ],
+     "text": "night. In morning, shape in forms of large biseuits, place"
+    },
+    {
+     "bbox": [
+      77.0,
+      1102.0,
+      993.0,
+      1149.0
+     ],
+     "text": "in pan one inch apart, let rise, brush over with beaten egg,"
+    },
+    {
+     "bbox": [
+      81.0,
+      1146.0,
+      995.0,
+      1183.0
+     ],
+     "text": "and bake twenty minutes; cool, and with ornamental frost-"
+    },
+    {
+     "bbox": [
+      79.0,
+      1183.0,
+      650.0,
+      1226.0
+     ],
+     "text": "ing make a cross on top of each bun."
+    }
+   ]
+  },
+  {
+   "id": "p0-b8",
+   "type": "heading",
+   "bbox": [
+    418.0,
+    1265.0,
+    655.0,
+    1291.0
+   ],
+   "order": 8,
+   "level": 2,
+   "text": "Raised Muffns",
+   "lines": [
+    {
+     "bbox": [
+      417.0,
+      1258.0,
+      658.0,
+      1296.0
+     ],
+     "text": "Raised Muffns"
+    }
+   ]
+  },
+  {
+   "id": "p0-b9",
+   "type": "paragraph",
+   "bbox": [
+    169.0,
+    1308.0,
+    882.0,
+    1449.0
+   ],
+   "order": 9,
+   "text": "1 eup scalded milk 4 teaspoon sa1t 1 cup boiling water 4 yeast cake 2 tablespoons butter 1egg 4 cup sugar 4 cups flour",
+   "lines": [
+    {
+     "bbox": [
+      658.0,
+      1305.0,
+      887.0,
+      1350.0
+     ],
+     "text": "4 teaspoon sa1t"
+    },
+    {
+     "bbox": [
+      170.0,
+      1307.0,
+      430.0,
+      1346.0
+     ],
+     "text": "1 eup scalded milk"
+    },
+    {
+     "bbox": [
+      172.0,
+      1344.0,
+      444.0,
+      1382.0
+     ],
+     "text": "1 cup boiling water"
+    },
+    {
+     "bbox": [
+      656.0,
+      1344.0,
+      845.0,
+      1384.0
+     ],
+     "text": "4 yeast cake"
+    },
+    {
+     "bbox": [
+      172.0,
+      1380.0,
+      457.0,
+      1418.0
+     ],
+     "text": "2 tablespoons butter"
+    },
+    {
+     "bbox": [
+      653.0,
+      1377.0,
+      751.0,
+      1424.0
+     ],
+     "text": "1egg"
+    },
+    {
+     "bbox": [
+      654.0,
+      1412.0,
+      828.0,
+      1457.0
+     ],
+     "text": "4 cups flour"
+    },
+    {
+     "bbox": [
+      170.0,
+      1418.0,
+      357.0,
+      1457.0
+     ],
+     "text": "4 cup sugar"
+    }
+   ]
+  },
+  {
+   "id": "p0-b10",
+   "type": "paragraph",
+   "bbox": [
+    79.0,
+    1469.0,
+    992.0,
+    1661.0
+   ],
+   "order": 10,
+   "text": "Add butter, sugar, and salt to milk and water; when lukewarm, add yeast cake, and when dissolved, egg well beaten,and flour; beat thoroughly, cover, and let rise over night.In morning, fill buttered muffin rings two-thirds full; let rise until rings are full, and bake thirty minutes in hot oven.",
+   "lines": [
+    {
+     "bbox": [
+      116.0,
+      1462.0,
+      999.0,
+      1509.0
+     ],
+     "text": "Add butter, sugar, and salt to milk and water; when luke-"
+    },
+    {
+     "bbox": [
+      83.0,
+      1506.0,
+      997.0,
+      1551.0
+     ],
+     "text": "warm, add yeast cake, and when dissolved, egg well beaten,"
+    },
+    {
+     "bbox": [
+      83.0,
+      1545.0,
+      995.0,
+      1586.0
+     ],
+     "text": "and flour; beat thoroughly, cover, and let rise over night."
+    },
+    {
+     "bbox": [
+      83.0,
+      1584.0,
+      995.0,
+      1626.0
+     ],
+     "text": "In morning, fill buttered muffin rings two-thirds full; let rise"
+    },
+    {
+     "bbox": [
+      81.0,
+      1628.0,
+      932.0,
+      1665.0
+     ],
+     "text": "until rings are full, and bake thirty minutes in hot oven."
+    }
+   ]
+  },
+  {
+   "id": "p0-b11",
+   "type": "page_number",
+   "bbox": [
+    953.0,
+    72.0,
+    991.0,
+    100.0
+   ],
+   "order": 11,
+   "text": "65"
+  }
+ ]
+}
