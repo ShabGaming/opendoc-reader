@@ -12,7 +12,7 @@ from typing import IO, Any
 
 from PIL import Image
 
-from opendoc_engine.errors import from_os_error
+from opendoc_engine.errors import from_os_error, io_error
 
 
 def write_atomic(path: str | Path, write: Callable[[IO[bytes]], None]) -> None:
@@ -28,6 +28,9 @@ def write_atomic(path: str | Path, write: Callable[[IO[bytes]], None]) -> None:
     except OSError as exc:
         with contextlib.suppress(OSError):
             temporary.unlink()
+        if isinstance(exc, FileExistsError | NotADirectoryError):
+            # A file is in the way of a parent folder; this write replaces its target anyway.
+            raise io_error("write_failed", f"{target}: {exc}") from exc
         raise from_os_error(exc, target) from exc
     except BaseException:
         with contextlib.suppress(OSError):

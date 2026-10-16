@@ -20,6 +20,7 @@ from pathlib import Path
 from PIL import Image
 
 from opendoc_engine.engines.base import Capabilities, EngineSetup
+from opendoc_engine.equations import dollar_math, tidy_equations
 from opendoc_engine.errors import not_configured, recognition_failed
 from opendoc_engine.grounding import parse_grounding
 from opendoc_engine.ir import Block
@@ -54,11 +55,15 @@ def _png_bytes(path: Path | str) -> bytes:
     return buffer.getvalue()
 
 
-def _tidy(blocks: list[Block]) -> None:
-    """Drop the `<center>` wrappers the model puts around captions."""
+def tidy_blocks(blocks: list[Block]) -> None:
+    """Drop the `<center>` wrappers the model puts around captions and sort out equations."""
+    tidy_equations(blocks)
     for block in blocks:
-        if block.text and "<" in block.text:
+        if not block.text:
+            continue
+        if "<" in block.text:
             block.text = " ".join(_CENTER_TAGS.sub(" ", block.text).split())
+        block.text = dollar_math(block.text)
 
 
 class DeepseekEngine:
@@ -111,7 +116,7 @@ class DeepseekEngine:
         blocks = parse_grounding(completion.text, page_size)
         if not blocks:
             raise recognition_failed("output_unusable", "no blocks in the answer")
-        _tidy(blocks)
+        tidy_blocks(blocks)
         return blocks
 
     def release(self) -> None:

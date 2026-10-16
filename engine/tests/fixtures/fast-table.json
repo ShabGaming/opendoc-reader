@@ -1,0 +1,329 @@
+{
+ "image": "table",
+ "width": 1318,
+ "height": 2200,
+ "blocks": [
+  {
+   "label": "header",
+   "bbox": [
+    525,
+    90,
+    757,
+    113
+   ],
+   "content": "IMMIGRATION。"
+  },
+  {
+   "label": "figure_title",
+   "bbox": [
+    73,
+    154,
+    1205,
+    211
+   ],
+   "content": "No.63.—IMMIGRANT ALIENS ADMITTED, YEARS ENDED JUNE 30,1918 TO 1920: BY RACE OB PEOPLE, AND BY AGE GROUPS."
+  },
+  {
+   "label": "figure_title",
+   "bbox": [
+    165,
+    231,
+    1121,
+    256
+   ],
+   "content": "[Source: Reports of the Commissioner General of Immigration, Department of Labor.]"
+  },
+  {
+   "label": "table",
+   "bbox": [
+    74,
+    279,
+    1217,
+    1860
+   ],
+   "content": "</table>"
+  },
+  {
+   "label": "number",
+   "bbox": [
+    1162,
+    84,
+    1203,
+    113
+   ],
+   "content": "95"
+  }
+ ],
+ "lines": [
+  {
+   "bbox": [
+    1156,
+    76,
+    1215,
+    124
+   ],
+   "text": "95"
+  },
+  {
+   "bbox": [
+    526,
+    87,
+    764,
+    117
+   ],
+   "text": "IMMIGRATION。"
+  },
+  {
+   "bbox": [
+    69,
+    147,
+    1211,
+    190
+   ],
+   "text": "No.63.—IMMIGRANT ALIENS ADMITTED, YEARS ENDED JUNE 30,"
+  },
+  {
+   "bbox": [
+    217,
+    176,
+    1066,
+    220
+   ],
+   "text": "1918 TO 1920: BY RACE OB PEOPLE, AND BY AGE GROUPS."
+  },
+  {
+   "bbox": [
+    169,
+    229,
+    1124,
+    259
+   ],
+   "text": "[Source: Reports of the Commissioner General of Immigration, Department of Labor.]"
+  },
+  {
+   "bbox": [
+    499,
+    293,
+    563,
+    323
+   ],
+   "text": "1918"
+  },
+  {
+   "bbox": [
+    776,
+    293,
+    835,
+    321
+   ],
+   "text": "1919"
+  },
+  {
+   "bbox": [
+    1046,
+    289,
+    1110,
+    323
+   ],
+   "text": "1920"
+  },
+  {
+   "bbox": [
+    146,
+    330,
+    327,
+    360
+   ],
+   "text": "Race or people."
+  },
+  {
+   "bbox": [
+    400,
+    341,
+    483,
+    367
+   ],
+   "text": "Under"
+  },
+  {
+   "bbox": [
+    493,
+    334,
+    566,
+    374
+   ],
+   "text": "16 to"
+  },
+  {
+   "bbox": [
+    581,
+    339,
+    668,
+    371
+   ],
+   "text": "45and"
+  },
+  {
+   "bbox": [
+    673,
+    341,
+    753,
+    367
+   ],
+   "text": "Under"
+  },
+  {
+   "bbox": [
+    766,
+    334,
+    843,
+    372
+   ],
+   "text": "16 to"
+  },
+  {
+   "bbox": [
+    851,
+    341,
+    934,
+    367
+   ],
+   "text": "45 and"
+  },
+  {
+   "bbox": [
+    943,
+    341,
+    1025,
+    367
+   ],
+   "text": "Under"
+  },
+  {
+   "bbox": [
+    1039,
+    337,
+    1107,
+    369
+   ],
+   "text": "16 to"
+  },
+  {
+   "bbox": [
+    1128,
+    341,
+    1204,
+    367
+   ],
+   "text": "45and"
+  },
+  {
+   "bbox": [
+    421,
+    364,
+    465,
+    392
+   ],
+   "text": "16."
+  },
+  {
+   "bbox": [
+    510,
+    364,
+    554,
+    392
+   ],
+   "text": "44."
+  },
+  {
+   "bbox": [
+    588,
+    364,
+    659,
+    396
+   ],
+   "text": "over."
+  },
+  {
+   "bbox": [
+    693,
+    364,
+    739,
+    392
+   ],
+   "text": "16."
+  },
+  {
+   "bbox": [
+    780,
+    360,
+    831,
+    396
+   ],
+   "text": "44."
+  },
+  {
+   "bbox": [
+    858,
+    362,
+    929,
+    394
+   ],
+   "text": "over."
+  },
+  {
+   "bbox": [
+    963,
+    364,
+    1007,
+    392
+   ],
+   "text": "16."
+  },
+  {
+   "bbox": [
+    1050,
+    364,
+    1098,
+    392
+   ],
+   "text": "44."
+  },
+  {
+   "bbox": [
+    1130,
+    362,
+    1204,
+    394
+   ],
+   "text": "over."
+  },
+  {
+   "bbox": [
+    78,
+    419,
+    265,
+    449
+   ],
+   "text": "African (biack)"
+  },
+  {
+   "bbox": [
+    437,
+    422,
+    481,
+    449
+   ],
+   "text": "662"
+  },
+  {
+   "bbox": [
+    503,
+    417,
+    572,
+    451
+   ],
+   "text": "4,828"
+  }
+ ]
+}

@@ -1,0 +1,57 @@
+{
+ "image": "table",
+ "width": 1318,
+ "height": 2200,
+ "blocks": [
+  {
+   "label": "header",
+   "bbox": [
+    525,
+    90,
+    763,
+    121
+   ],
+   "content": "IMMIGRATION."
+  },
+  {
+   "label": "number",
+   "bbox": [
+    1161,
+    85,
+    1209,
+    121
+   ],
+   "content": "95"
+  },
+  {
+   "label": "figure_title",
+   "bbox": [
+    74,
+    154,
+    1209,
+    218
+   ],
+   "content": "No. 63.—IMMIGRANT ALIENS ADMITTED, YEARS ENDED JUNE 30, 1918 TO 1920: BY RACE OR PEOPLE, AND BY AGE GROUPS."
+  },
+  {
+   "label": "figure_title",
+   "bbox": [
+    163,
+    232,
+    1126,
+    263
+   ],
+   "content": "[Source: Reports of the Commissioner General of Immigration, Department of Labor.]"
+  },
+  {
+   "label": "table",
+   "bbox": [
+    75,
+    282,
+    1226,
+    1859
+   ],
+   "content": "<table><tr><td rowspan=\"2\">Race or people.</td><td colspan=\"3\">1918</td><td colspan=\"3\">1919</td><td colspan=\"3\">1920</td></tr><tr><td>Under 16.</td><td>16 to 44.</td><td>45 and over.</td><td>Under 16.</td><td>16 to 44.</td><td>45 and over.</td><td>Under 16.</td><td>16 to 44.</td><td>45 and over.</td></tr><tr><td>African (black)</td><td>662</td><td>4,828</td><td>216</td><td>764</td><td>4,740</td><td>319</td><td>1,223</td><td>6,544</td><td>407</td></tr><tr><td>Armenian</td><td>45</td><td>152</td><td>24</td><td>48</td><td>206</td><td>28</td><td>481</td><td>2,066</td><td>215</td></tr><tr><td>Bohemian, Moravian (Czech)</td><td>9</td><td>48</td><td>17</td><td>18</td><td>72</td><td>15</td><td>79</td><td>296</td><td>49</td></tr><tr><td>Bulgarian, Serbian, Montenegrin</td><td>6</td><td>128</td><td>16</td><td>44</td><td>138</td><td>23</td><td>234</td><td>749</td><td>81</td></tr><tr><td>Chinese</td><td>129</td><td>1,178</td><td>269</td><td>172</td><td>1,278</td><td>247</td><td>242</td><td>1,712</td><td>194</td></tr></table>"
+  }
+ ]
+}

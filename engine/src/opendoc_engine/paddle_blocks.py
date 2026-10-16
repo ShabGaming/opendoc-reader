@@ -105,21 +105,23 @@ def _overlap(a: BBox, b: BBox) -> float:
     return shared / shorter if shorter > 0 else 0.0
 
 
+def _horizontal_gap(a: BBox, b: BBox) -> float:
+    return max(a[0] - b[2], b[0] - a[2], 0.0)
+
+
 def _attach_numbers(blocks: list[Block], numbers: list[tuple[BBox, str]]) -> list[tuple[BBox, str]]:
-    """Give each equation number to the formula it stands beside (same rows, to its right).
-    Returns the numbers that matched no formula."""
+    """Give each equation number to the formula it stands beside: same rows, on either side
+    (books print the number at the left or at the right), the nearest one. Returns the numbers
+    that matched no formula."""
     left_over = []
     for box, text in numbers:
         candidates = [
             b
             for b in blocks
-            if b.type is BlockType.FORMULA
-            and b.number is None
-            and _overlap(b.bbox, box) >= 0.5
-            and b.bbox[0] <= box[0]
+            if b.type is BlockType.FORMULA and b.number is None and _overlap(b.bbox, box) >= 0.5
         ]
         if candidates:
-            min(candidates, key=lambda b: box[0] - b.bbox[2]).number = text
+            min(candidates, key=lambda b: _horizontal_gap(b.bbox, box)).number = text
         else:
             left_over.append((box, text))
     return left_over

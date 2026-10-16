@@ -1,0 +1,247 @@
+{
+ "image": "math",
+ "width": 1376,
+ "height": 2200,
+ "blocks": [
+  {
+   "label": "header",
+   "bbox": [
+    225,
+    108,
+    1089,
+    149
+   ],
+   "content": "SIMPLE APPLICATIONS OF THE DERIVATIVE"
+  },
+  {
+   "label": "number",
+   "bbox": [
+    1173,
+    111,
+    1217,
+    147
+   ],
+   "content": "77"
+  },
+  {
+   "label": "text",
+   "bbox": [
+    133,
+    181,
+    1035,
+    228
+   ],
+   "content": "The normal being perpendicular to tangent, its slope is"
+  },
+  {
+   "label": "display_formula",
+   "bbox": [
+    545,
+    235,
+    770,
+    329
+   ],
+   "content": " $$ -\\frac{1}{m}=-\\frac{dx_{1}}{dy_{1}}. $$ "
+  },
+  {
+   "label": "text",
+   "bbox": [
+    1025,
+    256,
+    1220,
+    306
+   ],
+   "content": "By 55, p. 3"
+  },
+  {
+   "label": "text",
+   "bbox": [
+    90,
+    339,
+    1220,
+    434
+   ],
+   "content": "And since it also passes through the point of contact  $ P_{1}(x_{1}, y_{1}) $, we have for the equation of the normal  $ P_{1}N $"
+  },
+  {
+   "label": "formula_number",
+   "bbox": [
+    136,
+    470,
+    181,
+    508
+   ],
+   "content": "(2)"
+  },
+  {
+   "label": "display_formula",
+   "bbox": [
+    466,
+    440,
+    843,
+    537
+   ],
+   "content": " $$ y-y_{1}=-\\frac{dx_{1}}{dy_{1}}(x-x_{1}). $$ "
+  },
+  {
+   "label": "text",
+   "bbox": [
+    91,
+    548,
+    1222,
+    779
+   ],
+   "content": "That portion of the tangent which is intercepted between the point of contact and $OX$ is called the length of the tangent ($=TP_1$), and its projection on the axis of $X$ is called the length of the subtangent ($=TM$). Similarly, we have the length of the normal ($=P_1N$) and the length of the subnormal ($=MN$)."
+  },
+  {
+   "label": "text",
+   "bbox": [
+    134,
+    768,
+    866,
+    842
+   ],
+   "content": "In the triangle $TP_{1}M$, $\\tan \\tau = \\frac{MP_{1}}{TM}$; therefore"
+  },
+  {
+   "label": "formula_number",
+   "bbox": [
+    137,
+    876,
+    182,
+    916
+   ],
+   "content": "(3)"
+  },
+  {
+   "label": "display_formula",
+   "bbox": [
+    276,
+    847,
+    996,
+    937
+   ],
+   "content": " $$ TM^{*}=\\frac{MP_{1}}{\\tan\\tau}=y_{1}\\frac{dx_{1}}{dy_{1}}=length~of~subtangent. $$ "
+  },
+  {
+   "label": "text",
+   "bbox": [
+    133,
+    940,
+    874,
+    1027
+   ],
+   "content": "In the triangle $MP_{1}N$, $\\tan\\tau=\\frac{MN}{MP_{1}}$; therefore"
+  },
+  {
+   "label": "formula_number",
+   "bbox": [
+    139,
+    1068,
+    182,
+    1107
+   ],
+   "content": "(4)"
+  },
+  {
+   "label": "display_formula",
+   "bbox": [
+    274,
+    1038,
+    1045,
+    1132
+   ],
+   "content": " $$ MN^{\\dagger}=MP_{1}\\tan\\tau=y_{1}\\frac{dy_{1}}{dx_{1}}=length~of~subnormal. $$ "
+  },
+  {
+   "label": "text",
+   "bbox": [
+    91,
+    1132,
+    1223,
+    1289
+   ],
+   "content": "The length of tangent (= $TP_{1}$) and the length of normal ($=P_{1}N$) may then be found directly from the figure, each being the hypotenuse of a right triangle having the two legs known. Thus"
+  },
+  {
+   "label": "display_formula",
+   "bbox": [
+    227,
+    1296,
+    1146,
+    1496
+   ],
+   "content": " $$ \\begin{aligned}TP_{1}=\\sqrt{\\overline{TM}^{2}+\\overline{MP}_{1}^{2}}&=\\sqrt{\\left(y_{1}\\frac{dx_{1}}{dy_{1}}\\right)^{2}+\\left(y_{1}\\right)^{2}}\\\\&=y_{1}\\sqrt{\\left(\\frac{dx_{1}}{dy_{1}}\\right)^{2}+1}=length~of~tangent.\\end{aligned} $$ "
+  },
+  {
+   "label": "formula_number",
+   "bbox": [
+    140,
+    1435,
+    183,
+    1475
+   ],
+   "content": "(5)"
+  },
+  {
+   "label": "display_formula",
+   "bbox": [
+    223,
+    1510,
+    1141,
+    1713
+   ],
+   "content": " $$ \\begin{aligned}P_{1}N&=\\sqrt{\\overline{MP_{1}}^{2}+\\overline{MN}^{2}}=\\sqrt{(y_{1})^{2}+\\left(y_{1}\\frac{dy_{1}}{dx_{1}}\\right)^{2}}\\\\&=y_{1}\\sqrt{1+\\left(\\frac{dy_{1}}{dx_{1}}\\right)^{2}}=length~of~normal.\\end{aligned} $$ "
+  },
+  {
+   "label": "formula_number",
+   "bbox": [
+    141,
+    1653,
+    184,
+    1688
+   ],
+   "content": "(6)"
+  },
+  {
+   "label": "text",
+   "bbox": [
+    98,
+    1722,
+    1223,
+    1821
+   ],
+   "content": "The student is advised to get the lengths of the tangent and of the normal directly from the figure rather than by using (5) and (6)."
+  },
+  {
+   "label": "text",
+   "bbox": [
+    98,
+    1817,
+    1224,
+    1915
+   ],
+   "content": "When the length of subtangent or subnormal at a point on a curve is determined, the tangent and normal may be easily constructed."
+  },
+  {
+   "label": "footnote",
+   "bbox": [
+    110,
+    1931,
+    1212,
+    1975
+   ],
+   "content": " $ ^{*} $ If subtangent extends to the right of T, we consider it positive; if to the left, negative."
+  },
+  {
+   "label": "footnote",
+   "bbox": [
+    112,
+    1966,
+    1211,
+    2006
+   ],
+   "content": "† If subnormal extends to the right of $M$, we consider it positive; if to the left, negative."
+  }
+ ]
+}
