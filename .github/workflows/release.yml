@@ -95,6 +95,20 @@ jobs:
           args: --target ${{ matrix.target }}
           releaseId: ${{ github.event.release.id }}
 
+      # tauri-action also uploads the macOS .app as a .tar.gz, which is only useful
+      # to an auto-updater. Users install from the .dmg, so remove it from the release.
+      - name: Remove the macOS .app archive from the release
+        if: github.event_name == 'release' && runner.os == 'macOS'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets --jq '.assets[].name' |
+            grep '\.app\.tar\.gz$' |
+            while read -r name; do
+              gh release delete-asset "$TAG" "$name" --repo "$GITHUB_REPOSITORY" --yes
+            done
+
       # Manual run: build only, and keep the installers as workflow artifacts.
       - uses: tauri-apps/tauri-action@1deb371b0cd8bd54025b384f1cd735e725c4060f # action-v1.0.0
         if: github.event_name == 'workflow_dispatch'

@@ -4,7 +4,7 @@
 </h1>
 
 <p align="center">
-  Turn scanned documents and photos of pages into editable Word and Markdown files, using state-of-the-art OCR models that run entirely on your own computer.
+  <b>Free, open-source OCR app for Windows and macOS.</b> Convert scanned PDFs and images to editable Word (DOCX) and Markdown, offline and private, powered by DeepSeek-OCR and PaddleOCR running on your own computer.
 </p>
 
 <p align="center">
@@ -25,6 +25,8 @@
 </p>
 
 ![OpenDoc Reader reviewing a scanned IRS W-9 form: the original page with detected blocks on the left, the recognized text on the right](assets/screenshot.jpg)
+
+OpenDoc Reader is a desktop app that turns scanned documents, PDFs and photos of pages into documents you can edit. Drop in a scanned PDF, a phone photo of a page or a folder of images, and get a Word file or Markdown that keeps the headings, tables, lists and math of the original. It uses modern vision-language OCR models (DeepSeek-OCR and PaddleOCR-VL) through llama.cpp, works on an NVIDIA GPU, an Apple Silicon Mac or a plain CPU, and never uploads your files. Think of it as a private, offline alternative to online PDF-to-Word converters and cloud OCR services.
 
 > **Status: v0.1, first release.** Tested on Windows with an NVIDIA GPU and on CPU. macOS builds are new; please [report anything that breaks](https://github.com/ShabGaming/opendoc-reader/issues).
 
@@ -56,8 +58,8 @@ Get the latest installer from the [Releases page](https://github.com/ShabGaming/
 
 | Platform | File | Requirements |
 | --- | --- | --- |
-| Windows | `OpenDoc Reader_x.y.z_x64-setup.exe` (or `.msi`) | Windows 10 22H2 or later, 64-bit, 8 GB RAM |
-| macOS | `OpenDoc Reader_x.y.z_aarch64.dmg` | macOS 13 or later on Apple Silicon (M1 or newer) |
+| Windows | `OpenDoc.Reader_x.y.z_x64-setup.exe` (or `OpenDoc.Reader_x.y.z_x64_en-US.msi`) | Windows 10 22H2 or later, 64-bit, 8 GB RAM |
+| macOS | `OpenDoc.Reader_x.y.z_aarch64.dmg` | macOS 13 or later on Apple Silicon (M1 or newer) |
 
 The installer is about 20 MB. Setup then downloads the model you choose (0.2 to 3.6 GB) and the components it needs. The [user guide](docs/user-guide.md) walks through setup, converting, review and troubleshooting.
 
