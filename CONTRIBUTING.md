@@ -6,25 +6,23 @@ Thanks for your interest in OpenDoc Reader. This guide explains how to take part
 
 ## Project status
 
-The project is pre-alpha. The plan is written and the repository has a skeleton (app shell, engine package, CI), but OCR is not wired up yet.
+Version 0.1 is in testing. Every planned feature is built (setup, model downloads, the three OCR tiers, the queue, review and export), and the remaining work is end-to-end testing, a macOS pass and the release dry run. See [docs/plans/v0.1.md](docs/plans/v0.1.md).
 
 The most useful contributions right now are:
 
 - Feedback on the plan. Read [docs/architecture.md](docs/architecture.md) and the records in [docs/adr/](docs/adr/), then tell us what looks wrong or missing.
 - Sample scans for the test set (see [Test data rules](#test-data-rules)).
-- Testing, once early builds exist.
+- Testing, especially on macOS and on computers without an NVIDIA graphics card.
 
 ## Ways to contribute
 
-- **Bug reports.** Once there is something to run, open an issue with your OS version, the model tier you used, and the steps to reproduce. The app will have a "copy diagnostics" button in Settings. Paste its output into the issue.
+- **Bug reports.** Open an issue with your OS version, the model tier you used, and the steps to reproduce. Settings, Privacy and logs has a "Copy diagnostics" button. Paste its output into the issue.
 - **Feature ideas.** Start a thread in GitHub Discussions, or open an issue if Discussions is not enabled yet. Check the roadmap in the [README](README.md) first.
 - **Sample scans.** Public-domain or your own documents for the test set.
 - **Code.** Rust, TypeScript and Python are all used. Smaller, focused changes are easier to review.
 - **Documentation.** Fixes to the README, the architecture notes and the user guide.
 
 ## Development setup
-
-The repository has a working skeleton: the app shell, the engine package and CI. OCR itself is not wired up yet.
 
 You need:
 
@@ -46,8 +44,11 @@ Desktop app, from the repository root:
 
 ```bash
 pnpm install
+node scripts/fetch-uv.mjs
 pnpm --filter desktop tauri dev
 ```
+
+`scripts/fetch-uv.mjs` downloads the pinned `uv` release, checks its SHA-256 and puts it in `apps/desktop/src-tauri/binaries/`, where Tauri expects the bundled sidecar. The app uses it to build the engine's Python environment on first run. Run it once, and again whenever the pinned version changes. Pass `--target <triple>` to fetch for another platform.
 
 `pnpm --filter desktop dev` runs only the web UI in a browser at http://localhost:1420, which is quicker for layout work.
 
@@ -85,7 +86,33 @@ The engine speaks JSON-RPC over stdin and stdout. A quick check that it starts:
 echo '{"jsonrpc":"2.0","id":1,"method":"engine.ping"}' | uv run python -m opendoc_engine
 ```
 
-Tests that need real models are skipped unless `OPENDOC_INTEGRATION=1` is set. They read models in the manifest layout from `OPENDOC_MODELS_DIR` and the sample scans from `OPENDOC_SAMPLES_DIR`, and need a running llama-server for the Accurate and Max engines; the header of `engine/tests/test_integration.py` lists the settings. `engine/scripts/link_dev_models.py` builds such a models folder from a local copy of the spike files.
+Tests that need real models are skipped unless `OPENDOC_INTEGRATION=1` is set, so a plain `pytest` and CI stay green without them.
+
+- Engine, in `engine/`: `OPENDOC_INTEGRATION=1 uv run pytest tests/test_integration.py -s`. The tests read models in the manifest layout from `OPENDOC_MODELS_DIR` and the sample scans from `OPENDOC_SAMPLES_DIR`, and need a running llama-server for the Accurate and Max engines (`OPENDOC_LLAMA_URL`). `OPENDOC_INTEGRATION_ENGINES` picks the engines and `OPENDOC_MODEL_ID` the model; the header of the file lists every setting. The defaults point at the maintainer's folders, so set them on your machine.
+- Rust, in `apps/desktop/src-tauri`: `OPENDOC_INTEGRATION=1 cargo test --test integration -- --nocapture`. This runs the real engine environment (it needs `uv` and network access for the managed Python) and, for the llama-server tests, a llama-server build and model files. `OPENDOC_UV` names the `uv` to use (the default is the sidecar in `binaries/`, then `uv` on the PATH), `OPENDOC_LLAMA_DIR` a llama-server build folder, and `OPENDOC_MODELS_DIR` a models folder laid out as `<modelsDir>/<modelId>/<file>`.
+
+`engine/scripts/link_dev_models.py` builds such a models folder from a local copy of the spike files, and `scripts/fetch-models.py` fills one from the URLs in the manifest (`python scripts/fetch-models.py --tier fast --out DIR`, checked against the SHA-256 values).
+
+### Golden tests
+
+`engine/tests/test_golden.py` runs the Fast tier on seven public-domain pages and compares the result with the IR and Markdown checked in under `engine/tests/golden/expected/`. It compares structure with tolerances (block types and order, text similarity, box overlap), not bytes. It is opt-in locally and runs in CI as the `golden` job, which fetches the Fast tier models and caches them by the hash of the manifest:
+
+```bash
+cd engine
+OPENDOC_GOLDEN=1 OPENDOC_MODELS_DIR=/path/to/models uv run pytest tests/test_golden.py
+```
+
+Where each page comes from, and what its expected output looks like, is in `engine/tests/golden/SOURCES.md`. After a change that should alter the output, regenerate the files with `OPENDOC_GOLDEN_UPDATE=1` added to the command above, then read the changed files and commit them in the same pull request. Do not edit them by hand. The tolerance checks themselves are tested by tests that always run.
+
+### Third-party notices
+
+`THIRD_PARTY_NOTICES.md` is generated. After changing dependencies or the model manifest, run, from the repository root:
+
+```bash
+python scripts/gen-notices.py
+```
+
+It reads `cargo metadata`, `pnpm licenses list --prod`, the engine's installed packages (run `uv sync` in `engine/` first) and `models/manifest.json`, and lists licenses that need a closer look in a section of their own. Commit the result.
 
 The engine tests also validate `models/manifest.json` against `models/manifest.schema.json`, so run them after editing the manifest.
 
@@ -121,7 +148,7 @@ Checklist:
 - [ ] Normalize the output into the shared document IR: pages, then blocks with a type (heading, paragraph, list, table, formula, figure, caption, header, footer and so on), a bounding box in page coordinates, a reading-order index, and the text. Tables carry cells with row and column spans. Formulas are stored as LaTeX. Figures are stored as crops from the page image. Do not write exporter code for your engine. All exporters render from the IR.
 - [ ] Add the model entries to `models/manifest.json`: download sources, file names, sizes and a SHA-256 checksum for every file.
 - [ ] Add suggester rules to the same data file so the setup screen can recommend the engine, or mark it as a poor fit, on suitable hardware. The rules are data, so no code change should be needed.
-- [ ] Add golden-file tests. Run the engine on the sample scans and check in the expected IR output. Document how you produced it.
+- [ ] Add golden-file tests. Run the engine on the golden pages (see [Golden tests](#golden-tests)) and check in the expected IR output. Document how you produced it.
 - [ ] Document the license of the model weights, and of any code the engine pulls in, in the manifest and in your pull request. The app shows model licenses to users before download.
 - [ ] State the hardware you tested on and the speed and memory you measured. Mark numbers you did not measure as estimates.
 
@@ -136,7 +163,7 @@ The test set holds a small number of scans with expected outputs checked in alon
 - Do not submit pages from copyrighted books, papers or forms.
 - Keep files small. A single page at a reasonable resolution is enough.
 
-The set aims to cover a book page, a table-heavy invoice, a formula page, a two-column paper and a receipt.
+The set in `engine/tests/golden/` covers a book page with an illustration, a table, a formula page, a two-column dictionary page, a recipe page with lists, and two US federal forms. New pages that add a layout the set does not have are welcome; keep the whole set small.
 
 ## Reporting security issues
 

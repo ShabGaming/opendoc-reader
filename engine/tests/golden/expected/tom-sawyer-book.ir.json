@@ -1,0 +1,265 @@
+{
+ "index": 0,
+ "width": 1202,
+ "height": 1700,
+ "sourceImage": "tom-sawyer-book.jpg",
+ "blocks": [
+  {
+   "id": "p0-b0",
+   "type": "header",
+   "bbox": [
+    442.0,
+    165.0,
+    770.0,
+    189.0
+   ],
+   "order": 0,
+   "text": "INFUN 7OE EXPLAINS.",
+   "lines": [
+    {
+     "bbox": [
+      445.0,
+      161.0,
+      776.0,
+      191.0
+     ],
+     "text": "INFUN 7OE EXPLAINS."
+    }
+   ]
+  },
+  {
+   "id": "p0-b1",
+   "type": "paragraph",
+   "bbox": [
+    64.0,
+    240.0,
+    1126.0,
+    436.0
+   ],
+   "order": 1,
+   "text": "“I thought I'd got sober. I'd no business to drink to-night. But it's in my head yet—worse'n when we started hére. I'm all in a muddle; can't recollect anything of it hardly.Tell me, Joe—honest, now, old feller—did I do it? Joe,I never meant to—pon my soul and honor I never meant to,Joe. Tell me how it was Joe. O, it's awful—and him so young and promising.\"",
+   "lines": [
+    {
+     "bbox": [
+      97.0,
+      235.0,
+      1130.0,
+      273.0
+     ],
+     "text": "“I thought I'd got sober. I'd no business to drink to-night. But it's in my"
+    },
+    {
+     "bbox": [
+      72.0,
+      282.0,
+      1130.0,
+      312.0
+     ],
+     "text": "head yet—worse'n when we started hére. I'm all in a muddle; can't recollect"
+    },
+    {
+     "bbox": [
+      68.0,
+      321.0,
+      1132.0,
+      356.0
+     ],
+     "text": "anything of it hardly.Tell me, Joe—honest, now, old feller—did I do it? Joe,"
+    },
+    {
+     "bbox": [
+      68.0,
+      361.0,
+      1129.0,
+      397.0
+     ],
+     "text": "I never meant to—pon my soul and honor I never meant to,Joe. Tell me how"
+    },
+    {
+     "bbox": [
+      63.0,
+      398.0,
+      905.0,
+      443.0
+     ],
+     "text": "it was Joe. O, it's awful—and him so young and promising.\""
+    }
+   ]
+  },
+  {
+   "id": "p0-b2",
+   "type": "paragraph",
+   "bbox": [
+    64.0,
+    445.0,
+    1128.0,
+    600.0
+   ],
+   "order": 2,
+   "text": "“ Why you two was scuffling, and he fetched you one with the head-board and you fell fat ; and then up you come, all reeling and staggering, like, and snatched the knife and jammed it into him, just as he fetched you another awful clip—and here you've laid, as dead as a wedge till now.\"",
+   "lines": [
+    {
+     "bbox": [
+      91.0,
+      441.0,
+      1132.0,
+      482.0
+     ],
+     "text": "“ Why you two was scuffling, and he fetched you one with the head-board"
+    },
+    {
+     "bbox": [
+      66.0,
+      483.0,
+      1134.0,
+      524.0
+     ],
+     "text": "and you fell fat ; and then up you come, all reeling and staggering, like, and"
+    },
+    {
+     "bbox": [
+      68.0,
+      526.0,
+      1132.0,
+      561.0
+     ],
+     "text": "snatched the knife and jammed it into him, just as he fetched you another awful"
+    },
+    {
+     "bbox": [
+      68.0,
+      567.0,
+      835.0,
+      602.0
+     ],
+     "text": "clip—and here you've laid, as dead as a wedge till now.\""
+    }
+   ]
+  },
+  {
+   "id": "p0-b3",
+   "type": "paragraph",
+   "bbox": [
+    94.0,
+    610.0,
+    1130.0,
+    639.0
+   ],
+   "order": 3,
+   "text": "“O; I didn't know what I was a doing. I wish I may die this minute if I",
+   "lines": [
+    {
+     "bbox": [
+      93.0,
+      607.0,
+      1134.0,
+      643.0
+     ],
+     "text": "“O; I didn't know what I was a doing. I wish I may die this minute if I"
+    }
+   ]
+  },
+  {
+   "id": "p0-b4",
+   "type": "figure",
+   "bbox": [
+    160.0,
+    674.0,
+    1037.0,
+    1338.0
+   ],
+   "order": 4,
+   "figure": {
+    "crop": "p0-b4.png"
+   }
+  },
+  {
+   "id": "p0-b5",
+   "type": "caption",
+   "bbox": [
+    464.0,
+    1363.0,
+    724.0,
+    1383.0
+   ],
+   "order": 5,
+   "text": "MUFF POTTER OUTWITTED.",
+   "lines": [
+    {
+     "bbox": [
+      465.0,
+      1362.0,
+      726.0,
+      1387.0
+     ],
+     "text": "MUFF POTTER OUTWITTED."
+    }
+   ],
+   "caption": {
+    "for": "p0-b4"
+   }
+  },
+  {
+   "id": "p0-b6",
+   "type": "paragraph",
+   "bbox": [
+    64.0,
+    1421.0,
+    1129.0,
+    1576.0
+   ],
+   "order": 6,
+   "text": "did. It was all on account of the whisky; and the excitement, I reckon. I never used a weepon in my life before, Joe. I've fought, but never with weepons. They'1l all say that. Joe, don't tell!Say you won't tell, Joe—that's a good feller. I always liked you Joe, and stood up for you, too.Don't you",
+   "lines": [
+    {
+     "bbox": [
+      68.0,
+      1418.0,
+      1132.0,
+      1454.0
+     ],
+     "text": "did. It was all on account of the whisky; and the excitement, I reckon. I"
+    },
+    {
+     "bbox": [
+      66.0,
+      1457.0,
+      1134.0,
+      1496.0
+     ],
+     "text": "never used a weepon in my life before, Joe. I've fought, but never with weep-"
+    },
+    {
+     "bbox": [
+      68.0,
+      1498.0,
+      1134.0,
+      1537.0
+     ],
+     "text": "ons. They'1l all say that. Joe, don't tell!Say you won't tell, Joe—that's a"
+    },
+    {
+     "bbox": [
+      70.0,
+      1546.0,
+      1130.0,
+      1576.0
+     ],
+     "text": "good feller. I always liked you Joe, and stood up for you, too.Don't you"
+    }
+   ]
+  },
+  {
+   "id": "p0-b7",
+   "type": "page_number",
+   "bbox": [
+    1096.0,
+    169.0,
+    1123.0,
+    188.0
+   ],
+   "order": 7,
+   "text": "9I"
+  }
+ ]
+}

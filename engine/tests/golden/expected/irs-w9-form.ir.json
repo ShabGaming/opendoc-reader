@@ -1,0 +1,975 @@
+{
+ "index": 0,
+ "width": 1468,
+ "height": 1900,
+ "sourceImage": "irs-w9-form.jpg",
+ "blocks": [
+  {
+   "id": "p0-b0",
+   "type": "heading",
+   "bbox": [
+    437.0,
+    88.0,
+    1028.0,
+    155.0
+   ],
+   "order": 0,
+   "level": 1,
+   "text": "Request for Taxpayer Identiffication Number and Certification",
+   "lines": [
+    {
+     "bbox": [
+      572.0,
+      91.0,
+      896.0,
+      119.0
+     ],
+     "text": "Request for Taxpayer"
+    },
+    {
+     "bbox": [
+      439.0,
+      127.0,
+      1027.0,
+      152.0
+     ],
+     "text": "Identiffication Number and Certification"
+    }
+   ]
+  },
+  {
+   "id": "p0-b1",
+   "type": "paragraph",
+   "bbox": [
+    83.0,
+    157.0,
+    285.0,
+    195.0
+   ],
+   "order": 1,
+   "text": "Department of the Treasury Internal Revenue Service",
+   "lines": [
+    {
+     "bbox": [
+      80.0,
+      154.0,
+      287.0,
+      180.0
+     ],
+     "text": "Department of the Treasury"
+    },
+    {
+     "bbox": [
+      82.0,
+      174.0,
+      275.0,
+      200.0
+     ],
+     "text": "Internal Revenue Service"
+    }
+   ]
+  },
+  {
+   "id": "p0-b2",
+   "type": "paragraph",
+   "bbox": [
+    408.0,
+    168.0,
+    1054.0,
+    189.0
+   ],
+   "order": 2,
+   "text": "Go to www.irs.gov/FormW9 for instructions and the latest information.",
+   "lines": [
+    {
+     "bbox": [
+      411.0,
+      168.0,
+      1055.0,
+      188.0
+     ],
+     "text": "Go to www.irs.gov/FormW9 for instructions and the latest information."
+    }
+   ]
+  },
+  {
+   "id": "p0-b3",
+   "type": "paragraph",
+   "bbox": [
+    81.0,
+    205.0,
+    931.0,
+    225.0
+   ],
+   "order": 3,
+   "text": "Before you begin. For guidance related to the purpose of Form W-9, see Purpose of Form, below.",
+   "lines": [
+    {
+     "bbox": [
+      84.0,
+      202.0,
+      931.0,
+      228.0
+     ],
+     "text": "Before you begin. For guidance related to the purpose of Form W-9, see Purpose of Form, below."
+    }
+   ]
+  },
+  {
+   "id": "p0-b4",
+   "type": "paragraph",
+   "bbox": [
+    1187.0,
+    105.0,
+    1372.0,
+    179.0
+   ],
+   "order": 4,
+   "text": "Give form to the reguester. Do not send to the IRS.",
+   "lines": [
+    {
+     "bbox": [
+      1187.0,
+      103.0,
+      1362.0,
+      129.0
+     ],
+     "text": "Give form to the"
+    },
+    {
+     "bbox": [
+      1189.0,
+      133.0,
+      1372.0,
+      152.0
+     ],
+     "text": "reguester. Do not"
+    },
+    {
+     "bbox": [
+      1187.0,
+      156.0,
+      1354.0,
+      182.0
+     ],
+     "text": "send to the IRS."
+    }
+   ]
+  },
+  {
+   "id": "p0-b5",
+   "type": "paragraph",
+   "bbox": [
+    140.0,
+    232.0,
+    1373.0,
+    273.0
+   ],
+   "order": 5,
+   "text": "1 Name of entity/individual. An entry is required. (For a sole proprietor or disregarded entity, enter the owner's name on line 1, and enter the business/disregarded entity's name on line 2.)",
+   "lines": [
+    {
+     "bbox": [
+      138.0,
+      228.0,
+      1376.0,
+      255.0
+     ],
+     "text": "1 Name of entity/individual. An entry is required. (For a sole proprietor or disregarded entity, enter the owner's name on line 1, and enter the business/disregarded"
+    },
+    {
+     "bbox": [
+      172.0,
+      253.0,
+      357.0,
+      273.0
+     ],
+     "text": "entity's name on line 2.)"
+    }
+   ]
+  },
+  {
+   "id": "p0-b6",
+   "type": "figure",
+   "bbox": [
+    89.0,
+    296.0,
+    1383.0,
+    819.0
+   ],
+   "order": 6,
+   "figure": {
+    "crop": "p0-b6.png"
+   }
+  },
+  {
+   "id": "p0-b7",
+   "type": "heading",
+   "bbox": [
+    90.0,
+    835.0,
+    627.0,
+    859.0
+   ],
+   "order": 7,
+   "level": 2,
+   "text": "PartI Taxpayer Identification Number (TIN)",
+   "lines": [
+    {
+     "bbox": [
+      90.0,
+      837.0,
+      164.0,
+      859.0
+     ],
+     "text": "PartI"
+    },
+    {
+     "bbox": [
+      203.0,
+      835.0,
+      626.0,
+      861.0
+     ],
+     "text": "Taxpayer Identification Number (TIN)"
+    }
+   ]
+  },
+  {
+   "id": "p0-b8",
+   "type": "paragraph",
+   "bbox": [
+    79.0,
+    871.0,
+    963.0,
+    983.0
+   ],
+   "order": 8,
+   "text": "Enter your TIN in the appropriate box. The TIN provided must match the name given on line 1 to avoid backup withholding. For individuals, this is generally your social security number (SSN). However, for a resident alien, sole proprietor, or disregarded entity, see the instructions for Part 1, later. For other entities, it is your employer identification number (EIN). If you do not have a number, see How to get a TIN, later.",
+   "lines": [
+    {
+     "bbox": [
+      84.0,
+      873.0,
+      959.0,
+      893.0
+     ],
+     "text": "Enter your TIN in the appropriate box. The TIN provided must match the name given on line 1 to avoid"
+    },
+    {
+     "bbox": [
+      84.0,
+      897.0,
+      963.0,
+      916.0
+     ],
+     "text": "backup withholding. For individuals, this is generally your social security number (SSN). However, for a"
+    },
+    {
+     "bbox": [
+      82.0,
+      914.0,
+      922.0,
+      942.0
+     ],
+     "text": "resident alien, sole proprietor, or disregarded entity, see the instructions for Part 1, later. For other"
+    },
+    {
+     "bbox": [
+      84.0,
+      942.0,
+      957.0,
+      962.0
+     ],
+     "text": "entities, it is your employer identification number (EIN). If you do not have a number, see How to get a"
+    },
+    {
+     "bbox": [
+      84.0,
+      964.0,
+      170.0,
+      986.0
+     ],
+     "text": "TIN, later."
+    }
+   ]
+  },
+  {
+   "id": "p0-b9",
+   "type": "paragraph",
+   "bbox": [
+    79.0,
+    1002.0,
+    966.0,
+    1046.0
+   ],
+   "order": 9,
+   "text": "Note: If the account is in more than one name, see the instructions for line 1. See also What Name and Number To Give the Reguester for guidelines on whose number to enter.",
+   "lines": [
+    {
+     "bbox": [
+      80.0,
+      1001.0,
+      969.0,
+      1027.0
+     ],
+     "text": "Note: If the account is in more than one name, see the instructions for line 1. See also What Name and"
+    },
+    {
+     "bbox": [
+      82.0,
+      1027.0,
+      710.0,
+      1047.0
+     ],
+     "text": "Number To Give the Reguester for guidelines on whose number to enter."
+    }
+   ]
+  },
+  {
+   "id": "p0-b10",
+   "type": "heading",
+   "bbox": [
+    89.0,
+    1065.0,
+    347.0,
+    1088.0
+   ],
+   "order": 10,
+   "level": 2,
+   "text": "Part Il Certification",
+   "lines": [
+    {
+     "bbox": [
+      87.0,
+      1064.0,
+      178.0,
+      1093.0
+     ],
+     "text": "Part Il"
+    },
+    {
+     "bbox": [
+      168.0,
+      1065.0,
+      353.0,
+      1091.0
+     ],
+     "text": "Certification"
+    }
+   ]
+  },
+  {
+   "id": "p0-b11",
+   "type": "paragraph",
+   "bbox": [
+    82.0,
+    1099.0,
+    426.0,
+    1119.0
+   ],
+   "order": 11,
+   "text": "Under penalties of perjury, I certify that:",
+   "lines": [
+    {
+     "bbox": [
+      86.0,
+      1100.0,
+      427.0,
+      1120.0
+     ],
+     "text": "Under penalties of perjury, I certify that:"
+    }
+   ]
+  },
+  {
+   "id": "p0-b12",
+   "type": "figure",
+   "bbox": [
+    996.0,
+    859.0,
+    1380.0,
+    1064.0
+   ],
+   "order": 12,
+   "figure": {
+    "crop": "p0-b12.png"
+   }
+  },
+  {
+   "id": "p0-b13",
+   "type": "paragraph",
+   "bbox": [
+    81.0,
+    1127.0,
+    1229.0,
+    1148.0
+   ],
+   "order": 13,
+   "text": "1. The number shown on this form is my correct taxpayer identification number (or l am waiting for a number to be issued to me); and",
+   "lines": [
+    {
+     "bbox": [
+      82.0,
+      1126.0,
+      1229.0,
+      1150.0
+     ],
+     "text": "1. The number shown on this form is my correct taxpayer identification number (or l am waiting for a number to be issued to me); and"
+    }
+   ]
+  },
+  {
+   "id": "p0-b14",
+   "type": "paragraph",
+   "bbox": [
+    81.0,
+    1152.0,
+    1372.0,
+    1220.0
+   ],
+   "order": 14,
+   "text": "2. l am not subject to backup withholding because (a) I am exempt from backup withholding, or (b) I have not been notified by the Internal Revenue Service (IRS) that l am subject to backup withholding as a result of a failure to report all interest or dividends, or (c) the IRS has notified me that I am no longer subject to backup withholding; and",
+   "lines": [
+    {
+     "bbox": [
+      80.0,
+      1152.0,
+      1348.0,
+      1178.0
+     ],
+     "text": "2. l am not subject to backup withholding because (a) I am exempt from backup withholding, or (b) I have not been notified by the Internal Revenue"
+    },
+    {
+     "bbox": [
+      102.0,
+      1178.0,
+      1374.0,
+      1197.0
+     ],
+     "text": "Service (IRS) that l am subject to backup withholding as a result of a failure to report all interest or dividends, or (c) the IRS has notified me that I am"
+    },
+    {
+     "bbox": [
+      102.0,
+      1201.0,
+      497.0,
+      1221.0
+     ],
+     "text": "no longer subject to backup withholding; and"
+    }
+   ]
+  },
+  {
+   "id": "p0-b15",
+   "type": "paragraph",
+   "bbox": [
+    81.0,
+    1228.0,
+    624.0,
+    1249.0
+   ],
+   "order": 15,
+   "text": "3. I am a U.S. citizen or other U.S. person (defined below); and",
+   "lines": [
+    {
+     "bbox": [
+      82.0,
+      1229.0,
+      624.0,
+      1249.0
+     ],
+     "text": "3. I am a U.S. citizen or other U.S. person (defined below); and"
+    }
+   ]
+  },
+  {
+   "id": "p0-b16",
+   "type": "paragraph",
+   "bbox": [
+    80.0,
+    1256.0,
+    1036.0,
+    1277.0
+   ],
+   "order": 16,
+   "text": "4. The FATCA code(s) entered on this form (if any) indicating that I am exempt from FATCA reporting is correct.",
+   "lines": [
+    {
+     "bbox": [
+      80.0,
+      1255.0,
+      1037.0,
+      1281.0
+     ],
+     "text": "4. The FATCA code(s) entered on this form (if any) indicating that I am exempt from FATCA reporting is correct."
+    }
+   ]
+  },
+  {
+   "id": "p0-b17",
+   "type": "paragraph",
+   "bbox": [
+    79.0,
+    1286.0,
+    1378.0,
+    1376.0
+   ],
+   "order": 17,
+   "text": "Certification instructions. You must cross out item 2 above if you have been notified by the IRS that you are currently subject to backup withholding because you have failed to report all interest and dividends on your tax return. For real estate transactions, item 2 does not apply. For mortgage interest paid,acquisition or abandonment of secured property, cancellation of debt, contributions to an individual retirement arrangement (IRA), and, generally, payments other than interest and dividends, you are not required to sign the certification, but you must provide your correct TIN. See the instructions for Part Il, later.",
+   "lines": [
+    {
+     "bbox": [
+      84.0,
+      1288.0,
+      1318.0,
+      1308.0
+     ],
+     "text": "Certification instructions. You must cross out item 2 above if you have been notified by the IRS that you are currently subject to backup withholding"
+    },
+    {
+     "bbox": [
+      84.0,
+      1312.0,
+      1378.0,
+      1332.0
+     ],
+     "text": "because you have failed to report all interest and dividends on your tax return. For real estate transactions, item 2 does not apply. For mortgage interest paid,"
+    },
+    {
+     "bbox": [
+      82.0,
+      1336.0,
+      1366.0,
+      1356.0
+     ],
+     "text": "acquisition or abandonment of secured property, cancellation of debt, contributions to an individual retirement arrangement (IRA), and, generally, payments"
+    },
+    {
+     "bbox": [
+      84.0,
+      1358.0,
+      1356.0,
+      1378.0
+     ],
+     "text": "other than interest and dividends, you are not required to sign the certification, but you must provide your correct TIN. See the instructions for Part Il, later."
+    }
+   ]
+  },
+  {
+   "id": "p0-b18",
+   "type": "figure",
+   "bbox": [
+    82.0,
+    1385.0,
+    281.0,
+    1434.0
+   ],
+   "order": 18,
+   "figure": {
+    "crop": "p0-b18.png"
+   }
+  },
+  {
+   "id": "p0-b19",
+   "type": "heading",
+   "bbox": [
+    82.0,
+    1459.0,
+    411.0,
+    1486.0
+   ],
+   "order": 19,
+   "level": 2,
+   "text": "General Instructions",
+   "lines": [
+    {
+     "bbox": [
+      86.0,
+      1461.0,
+      413.0,
+      1488.0
+     ],
+     "text": "General Instructions"
+    }
+   ]
+  },
+  {
+   "id": "p0-b20",
+   "type": "paragraph",
+   "bbox": [
+    79.0,
+    1502.0,
+    684.0,
+    1541.0
+   ],
+   "order": 20,
+   "text": "Section references are to the Internal Revenue Code unless otherwise noted.",
+   "lines": [
+    {
+     "bbox": [
+      84.0,
+      1502.0,
+      686.0,
+      1522.0
+     ],
+     "text": "Section references are to the Internal Revenue Code unless otherwise"
+    },
+    {
+     "bbox": [
+      82.0,
+      1524.0,
+      144.0,
+      1544.0
+     ],
+     "text": "noted."
+    }
+   ]
+  },
+  {
+   "id": "p0-b21",
+   "type": "paragraph",
+   "bbox": [
+    79.0,
+    1552.0,
+    686.0,
+    1615.0
+   ],
+   "order": 21,
+   "text": "Future developments. For the latest information about developments related to Form W-9 and its instructions, such as legislation enacted after they were published, go to www.irs.gov/FormW9.",
+   "lines": [
+    {
+     "bbox": [
+      82.0,
+      1550.0,
+      688.0,
+      1575.0
+     ],
+     "text": "Future developments. For the latest information about developments"
+    },
+    {
+     "bbox": [
+      84.0,
+      1575.0,
+      672.0,
+      1595.0
+     ],
+     "text": "related to Form W-9 and its instructions, such as legislation enacted"
+    },
+    {
+     "bbox": [
+      82.0,
+      1597.0,
+      556.0,
+      1617.0
+     ],
+     "text": "after they were published, go to www.irs.gov/FormW9."
+    }
+   ]
+  },
+  {
+   "id": "p0-b22",
+   "type": "heading",
+   "bbox": [
+    81.0,
+    1632.0,
+    249.0,
+    1655.0
+   ],
+   "order": 22,
+   "level": 2,
+   "text": "What's New",
+   "lines": [
+    {
+     "bbox": [
+      82.0,
+      1633.0,
+      253.0,
+      1659.0
+     ],
+     "text": "What's New"
+    }
+   ]
+  },
+  {
+   "id": "p0-b23",
+   "type": "paragraph",
+   "bbox": [
+    80.0,
+    1670.0,
+    701.0,
+    1754.0
+   ],
+   "order": 23,
+   "text": "Line 3a has been modified to clarify how a disregarded entity completes this line. An LLC that is a disregarded entity should check the appropriate box for the tax classification of its owner. Otherwise, it should check the “LLC\" box and enter its appropriate tax classification.",
+   "lines": [
+    {
+     "bbox": [
+      80.0,
+      1668.0,
+      704.0,
+      1692.0
+     ],
+     "text": "Line 3a has been modified to clarify how a disregarded entity completes"
+    },
+    {
+     "bbox": [
+      80.0,
+      1690.0,
+      618.0,
+      1716.0
+     ],
+     "text": "this line. An LLC that is a disregarded entity should check the"
+    },
+    {
+     "bbox": [
+      80.0,
+      1712.0,
+      660.0,
+      1736.0
+     ],
+     "text": "appropriate box for the tax classification of its owner. Otherwise, it"
+    },
+    {
+     "bbox": [
+      80.0,
+      1734.0,
+      698.0,
+      1759.0
+     ],
+     "text": "should check the “LLC\" box and enter its appropriate tax classification."
+    }
+   ]
+  },
+  {
+   "id": "p0-b24",
+   "type": "heading",
+   "bbox": [
+    921.0,
+    1413.0,
+    961.0,
+    1430.0
+   ],
+   "order": 24,
+   "level": 2,
+   "text": "Date",
+   "lines": [
+    {
+     "bbox": [
+      918.0,
+      1411.0,
+      965.0,
+      1433.0
+     ],
+     "text": "Date"
+    }
+   ]
+  },
+  {
+   "id": "p0-b25",
+   "type": "paragraph",
+   "bbox": [
+    752.0,
+    1458.0,
+    1377.0,
+    1673.0
+   ],
+   "order": 25,
+   "text": "New line 3b has been added to this form. A flow-through entity is required to complete this line to indicate that it has direct or indirect foreign partners, owners, or beneficiaries when it provides the Form W-9to another flow-through entity in which it has an ownership interest. This change is intended to provide a flow-through entity with information regarding the status of its indirect foreign partners, owners, or beneficiaries, so that it can satisfy any applicable reporting requirements. For example, a partnership that has any indirect foreign partners may be required to complete Schedules K-2 and K-3. See the Partnership Instructions for Schedules K-2 and K-3 (Form 1065).",
+   "lines": [
+    {
+     "bbox": [
+      774.0,
+      1459.0,
+      1338.0,
+      1478.0
+     ],
+     "text": "New line 3b has been added to this form. A flow-through entity is"
+    },
+    {
+     "bbox": [
+      756.0,
+      1482.0,
+      1340.0,
+      1502.0
+     ],
+     "text": "required to complete this line to indicate that it has direct or indirect"
+    },
+    {
+     "bbox": [
+      754.0,
+      1500.0,
+      1384.0,
+      1526.0
+     ],
+     "text": "foreign partners, owners, or beneficiaries when it provides the Form W-9"
+    },
+    {
+     "bbox": [
+      756.0,
+      1524.0,
+      1380.0,
+      1544.0
+     ],
+     "text": "to another flow-through entity in which it has an ownership interest. This"
+    },
+    {
+     "bbox": [
+      756.0,
+      1546.0,
+      1344.0,
+      1566.0
+     ],
+     "text": "change is intended to provide a flow-through entity with information"
+    },
+    {
+     "bbox": [
+      758.0,
+      1568.0,
+      1292.0,
+      1587.0
+     ],
+     "text": "regarding the status of its indirect foreign partners, owners, or"
+    },
+    {
+     "bbox": [
+      754.0,
+      1589.0,
+      1263.0,
+      1609.0
+     ],
+     "text": "beneficiaries, so that it can satisfy any applicable reporting"
+    },
+    {
+     "bbox": [
+      756.0,
+      1611.0,
+      1360.0,
+      1631.0
+     ],
+     "text": "requirements. For example, a partnership that has any indirect foreign"
+    },
+    {
+     "bbox": [
+      756.0,
+      1633.0,
+      1368.0,
+      1653.0
+     ],
+     "text": "partners may be required to complete Schedules K-2 and K-3. See the"
+    },
+    {
+     "bbox": [
+      756.0,
+      1655.0,
+      1308.0,
+      1674.0
+     ],
+     "text": "Partnership Instructions for Schedules K-2 and K-3 (Form 1065)."
+    }
+   ]
+  },
+  {
+   "id": "p0-b26",
+   "type": "heading",
+   "bbox": [
+    755.0,
+    1690.0,
+    989.0,
+    1715.0
+   ],
+   "order": 26,
+   "level": 2,
+   "text": "Purpose of Form",
+   "lines": [
+    {
+     "bbox": [
+      756.0,
+      1690.0,
+      991.0,
+      1718.0
+     ],
+     "text": "Purpose of Form"
+    }
+   ]
+  },
+  {
+   "id": "p0-b27",
+   "type": "paragraph",
+   "bbox": [
+    753.0,
+    1727.0,
+    1347.0,
+    1769.0
+   ],
+   "order": 27,
+   "text": "An individual or entity (Form W-9 requester) who is required to file an information return with the IRS is giving you this form because they",
+   "lines": [
+    {
+     "bbox": [
+      756.0,
+      1726.0,
+      1350.0,
+      1752.0
+     ],
+     "text": "An individual or entity (Form W-9 requester) who is required to file an"
+    },
+    {
+     "bbox": [
+      756.0,
+      1748.0,
+      1338.0,
+      1773.0
+     ],
+     "text": "information return with the IRS is giving you this form because they"
+    }
+   ]
+  },
+  {
+   "id": "p0-b28",
+   "type": "footer",
+   "bbox": [
+    1183.0,
+    1790.0,
+    1380.0,
+    1809.0
+   ],
+   "order": 28,
+   "text": "Form W-9 (Rev. 3-2024)",
+   "lines": [
+    {
+     "bbox": [
+      1181.0,
+      1787.0,
+      1384.0,
+      1815.0
+     ],
+     "text": "Form W-9 (Rev. 3-2024)"
+    }
+   ]
+  },
+  {
+   "id": "p0-b29",
+   "type": "footer",
+   "bbox": [
+    565.0,
+    1792.0,
+    691.0,
+    1809.0
+   ],
+   "order": 29,
+   "text": "Cat. No. 10231X",
+   "lines": [
+    {
+     "bbox": [
+      564.0,
+      1791.0,
+      694.0,
+      1813.0
+     ],
+     "text": "Cat. No. 10231X"
+    }
+   ]
+  }
+ ]
+}
