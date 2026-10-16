@@ -7,6 +7,7 @@ from typing import Any
 from opendoc_engine import __version__
 from opendoc_engine.engines import EngineRegistry, default_registry, describe
 from opendoc_engine.ir import IR_SCHEMA_VERSION
+from opendoc_engine.methods_export import register_export_methods
 from opendoc_engine.rpc import MethodRegistry, RpcServer
 
 # Version of the RPC protocol in docs/protocol.md. Rust refuses an engine with another value.
@@ -32,6 +33,7 @@ def build_methods(engines: EngineRegistry) -> MethodRegistry:
     def capabilities(_params: Any) -> list[dict[str, Any]]:
         return [describe(engine) for engine in engines.all()]
 
+    register_export_methods(methods)
     return methods
 
 
