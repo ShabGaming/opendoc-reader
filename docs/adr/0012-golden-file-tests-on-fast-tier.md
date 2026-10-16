@@ -4,6 +4,8 @@ Status: Accepted
 
 Date: 2026-10-15
 
+Updated: 2026-10-16, when the golden set was built
+
 ## Context
 
 OCR output is hard to test. Results depend on the model, its quantization, the hardware and the preprocessing. Small changes in rendering or deskewing can shift output. We still need to catch regressions in preprocessing, normalization to the IR, and the exporters, since those are our own code and change often.
@@ -14,9 +16,9 @@ The maintainer has an RTX 4090 PC and an Apple Silicon Mac, so heavier checks ca
 
 ## Decision
 
-The repository includes a small set of public-domain sample scans covering: a book page, a table-heavy invoice, a formula page, a two-column paper and a receipt. Each has checked-in expected outputs (golden files).
+The repository includes a small set of public-domain sample pages: a book page, a statistical table, a formula page, a two-column dictionary page, a cookbook page with lists, and two US federal forms. Each has checked-in expected outputs (golden files). Sources and licenses are in `engine/tests/golden/SOURCES.md`.
 
-On every pull request, CI runs these samples through the Fast tier, which runs on any CPU, and compares the result to the golden files. The comparison covers the IR and the exported Markdown and DOCX structure. Tolerance rules for harmless differences (for example whitespace or tiny bounding box shifts) are defined in the test code and kept as narrow as practical.
+On every pull request, CI runs these samples through the Fast tier, which runs on any CPU, and compares the result to the golden files. The comparison covers the IR and the exported Markdown; the DOCX exporter has its own structural unit tests. Tolerance rules for harmless differences (block order similarity, word similarity, bounding box overlap) are defined at the top of `engine/tests/test_golden.py` and kept as narrow as practical.
 
 For the Accurate and Max tiers, a manual benchmark script is run on the maintainer's machines before each release. Its results are reviewed by hand and are not part of CI.
 
