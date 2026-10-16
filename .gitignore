@@ -223,3 +223,11 @@ __marimo__/
 .claude/settings.json
 .claude/settings.local.json
 .claude/launch.json
+
+# Node / Vite / Tauri
+node_modules/
+apps/desktop/dist/
+apps/desktop/src-tauri/target/
+apps/desktop/src-tauri/gen/schemas/
+*.tsbuildinfo
+.vite/

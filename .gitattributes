@@ -1,0 +1,41 @@
+# Normalize line endings to LF in the repository and on checkout.
+* text=auto eol=lf
+
+# Windows scripts need CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary files: never diff or convert.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.tif binary
+*.tiff binary
+*.bmp binary
+*.ico binary
+*.icns binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.7z binary
+*.gguf binary
+*.onnx binary
+*.pdparams binary
+*.pdiparams binary
+*.pdf binary
+*.docx binary
+
+# Generated lock files are collapsed in diffs and not counted as source.
+pnpm-lock.yaml linguist-generated=true
+uv.lock linguist-generated=true
+Cargo.lock linguist-generated=true
+
+# Docs and the spike report are documentation, not project languages.
+docs/** linguist-documentation
