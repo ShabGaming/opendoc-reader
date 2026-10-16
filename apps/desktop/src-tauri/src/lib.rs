@@ -15,6 +15,7 @@ pub mod fakes;
 pub mod hardware;
 pub mod logging;
 pub mod manifest;
+pub mod migrate;
 pub mod models;
 pub mod paths;
 pub mod queue;
@@ -63,19 +64,30 @@ fn calibration_page(resource_dir: Option<&std::path::Path>) -> PathBuf {
 }
 
 fn build_core(app: &tauri::App) -> Result<Arc<Core>, Box<dyn std::error::Error>> {
-    // OPENDOC_APP_DATA points a development build at another data folder (with its own logs).
-    let (data, logs) = match std::env::var_os("OPENDOC_APP_DATA") {
-        Some(dir) => (PathBuf::from(&dir), PathBuf::from(dir).join("logs")),
-        None => (app.path().app_data_dir()?, app.path().app_log_dir()?),
-    };
+    // Everything lives in <local data>/OpenDoc Reader. OPENDOC_APP_DATA points a development
+    // build at another data folder (with its own logs). Installs from before this layout are
+    // moved over; the notes are written to the log once it is running.
+    let mut notes: Vec<String> = Vec::new();
+    let (data, logs) = migrate::locate(
+        &app.path().local_data_dir()?,
+        &app.path().app_data_dir()?,
+        &app.path().app_log_dir()?,
+        std::env::var_os("OPENDOC_APP_DATA").as_deref(),
+        &mut |note| notes.push(note.to_string()),
+    );
     let paths = AppPaths::new(data, logs);
     paths.ensure()?;
     app.manage(LogGuard(logging::init(&paths.logs)));
     tracing::info!("OpenDoc Reader {} starting", env!("CARGO_PKG_VERSION"));
+    for note in notes {
+        tracing::info!("data folder: {note}");
+    }
 
-    // The review screen shows page images from the work folder through the asset protocol.
+    // The review screen shows page images and crops from the work folder through the asset
+    // protocol. tauri.conf.json covers the default folder; this covers the override and a
+    // fallback to the old location.
     app.asset_protocol_scope()
-        .allow_directory(&paths.work, true)?;
+        .allow_directory(&paths.data, true)?;
 
     let resource_dir = app.path().resource_dir().ok();
     let source = engine_env::resolve_source(resource_dir.as_deref())
@@ -89,7 +101,7 @@ fn build_core(app: &tauri::App) -> Result<Arc<Core>, Box<dyn std::error::Error>>
     )?;
     let engine_env = core.svc.engine_env.clone();
 
-    // A models folder outside app data is not covered by the static scope in tauri.conf.json.
+    // A models folder outside app data is not covered by the scope above.
     let models_dir = core.svc.models_dir();
     if !models_dir.starts_with(&core.svc.paths.data) {
         app.asset_protocol_scope()
