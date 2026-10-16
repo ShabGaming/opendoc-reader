@@ -86,6 +86,16 @@
           "repo": "PaddlePaddle/PP-DocLayout_plus-L",
           "revision": "aa52b8528c84f9b1a34ac3a88fe0e576edb9d11d",
           "url": "https://huggingface.co/PaddlePaddle/PP-DocLayout_plus-L"
+        },
+        {
+          "repo": "PaddlePaddle/PP-LCNet_x1_0_doc_ori",
+          "revision": "d3b95a6dff5fe8a94f2748e12b61cb26818a0df8",
+          "url": "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori"
+        },
+        {
+          "repo": "PaddlePaddle/UVDoc",
+          "revision": "16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3",
+          "url": "https://huggingface.co/PaddlePaddle/UVDoc"
         }
       ],
       "files": [
@@ -188,6 +198,66 @@
           ],
           "sha256": "d60f782a16f96afb27e8280399899a94c3e9ffc694ffb2f913ea00af1c522f1e",
           "sizeBytes": 1838
+        },
+        {
+          "name": "inference.json",
+          "dir": "PP-LCNet_x1_0_doc_ori",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori/resolve/d3b95a6dff5fe8a94f2748e12b61cb26818a0df8/inference.json"
+          ],
+          "sha256": "3580978602f309c3554508dd85d4fe09b73a7e0d80d7f9e63258f5b72c390c69",
+          "sizeBytes": 104441
+        },
+        {
+          "name": "inference.pdiparams",
+          "dir": "PP-LCNet_x1_0_doc_ori",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori/resolve/d3b95a6dff5fe8a94f2748e12b61cb26818a0df8/inference.pdiparams"
+          ],
+          "sha256": "e8d6e7c5d264507e40e58a655779059d616b20d7441ea22047d829eb3931989c",
+          "sizeBytes": 6754166
+        },
+        {
+          "name": "inference.yml",
+          "dir": "PP-LCNet_x1_0_doc_ori",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori/resolve/d3b95a6dff5fe8a94f2748e12b61cb26818a0df8/inference.yml"
+          ],
+          "sha256": "9e195eb729a8173588cd0e8a852c8b373aa606e79e77b4ac7d8346f5426caf26",
+          "sizeBytes": 766
+        },
+        {
+          "name": "inference.json",
+          "dir": "UVDoc",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/UVDoc/resolve/16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3/inference.json"
+          ],
+          "sha256": "2c2bc3e0f15e782cf8f2ad411b5033d99ca504fe88648f8054a5e925ba2336e0",
+          "sizeBytes": 190986
+        },
+        {
+          "name": "inference.pdiparams",
+          "dir": "UVDoc",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/UVDoc/resolve/16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3/inference.pdiparams"
+          ],
+          "sha256": "810488899520e0da843b9bd9769ba4949f1c81e357f0eceb12d4a7da459c3eca",
+          "sizeBytes": 32054311
+        },
+        {
+          "name": "inference.yml",
+          "dir": "UVDoc",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/UVDoc/resolve/16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3/inference.yml"
+          ],
+          "sha256": "be83d537b358f3ff87740e77e14a83ee9e9a7bb215c33d091b69e8bd5904fe39",
+          "sizeBytes": 330
         }
       ],
       "requirements": {
@@ -198,7 +268,7 @@
         ]
       },
       "llamaServerArgs": [],
-      "notes": "CPU-only, no llama-server. Spike section 5, config FINAL-structure-min-v6tiny: PP-StructureV3 with only layout detection and text OCR enabled, text_det_limit_type max, text_det_limit_side_len 960, oneDNN off (it fails on paddlepaddle 3.3.1 CPU). The layout model is the PP-StructureV3 default, PP-DocLayout_plus-L. 4 to 11 s per page and 765 MiB peak RSS on the spike CPU. Tables and formulas are kept as images. Each model is stored in its own folder (see dir). Files were hashed from the spike machine's copy and checked against the Hugging Face tree at the pinned revisions."
+      "notes": "CPU-only, no llama-server. Spike section 5, config FINAL-structure-min-v6tiny: PP-StructureV3 with only layout detection and text OCR enabled, text_det_limit_type max, text_det_limit_side_len 960, oneDNN off (it fails on paddlepaddle 3.3.1 CPU). The layout model is the PP-StructureV3 default, PP-DocLayout_plus-L. 4 to 11 s per page and 765 MiB peak RSS on the spike CPU. Tables and formulas are kept as images. Each model is stored in its own folder (see dir). Files were hashed from the spike machine's copy and checked against the Hugging Face tree at the pinned revisions. The page orientation model PP-LCNet_x1_0_doc_ori (auto-rotate) and the dewarp model UVDoc (opt-in) are listed under every model so the engine finds them in the folder of whichever model is installed."
     },
     "accurate-paddleocr-vl-1.6": {
       "tier": "accurate",
@@ -216,6 +286,16 @@
           "repo": "PaddlePaddle/PP-DocLayoutV3",
           "revision": "241f8bdfc77a7c7bee915a5057aaee58c235a8d3",
           "url": "https://huggingface.co/PaddlePaddle/PP-DocLayoutV3"
+        },
+        {
+          "repo": "PaddlePaddle/PP-LCNet_x1_0_doc_ori",
+          "revision": "d3b95a6dff5fe8a94f2748e12b61cb26818a0df8",
+          "url": "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori"
+        },
+        {
+          "repo": "PaddlePaddle/UVDoc",
+          "revision": "16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3",
+          "url": "https://huggingface.co/PaddlePaddle/UVDoc"
         }
       ],
       "files": [
@@ -268,6 +348,66 @@
           ],
           "sha256": "506fcfac13b3b546ae40d7886b44126420f392adb694e3f8bb6a6286a1f90fdc",
           "sizeBytes": 1482
+        },
+        {
+          "name": "inference.json",
+          "dir": "PP-LCNet_x1_0_doc_ori",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori/resolve/d3b95a6dff5fe8a94f2748e12b61cb26818a0df8/inference.json"
+          ],
+          "sha256": "3580978602f309c3554508dd85d4fe09b73a7e0d80d7f9e63258f5b72c390c69",
+          "sizeBytes": 104441
+        },
+        {
+          "name": "inference.pdiparams",
+          "dir": "PP-LCNet_x1_0_doc_ori",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori/resolve/d3b95a6dff5fe8a94f2748e12b61cb26818a0df8/inference.pdiparams"
+          ],
+          "sha256": "e8d6e7c5d264507e40e58a655779059d616b20d7441ea22047d829eb3931989c",
+          "sizeBytes": 6754166
+        },
+        {
+          "name": "inference.yml",
+          "dir": "PP-LCNet_x1_0_doc_ori",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori/resolve/d3b95a6dff5fe8a94f2748e12b61cb26818a0df8/inference.yml"
+          ],
+          "sha256": "9e195eb729a8173588cd0e8a852c8b373aa606e79e77b4ac7d8346f5426caf26",
+          "sizeBytes": 766
+        },
+        {
+          "name": "inference.json",
+          "dir": "UVDoc",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/UVDoc/resolve/16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3/inference.json"
+          ],
+          "sha256": "2c2bc3e0f15e782cf8f2ad411b5033d99ca504fe88648f8054a5e925ba2336e0",
+          "sizeBytes": 190986
+        },
+        {
+          "name": "inference.pdiparams",
+          "dir": "UVDoc",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/UVDoc/resolve/16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3/inference.pdiparams"
+          ],
+          "sha256": "810488899520e0da843b9bd9769ba4949f1c81e357f0eceb12d4a7da459c3eca",
+          "sizeBytes": 32054311
+        },
+        {
+          "name": "inference.yml",
+          "dir": "UVDoc",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/UVDoc/resolve/16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3/inference.yml"
+          ],
+          "sha256": "be83d537b358f3ff87740e77e14a83ee9e9a7bb215c33d091b69e8bd5904fe39",
+          "sizeBytes": 330
         }
       ],
       "requirements": {
@@ -288,7 +428,7 @@
         "-c",
         "16384"
       ],
-      "notes": "Spike sections 3 and 7: 2509 MiB peak VRAM above baseline and about 3.1 GB RAM on CPU, including the Python process. Always pass -np 1 -c 16384; the defaults use 11.5 GB of VRAM. The layout model PP-DocLayoutV3 (files in its own folder) runs on the CPU in the Python engine; about 2.8 s per page. The ModelScope mirror is pinned to its own commit (dea493a8), which holds the same bytes."
+      "notes": "Spike sections 3 and 7: 2509 MiB peak VRAM above baseline and about 3.1 GB RAM on CPU, including the Python process. Always pass -np 1 -c 16384; the defaults use 11.5 GB of VRAM. The layout model PP-DocLayoutV3 (files in its own folder) runs on the CPU in the Python engine; about 2.8 s per page. The ModelScope mirror is pinned to its own commit (dea493a8), which holds the same bytes. The page orientation model PP-LCNet_x1_0_doc_ori (auto-rotate) and the dewarp model UVDoc (opt-in) are listed under every model so the engine finds them in the folder of whichever model is installed."
     },
     "max-deepseek-ocr-1-q8": {
       "tier": "max",
@@ -301,6 +441,16 @@
           "repo": "ggml-org/DeepSeek-OCR-GGUF",
           "revision": "7086620c3e417c744eb30dd3090fd053c6bb2e5e",
           "url": "https://huggingface.co/ggml-org/DeepSeek-OCR-GGUF"
+        },
+        {
+          "repo": "PaddlePaddle/PP-LCNet_x1_0_doc_ori",
+          "revision": "d3b95a6dff5fe8a94f2748e12b61cb26818a0df8",
+          "url": "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori"
+        },
+        {
+          "repo": "PaddlePaddle/UVDoc",
+          "revision": "16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3",
+          "url": "https://huggingface.co/PaddlePaddle/UVDoc"
         }
       ],
       "files": [
@@ -323,6 +473,66 @@
           ],
           "sha256": "786c9b5159898de3d1d94a102836df559fed0bcf09f41a32f62c3219b0e278e0",
           "sizeBytes": 447856768
+        },
+        {
+          "name": "inference.json",
+          "dir": "PP-LCNet_x1_0_doc_ori",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori/resolve/d3b95a6dff5fe8a94f2748e12b61cb26818a0df8/inference.json"
+          ],
+          "sha256": "3580978602f309c3554508dd85d4fe09b73a7e0d80d7f9e63258f5b72c390c69",
+          "sizeBytes": 104441
+        },
+        {
+          "name": "inference.pdiparams",
+          "dir": "PP-LCNet_x1_0_doc_ori",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori/resolve/d3b95a6dff5fe8a94f2748e12b61cb26818a0df8/inference.pdiparams"
+          ],
+          "sha256": "e8d6e7c5d264507e40e58a655779059d616b20d7441ea22047d829eb3931989c",
+          "sizeBytes": 6754166
+        },
+        {
+          "name": "inference.yml",
+          "dir": "PP-LCNet_x1_0_doc_ori",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori/resolve/d3b95a6dff5fe8a94f2748e12b61cb26818a0df8/inference.yml"
+          ],
+          "sha256": "9e195eb729a8173588cd0e8a852c8b373aa606e79e77b4ac7d8346f5426caf26",
+          "sizeBytes": 766
+        },
+        {
+          "name": "inference.json",
+          "dir": "UVDoc",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/UVDoc/resolve/16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3/inference.json"
+          ],
+          "sha256": "2c2bc3e0f15e782cf8f2ad411b5033d99ca504fe88648f8054a5e925ba2336e0",
+          "sizeBytes": 190986
+        },
+        {
+          "name": "inference.pdiparams",
+          "dir": "UVDoc",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/UVDoc/resolve/16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3/inference.pdiparams"
+          ],
+          "sha256": "810488899520e0da843b9bd9769ba4949f1c81e357f0eceb12d4a7da459c3eca",
+          "sizeBytes": 32054311
+        },
+        {
+          "name": "inference.yml",
+          "dir": "UVDoc",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/UVDoc/resolve/16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3/inference.yml"
+          ],
+          "sha256": "be83d537b358f3ff87740e77e14a83ee9e9a7bb215c33d091b69e8bd5904fe39",
+          "sizeBytes": 330
         }
       ],
       "requirements": {
@@ -350,7 +560,7 @@
         "-np",
         "1"
       ],
-      "notes": "Spike sections 3 and 7: 6012 MiB peak VRAM above baseline at -c 8192, 6201 MiB working set on CPU. --special is required or the grounding tokens are stripped. Leave the default tiling. The ModelScope mirror is pinned to its own commit (f8982f9a), which holds the same bytes. Apple Silicon figures are estimates."
+      "notes": "Spike sections 3 and 7: 6012 MiB peak VRAM above baseline at -c 8192, 6201 MiB working set on CPU. --special is required or the grounding tokens are stripped. Leave the default tiling. The ModelScope mirror is pinned to its own commit (f8982f9a), which holds the same bytes. Apple Silicon figures are estimates. The page orientation model PP-LCNet_x1_0_doc_ori (auto-rotate) and the dewarp model UVDoc (opt-in) are listed under every model so the engine finds them in the folder of whichever model is installed."
     },
     "experimental-deepseek-ocr-2-q8": {
       "tier": "max",
@@ -363,6 +573,16 @@
           "repo": "sabafallah/DeepSeek-OCR-2-GGUF",
           "revision": "d08e5af400c64fa8a9b89b04ba373b600b02e05d",
           "url": "https://huggingface.co/sabafallah/DeepSeek-OCR-2-GGUF"
+        },
+        {
+          "repo": "PaddlePaddle/PP-LCNet_x1_0_doc_ori",
+          "revision": "d3b95a6dff5fe8a94f2748e12b61cb26818a0df8",
+          "url": "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori"
+        },
+        {
+          "repo": "PaddlePaddle/UVDoc",
+          "revision": "16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3",
+          "url": "https://huggingface.co/PaddlePaddle/UVDoc"
         }
       ],
       "files": [
@@ -383,6 +603,66 @@
           ],
           "sha256": "46efe1304f581869f3b067eb77b1151dc0daf32bc25ef644fc7d505f4153a545",
           "sizeBytes": 512537792
+        },
+        {
+          "name": "inference.json",
+          "dir": "PP-LCNet_x1_0_doc_ori",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori/resolve/d3b95a6dff5fe8a94f2748e12b61cb26818a0df8/inference.json"
+          ],
+          "sha256": "3580978602f309c3554508dd85d4fe09b73a7e0d80d7f9e63258f5b72c390c69",
+          "sizeBytes": 104441
+        },
+        {
+          "name": "inference.pdiparams",
+          "dir": "PP-LCNet_x1_0_doc_ori",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori/resolve/d3b95a6dff5fe8a94f2748e12b61cb26818a0df8/inference.pdiparams"
+          ],
+          "sha256": "e8d6e7c5d264507e40e58a655779059d616b20d7441ea22047d829eb3931989c",
+          "sizeBytes": 6754166
+        },
+        {
+          "name": "inference.yml",
+          "dir": "PP-LCNet_x1_0_doc_ori",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/PP-LCNet_x1_0_doc_ori/resolve/d3b95a6dff5fe8a94f2748e12b61cb26818a0df8/inference.yml"
+          ],
+          "sha256": "9e195eb729a8173588cd0e8a852c8b373aa606e79e77b4ac7d8346f5426caf26",
+          "sizeBytes": 766
+        },
+        {
+          "name": "inference.json",
+          "dir": "UVDoc",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/UVDoc/resolve/16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3/inference.json"
+          ],
+          "sha256": "2c2bc3e0f15e782cf8f2ad411b5033d99ca504fe88648f8054a5e925ba2336e0",
+          "sizeBytes": 190986
+        },
+        {
+          "name": "inference.pdiparams",
+          "dir": "UVDoc",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/UVDoc/resolve/16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3/inference.pdiparams"
+          ],
+          "sha256": "810488899520e0da843b9bd9769ba4949f1c81e357f0eceb12d4a7da459c3eca",
+          "sizeBytes": 32054311
+        },
+        {
+          "name": "inference.yml",
+          "dir": "UVDoc",
+          "role": "paddle-model",
+          "urls": [
+            "https://huggingface.co/PaddlePaddle/UVDoc/resolve/16c3f0ea9c2f0c6a57e24160f7eeaa7574613fa3/inference.yml"
+          ],
+          "sha256": "be83d537b358f3ff87740e77e14a83ee9e9a7bb215c33d091b69e8bd5904fe39",
+          "sizeBytes": 330
         }
       ],
       "requirements": {
@@ -420,7 +700,7 @@
         "--dry-sequence-breaker",
         "none"
       ],
-      "notes": "Community GGUF conversion by an individual account with no license field; the Apache-2.0 license is the upstream weights' license. No official GGUF exists, so this is pinned by revision and SHA-256 and has no ModelScope mirror. Verify or replace it before v0.1. Spike section 3: 7639 MiB peak VRAM above baseline, so it is only offered with 10 GB or more of VRAM (16 GB or more on a Mac). DRY sampling guards against repetition loops (section 7)."
+      "notes": "Community GGUF conversion by an individual account with no license field; the Apache-2.0 license is the upstream weights' license. No official GGUF exists, so this is pinned by revision and SHA-256 and has no ModelScope mirror. Verify or replace it before v0.1. Spike section 3: 7639 MiB peak VRAM above baseline, so it is only offered with 10 GB or more of VRAM (16 GB or more on a Mac). DRY sampling guards against repetition loops (section 7). The page orientation model PP-LCNet_x1_0_doc_ori (auto-rotate) and the dewarp model UVDoc (opt-in) are listed under every model so the engine finds them in the folder of whichever model is installed."
     }
   },
   "suggester": {

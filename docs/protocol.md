@@ -981,7 +981,7 @@ The full definitions are in `commands.ts`. This section shows the shape of the m
   "engineId": "paddleocr-vl",
   "experimental": false,
   "license": "Apache-2.0",
-  "downloadSizeBytes": 1949544560,
+  "downloadSizeBytes": 1988649560,
   "installedSizeBytes": null,
   "state": "notInstalled",
   "sourceUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6-GGUF"
@@ -1022,7 +1022,7 @@ The full definitions are in `commands.ts`. This section shows the shape of the m
       "name": "PaddleOCR-VL 1.6",
       "state": "downloading",
       "bytesDone": 912000000,
-      "bytesTotal": 1949544560,
+      "bytesTotal": 1988649560,
       "bytesPerSecond": 18500000.5,
       "secondsLeft": 56.4
     }
@@ -1216,8 +1216,8 @@ Both events are emitted to the main window. Subscribe with `listen`, and call `q
       "kind": "model",
       "name": "PaddleOCR-VL 1.6",
       "state": "done",
-      "bytesDone": 1949544560,
-      "bytesTotal": 1949544560,
+      "bytesDone": 1988649560,
+      "bytesTotal": 1988649560,
       "bytesPerSecond": null,
       "secondsLeft": null
     }

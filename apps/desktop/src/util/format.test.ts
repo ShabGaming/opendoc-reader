@@ -15,8 +15,8 @@ import {
 
 describe("formatBytes", () => {
   it("uses decimal units and no decimals for large megabyte values", () => {
-    expect(formatBytes(1_949_544_560)).toBe("1.9 GB");
-    expect(formatBytes(3_573_996_480)).toBe("3.6 GB");
+    expect(formatBytes(1_988_649_560)).toBe("1.9 GB");
+    expect(formatBytes(3_613_101_480)).toBe("3.6 GB");
     expect(formatBytes(790_000_000)).toBe("790 MB");
     expect(formatBytes(41_800_000)).toBe("41.8 MB");
     expect(formatBytes(412_000)).toBe("412 KB");
