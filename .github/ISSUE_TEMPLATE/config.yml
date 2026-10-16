@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or idea for discussion
+    url: https://github.com/ShabGaming/opendoc-reader/discussions
+    about: Ask how something works or talk through an idea before opening an issue.
+  - name: Security vulnerability
+    url: https://github.com/ShabGaming/opendoc-reader/security/policy
+    about: Report security problems privately, following the security policy. Do not open a public issue.

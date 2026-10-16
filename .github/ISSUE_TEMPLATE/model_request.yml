@@ -1,0 +1,39 @@
+name: Model request
+description: Ask for a new OCR model or engine to be added.
+labels: ["model"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Model name
+      placeholder: GLM-OCR
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Link
+      description: The official model page or repository, and a GGUF repository if one exists.
+      placeholder: https://huggingface.co/...
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License
+      description: The license of the model weights.
+      placeholder: Apache-2.0
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why add it?
+      description: What does it do better than the current tiers (for example tables, formulas, a language, speed)? Benchmark links or your own results help.
+    validations:
+      required: true
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Hardware it needs
+      description: Memory and GPU requirements, and whether it runs on llama.cpp, PaddleOCR, or something else.

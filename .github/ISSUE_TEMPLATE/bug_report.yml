@@ -1,0 +1,80 @@
+name: Bug report
+description: Something does not work as expected.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Everything in OpenDoc Reader runs on your machine, so the details below are the only way we can see what happened.
+
+        Please do not attach personal documents. If a page triggers the bug, describe it, or use a public-domain page that shows the same problem.
+  - type: input
+    id: os
+    attributes:
+      label: Operating system and version
+      placeholder: Windows 11 23H2, macOS 14.5
+    validations:
+      required: true
+  - type: input
+    id: app-version
+    attributes:
+      label: App version
+      description: Shown in Settings, or in the name of the installer you used.
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: tier
+    attributes:
+      label: Model tier
+      options:
+        - Fast
+        - Accurate
+        - Max
+        - Max (experimental DeepSeek-OCR 2)
+        - Not related to a model
+    validations:
+      required: true
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Hardware summary
+      description: CPU, RAM, and GPU with VRAM (or Apple Silicon chip and memory).
+      placeholder: Ryzen 5 5600, 16 GB RAM, RTX 3060 12 GB
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: In Settings, choose "Copy diagnostics" and paste the result here. Nothing is sent anywhere automatically.
+      render: text
+  - type: checkboxes
+    id: no-personal-documents
+    attributes:
+      label: Privacy
+      options:
+        - label: I have not attached personal or confidential documents, and I checked the diagnostics text for anything private.
+          required: true
