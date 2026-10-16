@@ -1,0 +1,242 @@
+{
+ "image": "book",
+ "width": 1555,
+ "height": 2200,
+ "blocks": [
+  {
+   "label": "header",
+   "bbox": [
+    571,
+    215,
+    996,
+    245
+   ],
+   "content": "INFUNFOE ExPLAINS."
+  },
+  {
+   "label": "text",
+   "bbox": [
+    83,
+    311,
+    1457,
+    564
+   ],
+   "content": "«I thought I'd got sober. I'd no business to drink to-night. But it's in my head yet—worse'n when we started hére. I'm all in a muddle; can't recollect anything of it hardly. Tell me, Joe—honest, now, old feller—did I do it? Joe,I never meant to—pon my soul and honor I never meant to,Joe. Tell me how it was Joe. O, it's awful—and him so young and promising.\""
+  },
+  {
+   "label": "text",
+   "bbox": [
+    83,
+    576,
+    1459,
+    777
+   ],
+   "content": "“Why you two was scuffling, and he fetched you one with the head-board and you fell flat ; and then up you come, all reeling and staggering, like, and snatched the knife and jammed it into him, just as he fetched you another awful clip—and here you've laid, as dead as a wedge till now.\""
+  },
+  {
+   "label": "text",
+   "bbox": [
+    122,
+    789,
+    1462,
+    826
+   ],
+   "content": "“O; I didn't know what I was a doing. I wish I may die this minute if I "
+  },
+  {
+   "label": "image",
+   "bbox": [
+    208,
+    873,
+    1342,
+    1731
+   ],
+   "content": ""
+  },
+  {
+   "label": "figure_title",
+   "bbox": [
+    602,
+    1764,
+    936,
+    1790
+   ],
+   "content": "MUFF POTTER OUTWITTED."
+  },
+  {
+   "label": "text",
+   "bbox": [
+    83,
+    1839,
+    1461,
+    2040
+   ],
+   "content": "did. It was all on account of the whisky; and the excitement, I reckon. I never used a weepon in my life before, Joe. I've fought, but never with weepons. They'll all say that. Joe, don't tell! Say you won't tell, Joe—that's a good feller. I always liked you Joe, and stood up for you, too. Don't you "
+  },
+  {
+   "label": "number",
+   "bbox": [
+    1417,
+    218,
+    1453,
+    243
+   ],
+   "content": "9I "
+  }
+ ],
+ "lines": [
+  {
+   "bbox": [
+    576,
+    209,
+    1002,
+    247
+   ],
+   "text": "INFUNFOE ExPLAINS."
+  },
+  {
+   "bbox": [
+    1412,
+    211,
+    1460,
+    252
+   ],
+   "text": "9I"
+  },
+  {
+   "bbox": [
+    125,
+    302,
+    1460,
+    353
+   ],
+   "text": "«I thought I'd got sober. I'd no business to drink to-night. But it's in my"
+  },
+  {
+   "bbox": [
+    93,
+    362,
+    1460,
+    401
+   ],
+   "text": "head yet—worse'n when we started hére. I'm all in a muddle; can't recollect"
+  },
+  {
+   "bbox": [
+    88,
+    415,
+    1465,
+    461
+   ],
+   "text": "anything of it hardly. Tell me, Joe—honest, now, old feller—did I do it? Joe,"
+  },
+  {
+   "bbox": [
+    88,
+    467,
+    1462,
+    513
+   ],
+   "text": "I never meant to—pon my soul and honor I never meant to,Joe. Tell me how"
+  },
+  {
+   "bbox": [
+    83,
+    518,
+    1169,
+    571
+   ],
+   "text": "it was Joe. O, it's awful—and him so young and promising.\""
+  },
+  {
+   "bbox": [
+    120,
+    573,
+    1465,
+    619
+   ],
+   "text": "“Why you two was scuffling, and he fetched you one with the head-board"
+  },
+  {
+   "bbox": [
+    88,
+    626,
+    1462,
+    671
+   ],
+   "text": "and you fell flat ; and then up you come, all reeling and staggering, like, and"
+  },
+  {
+   "bbox": [
+    88,
+    681,
+    1465,
+    726
+   ],
+   "text": "snatched the knife and jammed it into him, just as he fetched you another awful"
+  },
+  {
+   "bbox": [
+    88,
+    733,
+    1081,
+    779
+   ],
+   "text": "clip—and here you've laid, as dead as a wedge till now.\""
+  },
+  {
+   "bbox": [
+    123,
+    786,
+    1467,
+    832
+   ],
+   "text": "“O; I didn't know what I was a doing. I wish I may die this minute if I"
+  },
+  {
+   "bbox": [
+    604,
+    1762,
+    939,
+    1794
+   ],
+   "text": "MUFF POTTER OUTWITTED."
+  },
+  {
+   "bbox": [
+    93,
+    1838,
+    1462,
+    1877
+   ],
+   "text": "did. It was all on account of the whisky; and the excitement, I reckon. I"
+  },
+  {
+   "bbox": [
+    90,
+    1888,
+    1465,
+    1934
+   ],
+   "text": "never used a weepon in my life before, Joe. I've fought, but never with weep-"
+  },
+  {
+   "bbox": [
+    88,
+    1939,
+    1467,
+    1989
+   ],
+   "text": "ons. They'll all say that. Joe, don't tell! Say you won't tell, Joe—that's a"
+  },
+  {
+   "bbox": [
+    88,
+    1996,
+    1465,
+    2042
+   ],
+   "text": "good feller. I always liked you Joe, and stood up for you, too. Don't you"
+  }
+ ]
+}

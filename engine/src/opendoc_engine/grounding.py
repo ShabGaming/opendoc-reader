@@ -27,6 +27,7 @@ from dataclasses import dataclass
 
 from opendoc_engine.htmltable import parse_html_table
 from opendoc_engine.ir import BBox, Block, BlockType
+from opendoc_engine.mathtext import strip_math as _strip_math
 
 log = logging.getLogger(__name__)
 
@@ -57,8 +58,6 @@ _FORMULA_NUMBER_LABEL = "formula_number"
 
 _EQUATION_LABEL = "equation"
 
-_MATH_DELIMITERS = (("\\[", "\\]"), ("\\(", "\\)"), ("$$", "$$"), ("$", "$"))
-
 
 def _scale(value: float, extent: int) -> float:
     return round(min(max(value, 0), _MAX_COORD) / _MAX_COORD * extent, 2)
@@ -75,18 +74,6 @@ def _boxes_to_bbox(det: str, page_size: tuple[int, int]) -> BBox | None:
     x2 = max(max(b[0], b[2]) for b in boxes)
     y2 = max(max(b[1], b[3]) for b in boxes)
     return (_scale(x1, width), _scale(y1, height), _scale(x2, width), _scale(y2, height))
-
-
-def _strip_math(text: str) -> str:
-    text = text.strip()
-    for opening, closing in _MATH_DELIMITERS:
-        if (
-            len(text) >= len(opening) + len(closing)
-            and text.startswith(opening)
-            and text.endswith(closing)
-        ):
-            return text[len(opening) : -len(closing)].strip()
-    return text
 
 
 @dataclass

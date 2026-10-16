@@ -1,0 +1,38 @@
+<|ref|>text<|/ref|><|det|>[[96, 79, 749, 101]]<|/det|>
+The normal being perpendicular to tangent, its slope is  
+
+<|ref|>equation<|/ref|><|det|>[[391, 103, 884, 148]]<|/det|>
+\[-\frac{1}{m} = -\frac{dx_1}{dy_1}. \quad (By 55, p. 3)\]  
+
+<|ref|>text<|/ref|><|det|>[[68, 151, 885, 195]]<|/det|>
+And since it also passes through the point of contact \(P_1(x_1, y_1)\), we have for the equation of the normal \(P_1N\)  
+
+<|ref|>equation<|/ref|><|det|>[[98, 199, 611, 242]]<|/det|>
+\[(2) \qquad y - y_1 = -\frac{dx_1}{dy_1} (x - x_1).\]  
+
+<|ref|>text<|/ref|><|det|>[[68, 245, 885, 353]]<|/det|>
+That portion of the tangent which is intercepted between the point of contact and \(OX\) is called the length of the tangent \((= TP_1)\), and its projection on the axis of \(X\) is called the length of the subtangent \((= TM)\). Similarly, we have the length of the normal \((= P_1N)\) and the length of the subnormal \((= MN)\).  
+
+<|ref|>text<|/ref|><|det|>[[98, 348, 626, 383]]<|/det|>
+In the triangle \(TP_1M\), \(\tan \tau = \frac{MP_1}{TM}\); therefore  
+
+<|ref|>text<|/ref|><|det|>[[98, 385, 721, 429]]<|/det|>
+(3) \(TM^* = \frac{MP_1}{\tan \tau} = y_1 \frac{dx_1}{dy_1} = \text{length of subtangent.}\)  
+
+<|ref|>text<|/ref|><|det|>[[98, 430, 632, 469]]<|/det|>
+In the triangle \(MP_1N\), \(\tan \tau = \frac{MN}{MP_1}\); therefore  
+
+<|ref|>text<|/ref|><|det|>[[98, 471, 755, 512]]<|/det|>
+(4) \(MN^\dagger = MP_1 \tan \tau = y_1 \frac{dy_1}{dx_1} = \text{length of subnormal.}\)  
+
+<|ref|>text<|/ref|><|det|>[[68, 515, 885, 583]]<|/det|>
+The length of tangent \((= TP_1)\) and the length of normal \((= P_1N)\) may then be found directly from the figure, each being the hypotenuse of a right triangle having the two legs known. Thus  
+
+<|ref|>equation<|/ref|><|det|>[[166, 584, 832, 777]]<|/det|>
+\[{T P_{1}=\sqrt{T M^{2}+M P_{1}^{2}}=\sqrt{\left(y_{1}\frac{d x_{1}}{d y_{1}}\right)^{2}+\left(y_{1}\right)^{2}}}\] \[{=y_{1}\sqrt{\left(\frac{d x_{1}}{d y_{1}}\right)^{2}+1}=\text{length of tangent}.}\] \[{P_{1}N=\sqrt{M P_{1}^{2}+M N^{2}}=\sqrt{\left(y_{1}\right)^{2}+\left(y_{1}\frac{d y_{1}}{d x_{1}}\right)^{2}}}\] \[{=y_{1}\sqrt{1+\left(\frac{d y_{1}}{d x_{1}}\right)^{2}}=\text{length of normal}.}\]  
+
+<|ref|>text<|/ref|><|det|>[[70, 781, 888, 824]]<|/det|>
+The student is advised to get the lengths of the tangent and of the normal directly from the figure rather than by using (5) and (6).  
+
+<|ref|>text<|/ref|><|det|>[[70, 824, 888, 867]]<|/det|>
+When the length of subtangent or subnormal at a point on a curve is determined, the tangent and normal may be easily constructed.<｜end▁of▁sentence｜>

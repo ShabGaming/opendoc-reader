@@ -1,0 +1,859 @@
+{
+ "image": "math",
+ "width": 1376,
+ "height": 2200,
+ "blocks": [
+  {
+   "label": "header",
+   "bbox": [
+    226,
+    109,
+    1081,
+    139
+   ],
+   "content": "SIMPLE APPLICATIONS OF THE DERIVATIVE "
+  },
+  {
+   "label": "text",
+   "bbox": [
+    131,
+    181,
+    1029,
+    221
+   ],
+   "content": "The normal being perpendicular to tangent, its slope is "
+  },
+  {
+   "label": "formula",
+   "bbox": [
+    545,
+    236,
+    764,
+    324
+   ],
+   "content": "1dx1m dy1"
+  },
+  {
+   "label": "text",
+   "bbox": [
+    89,
+    340,
+    1213,
+    426
+   ],
+   "content": "And since it also passes through the point of contact P(x, y), we have for the equation of the normal PN "
+  },
+  {
+   "label": "text",
+   "bbox": [
+    135,
+    469,
+    176,
+    502
+   ],
+   "content": "(2)"
+  },
+  {
+   "label": "formula",
+   "bbox": [
+    468,
+    442,
+    839,
+    530
+   ],
+   "content": "y-y₁=dx2(x—x1).dyr "
+  },
+  {
+   "label": "text",
+   "bbox": [
+    90,
+    548,
+    1214,
+    774
+   ],
+   "content": "That portion of the tangent which is intercepted between the point of contact and OX is called the length of the tangent (= TP), and its projection on the axis of X is called the length of the subtangent (=TM).Similarly, we have the length of the normal (= PN) and the length of 7rn "
+  },
+  {
+   "label": "text",
+   "bbox": [
+    134,
+    765,
+    861,
+    837
+   ],
+   "content": "DO0oT001To002L2T In the triangle TpM, tan τMP therefore TM "
+  },
+  {
+   "label": "text",
+   "bbox": [
+    138,
+    877,
+    179,
+    910
+   ],
+   "content": "(3)"
+  },
+  {
+   "label": "formula",
+   "bbox": [
+    277,
+    847,
+    992,
+    934
+   ],
+   "content": "TM \nTM*MP dx1= length of subtangent.\ntan τdyr \n\n"
+  },
+  {
+   "label": "text",
+   "bbox": [
+    133,
+    941,
+    869,
+    1022
+   ],
+   "content": "MN In the triangle MPN, tan τ=MR •therefore "
+  },
+  {
+   "label": "text",
+   "bbox": [
+    138,
+    1067,
+    178,
+    1101
+   ],
+   "content": "(4)"
+  },
+  {
+   "label": "formula",
+   "bbox": [
+    275,
+    1039,
+    1038,
+    1125
+   ],
+   "content": "Mvt = MP tan τ=y1dx dys = length of subnormal."
+  },
+  {
+   "label": "text",
+   "bbox": [
+    91,
+    1139,
+    1218,
+    1280
+   ],
+   "content": "The length of tangent (= TP) and the length of normal (= PN)may then be found directly from the figure, each being the hypotenuse of a right triangle having the two legs known. Thus "
+  },
+  {
+   "label": "text",
+   "bbox": [
+    139,
+    1435,
+    179,
+    1469
+   ],
+   "content": "(5)"
+  },
+  {
+   "label": "text",
+   "bbox": [
+    141,
+    1652,
+    180,
+    1683
+   ],
+   "content": "(6)"
+  },
+  {
+   "label": "formula",
+   "bbox": [
+    223,
+    1294,
+    1141,
+    1708
+   ],
+   "content": "TP₁=√TM²+MP²=(ydy.)dx1+(y)²\n=/dx dy12+ 1 = length of tangent.PN=√MP²+MN (y)²+dy1=1√1+dx₁dy1= length of normal."
+  },
+  {
+   "label": "text",
+   "bbox": [
+    97,
+    1723,
+    1220,
+    1814
+   ],
+   "content": "The student is advised to get the lengths of the tangent and of the normal directly from the figure rather than by using (5) and (6)."
+  },
+  {
+   "label": "text",
+   "bbox": [
+    97,
+    1821,
+    1220,
+    1907
+   ],
+   "content": "When the length of subtangent or subnormal at a point on a curve is determined, the tangent and normal may be easily constructed."
+  },
+  {
+   "label": "footnote",
+   "bbox": [
+    111,
+    1933,
+    1206,
+    2000
+   ],
+   "content": "* If subtangent extends to the right of T, we consider it positive; if to the left, negative.† If subnormal extends to the right of M, we consider it positive; if to the left, negative."
+  },
+  {
+   "label": "number",
+   "bbox": [
+    1173,
+    111,
+    1210,
+    140
+   ],
+   "content": "77"
+  },
+  {
+   "label": "formula_number",
+   "bbox": [
+    1028,
+    257,
+    1212,
+    299
+   ],
+   "content": "By 55, p.3"
+  }
+ ],
+ "lines": [
+  {
+   "bbox": [
+    226,
+    105,
+    1089,
+    147
+   ],
+   "text": "SIMPLE APPLICATIONS OF THE DERIVATIVE"
+  },
+  {
+   "bbox": [
+    1170,
+    105,
+    1218,
+    147
+   ],
+   "text": "77"
+  },
+  {
+   "bbox": [
+    136,
+    176,
+    1034,
+    225
+   ],
+   "text": "The normal being perpendicular to tangent, its slope is"
+  },
+  {
+   "bbox": [
+    688,
+    229,
+    762,
+    286
+   ],
+   "text": "dx1"
+  },
+  {
+   "bbox": [
+    591,
+    241,
+    618,
+    275
+   ],
+   "text": "1"
+  },
+  {
+   "bbox": [
+    1027,
+    254,
+    1222,
+    302
+   ],
+   "text": "By 55, p.3"
+  },
+  {
+   "bbox": [
+    586,
+    289,
+    625,
+    321
+   ],
+   "text": "m"
+  },
+  {
+   "bbox": [
+    695,
+    282,
+    754,
+    330
+   ],
+   "text": "dy1"
+  },
+  {
+   "bbox": [
+    131,
+    335,
+    1220,
+    385
+   ],
+   "text": "And since it also passes through the point of contact P(x, y), we"
+  },
+  {
+   "bbox": [
+    95,
+    387,
+    729,
+    426
+   ],
+   "text": "have for the equation of the normal PN"
+  },
+  {
+   "bbox": [
+    636,
+    433,
+    706,
+    490
+   ],
+   "text": "dx2"
+  },
+  {
+   "bbox": [
+    466,
+    458,
+    612,
+    512
+   ],
+   "text": "y-y₁="
+  },
+  {
+   "bbox": [
+    690,
+    455,
+    842,
+    509
+   ],
+   "text": "(x—x1)."
+  },
+  {
+   "bbox": [
+    138,
+    465,
+    181,
+    509
+   ],
+   "text": "(2)"
+  },
+  {
+   "bbox": [
+    640,
+    490,
+    699,
+    536
+   ],
+   "text": "dyr"
+  },
+  {
+   "bbox": [
+    136,
+    545,
+    1220,
+    591
+   ],
+   "text": "That portion of the tangent which is intercepted between the point"
+  },
+  {
+   "bbox": [
+    97,
+    596,
+    1218,
+    635
+   ],
+   "text": "of contact and OX is called the length of the tangent (= TP), and its"
+  },
+  {
+   "bbox": [
+    93,
+    635,
+    1218,
+    688
+   ],
+   "text": "projection on the axis of X is called the length of the subtangent (=TM)."
+  },
+  {
+   "bbox": [
+    95,
+    687,
+    1215,
+    729
+   ],
+   "text": "Similarly, we have the length of the normal (= PN) and the length of"
+  },
+  {
+   "bbox": [
+    100,
+    740,
+    468,
+    772
+   ],
+   "text": ""
+  },
+  {
+   "bbox": [
+    610,
+    753,
+    685,
+    774
+   ],
+   "text": "7rn"
+  },
+  {
+   "bbox": [
+    136,
+    784,
+    579,
+    823
+   ],
+   "text": "In the triangle TpM, tan τ"
+  },
+  {
+   "bbox": [
+    706,
+    779,
+    862,
+    820
+   ],
+   "text": "therefore"
+  },
+  {
+   "bbox": [
+    612,
+    799,
+    687,
+    851
+   ],
+   "text": "TM"
+  },
+  {
+   "bbox": [
+    410,
+    843,
+    491,
+    896
+   ],
+   "text": "MP"
+  },
+  {
+   "bbox": [
+    556,
+    838,
+    632,
+    901
+   ],
+   "text": "dx1"
+  },
+  {
+   "bbox": [
+    281,
+    866,
+    371,
+    907
+   ],
+   "text": "TM*"
+  },
+  {
+   "bbox": [
+    608,
+    857,
+    996,
+    915
+   ],
+   "text": "= length of subtangent."
+  },
+  {
+   "bbox": [
+    138,
+    873,
+    181,
+    914
+   ],
+   "text": "(3)"
+  },
+  {
+   "bbox": [
+    405,
+    898,
+    493,
+    933
+   ],
+   "text": "tan τ"
+  },
+  {
+   "bbox": [
+    564,
+    896,
+    622,
+    942
+   ],
+   "text": "dyr"
+  },
+  {
+   "bbox": [
+    620,
+    935,
+    695,
+    979
+   ],
+   "text": "MN"
+  },
+  {
+   "bbox": [
+    138,
+    960,
+    611,
+    999
+   ],
+   "text": "In the triangle MPN, tan τ="
+  },
+  {
+   "bbox": [
+    612,
+    965,
+    698,
+    1034
+   ],
+   "text": "MR"
+  },
+  {
+   "bbox": [
+    708,
+    956,
+    869,
+    997
+   ],
+   "text": "therefore"
+  },
+  {
+   "bbox": [
+    695,
+    974,
+    706,
+    990
+   ],
+   "text": "•"
+  },
+  {
+   "bbox": [
+    612,
+    1030,
+    686,
+    1094
+   ],
+   "text": "dys"
+  },
+  {
+   "bbox": [
+    275,
+    1047,
+    630,
+    1112
+   ],
+   "text": "Mvt = MP tan τ=y1"
+  },
+  {
+   "bbox": [
+    663,
+    1047,
+    1041,
+    1103
+   ],
+   "text": "= length of subnormal."
+  },
+  {
+   "bbox": [
+    138,
+    1066,
+    181,
+    1107
+   ],
+   "text": "(4)"
+  },
+  {
+   "bbox": [
+    609,
+    1077,
+    681,
+    1135
+   ],
+   "text": "dx"
+  },
+  {
+   "bbox": [
+    133,
+    1130,
+    1220,
+    1194
+   ],
+   "text": "The length of tangent (= TP) and the length of normal (= PN)"
+  },
+  {
+   "bbox": [
+    93,
+    1185,
+    1224,
+    1238
+   ],
+   "text": "may then be found directly from the figure, each being the hypotenuse"
+  },
+  {
+   "bbox": [
+    95,
+    1230,
+    967,
+    1286
+   ],
+   "text": "of a right triangle having the two legs known. Thus"
+  },
+  {
+   "bbox": [
+    681,
+    1299,
+    740,
+    1345
+   ],
+   "text": "dx1"
+  },
+  {
+   "bbox": [
+    231,
+    1311,
+    602,
+    1371
+   ],
+   "text": "TP₁=√TM²+MP²="
+  },
+  {
+   "bbox": [
+    625,
+    1313,
+    760,
+    1402
+   ],
+   "text": "(ydy.)"
+  },
+  {
+   "bbox": [
+    755,
+    1305,
+    886,
+    1371
+   ],
+   "text": "+(y)²"
+  },
+  {
+   "bbox": [
+    664,
+    1396,
+    744,
+    1455
+   ],
+   "text": "/dx"
+  },
+  {
+   "bbox": [
+    541,
+    1411,
+    679,
+    1492
+   ],
+   "text": "="
+  },
+  {
+   "bbox": [
+    745,
+    1405,
+    767,
+    1423
+   ],
+   "text": "2"
+  },
+  {
+   "bbox": [
+    140,
+    1432,
+    183,
+    1474
+   ],
+   "text": "(5)"
+  },
+  {
+   "bbox": [
+    758,
+    1423,
+    1141,
+    1462
+   ],
+   "text": "+ 1 = length of tangent."
+  },
+  {
+   "bbox": [
+    677,
+    1448,
+    740,
+    1496
+   ],
+   "text": "dy1"
+  },
+  {
+   "bbox": [
+    785,
+    1506,
+    860,
+    1566
+   ],
+   "text": "dy1"
+  },
+  {
+   "bbox": [
+    229,
+    1529,
+    566,
+    1584
+   ],
+   "text": "PN=√MP²+MN"
+  },
+  {
+   "bbox": [
+    608,
+    1523,
+    750,
+    1591
+   ],
+   "text": "(y)²+"
+  },
+  {
+   "bbox": [
+    736,
+    1618,
+    799,
+    1668
+   ],
+   "text": "dy1"
+  },
+  {
+   "bbox": [
+    545,
+    1629,
+    736,
+    1701
+   ],
+   "text": "=1√1+"
+  },
+  {
+   "bbox": [
+    817,
+    1631,
+    1134,
+    1678
+   ],
+   "text": "= length of normal."
+  },
+  {
+   "bbox": [
+    143,
+    1648,
+    186,
+    1689
+   ],
+   "text": "(6)"
+  },
+  {
+   "bbox": [
+    732,
+    1658,
+    802,
+    1711
+   ],
+   "text": "dx₁"
+  },
+  {
+   "bbox": [
+    138,
+    1716,
+    1227,
+    1772
+   ],
+   "text": "The student is advised to get the lengths of the tangent and of"
+  },
+  {
+   "bbox": [
+    99,
+    1764,
+    1224,
+    1820
+   ],
+   "text": "the normal directly from the figure rather than by using (5) and (6)."
+  },
+  {
+   "bbox": [
+    140,
+    1813,
+    1222,
+    1863
+   ],
+   "text": "When the length of subtangent or subnormal at a point on a curve"
+  },
+  {
+   "bbox": [
+    99,
+    1856,
+    1154,
+    1914
+   ],
+   "text": "is determined, the tangent and normal may be easily constructed."
+  },
+  {
+   "bbox": [
+    111,
+    1925,
+    1213,
+    1976
+   ],
+   "text": "* If subtangent extends to the right of T, we consider it positive; if to the left, negative."
+  },
+  {
+   "bbox": [
+    113,
+    1957,
+    1209,
+    2005
+   ],
+   "text": "† If subnormal extends to the right of M, we consider it positive; if to the left, negative."
+  },
+  {
+   "bbox": [
+    134,
+    765,
+    468,
+    772
+   ],
+   "text": "DO0oT001To002L2T"
+  },
+  {
+   "bbox": [
+    610,
+    765,
+    685,
+    805
+   ],
+   "text": "MP"
+  }
+ ]
+}

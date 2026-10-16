@@ -11,12 +11,12 @@ engine only names the manifest model entries it needs through `manifest_models`.
 
 from __future__ import annotations
 
-from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Literal, Protocol, runtime_checkable
 
 from opendoc_engine.ir import Block
+from opendoc_engine.rpc import CallContext
 
 
 @dataclass(frozen=True)
@@ -42,6 +42,18 @@ class Capabilities:
         }
 
 
+@dataclass(frozen=True)
+class EngineSetup:
+    """The runtime facts an engine needs, taken from `engine.configure` and the call.
+    `llama_base_url` is the server's base URL without `/v1`, or None when none is running."""
+
+    model_id: str
+    models_dir: Path
+    llama_base_url: str | None
+    cpu_threads: int
+    scratch_dir: Path
+
+
 @runtime_checkable
 class Engine(Protocol):
     id: str
@@ -50,16 +62,26 @@ class Engine(Protocol):
     # Keys of the `models` object in models/manifest.json that must be downloaded first.
     manifest_models: tuple[str, ...]
 
-    def prepare(self, options: Mapping[str, Any] | None = None) -> None:
-        """Load or start whatever the engine needs. `options` carries runtime facts from the
-        core, such as the llama-server port."""
+    def prepare(self, setup: EngineSetup | None = None) -> None:
+        """Load or connect to whatever the engine needs. Called before every page and cheap
+        when `setup` is the same as last time; a different setup replaces what was loaded.
+        Raises the protocol's MODEL_NOT_READY or LLAMA_SERVER_UNREACHABLE errors."""
 
-    def run(self, page_image_path: Path | str, page_size: tuple[int, int]) -> list[Block]:
+    def run(
+        self,
+        page_image_path: Path | str,
+        page_size: tuple[int, int],
+        call: CallContext | None = None,
+    ) -> list[Block]:
         """Recognize one page. `page_size` is (width, height) in pixels of the image, and the
-        returned boxes are in the same pixel space, listed in reading order."""
+        returned boxes are in the same pixel space, listed in reading order. Figure blocks come
+        back without a crop; the pipeline writes it. Block ids are local to the call, the
+        pipeline renumbers them. `call` carries progress reporting and cancellation: engines
+        call `call.stage(...)` as they go, which raises CANCELLED after `convert.cancel`.
+        Non-fatal problems are added to `call.warnings`."""
 
     def release(self) -> None:
-        """Free memory so the queue can run the next job."""
+        """Free memory so the queue can run the next job (and on `engine.configure`)."""
 
 
 def describe(engine: Engine) -> dict[str, Any]:
@@ -89,3 +111,7 @@ class EngineRegistry:
 
     def all(self) -> list[Engine]:
         return list(self._engines.values())
+
+    def release_all(self) -> None:
+        for engine in self._engines.values():
+            engine.release()

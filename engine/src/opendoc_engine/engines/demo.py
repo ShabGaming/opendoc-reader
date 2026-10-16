@@ -9,12 +9,11 @@ document if it needs that.
 
 from __future__ import annotations
 
-from collections.abc import Mapping
 from pathlib import Path
-from typing import Any
 
-from opendoc_engine.engines.base import Capabilities
+from opendoc_engine.engines.base import Capabilities, EngineSetup
 from opendoc_engine.ir import Block, BlockType, Table, TableCell
+from opendoc_engine.rpc import CallContext
 
 
 def _box(size: tuple[int, int], x1: float, y1: float, x2: float, y2: float):
@@ -35,10 +34,17 @@ class DemoEngine:
     )
     manifest_models: tuple[str, ...] = ()
 
-    def prepare(self, options: Mapping[str, Any] | None = None) -> None:
+    def prepare(self, setup: EngineSetup | None = None) -> None:
         return None
 
-    def run(self, page_image_path: Path | str, page_size: tuple[int, int]) -> list[Block]:
+    def run(
+        self,
+        page_image_path: Path | str,
+        page_size: tuple[int, int],
+        call: CallContext | None = None,
+    ) -> list[Block]:
+        if call is not None:
+            call.stage("recognize")
         cells = [
             TableCell(
                 0, 0, col_span=2, header=True, blocks=[self._cell("demo-t0", page_size, "Totals")]

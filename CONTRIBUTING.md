@@ -85,6 +85,8 @@ The engine speaks JSON-RPC over stdin and stdout. A quick check that it starts:
 echo '{"jsonrpc":"2.0","id":1,"method":"engine.ping"}' | uv run python -m opendoc_engine
 ```
 
+Tests that need real models are skipped unless `OPENDOC_INTEGRATION=1` is set. They read models in the manifest layout from `OPENDOC_MODELS_DIR` and the sample scans from `OPENDOC_SAMPLES_DIR`, and need a running llama-server for the Accurate and Max engines; the header of `engine/tests/test_integration.py` lists the settings. `engine/scripts/link_dev_models.py` builds such a models folder from a local copy of the spike files.
+
 The engine tests also validate `models/manifest.json` against `models/manifest.schema.json`, so run them after editing the manifest.
 
 ## Workflow

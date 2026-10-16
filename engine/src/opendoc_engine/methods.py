@@ -1,23 +1,31 @@
-"""The `engine.*` RPC methods, wired to an engine registry."""
+"""The RPC method set, wired to an engine registry.
+
+`engine.ping`, `engine.version` and `engine.capabilities` live here. The rest is registered by
+one module per area, each exposing `register(...)`: `methods_pages` (input files) and
+`methods_convert` (recognition and calibration); the exports are registered from
+`methods_export`.
+"""
 
 from __future__ import annotations
 
 from typing import Any
 
-from opendoc_engine import __version__
+from opendoc_engine import __version__, methods_convert, methods_pages
 from opendoc_engine.engines import EngineRegistry, default_registry, describe
 from opendoc_engine.ir import IR_SCHEMA_VERSION
 from opendoc_engine.methods_export import register_export_methods
 from opendoc_engine.rpc import MethodRegistry, RpcServer
+from opendoc_engine.runtime import Runtime
 
 # Version of the RPC protocol in docs/protocol.md. Rust refuses an engine with another value.
 PROTOCOL_VERSION = "1"
 
 
-def build_methods(engines: EngineRegistry) -> MethodRegistry:
+def build_methods(engines: EngineRegistry, runtime: Runtime | None = None) -> MethodRegistry:
+    runtime = runtime or Runtime()
     methods = MethodRegistry()
 
-    @methods.method("engine.ping")
+    @methods.method("engine.ping", immediate=True)
     def ping(_params: Any) -> str:
         return "pong"
 
@@ -33,9 +41,12 @@ def build_methods(engines: EngineRegistry) -> MethodRegistry:
     def capabilities(_params: Any) -> list[dict[str, Any]]:
         return [describe(engine) for engine in engines.all()]
 
+    methods_pages.register(methods, runtime)
+    methods_convert.register(methods, engines, runtime)
     register_export_methods(methods)
     return methods
 
 
 def build_server(engines: EngineRegistry | None = None) -> RpcServer:
-    return RpcServer(build_methods(engines or default_registry()))
+    engines = engines or default_registry()
+    return RpcServer(build_methods(engines), on_shutdown=engines.release_all)
