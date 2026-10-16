@@ -531,8 +531,7 @@ async fn items_that_need_attention_wait_for_an_answer() {
     assert_eq!(rig.count("convert.page"), 0);
     let render = read_fake_log(&rig.env)
         .into_iter()
-        .filter(|e| e["method"] == "page.render")
-        .last()
+        .rfind(|e| e["method"] == "page.render")
         .unwrap();
     assert_eq!(render["params"]["rotate"], 0);
     assert_eq!(render["params"]["deskew"], false);

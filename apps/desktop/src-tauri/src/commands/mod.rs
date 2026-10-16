@@ -1,4 +1,24 @@
-//! Commands callable from the frontend through `invoke`.
+//! Commands callable from the frontend through `invoke` (docs/protocol.md, Part 2).
+//!
+//! Every command is a thin wrapper over [`crate::core::Core`], which the app registers as
+//! managed state. Names and argument names follow the contract: Rust `snake_case`, JavaScript
+//! `camelCase` (`invoke("queue_cancel", { fileId })`).
+
+mod queue;
+mod setup;
+mod system;
+
+pub use queue::*;
+pub use setup::*;
+pub use system::*;
+
+use std::sync::Arc;
+
+use tauri::State;
+
+use crate::app_core::Core;
+
+pub type CoreState<'a> = State<'a, Arc<Core>>;
 
 /// The app version, taken from the crate metadata so it cannot drift.
 #[tauri::command]

@@ -121,7 +121,7 @@ mod win {
                 return false;
             };
             // SAFETY: `process` is the live handle of a child we own.
-            unsafe { AssignProcessToJobObject(self.0, HANDLE(process as *mut c_void)).is_ok() }
+            unsafe { AssignProcessToJobObject(self.0, HANDLE(process)).is_ok() }
         }
 
         pub fn terminate(&self) {
