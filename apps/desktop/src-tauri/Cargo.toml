@@ -21,7 +21,7 @@ serde_json = "1"
 tokio = { version = "1.53.3", features = ["rt-multi-thread", "macros", "sync", "time", "process", "io-util", "fs", "net"] }
 sha2 = "0.11.1"
 futures-util = "0.3.34"
-rusqlite = { version = "0.40.2", features = ["bundled"] }
+rusqlite = { version = "0.41.1", features = ["bundled"] }
 sysinfo = "0.39.6"
 zip = "9.0.3"
 flate2 = "1.1.10"
